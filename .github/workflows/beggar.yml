@@ -158,7 +158,8 @@ jobs:
                 full   = 全插件
                 docker = 带docker
                 slim   = 精简版
-                beggar = 乞丐版" >> release.txt
+                beggar = 乞丐版
+                b&d    = Docker乞丐版" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
