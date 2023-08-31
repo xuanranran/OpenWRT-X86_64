@@ -82,7 +82,7 @@ git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 git clone https://github.com/sbwml/openwrt-alist --depth=1
 
 # Add luci-app-mosdns
-svn export https://github.com/281677160/openwrt-package/trunk/luci-app-mosdns
+# svn export https://github.com/281677160/openwrt-package/trunk/luci-app-mosdns
 
 # Add apk (Apk Packages Manager)
 svn export https://github.com/openwrt/packages/trunk/utils/apk
