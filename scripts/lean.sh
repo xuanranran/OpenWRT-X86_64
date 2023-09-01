@@ -98,10 +98,10 @@ svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app
 popd
 
 # Add luci-app-multiaccountdial
-svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-multiaccountdial --force package/community/multiaccountdial
+# svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-multiaccountdial --force package/community/multiaccountdial
 
 # Add luci-app-systools
-svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-systools --force package/community/systools
+# svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-systools --force package/community/systools
 
 # Add Pandownload
 pushd package/lean
