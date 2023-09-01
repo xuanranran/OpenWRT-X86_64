@@ -97,11 +97,11 @@ svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/aliyundr
 svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app-aliyundrive-webdav
 popd
 
-# Add luci-app-systools
-svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-systools
-
 # Add luci-app-multiaccountdial
-svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-multiaccountdial
+svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-multiaccountdial --force package/multiaccountdial
+
+# Add luci-app-systools
+svn export https://github.com/linkease/openwrt-app-actions/trunk/applications/luci-app-systools --force package/systools
 
 # Add Pandownload
 pushd package/lean
