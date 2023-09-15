@@ -59,6 +59,8 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
+        ./scripts/feeds clean
+        ./scripts/feeds update -a
         ./scripts/feeds install -a
         
     - name: Load Custom Configuration
@@ -155,13 +157,14 @@ jobs:
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "### 后台地址：
-                ```shell
+          ```shell
                 192.168.11.1
-                ```
+          ```
+          
                 ### 密码：
-                ```shell
+          ```shell
                 password
-                ```
+          ```
                 full   = 全插件
                 docker = 带docker
                 slim   = 精简版
