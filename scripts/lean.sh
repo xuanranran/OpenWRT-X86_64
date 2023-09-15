@@ -35,9 +35,9 @@ rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-ssr-plus
-rm -rf package/helloworld
-git clone --depth=1 https://github.com/kenzok8/small.git package/helloworld
-# git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
+rm -rf package/community/helloworld
+git clone --depth=1 https://github.com/kenzok8/small.git package/community/helloworld
+# git clone --depth=1 https://github.com/fw876/helloworld.git package/community/helloworld
 
 # Add luci-app-passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall
