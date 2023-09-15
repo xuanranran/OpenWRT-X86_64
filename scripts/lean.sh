@@ -38,9 +38,8 @@ rm -rf openwrt-package/luci-app-verysync
 git clone --depth=1 https://github.com/fw876/helloworld
 
 # Add luci-app-passwall
-git clone https://github.com/xiaorouji/openwrt-passwall
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2
-svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall
+echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
+echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> "feeds.conf.default"
 
 # Add luci-app-unblockneteasemusic
 rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
