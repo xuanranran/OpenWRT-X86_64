@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: x86_64-Wireless版
+name: X86_64-带无线Docker乞丐版
 
 on:
   repository_dispatch:
