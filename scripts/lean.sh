@@ -23,7 +23,7 @@
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
 
 mkdir package/community
 pushd package/community
@@ -36,12 +36,14 @@ rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
-git clone --depth=1 https://github.com/kenzok8/small.git
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/community/helloworld
 
 # Add luci-app-passwall
-# git clone https://github.com/xiaorouji/openwrt-passwall
-# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2
+svn export https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
+svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2
 # svn export https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall package/luci-app-passwall
 # svn export https://github.com/xiaorouji/openwrt-passwall2/trunk/luci-app-passwall2 package/luci-app-passwall2
 
