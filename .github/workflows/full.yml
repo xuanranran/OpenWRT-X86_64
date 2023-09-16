@@ -156,13 +156,10 @@ jobs:
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "### 后台地址：
-                ```shell
-                192.168.11.1
-                ```
+                ```192.168.11.1```
                 ### 密码：
-                ```shell
-                password
-                ```
+                ```password```
+                wcf    = 带无线Docker乞丐版
                 full   = 全插件
                 docker = 带docker
                 slim   = 精简版
@@ -176,7 +173,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86-64-Linux-${{ steps.generate.outputs.kernel_version }} 固件
+          name: ${{ steps.tag.outputs.release_date }} X86_64-Linux-${{ steps.generate.outputs.kernel_version }} 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
@@ -184,14 +181,14 @@ jobs:
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v2
       with:
-          retain_days: 1
-          keep_minimum_runs: 1
+          retain_days: 5
+          keep_minimum_runs: 5
 
     - name: Remove old Releases
       uses: dev-drprasad/delete-older-releases@v0.2.1
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-          keep_latest: 20
+          keep_latest: 60
           delete_tags: true
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
