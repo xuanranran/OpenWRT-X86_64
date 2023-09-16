@@ -68,6 +68,10 @@ svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
 # Add luci-app-poweroff
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 
+# Add iStore
+svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
+svn export https://github.com/linkease/istore/trunk/luci package/luci-app-store
+
 # Add luci-theme
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
@@ -127,3 +131,6 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
+
+# TTYD 自动登录
+sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
