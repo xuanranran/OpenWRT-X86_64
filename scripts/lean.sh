@@ -137,3 +137,4 @@ sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.
 
 # Test kernel 5.10
 sed -i 's/6.1/5.15/g' target/linux/x86/Makefile
+cp -r ../target/linux/generic/pending-5.15/ ./target/linux/generic/
