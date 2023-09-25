@@ -134,3 +134,6 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
+
+# Test kernel 5.10
+sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
