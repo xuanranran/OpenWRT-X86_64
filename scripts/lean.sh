@@ -141,4 +141,5 @@ cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_ne
 sed -i 's/6.1/5.15/g' target/linux/x86/Makefile
 rm -rf package/base-files/files/etc/banner
 wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
+sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
 cp -r ../target/linux/generic/pending-5.15/ ./target/linux/generic/
