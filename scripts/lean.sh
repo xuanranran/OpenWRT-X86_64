@@ -136,9 +136,9 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
 # Test kernel 5.10
-rm -rf target/linux/x86/base-files/etc/board.d/02_network
-cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_network
-rm -rf package/base-files/files/etc/banner
-wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
-sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
-cp -r ../target/linux/generic/pending-5.15/ ./target/linux/generic/
+# rm -rf target/linux/x86/base-files/etc/board.d/02_network
+# cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_network
+# rm -rf package/base-files/files/etc/banner
+# wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
+# sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
+# cp -r ../target/linux/generic/pending-5.15/ ./target/linux/generic/
