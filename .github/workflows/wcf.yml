@@ -11,10 +11,10 @@ name: x86-x64-带无线Docker乞丐版
 on:
   repository_dispatch:
   workflow_dispatch:
-  #schedule:
-    #- cron: 15 14 * * * 
-  #watch:
-    #types: started
+  schedule:
+    - cron: 15 14 * * * 
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/DHDAXCW/lede-rockchip
@@ -154,10 +154,16 @@ jobs:
           echo "release_tag=$(date +"%Y.%m.%d")-Lean3" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
-          echo "### 后台地址：
-                ```192.168.11.1```
-                ### 密码：
-                ```password```
+          echo "### 后台地址:
+                ```
+                192.168.11.1
+                ```
+                ### 密码:
+                ```
+                password
+                ```
+                -
+                
                 wcf    = 带无线Docker乞丐版
                 full   = 全插件
                 docker = 带docker
