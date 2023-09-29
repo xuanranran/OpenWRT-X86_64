@@ -161,4 +161,4 @@ cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/
 # rm -rf package/base-files/files/etc/banner
 # wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
 # sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
-cp -r ../target/linux/generic/pending-6.1/ ./target/linux/generic/
+# cp -r ../target/linux/generic/pending-6.1/ ./target/linux/generic/
