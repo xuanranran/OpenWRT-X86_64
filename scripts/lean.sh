@@ -21,12 +21,15 @@
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
 # alist
-git clone https://github.com/sbwml/luci-app-alist package/alist
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
+svn export https://github.com/sbwml/luci-app-alist/trunk/alist package/alist
 
 mkdir package/community
 pushd package/community
+
+# netdata
+rm -rf feeds/luci/applications/luci-app-netdata
+git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 
 # Add Lienol's Packages
 git clone --depth=1 https://github.com/Lienol/openwrt-package
@@ -83,9 +86,6 @@ git clone https://github.com/DHDAXCW/theme
 
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
-
-# alist
-git clone https://github.com/sbwml/openwrt-alist --depth=1
 
 # Add luci-app-mosdns
 # svn export https://github.com/281677160/openwrt-package/trunk/luci-app-mosdns
