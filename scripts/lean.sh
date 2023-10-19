@@ -21,7 +21,9 @@ svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 pa
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
 rm -rf package/wwan/driver/quectel_MHI
+rm -rf package/libs/openssl
 svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
+svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/libs/openssl package/libs/openssl
 
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
