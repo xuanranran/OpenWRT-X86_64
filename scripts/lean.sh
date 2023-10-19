@@ -20,6 +20,9 @@ svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mac80211 pack
 svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
 svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
+rm -rf package/wwan/driver/quectel_MHI
+svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
+
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/alist package/alist
@@ -156,10 +159,7 @@ sed -i 's/os.date()/os.date("%F %T %A")/g' package/lean/autocore/files/*/index.h
 # sed -i "s/${orig_version}/R${date_version} by LovinYarn/g" package/lean/default-settings/files/zzz-default-settings
 
 # 修复 hostapd 报错
-# cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
-
-rm -rf package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
-cp -f $GITHUB_WORKSPACE/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
