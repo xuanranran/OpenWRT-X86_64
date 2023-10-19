@@ -9,16 +9,16 @@
 #=================================================
 # Clone community packages to package/community
 
-#rm -rf package/libs/libnl-tiny
-#rm -rf package/kernel/mac80211
-#rm -rf package/kernel/mt76
-#rm -rf package/network/services/hostapd
-rm -rf package/wwan
-svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/wwan package/wwan
-#svn export https://github.com/openwrt/openwrt/trunk/package/libs/libnl-tiny package/libs/libnl-tiny
-#svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mac80211 package/kernel/mac80211
-#svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
-#svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
+rm -rf package/libs/libnl-tiny
+rm -rf package/kernel/mac80211
+rm -rf package/kernel/mt76
+rm -rf package/network/services/hostapd
+#rm -rf package/wwan
+#svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/wwan package/wwan
+svn export https://github.com/openwrt/openwrt/trunk/package/libs/libnl-tiny package/libs/libnl-tiny
+svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mac80211 package/kernel/mac80211
+svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
+svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
@@ -156,7 +156,10 @@ sed -i 's/os.date()/os.date("%F %T %A")/g' package/lean/autocore/files/*/index.h
 # sed -i "s/${orig_version}/R${date_version} by LovinYarn/g" package/lean/default-settings/files/zzz-default-settings
 
 # 修复 hostapd 报错
-cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
+# cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
+
+rm -rf package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+cp -f $GITHUB_WORKSPACE/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
 
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
