@@ -28,15 +28,15 @@ svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/libs/openssl p
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/alist package/alist
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+# rm -rf feeds/packages/lang/golang
+# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
 mkdir package/community
 pushd package/community
 
 # netdata
-rm -rf feeds/luci/applications/luci-app-netdata
-git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
+# rm -rf feeds/luci/applications/luci-app-netdata
+# git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
 
 # Add Lienol's Packages
 git clone --depth=1 https://github.com/Lienol/openwrt-package
