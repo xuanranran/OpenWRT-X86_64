@@ -33,8 +33,8 @@ mkdir package/community
 pushd package/community
 
 # netdata
-# rm -rf feeds/luci/applications/luci-app-netdata
-# git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
+rm -rf feeds/luci/applications/luci-app-netdata
+git clone https://github.com/Jason6111/luci-app-netdata feeds/luci/applications/luci-app-netdata/
 
 # Add Lienol's Packages
 git clone --depth=1 https://github.com/Lienol/openwrt-package
@@ -144,7 +144,7 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
 
 # TTYD 自动登录
-sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
+# sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
