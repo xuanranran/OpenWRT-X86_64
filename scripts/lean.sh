@@ -34,7 +34,7 @@ pushd package/community
 
 # netdata
 rm -rf feeds/luci/applications/luci-app-netdata
-git clone https://github.com/Jason6111/luci-app-netdata feeds/luci/applications/luci-app-netdata/
+git clone https://github.com/sirpdboy/luci-app-netdata feeds/luci/applications/luci-app-netdata/
 
 # Add Lienol's Packages
 git clone --depth=1 https://github.com/Lienol/openwrt-package
