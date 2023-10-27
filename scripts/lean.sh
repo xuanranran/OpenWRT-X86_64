@@ -21,7 +21,7 @@
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
 rm -rf package/wwan/driver/quectel_MHI
-cp -f $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
+svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
