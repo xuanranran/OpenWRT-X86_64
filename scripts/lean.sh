@@ -33,8 +33,8 @@ mkdir package/community
 pushd package/community
 
 # netdata
-rm -rf ../../customfeeds/luci/applications/luci-app-netdata
-git clone https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
+# rm -rf ../../customfeeds/luci/applications/luci-app-netdata
+# git clone https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
 
 # Add Lienol's Packages
 git clone --depth=1 https://github.com/Lienol/openwrt-package
