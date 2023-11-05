@@ -42,6 +42,9 @@ rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
 rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
 
+# Add luci-app-homeproxy
+git clone --depth=1 -b dev https://github.com/immortalwrt/homebridger
+
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
 git clone --depth=1 -b main https://github.com/fw876/helloworld package/helloworld
