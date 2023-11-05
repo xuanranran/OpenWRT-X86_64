@@ -43,7 +43,7 @@ rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-homeproxy
-git clone --depth=1 -b dev https://github.com/immortalwrt/homebridger package/homebridger
+# git clone --depth=1 -b dev https://github.com/immortalwrt/homebridger package/homebridger
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
