@@ -75,7 +75,7 @@ svn export https://github.com/linkease/nas-packages-luci/trunk/luci/luci-app-ddn
 svn export https://github.com/linkease/nas-packages/trunk/network/services/ddnsto
 
 # Add OpenClash
-svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
+svn export https://github.com/xuanranran/OpenClash/trunk/luci-app-openclash
 
 # Add luci-app-poweroff
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
