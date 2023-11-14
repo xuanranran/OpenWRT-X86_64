@@ -24,8 +24,7 @@ rm -rf package/wwan/driver/quectel_MHI
 svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
-svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
-svn export https://github.com/sbwml/luci-app-alist/trunk/alist package/alist
+git clone https://github.com/sbwml/luci-app-alist package/alist
 # rm -rf feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
