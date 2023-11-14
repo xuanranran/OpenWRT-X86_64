@@ -11,10 +11,10 @@ name: x86-x64-带无线Docker乞丐版
 on:
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 15 15 * * * 
-  watch:
-    types: started
+  #schedule:
+  #  - cron: 15 15 * * * 
+  #watch:
+   # types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
