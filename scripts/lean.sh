@@ -25,8 +25,8 @@ svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI packag
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
-# rm -rf feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
 mkdir package/community
 pushd package/community
