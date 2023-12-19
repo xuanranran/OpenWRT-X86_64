@@ -25,8 +25,8 @@ svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI packag
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+# rm -rf feeds/packages/lang/golang
+# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
 mkdir package/community
 pushd package/community
@@ -72,7 +72,7 @@ svn export https://github.com/linkease/nas-packages-luci/trunk/luci/luci-app-ddn
 svn export https://github.com/linkease/nas-packages/trunk/network/services/ddnsto
 
 # Add OpenClash
-svn export https://github.com/xuanranran/OpenClash/trunk/luci-app-openclash
+git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenClash
 
 # Add luci-app-poweroff
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
