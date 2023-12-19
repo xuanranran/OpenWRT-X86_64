@@ -1,0 +1,45 @@
+name: Delete workflow
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  # 自动取消其他运行中的workflow
+  # cancel-in-progress: true
+
+env:
+  REPO_URL: https://github.com/xuanranran/OpenWRT-X86_64
+  REPO_BRANCH: master
+  KMODS_IN_FIRMWARE: true
+  UPLOAD_RELEASE: true
+  TZ: Asia/Shanghai
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    outputs:
+      OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
+      PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
+      TARGET: ${{ steps.compile.outputs.TARGET }}
+      SUBTARGET: ${{ steps.compile.outputs.SUBTARGET }}
+      FIRMWARE: ${{ steps.compile.outputs.FIRMWARE }}
+      GENERATE_STATUS: ${{ steps.generate.outputs.GENERATE_STATUS }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+          retain_days: 0
+          keep_minimum_runs: 1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Delete Artifacts
+      uses: geekyeggo/delete-artifact@v2
+      with:
+         name: |
+            bin-archive
