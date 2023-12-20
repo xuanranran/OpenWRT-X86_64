@@ -24,7 +24,7 @@
 #cp -f $GITHUB_WORKSPACE/scripts/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
 
 rm -rf package/wwan/driver/quectel_MHI
-cp -f $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI/
+cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
@@ -78,8 +78,8 @@ git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenCl
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 
 # Add iStore
-svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
-svn export https://github.com/linkease/istore/trunk/luci package/luci-app-store
+git clone --depth=1 https://github.com/linkease/istore-ui package/app-store-ui
+git clone --depth=1 https://github.com/linkease/istore package/istore
 
 # Add luci-theme
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
