@@ -78,8 +78,8 @@ git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenCl
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 
 # Add iStore
-git clone --depth=1 https://github.com/linkease/istore-ui package/app-store-ui
-git clone --depth=1 https://github.com/linkease/istore package/istore
+svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
+svn export https://github.com/linkease/istore/trunk/luci package/luci-app-store
 
 # Add luci-theme
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
