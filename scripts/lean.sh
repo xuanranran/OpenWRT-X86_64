@@ -20,8 +20,11 @@
 #svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
+#rm -rf package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+#cp -f $GITHUB_WORKSPACE/scripts/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+
 rm -rf package/wwan/driver/quectel_MHI
-svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
+cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
@@ -40,9 +43,6 @@ git clone --depth=1 https://github.com/Lienol/openwrt-package
 rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
 rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
-
-# Add luci-app-homeproxy
-# git clone --depth=1 -b dev https://github.com/immortalwrt/homebridger package/homebridger
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
@@ -68,8 +68,8 @@ git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 # git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
 
 # Add ddnsto & linkease
-svn export https://github.com/linkease/nas-packages-luci/trunk/luci/luci-app-ddnsto
-svn export https://github.com/linkease/nas-packages/trunk/network/services/ddnsto
+git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
+git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
 
 # Add OpenClash
 git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenClash
@@ -78,8 +78,8 @@ git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenCl
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 
 # Add iStore
-svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
-svn export https://github.com/linkease/istore/trunk/luci package/luci-app-store
+git clone --depth=1 https://github.com/linkease/istore-ui package/app-store-ui
+git clone --depth=1 https://github.com/linkease/istore package/istore
 
 # Add luci-theme
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
@@ -154,13 +154,8 @@ sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/file
 # sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/files/*/index.htm
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
-# 修改版本为编译日期
-# date_version=$(date +"%y.%m.%d")
-# orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
-# sed -i "s/${orig_version}/R${date_version} by LovinYarn/g" package/lean/default-settings/files/zzz-default-settings
-
 # 修复 hostapd 报错
-cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
+# cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
