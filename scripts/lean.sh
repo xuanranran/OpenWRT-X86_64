@@ -24,7 +24,7 @@
 #cp -f $GITHUB_WORKSPACE/scripts/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
 
 rm -rf package/wwan/driver/quectel_MHI
-cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
+cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
