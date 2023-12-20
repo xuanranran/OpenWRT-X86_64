@@ -20,6 +20,9 @@ svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/wwan package/w
 #svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
+rm -rf package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+cp -f $GITHUB_WORKSPACE/scripts/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
+
 # rm -rf package/wwan/driver/quectel_MHI
 # svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
 
