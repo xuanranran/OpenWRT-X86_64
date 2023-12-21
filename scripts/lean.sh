@@ -20,9 +20,6 @@
 #svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
-#rm -rf package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
-#cp -f $GITHUB_WORKSPACE/scripts/qmi_wwan_f.c package/wwan/driver/fibocom_QMI_WWAN/src/qmi_wwan_f.c
-
 rm -rf package/wwan/driver/quectel_MHI
 cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
@@ -93,9 +90,6 @@ git clone https://github.com/DHDAXCW/theme
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
-# Add luci-app-mosdns
-# svn export https://github.com/281677160/openwrt-package/trunk/luci-app-mosdns
-
 # Add apk (Apk Packages Manager)
 svn export https://github.com/openwrt/packages/trunk/utils/apk
 
@@ -151,7 +145,6 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
 
 # 修改本地时间格式
-# sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/files/*/index.htm
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
 # 修复 hostapd 报错
