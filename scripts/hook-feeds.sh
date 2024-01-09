@@ -2,11 +2,6 @@
 # Svn checkout packages from immortalwrt's repository
 pushd customfeeds
 
-# Add luci-aliyundrive-webdav
-rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
-rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-popd
-
 # Add luci-proto-modemmanager
 # svn co https://github.com/immortalwrt/luci/trunk/protocols/luci-proto-modemmanager luci/protocols/luci-proto-modemmanager
 
