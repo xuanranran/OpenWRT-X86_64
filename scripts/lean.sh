@@ -53,6 +53,7 @@ git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
+popd
 
 # Add iStore
 # git clone https://github.com/linkease/istore
