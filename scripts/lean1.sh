@@ -9,11 +9,27 @@
 #=================================================
 # Clone community packages to package/community
 
+#rm -rf package/libs/libnl-tiny
+#rm -rf package/kernel/mac80211
+#rm -rf package/kernel/mt76
+#rm -rf package/network/services/hostapd
+#rm -rf package/wwan
+#svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/wwan package/wwan
+#svn export https://github.com/openwrt/openwrt/trunk/package/libs/libnl-tiny package/libs/libnl-tiny
+#svn export https://github.com/openwrt/openwrt/trunk/package/kernel/mac80211 package/kernel/mac80211
+#svn export https://github.com/DHDAXCW/lede-rockchip/trunk/package/kernel/mt76 package/kernel/mt76
+#svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
+
 rm -rf package/wwan/driver/quectel_MHI
 cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
+# rm -rf feeds/packages/lang/golang
+# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+
+mkdir package/community
+pushd package/community
 
 # netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -45,6 +61,9 @@ git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
 # Add luci-proto-minieap
 git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 
+# Add luci-app-onliner (need luci-app-nlbwmon)
+# git clone --depth=1 https://github.com/rufengsuixing/luci-app-onliner
+
 # Add ddnsto & linkease
 git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
 git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
@@ -54,6 +73,10 @@ git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenCl
 
 # Add luci-app-poweroff
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
+
+# Add iStore
+svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
+svn export https://github.com/linkease/istore/trunk/luci package/luci-app-store
 
 # Add luci-theme
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon
@@ -67,14 +90,29 @@ git clone https://github.com/DHDAXCW/theme
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
+# Add apk (Apk Packages Manager)
+svn export https://github.com/openwrt/packages/trunk/utils/apk
+
 # Add OpenAppFilter
 git clone --depth=1 https://github.com/destan19/OpenAppFilter
 
-# Add haiibo/openwrt-packages
-git clone https://github.com/haiibo/openwrt-packages package/haiibo
+# Add luci-aliyundrive-webdav
+rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
+rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
+svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/aliyundrive-webdav
+svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app-aliyundrive-webdav
+popd
+
+# Add linkease/openwrt-app-actions
+# svn export https://github.com/linkease/openwrt-app-actions/trunk/applications --force package/community/
+
+# Add Pandownload
+pushd package/lean
+svn export https://github.com/immortalwrt/packages/trunk/net/pandownload-fake-server
+popd
 
 # 在线用户
-# svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
+svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' package/lean/default-settings/files/zzz-default-settings
 sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
 chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
@@ -86,6 +124,12 @@ sed -i '/http/d' zzz-default-settings
 export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
 sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
+popd
+
+# Fix libssh
+pushd feeds/packages/libs
+rm -rf libssh
+svn export https://github.com/openwrt/packages/trunk/libs/libssh
 popd
 
 # Change default shell to zsh
