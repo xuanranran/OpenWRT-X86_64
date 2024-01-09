@@ -22,6 +22,11 @@ git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
 # svn co https://github.com/immortalwrt/packages/trunk/net/minieap packages/net/minieap
 # popd
 
+echo >> feeds.conf.default
+echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
+./scripts/feeds update istore
+./scripts/feeds install -d y -p istore luci-app-store
+
 # Set to local feeds
 pushd customfeeds/packages
 export packages_feed="$(pwd)"
