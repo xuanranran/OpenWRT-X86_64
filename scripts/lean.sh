@@ -29,12 +29,12 @@ rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
-# git clone --depth=1 -b main https://github.com/fw876/helloworld package/helloworld
+git clone --depth=1 https://github.com/fw876/helloworld package/helloworld
 
 # Add luci-app-passwall
-# git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/passwall-packages
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/passwall-packages
 
 # Add luci-app-unblockneteasemusic
 rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
