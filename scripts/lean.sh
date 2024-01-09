@@ -131,6 +131,8 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
+rm -rf package/kernel/linux/modules/netsupport.mk
+cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 # wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
 # sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
