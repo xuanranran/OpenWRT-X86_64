@@ -20,7 +20,7 @@ git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
 # Add minieap
 # rm -rf packages/net/minieap
 # svn co https://github.com/immortalwrt/packages/trunk/net/minieap packages/net/minieap
-# popd
+popd
 
 # Set to local feeds
 pushd customfeeds/packages
