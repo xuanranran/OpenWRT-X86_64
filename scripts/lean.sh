@@ -14,6 +14,8 @@ cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
+mkdir package/community
+pushd package/community
 
 # netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -49,7 +51,7 @@ git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
 
 # Add gost
-git clone --depth=1 https://github.com/xuanranran/gost package/haiibo/gost
+git clone --depth=1 https://github.com/xuanranran/gost package/openwrt-packages/gost
 
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
@@ -84,7 +86,7 @@ git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 git clone --depth=1 https://github.com/destan19/OpenAppFilter
 
 # Add haiibo/openwrt-packages
-git clone https://github.com/haiibo/openwrt-packages package/haiibo
+git clone https://github.com/haiibo/openwrt-packages package/openwrt-packages
 
 # 在线用户
 # svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
