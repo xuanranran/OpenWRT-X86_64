@@ -32,9 +32,9 @@ rm -rf package/community/helloworld
 git clone --depth=1 https://github.com/fw876/helloworld package/helloworld
 
 # Add luci-app-passwall
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/passwall-packages
-git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/passwall-packages
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/openwrt-passwall
+git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/openwrt-passwall
 
 # Add luci-app-unblockneteasemusic
 rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
