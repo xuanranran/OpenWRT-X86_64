@@ -22,9 +22,6 @@ git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
 # svn co https://github.com/immortalwrt/packages/trunk/net/minieap packages/net/minieap
 # popd
 
-echo >> feeds.conf.default
-echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
-
 # Set to local feeds
 pushd customfeeds/packages
 export packages_feed="$(pwd)"
