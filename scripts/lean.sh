@@ -14,8 +14,6 @@ cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
-mkdir package/community
-pushd package/community
 
 # netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -53,7 +51,6 @@ git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-popd
 
 # Add iStore
 # git clone https://github.com/linkease/istore
