@@ -13,21 +13,21 @@ rm -rf package/wwan/driver/quectel_MHI
 cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
-git clone https://github.com/sbwml/luci-app-alist package/alist
+git clone -v https://github.com/sbwml/luci-app-alist package/alist
 
 # netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
-git clone https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
+git clone -v https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
 
 # Add Lienol's Packages
-git clone --depth=1 https://github.com/Lienol/openwrt-package
+git clone -v --depth=1 https://github.com/Lienol/openwrt-package
 rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
 rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
-git clone --depth=1 https://github.com/fw876/helloworld package/helloworld
+git clone -v --depth=1 https://github.com/fw876/helloworld package/helloworld
 
 # Add luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
@@ -50,7 +50,7 @@ rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add ddnsto & linkease
-git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
+# git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
 git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
 
 # Add OpenClash
@@ -75,14 +75,15 @@ git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 git clone --depth=1 https://github.com/destan19/OpenAppFilter
 
 # Add haiibo/openwrt-packages
-git clone https://github.com/sirpdboy/sirpdboy-package package/openwrt-packages
-git clone https://github.com/haiibo/openwrt-packages --force package/openwrt-packages
+git clone https://github.com/haiibo/openwrt-packages package/openwrt-packages
+pushd package/openwrt-packages
 
 # Add luci-app-iptvhelper
-git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper --force package/openwrt-packages
+git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
 
 # Add gost
-git clone --depth=1 https://github.com/xuanranran/gost package/openwrt-packages/gost
+git clone --depth=1 https://github.com/xuanranran/gost
+popd
 
 # 在线用户
 # svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
