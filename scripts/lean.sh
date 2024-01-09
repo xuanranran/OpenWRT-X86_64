@@ -45,6 +45,12 @@ git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
 # Add luci-proto-minieap
 git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 
+# Add luci-app-iptvhelper
+git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
+
+# Add gost
+git clone --depth=1 https://github.com/xuanranran/gost package/haiibo/gost
+
 # Add ddnsto & linkease
 git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
 git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
