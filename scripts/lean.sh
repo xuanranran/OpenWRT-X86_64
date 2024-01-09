@@ -54,7 +54,6 @@ git clone --depth=1 https://github.com/xuanranran/gost package/haiibo/gost
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-popd
 
 # Add ddnsto & linkease
 git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
