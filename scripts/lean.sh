@@ -56,7 +56,7 @@ rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add iStore
-git clone --depth=1 https://github.com/linkease/istore package/luci-app-store
+git clone https://github.com/linkease/istore
 
 # Add ddnsto & linkease
 git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
