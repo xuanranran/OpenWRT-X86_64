@@ -13,21 +13,26 @@ rm -rf package/wwan/driver/quectel_MHI
 cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
-git clone -v https://github.com/sbwml/luci-app-alist package/alist
+git clone https://github.com/sbwml/luci-app-alist package/alist
+# rm -rf feeds/packages/lang/golang
+# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+
+mkdir package/community
+pushd package/community
 
 # netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
-git clone -v https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
+git clone --depth=1 https://github.com/sirpdboy/luci-app-netdata ../../customfeeds/luci/applications/luci-app-netdata
 
 # Add Lienol's Packages
-git clone -v --depth=1 https://github.com/Lienol/openwrt-package
+git clone --depth=1 https://github.com/Lienol/openwrt-package
 rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
 rm -rf openwrt-package/verysync
 rm -rf openwrt-package/luci-app-verysync
 
 # Add luci-app-ssr-plus
 rm -rf package/community/helloworld
-git clone -v --depth=1 https://github.com/fw876/helloworld package/helloworld
+git clone --depth=1 https://github.com/fw876/helloworld package/helloworld
 
 # Add luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
@@ -48,6 +53,7 @@ git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
+popd
 
 # Add ddnsto & linkease
 # git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
@@ -89,7 +95,7 @@ popd
 # svn export https://github.com/haiibo/packages/trunk/luci-app-onliner package/luci-app-onliner
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' package/lean/default-settings/files/zzz-default-settings
 sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
-chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
+chmod 755 package/openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
