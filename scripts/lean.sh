@@ -45,19 +45,13 @@ git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
 # Add luci-proto-minieap
 git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 
-# Add luci-app-iptvhelper
-git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper
-
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
-# Add iStore
-# git clone https://github.com/linkease/istore
-
 # Add ddnsto & linkease
-# git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
-# git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
+git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
+git clone --depth=1 https://github.com/linkease/nas-packages package/nas-packages
 
 # Add OpenClash
 git clone --depth=1 -b dev https://github.com/vernesong/OpenClash package/OpenClash
@@ -81,7 +75,11 @@ git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 git clone --depth=1 https://github.com/destan19/OpenAppFilter
 
 # Add haiibo/openwrt-packages
-git clone https://github.com/haiibo/openwrt-packages package/openwrt-packages
+git clone https://github.com/sirpdboy/sirpdboy-package package/openwrt-packages
+git clone https://github.com/haiibo/openwrt-packages --force package/openwrt-packages
+
+# Add luci-app-iptvhelper
+git clone --depth=1 https://github.com/riverscn/openwrt-iptvhelper --force package/openwrt-packages
 
 # Add gost
 git clone --depth=1 https://github.com/xuanranran/gost package/openwrt-packages/gost
