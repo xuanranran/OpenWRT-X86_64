@@ -10,7 +10,7 @@
 # Clone community packages to package/community
 
 rm -rf package/wwan/driver/quectel_MHI
-cp -r $GITHUB_WORKSPACE/quectel_MHI package/wwan/driver/quectel_MHI
+cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 git clone https://github.com/sbwml/luci-app-alist package/alist
@@ -129,10 +129,10 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
-cp -f $GITHUB_WORKSPACE/02_network target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 rm -rf package/kernel/linux/modules/netsupport.mk
 rm -rf config/Config-kernel.in
+cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
 cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
