@@ -35,7 +35,7 @@ rm -rf package/community/helloworld
 git clone --depth=1 https://github.com/fw876/helloworld package/helloworld
 
 # add luci-app-daed
-git clone https://github.com/sbwml/luci-app-daed-next
+# git clone https://github.com/sbwml/luci-app-daed-next
 
 # Add luci-app-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages
@@ -130,12 +130,12 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
-rm -rf package/kernel/linux/modules/netsupport.mk
-rm -rf config/Config-kernel.in
+# rm -rf package/kernel/linux/modules/netsupport.mk
+# rm -rf config/Config-kernel.in
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
-cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
+# cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
-cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
+# cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
 # wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
 # sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
 # cp -r ../target/linux/generic/pending-6.1/ ./target/linux/generic/
