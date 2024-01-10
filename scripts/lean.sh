@@ -56,7 +56,6 @@ git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap
 # Add luci-aliyundrive-webdav
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-popd
 
 # Add ddnsto & linkease
 # git clone --depth=1 https://github.com/linkease/nas-packages-luci package/nas-packages-luci
@@ -82,6 +81,7 @@ git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
 # Add OpenAppFilter
 git clone --depth=1 https://github.com/destan19/OpenAppFilter
+popd
 
 # Add haiibo/openwrt-packages
 git clone https://github.com/haiibo/openwrt-packages package/openwrt-packages
@@ -103,7 +103,7 @@ chmod 755 package/openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnl
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
 sed -i '/http/d' zzz-default-settings
-# sed -i '/18.06/d' zzz-default-settings
+sed -i '/18.06/d' zzz-default-settings
 export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
 sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
@@ -125,16 +125,16 @@ sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/file
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
 # 修复 hostapd 报错
-# cp -f $GITHUB_WORKSPACE/scripts/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
+# cp -f $GITHUB_WORKSPACE/data/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
 # Test kernel 5.10
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 # rm -rf package/kernel/linux/modules/netsupport.mk
 # rm -rf config/Config-kernel.in
+cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
 # cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
-cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 # cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
 # wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
 # sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
