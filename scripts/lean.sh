@@ -12,8 +12,8 @@
 rm -rf package/wwan/driver/quectel_MHI
 cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
 
-# rm -rf feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
 mkdir package/community
 pushd package/community
@@ -29,10 +29,7 @@ popd
 # Add subconverter
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
-# Add openwrt-packages
-git clone --depth=1 https://github.com/xuanranran/openwrt-packages package/openwrt-packages
-
-pushd package/openwrt-packages
+pushd customfeeds/openwrt-packages
 rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
