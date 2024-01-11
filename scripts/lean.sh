@@ -34,8 +34,8 @@ popd
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages package/openwrt-packages
-pushd package/openwrt-packages
 
+pushd package/openwrt-packages
 rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
