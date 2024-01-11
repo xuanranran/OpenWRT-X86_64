@@ -2,6 +2,12 @@
 # Svn checkout packages from immortalwrt's repository
 pushd customfeeds
 
+# Add openwrt-packages
+git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
+cd openwrt-packages
+rm -rf dnsmasq dockerd fullconenat-nft fullconenat && cd ../
+
+
 # Add tmate
 git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
 
