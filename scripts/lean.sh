@@ -43,13 +43,13 @@ cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/i
 git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
 # 在线用户
-sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' package/lean/default-settings/files/zzz-default-settings
-sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
 chmod 755 luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
+sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
+sed -i '$i uci commit nlbwmon' zzz-default-settings
 sed -i '/http/d' zzz-default-settings
 # sed -i '/18.06/d' zzz-default-settings
 export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
