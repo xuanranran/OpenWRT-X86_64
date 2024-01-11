@@ -27,6 +27,11 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 popd
 
+# Add luci-theme-neobird
+pushd package/lean
+rm -rf luci-theme-neobird
+popd
+
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages package/openwrt-packages
 pushd package/openwrt-packages
