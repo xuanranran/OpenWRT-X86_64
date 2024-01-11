@@ -19,7 +19,6 @@ mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
-rm -rf package/community/helloworld
 rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
@@ -27,10 +26,8 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 popd
 
-# Add luci-theme-neobird
-pushd package/lean
-rm -rf luci-theme-neobird
-popd
+# Add subconverter
+git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages package/openwrt-packages
@@ -38,9 +35,6 @@ git clone --depth=1 https://github.com/xuanranran/openwrt-packages package/openw
 pushd package/openwrt-packages
 rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-
-# Add subconverter
-git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
 
 # 在线用户
 chmod 755 luci-app-onliner/root/usr/share/onliner/setnlbw.sh
