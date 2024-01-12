@@ -24,18 +24,15 @@ rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
-popd
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
-
-pushd openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/rely
-rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
+rm -rf ./openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
+cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
 # 在线用户
-chmod 755 luci-app-onliner/root/usr/share/onliner/setnlbw.sh
+chmod 755 openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
 # Mod zzz-default-settings
