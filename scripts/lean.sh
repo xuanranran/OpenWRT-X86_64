@@ -29,10 +29,8 @@ popd
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
 
-# Add subconverter
-git clone --depth=1 https://github.com/tindy2013/openwrt-subconverter
-
 pushd openwrt-packages
+git clone --depth=1 https://github.com/xuanranran/rely
 rm -rf ./luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
