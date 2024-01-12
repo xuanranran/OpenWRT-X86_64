@@ -49,6 +49,12 @@ export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
 sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
 popd
 
+# Fix libssh
+pushd feeds/packages/libs
+rm -rf libssh
+git clone --depth 1 https://github.com/openwrt/packages openwrt_packages && mv -n openwrt_packages/libs/libssh ./ ; rm -rf openwrt_packages
+popd
+
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
