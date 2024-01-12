@@ -50,7 +50,7 @@ popd
 # pushd feeds/packages/libs
 # rm -rf libssh
 # git clone --depth 1 https://github.com/openwrt/packages openwrt_packages && mv -n openwrt_packages/libs/libssh ./ ; rm -rf openwrt_packages
-popd
+# popd
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
