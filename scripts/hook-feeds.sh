@@ -1,25 +1,4 @@
 #!/bin/bash
-# Svn checkout packages from immortalwrt's repository
-pushd customfeeds
-
-# Add openwrt-packages
-git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
-cd openwrt-packages
-rm -rf dnsmasq dockerd fullconenat-nft fullconenat && cd ../
-
-
-# Add tmate
-git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
-
-# Add gotop
-# rm -rf packages/admin/gotop
-# svn co https://github.com/immortalwrt/packages/branches/openwrt-18.06/admin/gotop packages/admin/gotop
-
-# Add minieap
-# rm -rf packages/net/minieap
-# svn co https://github.com/immortalwrt/packages/trunk/net/minieap packages/net/minieap
-popd
-
 # Set to local feeds
 pushd customfeeds/packages
 export packages_feed="$(pwd)"
