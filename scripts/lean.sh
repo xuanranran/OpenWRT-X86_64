@@ -9,12 +9,6 @@
 #=================================================
 # Clone community packages to package/community
 
-rm -rf package/wwan/driver/quectel_MHI
-cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
-
-# rm -rf feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
-
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -48,20 +42,11 @@ export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
 sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
 popd
 
-# Fix libssh
-# pushd feeds/packages/libs
-# rm -rf libssh
-# git clone --depth 1 https://github.com/openwrt/packages openwrt_packages && mv -n openwrt_packages/libs/libssh ./ ; rm -rf openwrt_packages
-# popd
-
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
-
-# TTYD 自动登录
-# sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
@@ -69,18 +54,9 @@ sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/file
 # 修改本地时间格式
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
-# 修复 hostapd 报错
-# cp -f $GITHUB_WORKSPACE/data/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
-
-# Test kernel 5.10
+# Test kernel 6.6
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
-# rm -rf package/kernel/linux/modules/netsupport.mk
-# rm -rf config/Config-kernel.in
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
-# cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
-# cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
-# wget -P package/base-files/files/etc url
-# sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
-# cp -r ../target/linux/generic/pending-6.1/ ./target/linux/generic/
+# sed -i 's/6.1/6.6/g' target/linux/x86/Makefile
