@@ -81,6 +81,6 @@ cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
 # cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 # cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
-# wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
+# wget -P package/base-files/files/etc url
 # sed -i 's/6.1/5.10/g' target/linux/x86/Makefile
 # cp -r ../target/linux/generic/pending-6.1/ ./target/linux/generic/
