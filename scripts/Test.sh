@@ -72,7 +72,7 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 # 修复 hostapd 报错
 # cp -f $GITHUB_WORKSPACE/data/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
-# Test kernel 5.10
+# Test kernel 6.6
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 # rm -rf package/kernel/linux/modules/netsupport.mk
