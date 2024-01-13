@@ -112,6 +112,7 @@ jobs:
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
       id: generate
       run: |
+        rm -rf staging_dir
         cd configs/opkg
         sed -i "s/subtarget/$SUBTARGET/g" distfeeds*.conf
         sed -i "s/target\//$TARGET\//g" distfeeds*.conf
