@@ -15,15 +15,15 @@
 # rm -rf feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 
-mkdir package/community
-pushd package/community
-rm -rf ../../customfeeds/luci/applications/luci-app-netdata
-rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
-rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
-rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
-rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-rm -rf ../../customfeeds/luci/themes/luci-theme-argon
-rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
+#mkdir package/community
+#pushd package/community
+#rm -rf ../../customfeeds/luci/applications/luci-app-netdata
+#rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
+#rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
+#rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
+#rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
+#rm -rf ../../customfeeds/luci/themes/luci-theme-argon
+#rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 
 # Add openwrt-packages
 #git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
