@@ -69,6 +69,12 @@ sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/file
 # 修改本地时间格式
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
+# 更换固件内核
+export Replace_Kernel="6.6"                    # 更换内核版本,在对应源码的[target/linux/架构]查看patches-x.x,看看x.x有啥就有啥内核了(填入内核x.x版本号,填0为不作修改)
+
+# 设置免密码登录(个别源码本身就没密码的)
+export Password_free_login="1"               # 设置首次登录后台密码为空（进入openwrt后自行修改密码）(1为启用命令,填0为不作修改)
+
 # 修复 hostapd 报错
 # cp -f $GITHUB_WORKSPACE/data/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
