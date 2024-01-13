@@ -21,7 +21,7 @@
 #svn export https://github.com/openwrt/openwrt/trunk/package/network/services/hostapd package/network/services/hostapd
 
 rm -rf package/wwan/driver/quectel_MHI
-svn export https://github.com/xuanranran/OpenWRT-X86_64/trunk/quectel_MHI package/wwan/driver/quectel_MHI
+cp -r $GITHUB_WORKSPACE/data/quectel_MHI package/wwan/driver/quectel_MHI
 
 # alist
 svn export https://github.com/sbwml/luci-app-alist/trunk/luci-app-alist package/luci-app-alist
@@ -136,10 +136,10 @@ sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-setti
 popd
 
 # Fix libssh
-pushd feeds/packages/libs
-rm -rf libssh
-svn export https://github.com/openwrt/packages/trunk/libs/libssh
-popd
+# pushd feeds/packages/libs
+# rm -rf libssh
+# git clone --depth 1 https://github.com/openwrt/packages openwrt_packages && mv -n openwrt_packages/libs/libssh ./ ; rm -rf openwrt_packages
+# popd
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
