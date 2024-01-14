@@ -73,12 +73,12 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 # cp -f $GITHUB_WORKSPACE/data/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
 
 # Test kernel 6.6
-rm -rf target/linux/x86/base-files/etc/board.d/02_network
-rm -rf package/base-files/files/etc/banner
+#rm -rf target/linux/x86/base-files/etc/board.d/02_network
+#rm -rf package/base-files/files/etc/banner
 # rm -rf package/kernel/linux/modules/netsupport.mk
 # rm -rf config/Config-kernel.in
-cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
-cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
+#cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
+#cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
 # cp -f $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 # cp -f $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
 # wget -P package/base-files/files/etc https://raw.githubusercontent.com/DHDAXCW/lede-rockchip/stable/package/base-files/files/etc/banner
