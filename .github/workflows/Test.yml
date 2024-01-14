@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: x86-x64-测试
+name: OpenWrt TEST
 
 on:
   repository_dispatch:
@@ -19,8 +19,8 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/lean_test.config
-  DIY_SH: scripts/Test.sh
+  CONFIG_FILE: configs/OpenWrt/openwrt-test.config
+  DIY_SH: test/openwrt-test.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -151,17 +151,10 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-Lean-test" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-test" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
-          echo "## 后台地址: 192.168.11.1
-                密码: password
-                 -
-                full   = 全插件
-                docker = 带docker
-                slim   = 精简版
-                beggar = 乞丐版
-                bod    = Docker乞丐版" >> release.txt
+          echo "仅仅测试 切勿使用" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
