@@ -20,7 +20,7 @@ env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: configs/OpenWrt/openwrt-test.config
-  DIY_SH: test/openwrt-test.sh
+  DIY_SH: test/test.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
