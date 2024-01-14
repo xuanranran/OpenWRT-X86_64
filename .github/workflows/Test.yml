@@ -59,7 +59,7 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
-        ./test/feeds install -a
+        ./scripts/feeds install -a
         
     - name: Load Custom Configuration
       run: |
