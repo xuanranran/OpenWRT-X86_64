@@ -22,8 +22,8 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/rely
-rm -rf ./openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-rm -rf ./openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
+rm -rf openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
+rm -rf openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
 
