@@ -17,8 +17,8 @@ on:
   #   types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: configs/OpenWrt/openwrt-test.config
   DIY_SH: test/openwrt-test.sh
   KMODS_IN_FIRMWARE: true
@@ -51,8 +51,8 @@ jobs:
         echo "OPENWRTROOT=$PWD" >> $GITHUB_ENV
         echo "OPENWRTROOT=$PWD" >> $GITHUB_OUTPUT
         mkdir customfeeds
-        git clone --depth=1 https://github.com/coolsnowwolf/packages customfeeds/packages
-        git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci
+        git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/packages customfeeds/packages
+        git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/luci customfeeds/luci
         chmod +x ../scripts/*.sh
         ../scripts/hook-feeds.sh
 
