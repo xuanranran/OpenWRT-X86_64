@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: x86-x64-全插件
+name: lean_x86_64_D-All
 
 on:
   repository_dispatch:
