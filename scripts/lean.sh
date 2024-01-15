@@ -15,10 +15,11 @@ rm -rf ../../customfeeds/luci/applications/luci-app-netdata
 rm -rf ../../customfeeds/luci/applications/luci-app-kodexplorer
 rm -rf ../../customfeeds/luci/applications/luci-app-unblockmusic
 rm -rf ../../customfeeds/luci/applications/luci-app-aliyundrive-webdav 
-rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
+rm -rf ../../customfeeds/luci/themes/luci-theme-design
 rm -rf ../../customfeeds/packages/utils/apk
+rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
