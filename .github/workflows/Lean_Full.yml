@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_D-All
+name: lean_x86_64-All
 
 on:
   repository_dispatch:

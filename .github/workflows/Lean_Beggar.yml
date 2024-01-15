@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_A-Beggar
+name: lean_x86_64-Beggar
 
 on:
   repository_dispatch:
@@ -151,7 +151,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-Lean3" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-Lean" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "## 后台地址: 192.168.11.1
@@ -159,7 +159,7 @@ jobs:
                  -
                 full   = 全插件
                 docker = 带docker
-                slim   = 精简版
+                Lite   = 精简版
                 beggar = 乞丐版
                 bod    = Docker乞丐版" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT

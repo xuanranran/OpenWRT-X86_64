@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_C-Lite
+name: lean_x86_64-Lite
 
 on:
   repository_dispatch:
