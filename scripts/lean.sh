@@ -28,8 +28,6 @@ rm -rf openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
-
-# 在线用户
 chmod 755 openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
