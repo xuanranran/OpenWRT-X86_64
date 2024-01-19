@@ -19,7 +19,6 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 rm -rf ../../customfeeds/luci/themes/luci-theme-design
 rm -rf ../../customfeeds/packages/utils/apk
-rm -rf ../../customfeeds/packages/net/zerotier
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add openwrt-packages
