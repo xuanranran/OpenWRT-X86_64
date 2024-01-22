@@ -6,8 +6,8 @@ popd
 pushd customfeeds/luci
 export luci_feed="$(pwd)"
 popd
-rm -rf package/network/utils/uqmi
-cp -r $GITHUB_WORKSPACE/data/uqmi package/network/utils/uqmi
+# rm -rf package/network/utils/uqmi
+# cp -r $GITHUB_WORKSPACE/data/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/pcre2 customfeeds/packages/libs/pcre2
 sed -i '/src-git packages/d' feeds.conf.default
