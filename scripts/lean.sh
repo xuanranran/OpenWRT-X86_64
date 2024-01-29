@@ -54,7 +54,7 @@ sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/file
 # 修改本地时间格式
 sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
-sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
+# sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
 
 # Test kernel 6.6
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
