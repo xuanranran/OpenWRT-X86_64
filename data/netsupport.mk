@@ -907,11 +907,25 @@ endef
 
 $(eval $(call KernelPackage,sched-ipset))
 
+define KernelPackage/sched-mqprio-common
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=mqprio queue common dependencies support
+  DEPENDS:=@LINUX_6_6
+  HIDDEN:=1
+  KCONFIG:=CONFIG_NET_SCH_MQPRIO_LIB
+  FILES:=$(LINUX_DIR)/net/sched/sch_mqprio_lib.ko
+endef
+
+define KernelPackage/sched-mqprio-common/description
+ Common library for manipulating mqprio queue configurations
+endef
+
+$(eval $(call KernelPackage,sched-mqprio-common))
 
 define KernelPackage/sched-mqprio
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Multi-queue priority scheduler (MQPRIO)
-  DEPENDS:=+kmod-sched-core
+  DEPENDS:=+kmod-sched-core +LINUX_6_6:kmod-sched-mqprio-common
   KCONFIG:=CONFIG_NET_SCH_MQPRIO
   FILES:=$(LINUX_DIR)/net/sched/sch_mqprio.ko
   AUTOLOAD:=$(call AutoProbe, sch_mqprio)
@@ -982,7 +996,7 @@ endef
 $(eval $(call KernelPackage,bpf-test))
 
 
-SCHED_MODULES_EXTRA = sch_codel sch_dsmark sch_gred sch_multiq sch_sfq sch_teql sch_fq act_pedit act_simple act_csum em_cmp em_nbyte em_meta em_text
+SCHED_MODULES_EXTRA = sch_codel sch_gred sch_multiq sch_sfq sch_teql sch_fq act_pedit act_simple act_skbmod act_csum em_cmp em_nbyte em_meta em_text
 SCHED_FILES_EXTRA = $(foreach mod,$(SCHED_MODULES_EXTRA),$(LINUX_DIR)/net/sched/$(mod).ko)
 
 define KernelPackage/sched
@@ -991,7 +1005,7 @@ define KernelPackage/sched
   DEPENDS:=+kmod-sched-core +kmod-lib-crc32c +kmod-lib-textsearch
   KCONFIG:= \
 	CONFIG_NET_SCH_CODEL \
-	CONFIG_NET_SCH_DSMARK \
+	CONFIG_NET_SCH_DSMARK@lt6.2 \
 	CONFIG_NET_SCH_GRED \
 	CONFIG_NET_SCH_MULTIQ \
 	CONFIG_NET_SCH_SFQ \
@@ -999,13 +1013,15 @@ define KernelPackage/sched
 	CONFIG_NET_SCH_FQ \
 	CONFIG_NET_ACT_PEDIT \
 	CONFIG_NET_ACT_SIMP \
+	CONFIG_NET_ACT_SKBMOD \
 	CONFIG_NET_ACT_CSUM \
 	CONFIG_NET_EMATCH_CMP \
 	CONFIG_NET_EMATCH_NBYTE \
 	CONFIG_NET_EMATCH_META \
 	CONFIG_NET_EMATCH_TEXT
   FILES:=$(SCHED_FILES_EXTRA)
-  AUTOLOAD:=$(call AutoLoad,73, $(SCHED_MODULES_EXTRA))
+  FILES+=$(LINUX_DIR)/net/sched/sch_dsmark.ko@lt6.2
+  AUTOLOAD:=$(call AutoLoad,73, $(SCHED_MODULES_EXTRA) sch_dsmark@lt6.2)
 endef
 
 define KernelPackage/sched/description
@@ -1448,22 +1464,6 @@ endef
 $(eval $(call KernelPackage,inet-diag))
 
 
-define KernelPackage/xdp-sockets-diag
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=PF_XDP sockets monitoring interface support for ss utility
-  DEPENDS:=@KERNEL_XDP_SOCKETS
-  KCONFIG:=CONFIG_XDP_SOCKETS_DIAG
-  FILES:=$(LINUX_DIR)/net/xdp/xsk_diag.ko
-  AUTOLOAD:=$(call AutoLoad,31,xsk_diag)
-endef
-
-define KernelPackage/xdp-sockets-diag/description
- Support for PF_XDP sockets monitoring interface used by the ss tool
-endef
-
-$(eval $(call KernelPackage,xdp-sockets-diag))
-
-
 define KernelPackage/inet-mptcp-diag
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=INET diag support for MultiPath TCP
@@ -1559,7 +1559,7 @@ $(eval $(call KernelPackage,qrtr-tun))
 define KernelPackage/qrtr-smd
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=SMD IPC Router channels
-  DEPENDS:=+kmod-qrtr @(TARGET_ipq60xx||TARGET_ipq807x)
+  DEPENDS:=+kmod-qrtr @TARGET_qualcommax
   KCONFIG:=CONFIG_QRTR_SMD
   FILES:= $(LINUX_DIR)/net/qrtr/qrtr-smd.ko
   AUTOLOAD:=$(call AutoProbe,qrtr-smd)
@@ -1585,3 +1585,19 @@ define KernelPackage/qrtr-mhi/description
 endef
 
 $(eval $(call KernelPackage,qrtr-mhi))
+
+define KernelPackage/xdp-sockets-diag
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=PF_XDP sockets monitoring interface support for ss utility
+  KCONFIG:= \
+	CONFIG_XDP_SOCKETS=y \
+	CONFIG_XDP_SOCKETS_DIAG
+  FILES:=$(LINUX_DIR)/net/xdp/xsk_diag.ko
+  AUTOLOAD:=$(call AutoLoad,31,xsk_diag)
+endef
+
+define KernelPackage/xdp-sockets-diag/description
+ Support for PF_XDP sockets monitoring interface used by the ss tool
+endef
+
+$(eval $(call KernelPackage,xdp-sockets-diag))
