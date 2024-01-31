@@ -14,6 +14,8 @@ popd
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/target/linux/x86/Makefile target/linux/x86/Makefile
 # cp -r $GITHUB_WORKSPACE/data/pcre2 customfeeds/packages/libs/pcre2
+rm -rf package/kernel/linux/modules/netsupport.mk
+cp -r $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
