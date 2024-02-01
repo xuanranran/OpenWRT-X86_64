@@ -23,7 +23,8 @@ rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-packages
-git clone --depth=1 https://github.com/xuanranran/rely
+git clone --depth=1 https://github.com/xuanranran/rely ruby
+git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed-next
 rm -rf openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-packages/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-packages/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
