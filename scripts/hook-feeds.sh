@@ -1,27 +1,4 @@
 #!/bin/bash
-# Svn checkout packages from immortalwrt's repository
-pushd customfeeds
-
-# Add luci-proto-modemmanager
-# svn co https://github.com/immortalwrt/luci/trunk/protocols/luci-proto-modemmanager luci/protocols/luci-proto-modemmanager
-
-# Add luci-app-gowebdav
-# svn co https://github.com/immortalwrt/luci/trunk/applications/luci-app-gowebdav luci/applications/luci-app-gowebdav
-# rm -rf packages/net/gowebdav
-# svn co https://github.com/immortalwrt/packages/trunk/net/gowebdav packages/net/gowebdav
-
-# Add tmate
-git clone --depth=1 https://github.com/immortalwrt/openwrt-tmate
-
-# Add gotop
-# rm -rf packages/admin/gotop
-# svn co https://github.com/immortalwrt/packages/branches/openwrt-18.06/admin/gotop packages/admin/gotop
-
-# Add minieap
-# rm -rf packages/net/minieap
-# svn co https://github.com/immortalwrt/packages/trunk/net/minieap packages/net/minieap
-popd
-
 # Set to local feeds
 pushd customfeeds/packages
 export packages_feed="$(pwd)"
@@ -29,6 +6,16 @@ popd
 pushd customfeeds/luci
 export luci_feed="$(pwd)"
 popd
+# rm -rf package/network/utils/uqmi
+# rm -rf package/net/iperf3
+# cp -r $GITHUB_WORKSPACE/data/iperf3 package/net/iperf3
+# rm -rf target/linux/x86/Makefile
+# cp -r $GITHUB_WORKSPACE/data/uqmi package/network/utils/uqmi
+cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
+# cp -r $GITHUB_WORKSPACE/target/linux/x86/Makefile target/linux/x86/Makefile
+# cp -r $GITHUB_WORKSPACE/data/pcre2 customfeeds/packages/libs/pcre2
+rm -rf package/kernel/linux/modules/netsupport.mk
+cp -r $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
