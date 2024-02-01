@@ -58,7 +58,7 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 # 修改Makefile 禁用iperf3-ssl
 sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
 
-# 修改开源镜像站地址
+# 修改开源站地址
 sed -i 's/mirror.iscas.ac.cn/mirrors.mit.edu/g' scripts/download.pl
 
 # Test kernel 6.6
