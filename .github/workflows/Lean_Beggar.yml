@@ -158,6 +158,7 @@ jobs:
           echo -e "后台地址 \`192.168.11.1\`\n" >> release.txt
           echo -e "后台密码 \`password\`\n" >> release.txt
           echo -e " - 
+                 - 
                 full   = 全插件
                 docker = 带docker
                 slim   = 精简版
