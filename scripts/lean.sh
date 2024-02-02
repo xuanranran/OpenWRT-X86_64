@@ -21,6 +21,10 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-design
 rm -rf ../../customfeeds/packages/utils/apk
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
+# add luci-app-daed
+git clone https://github.com/sbwml/luci-app-daed-next
+git clone https://github.com/QiuSimons/luci-app-daed
+
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely
