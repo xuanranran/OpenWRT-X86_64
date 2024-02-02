@@ -6,21 +6,21 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.6-Docker
+name: lean_x86_64_6.6-Beggar_Docker
 
 on:
   repository_dispatch:
   workflow_dispatch:
   # schedule:
-  #   - cron: 45 22 * * * 
+  #   - cron: 10 23 * * * 
   # watch:
   #   types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/lean_docker.config
-  DIY_SH: scripts/lean_6.6.sh
+  CONFIG_FILE: configs/lean/lean_bod.config
+  DIY_SH: scripts/lean_6_6.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -44,7 +44,6 @@ jobs:
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-
     - name: Update Feeds
       id: update
       run: |
@@ -142,10 +141,10 @@ jobs:
         rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
         rm -rf openwrt-x86-64-generic-squashfs-combined-efi.vmdk
         rm -rf openwrt-x86-64-generic.manifest
-        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz docker-x86-64-squashfs-efi.img.gz
+        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz bod-x86-64-squashfs-efi.img.gz
         popd
         make checksum
-        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/docker-sha256sums
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/bod-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag

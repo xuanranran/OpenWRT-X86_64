@@ -6,21 +6,21 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.6-Stable
+name: lean_x86_64_6.6-Full
 
 on:
   repository_dispatch:
   workflow_dispatch:
   # schedule:
-  #   - cron: 45 22 * * * 
+  #   - cron: 30 22 * * * 
   # watch:
   #   types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/lean_stable.config
-  DIY_SH: scripts/lean_6.6.sh
+  CONFIG_FILE: configs/lean/lean.config
+  DIY_SH: scripts/lean_6_6.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -39,11 +39,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-        
+
     - name: Clone Source Code
       run: |
+        df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-        
+
     - name: Update Feeds
       id: update
       run: |
@@ -60,7 +61,7 @@ jobs:
       run: |
         cd $OPENWRTROOT
         ./scripts/feeds install -a
-        
+
     - name: Load Custom Configuration
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
@@ -107,7 +108,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "FIRMWARE=$PWD" >> $GITHUB_OUTPUT
         echo "COMPILE_STATUS=success" >> $GITHUB_OUTPUT
-        
+
     - name: Generate Firmware
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
       id: generate
@@ -141,10 +142,10 @@ jobs:
         rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
         rm -rf openwrt-x86-64-generic-squashfs-combined-efi.vmdk
         rm -rf openwrt-x86-64-generic.manifest
-        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz slim-x86-64-squashfs-efi.img.gz
+        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz full-x86-64-squashfs-efi.img.gz
         popd
         make checksum
-        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/slim-sha256sums
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/full-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
