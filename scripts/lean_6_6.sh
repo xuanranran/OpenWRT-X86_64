@@ -1,6 +1,6 @@
 #!/bin/bash
 #=================================================
-# File name: lean.sh
+# File name: lean_6_6.sh
 # System Required: Linux
 # Version: 1.0
 # Lisence: MIT
