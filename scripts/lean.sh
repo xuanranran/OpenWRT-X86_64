@@ -31,10 +31,6 @@ cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-packages/luci-theme-design/htdo
 chmod 755 openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
-pushd package
-git clone https://github.com/sbwml/luci-app-daed-next daed123 && mv -n daed123/daed-next daed123/luci-app-daed-next ./ ; rm -rf daed123
-popd
-
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
