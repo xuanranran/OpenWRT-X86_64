@@ -31,7 +31,7 @@ cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-packages/luci-theme-design/htdo
 chmod 755 openwrt-packages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 # add daed-next
-git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed-next
+git clone --depth 1 https://github.com/sbwml/luci-app-daed-next package/daed-next
 
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
