@@ -8,7 +8,10 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
-
+pushd package
+# Add luci-app-daed
+git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
+popd
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -20,9 +23,6 @@ rm -rf ../../customfeeds/luci/themes/luci-theme-argon-mod
 rm -rf ../../customfeeds/luci/themes/luci-theme-design
 rm -rf ../../customfeeds/packages/utils/apk
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
-
-# add luci-app-daed
-git clone https://github.com/sbwml/luci-app-daed-next luci-app-daed
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-package
