@@ -6,6 +6,7 @@ popd
 pushd customfeeds/luci
 export luci_feed="$(pwd)"
 popd
+git clone https://github.com/sbwml/luci-app-daed-next packages/dae
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 rm -rf config/Config-kernel.in
 cp -r $GITHUB_WORKSPACE/data/Config-kernel.in config/Config-kernel.in
