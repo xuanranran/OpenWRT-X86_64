@@ -18,6 +18,8 @@ echo "src-link luci $luci_feed" >> feeds.conf.default
 sed -i "/openwrtdaed/d" "feeds.conf.default"
 echo "src-git openwrtdaed https://github.com/xuanranran/openwrt-daed.git" >> "feeds.conf.default"
 
+./scripts/feeds update openwrtdaed
+./scripts/feeds install -a -f -p openwrtdaed
 # Update feeds
 ./scripts/feeds clean
 ./scripts/feeds update -a
