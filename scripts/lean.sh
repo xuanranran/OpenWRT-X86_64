@@ -8,6 +8,11 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
+pushd package/
+git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
+git clone --depth 1 https://github.com/QiuSimons/luci-app-daed
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/daed ./ ; rm -rf immortalwrt_packages
+popd
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
