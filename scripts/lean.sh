@@ -8,6 +8,7 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
+mkdir package/luci-app-daed
 pushd package/luci-app-daed
 git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
 git clone --depth 1 https://github.com/QiuSimons/luci-app-daed
