@@ -9,7 +9,7 @@
 #=================================================
 # Clone community packages to package/community
 
-sed -i 's/GCC_VERSION=unknown/GCC_VERSION=13.2.0/g' toolchain/info.mk
+sed -i 's/GCC_VERSION=unknown/GCC_VERSION=12/g' toolchain/info.mk
 
 mkdir package/community
 pushd package/community
