@@ -8,12 +8,6 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
-export USE_GLIBC=y
-export USE_GCC13=y
-export ENABLE_LTO=y
-export USE_MOLD=y
-export ENABLE_BPF=y
-export ENABLE_LRNG=y
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -29,7 +23,7 @@ rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely
-git clone --depth=1 https://github.com/xuanranran/openwrt-daed
+# git clone --depth=1 https://github.com/xuanranran/openwrt-daed
 rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
