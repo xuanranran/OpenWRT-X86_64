@@ -23,23 +23,12 @@ rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed
 rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
-popd
-
-pushd customfeeds/packages/net
-git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDD && mv -n DAEDD/dae DAEDD/daed DAEDD/daed-next ./ ; rm -rf DAEDD
-popd
-
-pushd customfeeds/packages/libs
-git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDD && mv -n DAEDDD/libcron ./ ; rm -rf DAEDDD
-popd
-
-pushd customfeeds/luci/applications
-git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDDD && mv -n DAEDDDD/luci-app-daed DAEDDDD/luci-app-daed-next ./ ; rm -rf DAEDDDD
 popd
 
 # Mod zzz-default-settings
