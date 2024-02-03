@@ -14,12 +14,6 @@ export ENABLE_LTO=y
 export USE_MOLD=y
 export ENABLE_BPF=y
 export ENABLE_LRNG=y
-mkdir package/luci-app-daed
-pushd package/luci-app-daed
-# git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
-git clone --depth 1 https://github.com/QiuSimons/luci-app-daed
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/daed ./ ; rm -rf immortalwrt_packages
-popd
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
@@ -35,6 +29,7 @@ rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-packages openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed
 rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
