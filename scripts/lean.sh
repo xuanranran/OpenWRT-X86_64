@@ -16,9 +16,9 @@ export ENABLE_BPF=y
 export ENABLE_LRNG=y
 mkdir package/luci-app-daed
 pushd package/luci-app-daed
-git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
-# git clone --depth 1 https://github.com/QiuSimons/luci-app-daed
-# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/daed ./ ; rm -rf immortalwrt_packages
+# git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
+git clone --depth 1 https://github.com/QiuSimons/luci-app-daed
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/daed ./ ; rm -rf immortalwrt_packages
 popd
 mkdir package/community
 pushd package/community
