@@ -15,7 +15,7 @@ sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
 echo "src-link luci $luci_feed" >> feeds.conf.default
-echo "src-git daed https://github.com/xuanranran/openwrt-daed.git" >> feeds.conf.default
+# echo "src-git daed https://github.com/xuanranran/openwrt-daed.git" >> feeds.conf.default
 
 # Update feeds
 ./scripts/feeds update -a

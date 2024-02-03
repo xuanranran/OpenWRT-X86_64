@@ -156,14 +156,14 @@ jobs:
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**固件说明**:\n" >> release.txt
-          echo -e "后台地址： \`192.168.11.1\`\n" >> release.txt
-          echo -e "后台密码： \`password\`\n" >> release.txt
-          echo -e " -- 
-                full   = 全插件
-                docker = 带docker
-                slim   = 精简版
-                beggar = 乞丐版
-                bod    = Docker乞丐版\n" >> release.txt
+          echo -e "### 后台地址: \`192.168.11.1\`\n" >> release.txt
+          echo -e "### 后台密码: \`password\`\n" >> release.txt
+          echo -e "-----------
+                \`full   = 全插件\`
+                \`docker = 带docker\`
+                \`slim   = 精简版\`
+                \`beggar = 乞丐版\`
+                \`bod    = Docker乞丐版\`\n" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
