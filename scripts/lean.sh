@@ -30,6 +30,18 @@ cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdoc
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
+pushd customfeeds/packages/net
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDD && mv -n DAEDD/dae DAEDD/daed DAEDD/daed-next ./ ; rm -rf DAEDD
+popd
+
+pushd customfeeds/packages/libs
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDD && mv -n DAEDDD/libcron ./ ; rm -rf DAEDDD
+popd
+
+pushd customfeeds/luci/applications
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDDD && mv -n DAEDDDD/luci-app-daed DAEDDDD/luci-app-daed-next ./ ; rm -rf.DAEDDDD
+popd
+
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
