@@ -39,7 +39,7 @@ git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDD && mv -n D
 popd
 
 pushd customfeeds/luci/applications
-git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDDD && mv -n DAEDDDD/luci-app-daed DAEDDDD/luci-app-daed-next ./ ; rm -rf.DAEDDDD
+git clone --depth=1 https://github.com/xuanranran/openwrt-daed DAEDDDD && mv -n DAEDDDD/luci-app-daed DAEDDDD/luci-app-daed-next ./ ; rm -rf DAEDDDD
 popd
 
 # Mod zzz-default-settings
