@@ -8,6 +8,9 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
+
+sed -i 's/GCC_VERSION=unknown/GCC_VERSION=13.2.0/g' toolchain/info.mk
+
 mkdir package/community
 pushd package/community
 rm -rf ../../customfeeds/luci/applications/luci-app-netdata
