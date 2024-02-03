@@ -8,10 +8,7 @@ export luci_feed="$(pwd)"
 popd
 rm -rf config/Config-kernel.in
 rm -rf package/kernel/linux/modules/netsupport.mk
-rm -rf config/Config-build.in
-cp -r $GITHUB_WORKSPACE/data/config/Config-build.in config/Config-build.in
 cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
-cp -r $GITHUB_WORKSPACE/data/config/check-hostcxx.sh config/check-hostcxx.sh
 cp -r $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 sed -i '/src-git packages/d' feeds.conf.default
