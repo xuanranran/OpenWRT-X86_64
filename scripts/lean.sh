@@ -8,6 +8,12 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Clone community packages to package/community
+export USE_GLIBC=y
+export USE_GCC13=y
+export ENABLE_LTO=y
+export USE_MOLD=y
+export ENABLE_BPF=y
+export ENABLE_LRNG=y
 mkdir package/luci-app-daed
 pushd package/luci-app-daed
 git clone --depth 1 https://github.com/sbwml/luci-app-daed-next daed321 && mv -n daed321/daed-next daed321/luci-app-daed-next ./ ; rm -rf daed321
