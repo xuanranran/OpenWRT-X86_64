@@ -38,7 +38,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: geekyeggo/delete-artifact@v4
+      uses: actions/checkout@v4
         
     - name: Clone Source Code
       run: |
