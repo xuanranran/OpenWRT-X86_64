@@ -58,8 +58,8 @@ sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.h
 sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
 
 # 修改开源站地址
-# sed -i 's/mirror.iscas.ac.cn/mirrors.mit.edu/g' scripts/download.pl
-# sed -i 's/mirrors.aliyun.com/mirror.netcologne.de/g' scripts/download.pl
+sed -i 's/mirror.iscas.ac.cn/mirrors.mit.edu/g' scripts/download.pl
+sed -i 's/mirrors.aliyun.com/mirror.netcologne.de/g' scripts/download.pl
 
 # Test kernel 6.6
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
