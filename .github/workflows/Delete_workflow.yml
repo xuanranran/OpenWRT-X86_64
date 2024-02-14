@@ -6,7 +6,7 @@ on:
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   # 自动取消其他运行中的workflow
-  # cancel-in-progress: true
+  cancel-in-progress: true
 
 env:
   REPO_URL: https://github.com/xuanranran/OpenWRT-X86_64
