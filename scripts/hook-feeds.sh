@@ -11,9 +11,15 @@ rm -rf package/kernel/linux/modules/netsupport.mk
 rm -rf toolchain/gcc/*
 rm -rf package/libs/elfutils
 rm -rf package/network/utils/uqmi
+rm -rf customfeeds/packages/lang/node/*
 pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/toolchain/gcc/* ./ ; rm -rf immortalwrt
 popd
+
+pushd customfeeds/packages/lang/node
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
+popd
+
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
 cp -r $GITHUB_WORKSPACE/data/netsupport.mk package/kernel/linux/modules/netsupport.mk
