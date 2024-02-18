@@ -42,10 +42,7 @@ jobs:
         
     - name: Clone Source Code
       run: |
-        lscpu
-        free -h
-        df -Th $PWD
-        uname -a
+        df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
     - name: Update Feeds
       id: update
