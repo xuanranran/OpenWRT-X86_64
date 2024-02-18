@@ -16,7 +16,7 @@ pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/toolchain/gcc/* ./ ; rm -rf immortalwrt
 popd
 
-pushd customfeeds/packages/lang/node
+pushd customfeeds/packages/lang/node/
 git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
 popd
 
