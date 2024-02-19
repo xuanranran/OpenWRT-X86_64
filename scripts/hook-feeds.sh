@@ -12,12 +12,21 @@ rm -rf toolchain/gcc/*
 rm -rf package/libs/elfutils
 rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
+rm -rf customfeeds/packages/lang/node-yarn/*
+
+# Update GCC 12.3.0
 pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/toolchain/gcc/* ./ ; rm -rf immortalwrt
 popd
 
+# Update node 20.x
 pushd customfeeds/packages/lang/node/
 git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
+popd
+
+# Update node-yarn
+pushd customfeeds/packages/lang/node-yarn/
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
 popd
 
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
