@@ -8,7 +8,7 @@ export luci_feed="$(pwd)"
 popd
 rm -rf config/Config-kernel.in
 rm -rf package/kernel/linux/modules/netsupport.mk
-rm -rf package/kernel/linux/modules/video.mk
+# rm -rf package/kernel/linux/modules/video.mk
 rm -rf toolchain/gcc/*
 rm -rf package/libs/elfutils
 rm -rf package/network/utils/uqmi
@@ -31,10 +31,10 @@ git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n
 popd
 
 # Update golang 1.22.x
-# rm -rf feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
-cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
+# cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
