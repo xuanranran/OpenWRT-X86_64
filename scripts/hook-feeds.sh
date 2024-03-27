@@ -15,9 +15,9 @@ rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 
-# Update GCC 13.2.0
+# Update GCC 12.3.0
 pushd toolchain/gcc/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/toolchain/gcc/* ./ ; rm -rf immortalwrt
+git clone --depth 1 https://github.com/xuanranran/OpenWRT-X86_64 gcc && mv -n gcc/data/gcc/* ./ ; rm -rf gcc
 popd
 
 # Update node 20.x
