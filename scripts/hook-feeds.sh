@@ -14,6 +14,7 @@ rm -rf package/libs/elfutils
 rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
+rm -rf customfeeds/packages/net/nginx-util/*
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -28,6 +29,11 @@ popd
 # Update node-yarn
 pushd customfeeds/packages/lang/node-yarn/
 git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
+popd
+
+# Update nginx-util
+pushd customfeeds/packages/net/nginx-util/
+git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
 popd
 
 # Update golang 1.22.x
