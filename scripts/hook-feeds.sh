@@ -37,8 +37,8 @@ git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n n
 popd
 
 # Update golang 1.22.x
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+rm -rf customfeeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 22.x customfeeds/packages/lang/golang
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
