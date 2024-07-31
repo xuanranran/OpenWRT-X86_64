@@ -65,4 +65,4 @@ rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
-# sed -i 's/6.6/6.1/g' target/linux/x86/Makefile
+sed -i 's/6.6/6.1/g' target/linux/x86/Makefile
