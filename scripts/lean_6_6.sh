@@ -60,7 +60,6 @@ sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
 sed -i 's/mirror.iscas.ac.cn/mirrors.mit.edu/g' scripts/download.pl
 sed -i 's/mirrors.aliyun.com/mirror.netcologne.de/g' scripts/download.pl
 
-rm -rf package/network/config/firewall
 sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 
 # Test kernel 6.6
