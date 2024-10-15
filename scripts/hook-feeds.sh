@@ -46,6 +46,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 pushd package/network/config
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/config/{*firewall,firewall4} ./ ; rm -rf immortalwrt 
 popd
+sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
