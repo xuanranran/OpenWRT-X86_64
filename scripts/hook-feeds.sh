@@ -15,7 +15,6 @@ rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
-rm -rf package/network/config/{*firewall,firewall4}
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -43,9 +42,10 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # Update firewall
-pushd package/network/config
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/config/{*firewall,firewall4} ./ ; rm -rf immortalwrt 
-popd
+# rm -rf package/network/config/{*firewall,firewall4}
+# pushd package/network/config
+# git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/config/{*firewall,firewall4} ./ ; rm -rf immortalwrt 
+# popd
 sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
