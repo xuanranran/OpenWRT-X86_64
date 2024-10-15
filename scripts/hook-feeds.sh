@@ -48,7 +48,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # popd
 # sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 rm -rf package/network/config/firewall
-sed -i 's/+firewall/+uci-firewall/g' feeds/luci/applications/luci-app-firewall/Makefile
+sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
