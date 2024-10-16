@@ -44,7 +44,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # Update dnsmasq
 rm -rf package/network/services/dnsmasq/*
 pushd package/network/services/dnsmasq/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
+git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
 popd
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
