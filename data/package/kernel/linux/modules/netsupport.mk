@@ -93,8 +93,7 @@ define KernelPackage/vxlan
 	+IPV6:kmod-udptunnel6
   KCONFIG:=CONFIG_VXLAN
   FILES:= \
-	$(LINUX_DIR)/drivers/net/vxlan.ko@lt5.5 \
-	$(LINUX_DIR)/drivers/net/vxlan/vxlan.ko@ge5.6
+	$(LINUX_DIR)/drivers/net/vxlan/vxlan.ko
   AUTOLOAD:=$(call AutoLoad,13,vxlan)
 endef
 
@@ -907,10 +906,10 @@ endef
 
 $(eval $(call KernelPackage,sched-ipset))
 
+
 define KernelPackage/sched-mqprio-common
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=mqprio queue common dependencies support
-  DEPENDS:=@LINUX_6_6
   HIDDEN:=1
   KCONFIG:=CONFIG_NET_SCH_MQPRIO_LIB
   FILES:=$(LINUX_DIR)/net/sched/sch_mqprio_lib.ko
@@ -922,10 +921,11 @@ endef
 
 $(eval $(call KernelPackage,sched-mqprio-common))
 
+
 define KernelPackage/sched-mqprio
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Multi-queue priority scheduler (MQPRIO)
-  DEPENDS:=+kmod-sched-core +LINUX_6_6:kmod-sched-mqprio-common
+  DEPENDS:=+kmod-sched-core +kmod-sched-mqprio-common
   KCONFIG:=CONFIG_NET_SCH_MQPRIO
   FILES:=$(LINUX_DIR)/net/sched/sch_mqprio.ko
   AUTOLOAD:=$(call AutoProbe, sch_mqprio)
@@ -986,6 +986,18 @@ endef
 $(eval $(call KernelPackage,sched-red))
 
 
+define KernelPackage/sched-skbprio
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=SKB priority queue scheduler (SKBPRIO)
+  DEPENDS:=+kmod-sched-core
+  KCONFIG:= CONFIG_NET_SCH_SKBPRIO
+  FILES:= $(LINUX_DIR)/net/sched/sch_skbprio.ko
+  AUTOLOAD:=$(call AutoProbe,sch_skbprio)
+endef
+
+$(eval $(call KernelPackage,sched-skbprio))
+
+
 define KernelPackage/bpf-test
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Test Berkeley Packet Filter functionality
@@ -1005,7 +1017,6 @@ define KernelPackage/sched
   DEPENDS:=+kmod-sched-core +kmod-lib-crc32c +kmod-lib-textsearch
   KCONFIG:= \
 	CONFIG_NET_SCH_CODEL \
-	CONFIG_NET_SCH_DSMARK@lt6.2 \
 	CONFIG_NET_SCH_GRED \
 	CONFIG_NET_SCH_MULTIQ \
 	CONFIG_NET_SCH_SFQ \
@@ -1020,8 +1031,7 @@ define KernelPackage/sched
 	CONFIG_NET_EMATCH_META \
 	CONFIG_NET_EMATCH_TEXT
   FILES:=$(SCHED_FILES_EXTRA)
-  FILES+=$(LINUX_DIR)/net/sched/sch_dsmark.ko@lt6.2
-  AUTOLOAD:=$(call AutoLoad,73, $(SCHED_MODULES_EXTRA) sch_dsmark@lt6.2)
+  AUTOLOAD:=$(call AutoLoad,73, $(SCHED_MODULES_EXTRA))
 endef
 
 define KernelPackage/sched/description
@@ -1224,7 +1234,7 @@ define KernelPackage/sctp
   FILES:= $(LINUX_DIR)/net/sctp/sctp.ko
   AUTOLOAD:= $(call AutoLoad,32,sctp)
   DEPENDS:=+kmod-lib-crc32c +kmod-crypto-md5 +kmod-crypto-hmac \
-    +LINUX_5_15:kmod-udptunnel4 +LINUX_5_15:kmod-udptunnel6
+    +kmod-udptunnel4 +kmod-udptunnel6
 endef
 
 define KernelPackage/sctp/description
@@ -1232,6 +1242,18 @@ define KernelPackage/sctp/description
 endef
 
 $(eval $(call KernelPackage,sctp))
+
+
+define KernelPackage/sctp-diag
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=SCTP diag support
+  DEPENDS:=+kmod-sctp +kmod-inet-diag
+  KCONFIG:=CONFIG_INET_SCTP_DIAG
+  FILES:= $(LINUX_DIR)/net/sctp/sctp_diag.ko
+  AUTOLOAD:= $(call AutoLoad,33,sctp_diag)
+endef
+
+$(eval $(call KernelPackage,sctp-diag))
 
 
 define KernelPackage/netem
@@ -1286,12 +1308,20 @@ define KernelPackage/rxrpc
   HIDDEN:=1
   KCONFIG:= \
 	CONFIG_AF_RXRPC \
-	CONFIG_RXKAD=m \
+	CONFIG_AF_RXRPC_IPV6=y \
+	CONFIG_RXKAD \
 	CONFIG_AF_RXRPC_DEBUG=n
   FILES:= \
 	$(LINUX_DIR)/net/rxrpc/rxrpc.ko
-  AUTOLOAD:=$(call AutoLoad,30,rxrpc.ko)
-  DEPENDS:= +kmod-crypto-manager +kmod-crypto-pcbc +kmod-crypto-fcrypt
+  AUTOLOAD:=$(call AutoLoad,30,rxrpc)
+  DEPENDS:= \
+	+kmod-crypto-fcrypt \
+	+kmod-crypto-hmac \
+	+kmod-crypto-manager \
+	+kmod-crypto-md5 \
+	+kmod-crypto-pcbc \
+	+kmod-udptunnel4 \
+	+IPV6:kmod-udptunnel6
 endef
 
 define KernelPackage/rxrpc/description
@@ -1330,7 +1360,7 @@ define KernelPackage/9pnet
   KCONFIG:= \
 	CONFIG_NET_9P \
 	CONFIG_NET_9P_DEBUG=n \
-	CONFIG_NET_9P_FD=n@ge5.17
+	CONFIG_NET_9P_FD=n
   FILES:= \
 	$(LINUX_DIR)/net/9p/9pnet.ko
   AUTOLOAD:=$(call AutoLoad,29,9pnet)
@@ -1457,28 +1487,11 @@ define KernelPackage/inet-diag
 endef
 
 define KernelPackage/inet-diag/description
-Support for INET (TCP, DCCP, etc) socket monitoring interface used by
-native Linux tools such as ss.
+  Support for INET (TCP, DCCP, etc) socket monitoring interface used by
+  native Linux tools such as ss.
 endef
 
 $(eval $(call KernelPackage,inet-diag))
-
-
-define KernelPackage/inet-mptcp-diag
-  SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=INET diag support for MultiPath TCP
-  DEPENDS:= +@KERNEL_MPTCP +@KERNEL_MPTCP_IPV6 +kmod-inet-diag
-  KCONFIG:= CONFIG_INET_MPTCP_DIAG@ge5.6
-  FILES:= $(LINUX_DIR)/net/mptcp/mptcp_diag.ko@ge5.6
-  AUTOLOAD:=$(call AutoProbe,mptcp_diag)
-endef
-
-define KernelPackage/inet-mptcp-diag/description
-Support for INET (MultiPath TCP) socket monitoring interface used by
-native Linux tools such as ss.
-endef
-
-$(eval $(call KernelPackage,inet-mptcp-diag))
 
 
 define KernelPackage/xdp-sockets-diag
@@ -1544,7 +1557,6 @@ define KernelPackage/qrtr
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Qualcomm IPC Router support
   HIDDEN:=1
-  DEPENDS:=@!(LINUX_5_4||LINUX_5_10)
   KCONFIG:=CONFIG_QRTR
   FILES:= \
   $(LINUX_DIR)/net/qrtr/qrtr.ko

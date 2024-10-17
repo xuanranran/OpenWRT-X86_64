@@ -6,15 +6,17 @@ popd
 pushd customfeeds/luci
 export luci_feed="$(pwd)"
 popd
-# rm -rf config/Config-kernel.in
+rm -rf config/Config-kernel.in
 rm -rf package/kernel/linux/modules/netsupport.mk
-# rm -rf package/kernel/linux/modules/video.mk
+rm -rf package/kernel/linux/modules/video.mk
 rm -rf toolchain/gcc/*
 rm -rf package/libs/elfutils
 rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
+rm -rf package/network/services/dnsmasq/*
+rm -rf customfeeds/packages/lang/rust/*
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -42,13 +44,17 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # Update dnsmasq
-rm -rf package/network/services/dnsmasq/*
 pushd package/network/services/dnsmasq/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
 popd
 
-# cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
-# cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
+# Update rust
+pushd customfeeds/packages/lang/rust/
+git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
+popd
+
+cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
+cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools

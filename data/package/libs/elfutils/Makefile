@@ -1,125 +1,103 @@
-#
-# Copyright (C) 2010-2019 OpenWrt.org
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-#
+# SPDX-License-Identifier: GPL-2.0-only
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=elfutils
-PKG_VERSION:=0.189
-PKG_RELEASE:=1
+PKG_VERSION:=0.191
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://sourceware.org/$(PKG_NAME)/ftp/$(PKG_VERSION)
-PKG_HASH:=39bd8f1a338e2b7cd4abc3ff11a0eddc6e690f69578a57478d8179b4148708c8
+PKG_HASH:=df76db71366d1d708365fc7a6c60ca48398f14367eb2b8954efc8897147ad871
 
-PKG_MAINTAINER:=Luiz Angelo Daros de Luca <luizluca@gmail.com>
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=COPYING COPYING-GPLV2 COPYING-LGPLV3
 PKG_CPE_ID:=cpe:/a:elfutils_project:elfutils
 
 PKG_FIXUP:=autoreconf
-PKG_INSTALL:=1
-PKG_BUILD_DEPENDS:=!USE_GLIBC:argp-standalone
 
-include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/nls.mk
+PKG_PROGRAMS:=elflint findtextrel elfcmp unstrip stack elfcompress elfclassify srcfiles
 
-define Package/elfutils/Default
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=ELF manipulation libraries
-  URL:=https://fedorahosted.org/elfutils/
-  ABI_VERSION:=1
-endef
+PKG_SUBDIRS := \
+	config \
+	lib \
+	libelf \
+	libcpu \
+	backends \
+	libebl \
+	libdwelf \
+	libdwfl \
+	libdw \
+	src
 
-define Package/libasm
-  $(call Package/elfutils/Default)
-  TITLE+= (libasm)
-  DEPENDS:=+libelf +libdw
-endef
+PKG_GNULIB_BASE:=libgnu
 
-define Package/libdw
-  $(call Package/elfutils/Default)
-  DEPENDS:=+libelf +libbz2 +USE_MUSL:musl-fts
-  TITLE+= (libdw)
-endef
+PKG_GNULIB_ARGS = \
+	--dir=$(HOST_BUILD_DIR) \
+	--libtool \
+	--avoid=reallocarray \
+	--import
 
-define Package/libelf
-  $(call Package/elfutils/Default)
-  DEPENDS:=$(INTL_DEPENDS) +zlib
-  TITLE+= (libelf)
-  PROVIDES:=libelf1
-endef
+PKG_GNULIB_MODS = \
+	argp \
+	fallocate-posix \
+	fnmatch-gnu \
+	fts \
+	obstack \
+	progname \
+	strchrnul \
+	tsearch
 
-ifeq ($(CONFIG_BUILD_NLS),y)
-TARGET_LDFLAGS += -lintl
-else
-CONFIGURE_ARGS += --disable-nls
+include $(INCLUDE_DIR)/host-build.mk
+
+export $(PKG_GNULIB_BASE)=$(HOST_BUILD_DIR)/$(PKG_GNULIB_BASE)/.libs/$(PKG_GNULIB_BASE).a
+export $(PKG_GNULIB_BASE)_fallocate-posix=$(HOST_BUILD_DIR)/$(PKG_GNULIB_BASE)/$(PKG_GNULIB_BASE)_la-posix_fallocate.o
+export $(PKG_GNULIB_BASE)_tsearch=$(HOST_BUILD_DIR)/$(PKG_GNULIB_BASE)/$(PKG_GNULIB_BASE)_la-tsearch.o
+
+HOST_MAKE_FLAGS += \
+	DEFAULT_INCLUDES='-I. -I$$$$(top_builddir) -I$$$$(top_srcdir)/$(PKG_GNULIB_BASE)' \
+	AM_LDFLAGS='$$$$(STACK_USAGE_NO_ERROR)' \
+	LIBS+='$$$$(if $$$$(findstring $(lastword $(PKG_SUBDIRS)),$$$$(subdir)), $$$$($(PKG_GNULIB_BASE)))' \
+	LIBS+='$$$$(wildcard $$$$($(PKG_GNULIB_BASE)_fallocate-posix))' \
+	LIBS+='$$$$(wildcard $$$$($(PKG_GNULIB_BASE)_tsearch))' \
+	REPLACE_FCNTL=0 REPLACE_FREE=0 REPLACE_FSTAT=0 REPLACE_OPEN=0 \
+	bin_PROGRAMS='$(PKG_PROGRAMS)' EXEEXT=
+
+HOST_CPPFLAGS += "'-I$$$$(top_srcdir)/lib'"
+
+ifeq ($(HOST_OS),Darwin)
+  HOST_CFLAGS += -I/opt/homebrew/include
 endif
+
+HOST_CFLAGS += -Wno-error -fPIC
 
 HOST_CONFIGURE_ARGS += \
-	--disable-shared \
+	--without-libintl-prefix \
+	--without-libiconv-prefix \
+	--disable-debuginfod \
+	--disable-libdebuginfod \
 	--disable-nls \
-	--disable-debuginfod \
-	--disable-libdebuginfod \
-	--without-bzlib \
+	--disable-shared \
+	--enable-static \
 	--without-lzma \
+	--without-bzlib \
 	--without-zstd
 
-CONFIGURE_ARGS += \
-	--program-prefix=eu- \
-	--disable-debuginfod \
-	--disable-libdebuginfod \
-	--without-bzlib \
-	--without-lzma \
-	--without-zstd
-
-HOST_CONFIGURE_VARS += \
-	ac_cv_search__obstack_free=yes
-
-CONFIGURE_VARS += \
-	ac_cv_search__obstack_free=yes
-
-TARGET_CFLAGS += \
-	-D_GNU_SOURCE \
-	-Wno-unused-result \
-	-Wno-format-nonliteral
-
-ifneq ($(CONFIG_GCC_USE_VERSION_11),y)
-TARGET_CFLAGS += \
-	-Wno-error=use-after-free
+ifeq ($(HOST_OS),Darwin)
+  HOST_CONFIGURE_ARGS += --disable-symbol-versioning
 endif
 
-define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libasm*.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libdw*.{a,so*} $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libelf*.{a,so*} $(1)/usr/lib/
-	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libelf.pc $(1)/usr/lib/pkgconfig/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libdw.pc $(1)/usr/lib/pkgconfig/
+HOST_CONFIGURE_VARS += \
+	ac_cv_search_argp_parse=yes \
+	ac_cv_search_fts_close=yes \
+	ac_cv_search__obstack_free=yes \
+	ac_cv_buildid=yes
+
+Hooks/HostConfigure/Pre := Host/Gnulib/Prepare $(Hooks/HostConfigure/Pre)
+Hooks/HostCompile/Pre := Host/Gnulib/Compile $(Hooks/HostCompile/Pre)
+
+define Host/Uninstall
+	-$(call Host/Compile/Default,uninstall)
 endef
 
-define Package/libasm/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libasm{-*.so,*.so.*} $(1)/usr/lib/
-endef
-
-define Package/libdw/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libdw{-*.so,*.so.*} $(1)/usr/lib/
-endef
-
-define Package/libelf/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libelf{-*.so,*.so.*} $(1)/usr/lib/
-endef
-
-# these lines need to be ordered by dependency because of ABI versioning
-$(eval $(call BuildPackage,libelf))
-$(eval $(call BuildPackage,libdw))
-$(eval $(call BuildPackage,libasm))
+$(eval $(call HostBuild))
