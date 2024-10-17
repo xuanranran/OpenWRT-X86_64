@@ -18,8 +18,6 @@ rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf package/network/services/dnsmasq/*
 rm -rf customfeeds/packages/lang/rust/*
-rm -rf package/network/utils/bpftools
-rm -rf package/devel/strace
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -64,7 +62,6 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uq
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
-cp -r $GITHUB_WORKSPACE/data/package/devel/strace package/devel/strace
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
