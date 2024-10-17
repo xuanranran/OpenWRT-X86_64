@@ -10,8 +10,8 @@ popd
 # rm -rf package/kernel/linux/modules/video.mk
 rm -rf package/kernel/linux/modules/netsupport.mk
 rm -rf toolchain/gcc/*
-rm -rf package/libs/elfutils
-rm -rf tools/elfutils
+# rm -rf package/libs/elfutils
+# rm -rf tools/elfutils
 rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
@@ -59,8 +59,8 @@ popd
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
-cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
-cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
+# cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
+# cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
