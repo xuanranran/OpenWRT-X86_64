@@ -18,7 +18,6 @@ rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf package/network/services/dnsmasq/*
 rm -rf customfeeds/packages/lang/rust/*
-rm -rf scripts/download.pl
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -61,7 +60,6 @@ cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/bpftool package/network/utils/bpftool
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
-cp -r $GITHUB_WORKSPACE/data/scripts/download.pl scripts/download.pl
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
 sed -i '/src-git packages/d' feeds.conf.default
