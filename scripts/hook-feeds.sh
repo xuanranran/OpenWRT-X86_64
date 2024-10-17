@@ -52,6 +52,7 @@ popd
 # Update rust
 pushd customfeeds/packages/lang/rust/
 git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
+sed -i 's/872448febdff32e50c3c90a7e15f9bb2db131d13c588fe9071b0ed88837ccfa7/36217ef7e32f40a180e3d79bd666b4dfdaed49dd381023a5fb765fd12d0092ce/g' Makefile
 popd
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
