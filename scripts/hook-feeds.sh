@@ -17,6 +17,7 @@ rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf package/network/services/dnsmasq/*
+rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,mosdns,sing-box,xray-core}
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
