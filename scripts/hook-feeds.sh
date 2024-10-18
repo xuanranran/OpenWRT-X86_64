@@ -13,11 +13,11 @@ rm -rf toolchain/gcc/*
 # rm -rf package/libs/elfutils
 # rm -rf tools/elfutils
 rm -rf package/network/utils/uqmi
-rm -rf customfeeds/packages/lang/node/*
-rm -rf customfeeds/packages/lang/node-yarn/*
-rm -rf customfeeds/packages/net/nginx-util/*
+# rm -rf customfeeds/packages/lang/node/*
+# rm -rf customfeeds/packages/lang/node-yarn/*
+# rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf package/network/services/dnsmasq/*
-rm -rf customfeeds/packages/lang/rust/*
+# rm -rf customfeeds/packages/lang/rust/*
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -25,23 +25,23 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/
 popd
 
 # Update node 20.x
-pushd customfeeds/packages/lang/node/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
-popd
+# pushd customfeeds/packages/lang/node/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
+# popd
 
 # Update node-yarn
-pushd customfeeds/packages/lang/node-yarn/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
-popd
+# pushd customfeeds/packages/lang/node-yarn/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
+# popd
 
 # Update nginx-util
-pushd customfeeds/packages/net/nginx-util/
-git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
-popd
+# pushd customfeeds/packages/net/nginx-util/
+# git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
+# popd
 
 # Update golang 1.23.x
-rm -rf customfeeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
+# rm -rf customfeeds/packages/lang/golang
+# git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # Update dnsmasq
@@ -50,9 +50,15 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv
 popd
 
 # Update rust
-pushd customfeeds/packages/lang/rust/
-git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
-popd
+# pushd customfeeds/packages/lang/rust/
+# git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
+# popd
+
+# Update
+# rm -rf customfeeds/packages/{*devel,kernel,libs,net,utils}
+# pushd customfeeds/packages/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt-packages && mv -n immortalwrt-packages/{*devel,kernel,libs,net,utils} ./ ; rm -rf immortalwrt-packages
+# popd
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
