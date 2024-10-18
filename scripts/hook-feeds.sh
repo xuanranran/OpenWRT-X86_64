@@ -17,7 +17,6 @@ rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf package/network/services/dnsmasq/*
-rm -rf customfeeds/packages/lang/rust/*
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -50,15 +49,10 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv
 popd
 
 # Update rust
-pushd customfeeds/packages/lang/rust/
-git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
-popd
-
-# Update
-rm -rf customfeeds/packages/{*devel,kernel,libs,net,utils}
-pushd customfeeds/packages/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt-packages && mv -n immortalwrt-packages/{*devel,kernel,libs,net,utils} ./ ; rm -rf immortalwrt-packages
-popd
+# rm -rf customfeeds/packages/lang/rust/*
+# pushd customfeeds/packages/lang/rust/
+# git clone --depth 1 https://github.com/immortalwrt/packages rust && mv -n rust/lang/rust/* ./ ; rm -rf rust
+# popd
 
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
