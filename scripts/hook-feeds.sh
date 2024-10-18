@@ -16,7 +16,6 @@ rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
-rm -rf package/network/services/dnsmasq/*
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 
 # Update GCC 13.3.0
@@ -45,9 +44,10 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # Update dnsmasq
-pushd package/network/services/dnsmasq/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
-popd
+# rm -rf package/network/services/dnsmasq/*
+# pushd package/network/services/dnsmasq/
+# git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
+# popd
 
 # Update rust
 # rm -rf customfeeds/packages/lang/rust/*
