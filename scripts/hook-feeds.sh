@@ -31,6 +31,7 @@ rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
+chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
