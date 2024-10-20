@@ -78,9 +78,9 @@ cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
 sed -i '/src-git openwrt-package/d' feeds.conf.default
-echo "src-link packages $openwrt-package_feed" >> feeds.conf.default
+echo "src-link openwrt-package $openwrt-package_feed" >> feeds.conf.default
 sed -i '/src-git openwrt-rely/d' feeds.conf.default
-echo "src-link luci $openwrt-rely_feed" >> feeds.conf.default
+echo "src-link openwrt-rely $openwrt-rely_feed" >> feeds.conf.default
 
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
