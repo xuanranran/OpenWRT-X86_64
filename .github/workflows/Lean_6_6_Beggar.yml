@@ -87,9 +87,9 @@ jobs:
       id: compile
       run: |
         cd $OPENWRTROOT
+        PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         export PATH="/opt/clang/bin:$PATH"
         export KERNEL_CLANG_LTO=y BUILD_FAST=y ENABLE_UHTTPD=y ENABLE_LTO=y ENABLE_LRNG=y ENABLE_BPF=y USE_GCC14=y USE_MOLD=y
-        PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         echo -e "$(nproc) thread compile"
         make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
         make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
