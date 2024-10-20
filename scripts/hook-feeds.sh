@@ -73,10 +73,11 @@ sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
 echo "src-link luci $luci_feed" >> feeds.conf.default
+
 sed -i '/src-git routing/d' feeds.conf.default
-echo "src-link routing $luci_feed" >> feeds.conf.default
+echo "src-link routing $routing_feed" >> feeds.conf.default
 sed -i '/src-git telephony/d' feeds.conf.default
-echo "src-link telephony $luci_feed" >> feeds.conf.default
+echo "src-link telephony $telephony_feed" >> feeds.conf.default
 
 # Update feeds
 ./scripts/feeds clean
