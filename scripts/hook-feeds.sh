@@ -1,11 +1,19 @@
 #!/bin/bash
 # Set to local feeds
+pushd customfeeds/openwrt-package
+export openwrt-package_feed="$(pwd)"
+popd
+pushd customfeeds/openwrt-rely
+export openwrt-rely_feed="$(pwd)"
+popd
+
 pushd customfeeds/packages
 export packages_feed="$(pwd)"
 popd
 pushd customfeeds/luci
 export luci_feed="$(pwd)"
 popd
+
 pushd customfeeds/routing
 export routing_feed="$(pwd)"
 popd
@@ -69,12 +77,16 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uq
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
-sed -i '1i src-git openwrt-packages https://github.com/xuanranran/openwrt-packages' feeds.conf.default
-sed -i '2i src-git openwrt-rely https://github.com/xuanranran/rely' feeds.conf.default
+sed -i '/src-git openwrt-package/d' feeds.conf.default
+echo "src-link packages $openwrt-package_feed" >> feeds.conf.default
+sed -i '/src-git openwrt-rely/d' feeds.conf.default
+echo "src-link luci $openwrt-rely_feed" >> feeds.conf.default
+
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
 echo "src-link luci $luci_feed" >> feeds.conf.default
+
 sed -i '/src-git routing/d' feeds.conf.default
 echo "src-link routing $routing_feed" >> feeds.conf.default
 sed -i '/src-git telephony/d' feeds.conf.default
