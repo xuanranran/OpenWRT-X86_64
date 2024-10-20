@@ -1,10 +1,10 @@
 #!/bin/bash
 # Set to local feeds
-pushd customfeeds/openwrt-package
-export openwrt-package_feed="$(pwd)"
+pushd customfeeds/loveyarn-packages
+export loveyarn-packages_feed="$(pwd)"
 popd
-pushd customfeeds/openwrt-rely
-export openwrt-rely_feed="$(pwd)"
+pushd customfeeds/loveyarn-rely
+export loveyarn-rely_feed="$(pwd)"
 popd
 
 pushd customfeeds/packages
@@ -30,7 +30,7 @@ rm -rf package/network/utils/uqmi
 rm -rf customfeeds/packages/lang/node/*
 rm -rf customfeeds/packages/lang/node-yarn/*
 rm -rf customfeeds/packages/net/nginx-util/*
-# rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
+rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
@@ -77,10 +77,10 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uq
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
-sed -i '/src-git openwrt-package/d' feeds.conf.default
-echo "src-link openwrt-package $openwrt-package_feed" >> feeds.conf.default
-sed -i '/src-git openwrt-rely/d' feeds.conf.default
-echo "src-link openwrt-rely $openwrt-rely_feed" >> feeds.conf.default
+sed -i '/src-git loveyarn-packages/d' feeds.conf.default
+echo "src-link loveyarn-packages $loveyarn-packages_feed" >> feeds.conf.default
+sed -i '/src-git loveyarn-rely/d' feeds.conf.default
+echo "src-link loveyarn-rely $loveyarn-rely_feed" >> feeds.conf.default
 
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
