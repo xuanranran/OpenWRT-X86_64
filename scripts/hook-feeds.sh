@@ -69,16 +69,17 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uq
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
+sed -i '1i src-git openwrt-packages https://github.com/xuanranran/openwrt-packages' feeds.conf.default
+sed -i '2i src-git openwrt-rely https://github.com/xuanranran/rely' feeds.conf.default
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default
 echo "src-link luci $luci_feed" >> feeds.conf.default
-
 sed -i '/src-git routing/d' feeds.conf.default
 echo "src-link routing $routing_feed" >> feeds.conf.default
 sed -i '/src-git telephony/d' feeds.conf.default
 echo "src-link telephony $telephony_feed" >> feeds.conf.default
 
 # Update feeds
-./scripts/feeds clean
+./scripts/feeds clean -a
 ./scripts/feeds update -a
