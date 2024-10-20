@@ -1,10 +1,10 @@
 #!/bin/bash
 # Set to local feeds
-pushd customfeeds/loveyarn-packages
-export loveyarn-packages_feed="$(pwd)"
+pushd customfeeds/lovepackages
+export lovepackages_feed="$(pwd)"
 popd
-pushd customfeeds/loveyarn-rely
-export loveyarn-rely_feed="$(pwd)"
+pushd customfeeds/loverely
+export loverely_feed="$(pwd)"
 popd
 
 pushd customfeeds/packages
@@ -77,10 +77,10 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uq
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
-sed -i '/src-git loveyarn-packages/d' feeds.conf.default
-echo "src-link loveyarn-packages $loveyarn-packages_feed" >> feeds.conf.default
-sed -i '/src-git loveyarn-rely/d' feeds.conf.default
-echo "src-link loveyarn-rely $loveyarn-rely_feed" >> feeds.conf.default
+sed -i '/src-git lovepackages/d' feeds.conf.default
+echo "src-link lovepackages $lovepackages_feed" >> feeds.conf.default
+sed -i '/src-git loverely/d' feeds.conf.default
+echo "src-link loverely $loverely_feed" >> feeds.conf.default
 
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
