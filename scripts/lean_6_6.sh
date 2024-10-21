@@ -21,7 +21,7 @@ rm -rf ../../customfeeds/packages/utils/apk
 rm -rf ../../customfeeds/packages/multimedia/aliyundrive-webdav
 
 # Add openwrt-packages
-git clone --depth=1 https://github.com/xuanranran/immortalwrt-packages openwrt-package
+git clone --depth=1 https://github.com/xuanranran/openwrt-package openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely openwrt-rely
 rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
