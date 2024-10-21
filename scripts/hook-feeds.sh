@@ -33,6 +33,10 @@ rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
+# 替换FW4
+rm -rf package/network/config/firewall4
+cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
+
 # Update GCC 13.3.0
 pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
