@@ -83,7 +83,6 @@ popd
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/video.mk package/kernel/linux/modules/video.mk
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
-cp -r $GITHUB_WORKSPACE/data/package/network/utils/bpftool package/network/utils/bpftool
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
