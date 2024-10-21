@@ -11,6 +11,7 @@ PKG_ABI_VERSION:=$(call abi_version_str,$(PKG_VERSION))
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 
+PKG_BUILD_FLAGS:=no-lto no-mold
 PKG_BUILD_DEPENDS:=bpf-headers
 PKG_FLAGS:=nonshared
 
@@ -85,9 +86,8 @@ CONFIGURE_VARS += \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	CLANG="$(CLANG)" \
-	BPF_TARGET="$(BPF_ARCH)-linux-gnu" \
-	LLC="$(LLVM_LLC)" \
-	BPF_LDFLAGS="-march=$(BPF_TARGET) -mcpu=v3"
+	BPF_TARGET="$(BPF_TARGET)" \
+	LLC="$(LLVM_LLC)"
 
 ifneq ($(findstring s,$(OPENWRT_VERBOSE)),)
 	MAKE_FLAGS+=V=1
@@ -99,7 +99,7 @@ MAKE_VARS += \
 
 define Build/Configure
 	$(call Build/Configure/Default)
-	echo "BPF_CFLAGS += $(BPF_CFLAGS) -Wno-error -fno-stack-protector" >> $(PKG_BUILD_DIR)/config.mk
+	echo "BPF_CFLAGS += -I$(BPF_HEADERS_DIR)/tools/lib" >> $(PKG_BUILD_DIR)/config.mk
 endef
 
 define Build/InstallDev
