@@ -33,9 +33,15 @@ rm -rf customfeeds/packages/net/nginx-util/*
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
-# 替换FW4
+# Update FW4
 rm -rf package/network/config/firewall4
 cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
+
+# Update iproute2
+rm -rf package/network/utils/iproute2
+pushd package/network/utils/
+git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
+popd
 
 # Update GCC 13.3.0
 pushd toolchain/gcc/
