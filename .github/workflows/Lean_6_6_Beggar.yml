@@ -74,7 +74,7 @@ jobs:
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-terminal-tools.sh
-        make defconfig
+        make defconfig V=s
         
     - name: Download Package
       id: package
