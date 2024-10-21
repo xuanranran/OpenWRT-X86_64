@@ -84,8 +84,11 @@ popd
 # cp -r $GITHUB_WORKSPACE/data/config/Config-kernel.in config/Config-kernel.in
 cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
-cp -r $GITHUB_WORKSPACE/data/package/network/utils/fullconenat-nft package/network/utils/fullconenat-nft
-cp -r $GITHUB_WORKSPACE/data/xdp-tools package/network/utils/xdp-tools
+cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/utils/xdp-tools
+
+
+rm -rf tools/*
+cp -r $GITHUB_WORKSPACE/data/tools/* tools/
 # cp -r $GITHUB_WORKSPACE/data/package/libs/elfutils package/libs/elfutils
 # cp -r $GITHUB_WORKSPACE/data/tools/elfutils tools/elfutils
 sed -i '/src-git lovepackages/d' feeds.conf.default
