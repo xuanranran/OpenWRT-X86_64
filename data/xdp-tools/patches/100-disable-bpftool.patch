@@ -1,0 +1,11 @@
+--- a/configure
++++ b/configure
+@@ -138,8 +138,6 @@ check_toolchain()
+     echo "EMACS:=${EMACS}" >>$CONFIG
+     echo "ARCH_INCLUDES:=$ARCH_INCLUDES" >> $CONFIG
+     echo "READELF:=${READELF}" >> $CONFIG
+-    echo "BPFTOOL:=${BPFTOOL}" >> $CONFIG
+-    [ -n "$BPFTOOL" ] && echo "HAVE_FEATURES+=BPFTOOL" >>"$CONFIG"
+ }
+ 
+ check_zlib()
