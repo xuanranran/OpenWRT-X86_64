@@ -65,14 +65,6 @@ sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.c
 # custom packages
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
 
-# luci-compat - fix translation
-sed -i 's/<%:Up%>/<%:Move up%>/g' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
-sed -i 's/<%:Down%>/<%:Move down%>/g' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
-
-# SQM Translation
-mkdir -p customfeeds/packages/net/sqm-scripts/patches
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/sqm/001-help-translation.patch > feeds/packages/net/sqm-scripts/patches/001-help-translation.patch
-
 # unzip
 rm -rf customfeeds/packages/utils/unzip
 git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
