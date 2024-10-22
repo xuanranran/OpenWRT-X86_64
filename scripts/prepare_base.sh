@@ -73,22 +73,22 @@ git clone https://github.com/sbwml/tools_dwarves tools/dwarves
 sed -i 's/noinitrd/noinitrd intel_pstate=disable mitigations=off/g' target/linux/x86/image/grub-efi.cfg
 
 # Use nginx instead of uhttpd
-sed -i 's/+uhttpd /+luci-nginx /g' customfeeds/luci/collections/luci/Makefile
-sed -i 's/+uhttpd-mod-ubus //' customfeeds/luci/collections/luci/Makefile
-sed -i 's/+uhttpd /+luci-nginx /g' customfeeds/luci/collections/luci-light/Makefile
-sed -i "s/+luci /+luci-nginx /g" customfeeds/luci/collections/luci-ssl-openssl/Makefile
-sed -i "s/+luci /+luci-nginx /g" customfeeds/luci/collections/luci-ssl/Makefile
-sed -i 's/+uhttpd +uhttpd-mod-ubus /+luci-nginx /g' customfeeds/packages/net/wg-installer/Makefile
-sed -i '/uhttpd-mod-ubus/d' customfeeds/luci/collections/luci-light/Makefile
-sed -i 's/+luci-nginx \\$/+luci-nginx/' customfeeds/luci/collections/luci-light/Makefile
+# sed -i 's/+uhttpd /+luci-nginx /g' customfeeds/luci/collections/luci/Makefile
+# sed -i 's/+uhttpd-mod-ubus //' customfeeds/luci/collections/luci/Makefile
+# sed -i 's/+uhttpd /+luci-nginx /g' customfeeds/luci/collections/luci-light/Makefile
+# sed -i "s/+luci /+luci-nginx /g" customfeeds/luci/collections/luci-ssl-openssl/Makefile
+# sed -i "s/+luci /+luci-nginx /g" customfeeds/luci/collections/luci-ssl/Makefile
+# sed -i 's/+uhttpd +uhttpd-mod-ubus /+luci-nginx /g' customfeeds/packages/net/wg-installer/Makefile
+# sed -i '/uhttpd-mod-ubus/d' customfeeds/luci/collections/luci-light/Makefile
+# sed -i 's/+luci-nginx \\$/+luci-nginx/' customfeeds/luci/collections/luci-light/Makefile
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
-rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
-git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
-git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
-git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
-git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
-git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
+# rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
+# git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
+# git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
+# git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
+# git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
+# git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
 # GCC Optimization level -O3
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
