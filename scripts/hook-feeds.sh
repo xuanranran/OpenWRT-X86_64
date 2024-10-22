@@ -24,17 +24,15 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # Update node 20.x
-pushd customfeeds/packages/lang/node/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node/* ./ ; rm -rf immortalwrt
-popd
-
-# Update node
 rm -rf customfeeds/packages/lang/node
 git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
-# rm -rf customfeeds/packages/lang/node/*
-# pushd customfeeds/packages/lang/node-yarn/
-# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
-# popd
+popd
+
+# Update node-yarn
+rm -rf customfeeds/packages/lang/node-yarn/*
+pushd customfeeds/packages/lang/node-yarn/
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
+popd
 
 # ddns - fix boot
 sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
