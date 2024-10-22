@@ -73,7 +73,6 @@ jobs:
         chmod +x scripts/*.sh
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        export KERNEL_CLANG_LTO=y BUILD_FAST=y ENABLE_UHTTPD=y ENABLE_LTO=y ENABLE_LRNG=y ENABLE_BPF=y USE_GCC14=y USE_MOLD=y
         ../$DIY_SH
         ../$DIY2_SH
         ../scripts/preset-clash-core.sh amd64
@@ -94,7 +93,6 @@ jobs:
       run: |
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        export KERNEL_CLANG_LTO=y BUILD_FAST=y ENABLE_UHTTPD=y ENABLE_LTO=y ENABLE_LRNG=y ENABLE_BPF=y USE_GCC14=y USE_MOLD=y
         echo -e "$(nproc) thread compile"
         make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
         make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
