@@ -24,11 +24,16 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/uti
 rm -rf package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 
+# tools: add upx tools
+rm -rf tools/Makefile
+cp -r $GITHUB_WORKSPACE/data/tools/upx tools/upx
+cp -r $GITHUB_WORKSPACE/data/tools/Makefile tools/Makefile
+
 # tools: add llvm/clang toolchain
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic/0001-tools-add-llvm-clang-toolchain.patch | patch -p1
 
 # tools: add upx tools
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic/0002-tools-add-upx-tools.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic/0002-tools-add-upx-tools.patch | patch -p1
 
 # rootfs: upx compression
 # include/rootfs.mk

@@ -26,12 +26,6 @@ endif
 ifneq ($(CONFIG_SDK)$(CONFIG_TARGET_INITRAMFS_COMPRESSION_LZO),)
   BUILD_LZO_TOOLS = y
 endif
-ifeq ($(CONFIG_KERNEL_CC),clang)
-  BUILD_CLANG_HOST = y
-endif
-ifeq ($(CONFIG_BPF_TOOLCHAIN_HOST),y)
-  BUILD_CLANG_HOST = y
-endif
 
 tools-y += autoconf
 tools-y += autoconf-archive
@@ -72,7 +66,6 @@ tools-y += util-linux
 tools-y += zip
 tools-y += zlib
 tools-y += zstd
-tools-$(if $(BUILD_CLANG_HOST),y) += clang
 tools-$(if $(CONFIG_BUILD_ALL_HOST_TOOLS),y) += liblzo
 tools-$(if $(CONFIG_BUILD_ALL_HOST_TOOLS)$(BUILD_B43_TOOLS),y) += b43-tools
 tools-$(if $(CONFIG_BUILD_ALL_HOST_TOOLS)$(BUILD_ISL),y) += isl
