@@ -1048,28 +1048,28 @@ endef
 $(eval $(call KernelPackage,sched))
 
 
-define KernelPackage/tcp-bbr
+define KernelPackage/tcp-bbr3
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
-  TITLE:=BBR TCP congestion control
+  TITLE:=BBRv3 TCP congestion control
   KCONFIG:=CONFIG_TCP_CONG_BBR
   FILES:=$(LINUX_DIR)/net/ipv4/tcp_bbr.ko
   AUTOLOAD:=$(call AutoProbe,tcp_bbr)
 endef
 
-define KernelPackage/tcp-bbr/description
- Kernel module for BBR (Bottleneck Bandwidth and RTT) TCP congestion
+define KernelPackage/tcp-bbr3/description
+ Kernel module for BBRv3 (Bottleneck Bandwidth and RTT) TCP congestion
  control. It requires the fq ("Fair Queue") pacing packet scheduler.
- For kernel 4.13+, TCP internal pacing is implemented as fallback.
+ For kernel 6.4+, TCP internal pacing is implemented as fallback.
 endef
 
 TCP_BBR_SYSCTL_CONF:=sysctl-tcp-bbr.conf
 
-define KernelPackage/tcp-bbr/install
+define KernelPackage/tcp-bbr3/install
 	$(INSTALL_DIR) $(1)/etc/sysctl.d
 	$(INSTALL_DATA) ./files/$(TCP_BBR_SYSCTL_CONF) $(1)/etc/sysctl.d/12-tcp-bbr.conf
 endef
 
-$(eval $(call KernelPackage,tcp-bbr))
+$(eval $(call KernelPackage,tcp-bbr3))
 
 define KernelPackage/tls
   SUBMENU:=$(NETWORK_SUPPORT_MENU)

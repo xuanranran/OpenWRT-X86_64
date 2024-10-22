@@ -100,6 +100,8 @@ pushd package/network/services/dnsmasq/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
 popd
 
+rm -rf package/kernel/linux/modules/netsupport.mk
+cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
 
 sed -i '/src-git lovepackages/d' feeds.conf.default
 echo "src-link lovepackages $lovepackages_feed" >> feeds.conf.default

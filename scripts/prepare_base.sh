@@ -125,10 +125,10 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/fstools/202-fstools-support-extroot-for-non-MTD-rootfs_data.patch > package/system/fstools/patches/202-fstools-support-extroot-for-non-MTD-rootfs_data.patch
 # fstools
 rm -rf package/system/fstools
-git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 package/system/fstools
+git clone https://github.com/sbwml/package_system_fstools -b openwrt-23.05 package/system/fstools
 # util-linux
 rm -rf package/utils/util-linux
-git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
+git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-23.05 package/utils/util-linux
 
 # Patch FireWall 4
 # firewall4 - master
@@ -309,7 +309,7 @@ popd
 
 # nginx - latest version
 rm -rf customfeeds/packages/net/nginx
-git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-24.10
+git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-23.05
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
 
 # nginx - ubus
@@ -318,7 +318,7 @@ sed -i '/ubus_parallel_req/a\        ubus_script_timeout 300;' customfeeds/packa
 
 # nginx - uwsgi timeout & enable brotli
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/openwrt-24.10-uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/openwrt-23.05-uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
 
 # opkg
 mkdir -p package/system/opkg/patches
@@ -359,7 +359,7 @@ sed -i "s/openwrt.org/www.baidu.com/g" customfeeds/luci/modules/luci-mod-network
 # rm -f customfeeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js
 
 # luci - rollback dhcp.js
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/dhcp/openwrt-24.10-dhcp.js > customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/dhcp/openwrt-23.05-dhcp.js > customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
 
 # ppp - 2.5.0
 rm -rf package/network/services/ppp
