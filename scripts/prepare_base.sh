@@ -14,6 +14,10 @@ pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
 popd
 
+# luci-app-turboacc
+sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/collections/luci/luci-app-turboacc/Makefile
+
+ 
 # xdp-tools
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/utils/xdp-tools
 
