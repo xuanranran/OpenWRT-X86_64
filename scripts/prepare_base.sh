@@ -421,8 +421,8 @@ rm -rf package/network/services/ppp
 git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
 # odhcpd RFC-9096
-mkdir -p package/network/services/odhcpd/patches
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/odhcpd/001-odhcpd-RFC-9096-compliance.patch > package/network/services/odhcpd/patches/001-odhcpd-RFC-9096-compliance.patch
+# mkdir -p package/network/services/odhcpd/patches
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/odhcpd/001-odhcpd-RFC-9096-compliance.patch > package/network/services/odhcpd/patches/001-odhcpd-RFC-9096-compliance.patch
 pushd customfeeds/luci
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/odhcpd/luci-mod-network-add-option-for-ipv6-max-plt-vlt.patch | patch -p1
 popd
