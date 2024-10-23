@@ -106,9 +106,9 @@ jobs:
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         echo -e "$(nproc) thread compile"
-        make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
-        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
-        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1
+        make tools/compile -j$(nproc) || make tools/compile -j$(nproc) V=s
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) V=s
+        make target/compile -j$(nproc) || make target/compile -j$(nproc) V=s IGNORE_ERRORS=1
         make diffconfig
         make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) V=s IGNORE_ERRORS=1
         make package/index
