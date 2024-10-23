@@ -110,6 +110,9 @@ git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 # GCC Optimization level -O3
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
 
+# dnsmasq drop extraconftext parameter
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/dnsmasq/0001-dnsmasq-drop-extraconftext-parameter.patch | patch -p1
+
 # Patch FireWall 4
 # firewall4 - master
 rm -rf package/network/config/firewall4
