@@ -83,10 +83,6 @@ rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
-
-rm -rf package/kernel/linux/modules/netsupport.mk
-cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
-
 sed -i '/src-git lovepackages/d' feeds.conf.default
 echo "src-link lovepackages $lovepackages_feed" >> feeds.conf.default
 sed -i '/src-git loverely/d' feeds.conf.default
