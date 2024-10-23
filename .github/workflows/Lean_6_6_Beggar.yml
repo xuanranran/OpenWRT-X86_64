@@ -39,7 +39,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Initialization Environment
+    - name: Compilation environment
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
