@@ -69,10 +69,10 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # Update iproute2
-rm -rf package/network/utils/iproute2
-pushd package/network/utils/
-git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
-popd
+# rm -rf package/network/utils/iproute2
+# pushd package/network/utils/
+# git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
+# popd
 
 # Update GCC 13.3.0
 rm -rf toolchain/gcc/*
