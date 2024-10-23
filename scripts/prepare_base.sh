@@ -2,6 +2,9 @@
 # rm -rf package/network/config/firewall4
 # cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
 
+rm -rf package/kernel/linux/modules/netsupport.mk
+cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
+
 # Update iproute2
 rm -rf package/network/utils/iproute2
 pushd package/network/utils/
@@ -23,6 +26,12 @@ cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/uti
 # uqmi
 rm -rf package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
+
+# Update dnsmasq
+rm -rf package/network/services/dnsmasq/*
+pushd package/network/services/dnsmasq/
+git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
+popd
 
 # tools: add upx tools
 # rm -rf tools/Makefile
