@@ -68,11 +68,6 @@ popd
 # pushd package/network/utils/
 # git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
 
-# dwarves 1.25
-# rm -rf tools/dwarves
-# git clone https://github.com/sbwml/tools_dwarves tools/dwarves
-# popd
-
 # luci-app-turboacc
 sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/applications/luci-app-turboacc/Makefile
 
