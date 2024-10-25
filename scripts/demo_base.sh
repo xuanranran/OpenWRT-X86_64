@@ -141,7 +141,7 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0009-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
 
 # kernel: linux-6.11 config
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0010-include-kernel-add-miss-config-for-linux-6.11.patch | patch -p1
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0010-include-kernel-add-miss-config-for-linux-6.11.patch | patch -p1
 
 # meson: add platform variable to cross-compilation file
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0011-meson-add-platform-variable-to-cross-compilation-fil.patch | patch -p1
@@ -297,11 +297,11 @@ curl -sO https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/head
 popd
 
 # openssl urandom
-sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+# sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
-sed -i "s/ no-lto//g" package/libs/openssl/Makefile
-sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
+# sed -i "s/ no-lto//g" package/libs/openssl/Makefile
+# sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
 
 # nghttp3
 rm -rf customfeeds/packages/libs/nghttp3
