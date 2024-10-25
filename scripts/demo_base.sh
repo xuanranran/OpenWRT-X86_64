@@ -1,115 +1,6 @@
 #!/bin/bash
 # Set to local prepare
 
-# Update FW4
-# rm -rf package/network/config/firewall4
-# cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
-
-rm -rf package/kernel/linux/modules/netsupport.mk
-cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
-
-# custom packages
-rm -rf customfeeds/luci/applications/luci-app-filebrowser
-
-rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
-chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
-
-# Update node 20.x
-rm -rf customfeeds/packages/lang/node
-git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
-
-# Update node-yarn
-rm -rf customfeeds/packages/lang/node-yarn/*
-pushd customfeeds/packages/lang/node-yarn/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
-popd
-
-# ddns - fix boot
-sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
-
-# nlbwmon - disable syslog
-sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
-
-# samba4 - bump version
-rm -rf customfeeds/packages/net/samba4
-git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
-# liburing - 2.7 (samba-4.21.0)
-rm -rf customfeeds/packages/libs/liburing
-git clone https://github.com/sbwml/feeds_packages_libs_liburing customfeeds/packages/libs/liburing
-# enable multi-channel
-sed -i '/workgroup/a \\n\t## enable multi-channel' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i '/enable multi-channel/a \\tserver multi channel support = yes' customfeeds/packages/net/samba4/files/smb.conf.template
-# default config
-sed -i 's/#aio read size = 0/aio read size = 0/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/#aio write size = 0/aio write size = 0/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/invalid users = root/#invalid users = root/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/bind interfaces only = yes/bind interfaces only = no/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/#create mask/create mask/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/#directory mask/directory mask/g' customfeeds/packages/net/samba4/files/smb.conf.template
-sed -i 's/0666/0644/g;s/0744/0755/g;s/0777/0755/g' customfeeds/luci/applications/luci-app-samba4/htdocs/luci-static/resources/view/samba4.js
-sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba.config
-sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
-
-# apk-tools
-curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
-
-# unzip
-rm -rf customfeeds/packages/utils/unzip
-git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
-
-# tcp-brutal
-git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
-
-# Update nginx-util
-rm -rf customfeeds/packages/net/nginx-util/*
-pushd customfeeds/packages/net/nginx-util/
-git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
-popd
-
-# Update golang 1.23.x
-rm -rf customfeeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
-
-# Update iproute2
-# rm -rf package/network/utils/iproute2
-# pushd package/network/utils/
-# git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
-# popd
-
-# Update GCC 13.3.0
-rm -rf toolchain/gcc/*
-pushd toolchain/gcc/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
-popd
-
-# luci-app-turboacc
-sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/applications/luci-app-turboacc/Makefile
- 
-# xdp-tools
-cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/utils/xdp-tools
-
-# uqmi
-rm -rf package/network/utils/uqmi
-cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
-
-# Update dnsmasq
-# rm -rf package/network/services/dnsmasq/*
-# pushd package/network/services/dnsmasq/
-# git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
-# popd
-# dnsmasq drop extraconftext parameter
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/dnsmasq/0001-dnsmasq-drop-extraconftext-parameter.patch | patch -p1
-
-# tools: add upx tools
-# rm -rf tools/Makefile
-# cp -r $GITHUB_WORKSPACE/data/tools/upx tools/upx
-# cp -r $GITHUB_WORKSPACE/data/tools/Makefile tools/Makefile
-
-# lantiq
-# rm -rf package/kernel/lantiq
-# git clone --depth 1 https://github.com/xuanranran/package_kerne_lantiq package/kernel/lantiq
-
 # tools: add llvm/clang toolchain
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic/0001-tools-add-llvm-clang-toolchain.patch | patch -p1
 
@@ -159,10 +50,6 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # attr no-mold
 # sed -i '/PKG_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/utils/attr/Makefile
 
-# dwarves 1.25
-# rm -rf tools/dwarves
-# git clone https://github.com/sbwml/tools_dwarves tools/dwarves
-
 # x86 - disable intel_pstate & mitigations
 sed -i 's/noinitrd/noinitrd intel_pstate=disable mitigations=off/g' target/linux/x86/image/grub-efi.cfg
 
@@ -176,20 +63,8 @@ sed -i 's/+uhttpd +uhttpd-mod-ubus /+luci-nginx /g' customfeeds/packages/net/wg-
 sed -i '/uhttpd-mod-ubus/d' customfeeds/luci/collections/luci-light/Makefile
 sed -i 's/+luci-nginx \\$/+luci-nginx/' customfeeds/luci/collections/luci-light/Makefile
 
-# Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
-rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
-git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
-git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
-git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
-git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
-git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
-
 # GCC Optimization level -O3
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
-
-# Update applications/luci-app-firewall
-rm -rf customfeeds/luci/applications/luci-app-firewall
-cp -r $GITHUB_WORKSPACE/data/luci/applications/luci-app-firewall customfeeds/luci/applications/luci-app-firewall
 
 # Patch FireWall 4
 # firewall4 - master
@@ -226,15 +101,6 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 pushd customfeeds/luci
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0004-luci-mod-status-firewall-disable-legacy-firewall-rul.patch | patch -p1
 popd
-
-# FullCone module
-git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
-
-# IPv6 NAT
-git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
-
-# natflow
-git clone https://github.com/sbwml/package_new_natflow package/new/natflow
 
 # Patch Luci add nft_fullcone/bcm_fullcone & shortcut-fe & natflow & ipv6-nat & custom nft command option
 pushd customfeeds/luci
@@ -297,11 +163,17 @@ curl -sO https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/head
 popd
 
 # openssl urandom
-# sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
-# sed -i "s/ no-lto//g" package/libs/openssl/Makefile
-# sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
+sed -i "s/ no-lto//g" package/libs/openssl/Makefile
+sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
+
+# grub2 -  disable `gc-sections` flag
+sed -i '/PKG_BUILD_FLAGS/ s/$/ no-gc-sections/' package/boot/grub2/Makefile
+
+# haproxy - fix build with quictls
+sed -i '/USE_QUIC_OPENSSL_COMPAT/d' feeds/packages/net/haproxy/Makefile
 
 # nghttp3
 rm -rf customfeeds/packages/libs/nghttp3
@@ -346,21 +218,11 @@ popd
 # docker systemd support
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/cgroupfs-mount/902-mount-sys-fs-cgroup-systemd-for-docker-systemd-suppo.patch > customfeeds/packages/utils/cgroupfs-mount/patches/902-mount-sys-fs-cgroup-systemd-for-docker-systemd-suppo.patch
 
-# procps-ng - top
-rm -rf customfeeds/packages/utils/procps-ng
-cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
-sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
-
 # TTYD
 sed -i 's/services/system/g' customfeeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 sed -i '3 a\\t\t"order": 50,' customfeeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' customfeeds/packages/utils/ttyd/files/ttyd.init
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/utils/ttyd/files/ttyd.init
-
-# UPnP
-rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
-git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
-git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # nginx-util - fix gcc13
 # pushd customfeeds/packages
@@ -381,13 +243,12 @@ git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applicatio
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/openwrt-23.05-uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
 
+# perl
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/gcc-14/perl/1000-fix-implicit-declaration-error.patch > feeds/packages/lang/perl/patches/1000-fix-implicit-declaration-error.patch
+
 # opkg
 mkdir -p package/system/opkg/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/opkg/900-opkg-download-disable-hsts.patch > package/system/opkg/patches/900-opkg-download-disable-hsts.patch
-
-# uwsgi - bump version
-rm -rf customfeeds/packages/net/uwsgi
-cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
 
 # uwsgi - fix timeout
 sed -i '$a cgi-timeout = 600' customfeeds/packages/net/uwsgi/files-luci-support/luci-*.ini
