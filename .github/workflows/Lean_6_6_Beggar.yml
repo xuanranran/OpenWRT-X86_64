@@ -21,6 +21,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: configs/lean/lean_beggar_6_6.config
   DIY_SH: scripts/lean_6_6.sh
+  KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -142,6 +143,7 @@ jobs:
         cp ../scripts/init-settings.sh files/etc/uci-defaults/99-init-settings
         mkdir -p files/etc/opkg
         cp ../configs/opkg/distfeeds-packages-server.conf files/etc/opkg/distfeeds.conf.server
+        if "$KMODS_IN_FIRMWARE" = 'true'
         then
             mkdir -p files/www/snapshots
             cp -r bin/targets files/www/snapshots
