@@ -190,7 +190,7 @@ popd
 # sed -i '/PKG_BUILD_FLAGS/ s/$/ no-gc-sections/' package/boot/grub2/Makefile
 
 # haproxy - fix build with quictls
-sed -i '/USE_QUIC_OPENSSL_COMPAT/d' customfeeds/packages/net/haproxy/Makefile
+# sed -i '/USE_QUIC_OPENSSL_COMPAT/d' customfeeds/packages/net/haproxy/Makefile
 
 # nghttp3
 rm -rf customfeeds/packages/libs/nghttp3
