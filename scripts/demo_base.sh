@@ -53,7 +53,6 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # dwarves: Fix a dwarf type DW_ATE_unsigned_1024 to btf encoding issue
 mkdir -p tools/dwarves/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/dwarves/100-btf_encoder-Fix-a-dwarf-type-DW_ATE_unsigned_1024-to-btf-encoding-issue.patch > tools/dwarves/patches/100-btf_encoder-Fix-a-dwarf-type-DW_ATE_unsigned_1024-to-btf-encoding-issue.patch
-fi
 
 # dwarves 1.25
 # rm -rf tools/dwarves
