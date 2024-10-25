@@ -26,8 +26,8 @@ rm -rf package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 
 # uwsgi - bump version
-rm -rf customfeeds/packages/net/uwsgi
-cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
+# rm -rf customfeeds/packages/net/uwsgi
+# cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
 
 # Update node 20.x
 rm -rf customfeeds/packages/lang/node
@@ -44,7 +44,7 @@ rm -rf customfeeds/packages/utils/unzip
 git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
 
 # tcp-brutal
-git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
+# git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
 # Update nginx-util
 rm -rf customfeeds/packages/net/nginx-util/*
@@ -64,9 +64,9 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/
 popd
 
 # Update iproute2
-rm -rf package/network/utils/iproute2
-pushd package/network/utils/
-git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
+# rm -rf package/network/utils/iproute2
+# pushd package/network/utils/
+# git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
 
 # luci-app-turboacc
 sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/applications/luci-app-turboacc/Makefile
