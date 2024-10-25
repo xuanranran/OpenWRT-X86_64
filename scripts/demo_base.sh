@@ -50,6 +50,9 @@ sed -i 's/0666/0644/g;s/0744/0755/g;s/0777/0755/g' customfeeds/luci/applications
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba.config
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
 
+# apk-tools
+curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
+
 # unzip
 rm -rf customfeeds/packages/utils/unzip
 git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
