@@ -47,10 +47,10 @@ git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packag
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
 # Update nginx-util
-rm -rf customfeeds/packages/net/nginx-util/*
-pushd customfeeds/packages/net/nginx-util/
-git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
-popd
+# rm -rf customfeeds/packages/net/nginx-util/*
+# pushd customfeeds/packages/net/nginx-util/
+# git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
+# popd
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
@@ -120,12 +120,12 @@ sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
-rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
-git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
-git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
-git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
-git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
-git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
+# rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
+# git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
+# git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
+# git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
+# git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
+# git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
 # FullCone module
 git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
