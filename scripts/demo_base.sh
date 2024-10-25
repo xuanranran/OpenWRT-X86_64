@@ -36,7 +36,7 @@ git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/package
 # liburing - 2.7 (samba-4.21.0)
 rm -rf customfeeds/packages/libs/liburing
 git clone https://github.com/sbwml/feeds_packages_libs_liburing customfeeds/packages/libs/liburing
-enable multi-channel
+# enable multi-channel
 sed -i '/workgroup/a \\n\t## enable multi-channel' customfeeds/packages/net/samba4/files/smb.conf.template
 sed -i '/enable multi-channel/a \\tserver multi channel support = yes' customfeeds/packages/net/samba4/files/smb.conf.template
 # default config
