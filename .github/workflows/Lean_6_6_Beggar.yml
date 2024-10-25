@@ -72,7 +72,7 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
         chmod +x ../scripts/*.sh
         ../scripts/hook-package.sh
-        ../scripts/demo-base.sh
+        ../scripts/hook-base.sh
         ../scripts/hook-feeds.sh
         
     - name: Install Feeds
