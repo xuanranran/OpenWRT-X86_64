@@ -26,7 +26,7 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0007-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 
 # toolchain: Add libquadmath to the toolchain
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0008-libquadmath-Add-libquadmath-to-the-toolchain.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0008-libquadmath-Add-libquadmath-to-the-toolchain.patch | patch -p1
 
 # build: kernel: add out-of-tree kernel config
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0009-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
@@ -73,7 +73,7 @@ sed -i 's/noinitrd/noinitrd intel_pstate=disable mitigations=off/g' target/linux
 # sed -i 's/+luci-nginx \\$/+luci-nginx/' customfeeds/luci/collections/luci-light/Makefile
 
 # GCC Optimization level -O3
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
 
 # DPDK & NUMACTL
 # mkdir -p package/new/{dpdk/patches,numactl}
@@ -187,7 +187,7 @@ popd
 # sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
 
 # grub2 -  disable `gc-sections` flag
-sed -i '/PKG_BUILD_FLAGS/ s/$/ no-gc-sections/' package/boot/grub2/Makefile
+# sed -i '/PKG_BUILD_FLAGS/ s/$/ no-gc-sections/' package/boot/grub2/Makefile
 
 # haproxy - fix build with quictls
 # sed -i '/USE_QUIC_OPENSSL_COMPAT/d' customfeeds/packages/net/haproxy/Makefile
@@ -316,9 +316,9 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
 # profile
-# sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
-# sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
-# sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
+sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
+sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
+sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
 
 # BBRv3 - linux-6.6/6.12
 pushd target/linux/generic/backport-6.6
