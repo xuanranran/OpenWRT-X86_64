@@ -13,7 +13,7 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 
 # rootfs: add r/w (0600) permissions for UCI configuration files
 # include/rootfs.mk
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0004-rootfs-add-r-w-permissions-for-UCI-configuration-fil.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0004-rootfs-add-r-w-permissions-for-UCI-configuration-fil.patch | patch -p1
 
 # rootfs: Add support for local kmod installation sources
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0005-rootfs-Add-support-for-local-kmod-installation-sourc.patch | patch -p1
@@ -299,9 +299,9 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # git clone https://github.com/sbwml/package_network_services_ppp package/network/services/ppp
 
 # profile
-sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
-sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
-sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
+# sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
+# sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
+# sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
 
 # BBRv3 - linux-6.6/6.12
 pushd target/linux/generic/backport-6.6
