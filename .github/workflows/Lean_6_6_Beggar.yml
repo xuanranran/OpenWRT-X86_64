@@ -19,8 +19,8 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/OpenWrt_Lean_2305.config
-  DIY_SH: scripts/lean_23_05.sh
+  CONFIG_FILE: configs/lean/lean_beggar_6_6.config
+  DIY_SH: scripts/lean_6_6.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -39,25 +39,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-
-    - name: Initialization Environment
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        echo -e "Total CPU cores\t: $(nproc)"
-        cat /proc/cpuinfo | grep 'model name'
-        free -h
-        uname -a
-        [ -f /proc/version ] && cat /proc/version
-        [ -f /etc/issue.net ] && cat /etc/issue.net
-        [ -f /etc/issue ] && cat /etc/issue
-        ulimit -a
         
     - name: Clone Source Code
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-
     - name: Update Feeds
       id: update
       run: |
@@ -65,22 +51,16 @@ jobs:
         echo "OPENWRTROOT=$PWD" >> $GITHUB_ENV
         echo "OPENWRTROOT=$PWD" >> $GITHUB_OUTPUT
         mkdir customfeeds
-        git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
-        git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
         git clone --depth=1 https://github.com/coolsnowwolf/packages customfeeds/packages
-        git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci -b openwrt-23.05
-        git clone --depth=1 https://github.com/coolsnowwolf/routing customfeeds/routing
-        git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
+        git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci
         chmod +x ../scripts/*.sh
-        ../scripts/hook-package.sh
-        ../scripts/hook-base.sh
         ../scripts/hook-feeds.sh
-        
+
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
         ./scripts/feeds install -a
-
+        
     - name: Load Custom Configuration
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
@@ -98,7 +78,6 @@ jobs:
         cd $OPENWRTROOT
         cat .config
         make download -j100
-        make download -j10
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
   
@@ -106,11 +85,10 @@ jobs:
       id: compile
       run: |
         cd $OPENWRTROOT
-        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         echo -e "$(nproc) thread compile"
-        make tools/compile -j$(nproc) || make tools/compile -j$(nproc) V=s
-        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) V=s
-        make target/compile -j$(nproc) || make target/compile -j$(nproc) V=s IGNORE_ERRORS=1
+        make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
+        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1
         make diffconfig
         make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
         make package/index
@@ -129,7 +107,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "FIRMWARE=$PWD" >> $GITHUB_OUTPUT
         echo "COMPILE_STATUS=success" >> $GITHUB_OUTPUT
-
+        
     - name: Generate Firmware
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
       id: generate
@@ -147,9 +125,9 @@ jobs:
         then
             mkdir -p files/www/snapshots
             cp -r bin/targets files/www/snapshots
-            cp ../configs/opkg/distfeeds-23.05-local.conf files/etc/opkg/distfeeds.conf
+            cp ../configs/opkg/distfeeds-18.06-local.conf files/etc/opkg/distfeeds.conf
         else
-            cp ../configs/opkg/distfeeds-23.05-remote.conf files/etc/opkg/distfeeds.conf
+            cp ../configs/opkg/distfeeds-18.06-remote.conf files/etc/opkg/distfeeds.conf
         fi
         cp files/etc/opkg/distfeeds.conf.server files/etc/opkg/distfeeds.conf.mirror
         sed -i "s/http:\/\/192.168.123.100:2345\/snapshots/https:\/\/openwrt.cc\/snapshots\/$(date +"%Y-%m-%d")\/lean/g" files/etc/opkg/distfeeds.conf.mirror
@@ -188,7 +166,7 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -205,7 +183,7 @@ jobs:
           keep_minimum_runs: 5
 
     - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.4
+      uses: dev-drprasad/delete-older-releases@v0.3.2
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
           keep_latest: 120
@@ -214,7 +192,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Delete Artifacts
-      uses: geekyeggo/delete-artifact@v5
+      uses: geekyeggo/delete-artifact@v4
       with:
          name: |
             bin-archive
