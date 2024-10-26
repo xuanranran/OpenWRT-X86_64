@@ -212,23 +212,23 @@ git clone https://github.com/sbwml/package_libs_ngtcp2 package/libs/ngtcp2
 # git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
 
 # Docker
-rm -rf customfeeds/luci/applications/luci-app-dockerman
-git clone https://git.cooluc.com/sbwml/luci-app-dockerman -b openwrt-23.05 customfeeds/luci/applications/luci-app-dockerman
-rm -rf customfeeds/packages/utils/{docker,dockerd,containerd,runc}
-git clone https://github.com/sbwml/packages_utils_docker customfeeds/packages/utils/docker
-git clone https://github.com/sbwml/packages_utils_dockerd customfeeds/packages/utils/dockerd
-git clone https://github.com/sbwml/packages_utils_containerd customfeeds/packages/utils/containerd
-git clone https://github.com/sbwml/packages_utils_runc customfeeds/packages/utils/runc
+# rm -rf customfeeds/luci/applications/luci-app-dockerman
+# git clone https://git.cooluc.com/sbwml/luci-app-dockerman -b openwrt-23.05 customfeeds/luci/applications/luci-app-dockerman
+# rm -rf customfeeds/packages/utils/{docker,dockerd,containerd,runc}
+# git clone https://github.com/sbwml/packages_utils_docker customfeeds/packages/utils/docker
+# git clone https://github.com/sbwml/packages_utils_dockerd customfeeds/packages/utils/dockerd
+# git clone https://github.com/sbwml/packages_utils_containerd customfeeds/packages/utils/containerd
+# git clone https://github.com/sbwml/packages_utils_runc customfeeds/packages/utils/runc
 
-rm -rf customfeeds/packages/utils/docker-compose
-cp -r $GITHUB_WORKSPACE/data/packages-master/utils/docker-compose customfeeds/packages/utils/docker-compose
+# rm -rf customfeeds/packages/utils/docker-compose
+# cp -r $GITHUB_WORKSPACE/data/packages-master/utils/docker-compose customfeeds/packages/utils/docker-compose
 
-sed -i '/sysctl.d/d' customfeeds/packages/utils/dockerd/Makefile
-pushd customfeeds/packages
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0001-dockerd-fix-bridge-network.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0002-docker-add-buildkit-experimental-support.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0003-dockerd-disable-ip6tables-for-bridge-network-by-defa.patch | patch -p1
-popd
+# sed -i '/sysctl.d/d' customfeeds/packages/utils/dockerd/Makefile
+# pushd customfeeds/packages
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0001-dockerd-fix-bridge-network.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0002-docker-add-buildkit-experimental-support.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/docker/0003-dockerd-disable-ip6tables-for-bridge-network-by-defa.patch | patch -p1
+# popd
 
 # cgroupfs-mount
 # fix unmount hierarchical mount
