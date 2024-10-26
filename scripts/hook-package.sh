@@ -26,8 +26,8 @@ rm -rf package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 
 # uwsgi - bump version
-# rm -rf customfeeds/packages/net/uwsgi
-# cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
+rm -rf customfeeds/packages/net/uwsgi
+cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
 
 # Update node 20.x
 rm -rf customfeeds/packages/lang/node
