@@ -54,9 +54,8 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # sed -i '/PKG_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/utils/attr/Makefile
 
 # dwarves 1.25
-rm -rf tools/dwarves
-git clone https://github.com/sbwml/tools_dwarves tools/dwarves
-popd
+# rm -rf tools/dwarves
+# git clone https://github.com/sbwml/tools_dwarves tools/dwarves
 
 # dwarves: Fix a dwarf type DW_ATE_unsigned_1024 to btf encoding issue
 mkdir -p tools/dwarves/patches
