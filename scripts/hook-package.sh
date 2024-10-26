@@ -127,15 +127,6 @@ sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.c
 # git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
 # git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
-# FullCone module
-git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
-
-# IPv6 NAT
-git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
-
-# natflow
-git clone https://github.com/sbwml/package_new_natflow package/new/natflow
-
 # UPnP
 rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
 git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
