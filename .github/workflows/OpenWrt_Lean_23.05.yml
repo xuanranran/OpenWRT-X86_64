@@ -19,7 +19,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/OpenWrt_Lean_23.05.config
+  CONFIG_FILE: configs/lean/OpenWrt_Lean_2305.config
   DIY_SH: scripts/lean_2305.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
