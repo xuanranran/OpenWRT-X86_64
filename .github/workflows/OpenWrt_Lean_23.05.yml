@@ -74,7 +74,7 @@ jobs:
         chmod +x ../scripts/*.sh
         ../scripts/hook-package.sh
         ../scripts/hook-base.sh
-        ../scripts/hook-feeds.sh
+        ../scripts/hook-feed.sh
         
     - name: Install Feeds
       run: |
