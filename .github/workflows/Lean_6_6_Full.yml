@@ -40,6 +40,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Initialization Environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        echo -e "Total CPU cores\t: $(nproc)"
+        cat /proc/cpuinfo | grep 'model name'
+        free -h
+        uname -a
+        [ -f /proc/version ] && cat /proc/version
+        [ -f /etc/issue.net ] && cat /etc/issue.net
+        [ -f /etc/issue ] && cat /etc/issue
+        ulimit -a
+        
     - name: Clone Source Code
       run: |
         df -hT $PWD
@@ -56,7 +69,7 @@ jobs:
         git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci
         chmod +x ../scripts/*.sh
         ../scripts/hook-feeds.sh
-        
+
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
@@ -79,6 +92,7 @@ jobs:
         cd $OPENWRTROOT
         cat .config
         make download -j100
+        make download -j10
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
   
@@ -167,7 +181,7 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -184,7 +198,7 @@ jobs:
           keep_minimum_runs: 5
 
     - name: Remove old Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.2
+      uses: dev-drprasad/delete-older-releases@v0.3.4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
           keep_latest: 120
