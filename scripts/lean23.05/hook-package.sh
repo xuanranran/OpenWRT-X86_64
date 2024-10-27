@@ -6,7 +6,7 @@
 # cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
 
 # custom packages
-rm -rf package/lean/{*ddns-scripts_aliyun，ddns-scripts_dnspod}
+rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
