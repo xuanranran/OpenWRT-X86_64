@@ -143,3 +143,5 @@ git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applicatio
 # cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 # sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
+# 测试杂项
+# rm -rf customfeeds/packages
