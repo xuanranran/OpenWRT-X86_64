@@ -68,10 +68,10 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/
 popd
 
 # Update busybox
-rm -rf package/utils/busybox
-pushd package/utils/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt busybox && mv -n busybox/package/utils/busybox ./ ; rm -rf busybox
-popd
+# rm -rf package/utils/busybox
+# pushd package/utils/
+# git clone --depth 1 https://github.com/immortalwrt/immortalwrt busybox && mv -n busybox/package/utils/busybox ./ ; rm -rf busybox
+# popd
 
 
 # Update iproute2
