@@ -20,7 +20,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   CONFIG_FILE: configs/lean/lean_docker.config
-  DIY_SH: scripts/lean.sh
+  DIY_SH: scripts/lean18.06/lean.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -68,7 +68,8 @@ jobs:
         git clone --depth=1 https://github.com/coolsnowwolf/packages customfeeds/packages
         git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci
         chmod +x ../scripts/*.sh
-        ../scripts/hook-feeds.sh
+        chmod +x ../scripts/lean18.06/*.sh
+        ../scripts/lean18.06/hook-feeds.sh
 
     - name: Install Feeds
       run: |

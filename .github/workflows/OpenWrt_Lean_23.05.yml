@@ -20,7 +20,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   CONFIG_FILE: configs/lean_23_05/OpenWrt_Lean.config
-  DIY_SH: scripts/lean_2305.sh
+  DIY_SH: scripts/lean23.05/lean.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -72,9 +72,10 @@ jobs:
         git clone --depth=1 https://github.com/coolsnowwolf/routing customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
         chmod +x ../scripts/*.sh
-        ../scripts/hook-package.sh
-        ../scripts/hook-base.sh
-        ../scripts/hook-feed.sh
+        chmod +x ../scripts/lean23.05/*.sh
+        ../scripts/lean23.05/hook-package.sh
+        ../scripts/lean23.05/hook-base.sh
+        ../scripts/lean23.05/hook-feed.sh
         
     - name: Install Feeds
       run: |
