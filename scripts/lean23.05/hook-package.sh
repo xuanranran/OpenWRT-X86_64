@@ -67,6 +67,13 @@ pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
 popd
 
+# Update busybox
+rm -rf package/utils/busybox
+pushd package/utils/
+git clone --depth 1 https://github.com/immortalwrt/immortalwrt busybox && mv -n busybox/package/utils/busybox ./ ; rm -rf busybox
+popd
+
+
 # Update iproute2
 # rm -rf package/network/utils/iproute2
 # pushd package/network/utils/
@@ -139,9 +146,9 @@ git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniup
 git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
-# rm -rf customfeeds/packages/utils/procps-ng
-# cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
-# sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+rm -rf customfeeds/packages/utils/procps-ng
+cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
+sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # 测试杂项
-# rm -rf customfeeds/packages
+
