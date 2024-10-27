@@ -316,7 +316,7 @@ sed -i "s/openwrt.org/baidu.com/g" customfeeds/luci/modules/luci-mod-network/htd
 # rm -f customfeeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js
 
 # luci - rollback dhcp.js
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/dhcp/openwrt-24.10-dhcp.js > customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/dhcp/openwrt-23.05-dhcp.js > customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
 
 # ppp - 2.5.0
 rm -rf package/network/services/ppp
