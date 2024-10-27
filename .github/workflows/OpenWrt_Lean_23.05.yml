@@ -75,7 +75,7 @@ jobs:
         chmod +x ../scripts/lean23.05/*.sh
         ../scripts/lean23.05/hook-package.sh
         ../scripts/lean23.05/hook-base.sh
-        ../scripts/lean23.05/hook-feed.sh
+        ../scripts/lean23.05/hook-feeds.sh
         
     - name: Install Feeds
       run: |
