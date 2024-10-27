@@ -6,6 +6,7 @@
 # cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
 
 # custom packages
+rm -rf package/lean/{*ddns-scripts_aliyun，ddns-scripts_dnspod}
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
@@ -141,3 +142,4 @@ git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applicatio
 # rm -rf customfeeds/packages/utils/procps-ng
 # cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 # sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+
