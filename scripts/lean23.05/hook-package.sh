@@ -16,8 +16,11 @@ chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnl
 rm -rf customfeeds/luci/applications/luci-app-firewall
 cp -r $GITHUB_WORKSPACE/data/luci/applications/luci-app-firewall customfeeds/luci/applications/luci-app-firewall
 
-rm -rf package/kernel/linux/modules/netsupport.mk
-cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
+# rm -rf package/kernel/linux/modules/netsupport.mk
+# cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
+
+# luci-app-turboacc
+# sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/applications/luci-app-turboacc/Makefile
 
 # xdp-tools
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/xdp-tools package/network/utils/xdp-tools
@@ -68,9 +71,6 @@ popd
 # rm -rf package/network/utils/iproute2
 # pushd package/network/utils/
 # git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
-
-# luci-app-turboacc
-sed -i 's/kmod-tcp-bbr/kmod-tcp-bbr3/g' customfeeds/luci/applications/luci-app-turboacc/Makefile
 
 # Update dnsmasq
 # rm -rf package/network/services/dnsmasq/*
