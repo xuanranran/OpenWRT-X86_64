@@ -96,7 +96,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
 
 # ddns - fix boot
-sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
+# sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
 
 # nlbwmon - disable syslog
 sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
