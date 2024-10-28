@@ -1,6 +1,9 @@
 #!/bin/bash
 # Set to local prepare
 
+rm -rf package/lean/autocore/files/x86/index.htm
+cp -r $GITHUB_WORKSPACE/data/index.htm package/lean/autocore/files/x86/index.htm
+
 # tools: add llvm/clang toolchain
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic/0001-tools-add-llvm-clang-toolchain.patch | patch -p1
 
