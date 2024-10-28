@@ -37,4 +37,5 @@ sed -i '/src-git telephony/d' feeds.conf.default
 echo "src-link telephony $telephony_feed" >> feeds.conf.default
 
 # Update feeds
+./scripts/feeds clean -a
 ./scripts/feeds update -a
