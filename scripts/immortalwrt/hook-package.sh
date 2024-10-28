@@ -3,6 +3,7 @@
 
 # custom packages
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
+rm -rf customfeeds/packages/net/shadowsocks-libev
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 # chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
