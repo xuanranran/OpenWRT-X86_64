@@ -29,8 +29,8 @@ chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnl
 # cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
 
 # Update node 20.x
-rm -rf customfeeds/packages/lang/node
-git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
+# rm -rf customfeeds/packages/lang/node
+# git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
 
 # Update node-yarn
 # rm -rf customfeeds/packages/lang/node-yarn/*
@@ -39,8 +39,8 @@ git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds
 # popd
 
 # unzip
-rm -rf customfeeds/packages/utils/unzip
-git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
+# rm -rf customfeeds/packages/utils/unzip
+# git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
 
 # tcp-brutal
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
@@ -93,7 +93,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone --depth 1 https://github.com/xuanranran/package_kerne_lantiq package/kernel/lantiq
 
 # apk-tools
-# curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
+curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
 
 # ddns - fix boot
 # sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
