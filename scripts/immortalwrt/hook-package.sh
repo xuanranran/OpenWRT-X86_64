@@ -147,10 +147,18 @@ rm -rf customfeeds/packages/utils/procps-ng
 cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
-# curl
-rm -rf customfeeds/packages/net/curl
+# 替换杂项
+rm -rf customfeeds/packages/net/{*curl,cgi-io,wsdd2}
+rm -rf customfeeds/packages/libs/libsodium
+rm -rf customfeeds/luci/contrib/package/lucihttp
 pushd customfeeds/packages/net/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_curl && mv -n immortalwrt_curl/net/curl ./ ; rm -rf immortalwrt_curl
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_curl && mv -n immortalwrt_curl/net/{*curl,cgi-io,wsdd2} ./ ; rm -rf immortalwrt_curl
+popd
+pushd customfeeds/packages/libs/
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_libsodium && mv -n immortalwrt_libsodium/libs/libsodium ./ ; rm -rf immortalwrt_libsodium
+popd
+pushd customfeeds/luci/contrib/package/
+git clone --depth 1 https://github.com/immortalwrt/luci immortalwrt_lucihttp && mv -n immortalwrt_lucihttp/contrib/package/lucihttp ./ ; rm -rf immortalwrt_lucihttp
 popd
 
 # 测试杂项
