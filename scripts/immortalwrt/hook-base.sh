@@ -207,10 +207,6 @@ popd
 # rm -rf customfeeds/packages/libs/ngtcp2
 # git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/package/libs/ngtcp2
 
-# curl - fix passwall `time_pretransfer` check
-# rm -rf customfeeds/packages/net/curl
-# git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
-
 # Docker
 # rm -rf customfeeds/luci/applications/luci-app-dockerman
 # git clone https://git.cooluc.com/sbwml/luci-app-dockerman -b openwrt-23.05 customfeeds/luci/applications/luci-app-dockerman
