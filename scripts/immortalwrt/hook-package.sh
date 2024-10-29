@@ -148,11 +148,11 @@ cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/package
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # 替换杂项
-rm -rf customfeeds/packages/net/{*curl,cgi-io,wsdd2}
+rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
 rm -rf customfeeds/packages/libs/libsodium
 rm -rf customfeeds/luci/contrib/package/lucihttp
 pushd customfeeds/packages/net/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_curl && mv -n immortalwrt_curl/net/{*curl,cgi-io,wsdd2} ./ ; rm -rf immortalwrt_curl
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/{*cgi-io,wsdd2} ./ ; rm -rf immortalwrt_packages
 popd
 pushd customfeeds/packages/libs/
 git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_libsodium && mv -n immortalwrt_libsodium/libs/libsodium ./ ; rm -rf immortalwrt_libsodium
