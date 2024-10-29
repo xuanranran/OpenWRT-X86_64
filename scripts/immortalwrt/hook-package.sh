@@ -94,13 +94,13 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone --depth 1 https://github.com/xuanranran/package_kerne_lantiq package/kernel/lantiq
 
 # apk-tools
-curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
+# curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
 
 # ddns - fix boot
 # sed -i '/boot()/,+2d' customfeeds/packages/net/ddns-scripts/files/ddns.init
 
 # nlbwmon - disable syslog
-sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
+# sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
 
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
@@ -143,9 +143,9 @@ git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniup
 git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
-rm -rf customfeeds/packages/utils/procps-ng
-cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
-sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+# rm -rf customfeeds/packages/utils/procps-ng
+# cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
+# sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
