@@ -151,6 +151,11 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/emortal/default-settings
 git clone https://github.com/sbwml/default-settings package/emortal/default-settings
 
+# telephony
+pushd customfeeds/telephony
+rm -rf libs/dahdi-linux
+git clone https://github.com/sbwml/feeds_telephony_libs_dahdi-linux libs/dahdi-linux
+
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
 rm -rf customfeeds/packages/libs/libsodium
