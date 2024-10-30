@@ -151,10 +151,25 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/emortal/default-settings
 git clone https://github.com/sbwml/default-settings package/emortal/default-settings
 
+pushd feeds/packages
+# xr_usb_serial_common
+curl -s https://github.com/openwrt/packages/commit/23a3ea2d6b3779cd48d318b95a3c72cad9433d50.patch | patch -p1
+# fix linux-6.6
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/xr_usb_serial_common/900-fix-linux-6.6.patch > libs/xr_usb_serial_common/patches/900-fix-linux-6.6.patch
+# coova-chilli
+curl -s https://github.com/openwrt/packages/commit/9975e855adcfc24939080a5e0279e0a90553347b.patch | patch -p1
+curl -s https://github.com/openwrt/packages/commit/c0683d3f012096fc7b2fbe8b8dc81ea424945e9b.patch | patch -p1
+popd
+
+# perl
+# sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" feeds/packages/lang/perl/Makefile
+# sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' feeds/packages/lang/perl/Makefile
+
 # telephony
 pushd customfeeds/telephony
 rm -rf libs/dahdi-linux
 git clone https://github.com/sbwml/feeds_telephony_libs_dahdi-linux libs/dahdi-linux
+popd
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
