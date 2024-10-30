@@ -151,7 +151,7 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/emortal/default-settings
 git clone https://github.com/sbwml/default-settings package/emortal/default-settings
 
-pushd feeds/packages
+pushd customfeeds/packages
 # xr_usb_serial_common
 curl -s https://github.com/openwrt/packages/commit/23a3ea2d6b3779cd48d318b95a3c72cad9433d50.patch | patch -p1
 # fix linux-6.6
@@ -162,8 +162,8 @@ curl -s https://github.com/openwrt/packages/commit/c0683d3f012096fc7b2fbe8b8dc81
 popd
 
 # perl
-# sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" feeds/packages/lang/perl/Makefile
-# sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' feeds/packages/lang/perl/Makefile
+sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
+sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
 # telephony
 pushd customfeeds/telephony
