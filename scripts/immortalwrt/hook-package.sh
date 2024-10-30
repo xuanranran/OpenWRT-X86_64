@@ -138,9 +138,9 @@ git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
 git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
 # UPnP
-# rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
-# git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
-# git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
+rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
+git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
+git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
 rm -rf customfeeds/packages/utils/procps-ng
