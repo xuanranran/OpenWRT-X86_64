@@ -10,11 +10,11 @@ rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
-chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
+# chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # Update applications/luci-app-firewall
-rm -rf customfeeds/luci/applications/luci-app-firewall
-cp -r $GITHUB_WORKSPACE/data/luci/applications/luci-app-firewall customfeeds/luci/applications/luci-app-firewall
+# rm -rf customfeeds/luci/applications/luci-app-firewall
+# cp -r $GITHUB_WORKSPACE/data/luci/applications/luci-app-firewall customfeeds/luci/applications/luci-app-firewall
 
 # rm -rf package/kernel/linux/modules/netsupport.mk
 # cp -r $GITHUB_WORKSPACE/data/package/kernel/linux/modules/netsupport.mk package/kernel/linux/modules/netsupport.mk
@@ -30,8 +30,8 @@ rm -rf package/network/utils/uqmi
 cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 
 # uwsgi - bump version
-rm -rf customfeeds/packages/net/uwsgi
-cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
+# rm -rf customfeeds/packages/net/uwsgi
+# cp -r $GITHUB_WORKSPACE/data/packages-master/net/uwsgi customfeeds/packages/net/uwsgi
 
 # Update node 20.x
 rm -rf customfeeds/packages/lang/node
@@ -142,9 +142,9 @@ popd
 # git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
 # UPnP
-rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
-git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
-git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
+# rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
+# git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.7
+# git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
 rm -rf customfeeds/packages/utils/procps-ng
@@ -152,8 +152,8 @@ cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/package
 # sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # 替换杂项
-rm -rf customfeeds/packages/libs/gnutls
-pushd customfeeds/packages/libs/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_gnutls && mv -n immortalwrt_gnutls/libs/gnutls ./ ; rm -rf immortalwrt_gnutls
-popd
+# rm -rf customfeeds/packages/libs/gnutls
+# pushd customfeeds/packages/libs/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_gnutls && mv -n immortalwrt_gnutls/libs/gnutls ./ ; rm -rf immortalwrt_gnutls
+# popd
 
