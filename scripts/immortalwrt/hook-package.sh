@@ -103,8 +103,8 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
 
 # samba4 - bump version
-# rm -rf customfeeds/packages/net/samba4
-# git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
+rm -rf customfeeds/packages/net/samba4
+git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
 sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Makefile
 
 # liburing - 2.7 (samba-4.21.0)
