@@ -103,8 +103,8 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # sed -i 's/stderr 1/stderr 0/g' customfeeds/packages/net/nlbwmon/files/nlbwmon.init
 
 # samba4 - bump version
-rm -rf customfeeds/packages/net/samba4
-git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
+# rm -rf customfeeds/packages/net/samba4
+# git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
 sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Makefile
 
 # liburing - 2.7 (samba-4.21.0)
@@ -130,12 +130,12 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 popd
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
-# rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
-# git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
-# git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
-# git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
-# git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
-# git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
+rm -rf package/kernel/r8168 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
+git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
+git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
+git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
+git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
+git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
 
 # UPnP
 # rm -rf customfeeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
@@ -143,9 +143,13 @@ popd
 # git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
-# rm -rf customfeeds/packages/utils/procps-ng
-# cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
-# sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+rm -rf customfeeds/packages/utils/procps-ng
+cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
+sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+
+# default settings
+rm -rf package/emortal/default-settings
+git clone https://github.com/sbwml/default-settings package/emortal/default-settings
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
