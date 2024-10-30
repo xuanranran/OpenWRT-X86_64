@@ -151,5 +151,9 @@ rm -rf customfeeds/packages/utils/procps-ng
 cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 # sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
-# 测试杂项
+# 替换杂项
+rm -rf customfeeds/packages/libs/gnutls
+pushd customfeeds/packages/libs/
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_gnutls && mv -n immortalwrt_libsodium/libs/gnutls ./ ; rm -rf immortalwrt_gnutls
+popd
 
