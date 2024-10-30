@@ -154,6 +154,6 @@ cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/package
 # 替换杂项
 rm -rf customfeeds/packages/libs/gnutls
 pushd customfeeds/packages/libs/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_gnutls && mv -n immortalwrt_libsodium/libs/gnutls ./ ; rm -rf immortalwrt_gnutls
+git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_gnutls && mv -n immortalwrt_gnutls/libs/gnutls ./ ; rm -rf immortalwrt_gnutls
 popd
 
