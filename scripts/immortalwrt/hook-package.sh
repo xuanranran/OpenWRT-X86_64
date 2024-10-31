@@ -199,8 +199,8 @@ rm -rf package/kernel/mac80211
 git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-23.05
 
 # ath10k-ct
-rm -rf package/kernel/ath10k-ct
-git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.11
+# rm -rf package/kernel/ath10k-ct
+# git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.11
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
