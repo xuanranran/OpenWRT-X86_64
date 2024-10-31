@@ -37,10 +37,12 @@ sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeed
 echo "src/gz openwrt_extras https://opkg.cooluc.com/openwrt-23.05/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
 
 # diagnostics
-uci set luci.diag.dns='www.qq.com'
-uci set luci.diag.ping='www.qq.com'
-uci set luci.diag.route='www.qq.com'
-uci commit luci
+if [ $(uci -q get luci.diag.ping) = "openwrt.org" ]; then
+    uci set luci.diag.dns='www.qq.com'
+    uci set luci.diag.ping='www.qq.com'
+    uci set luci.diag.route='www.qq.com'
+    uci commit luci
+fi
 
 # packet steering
 uci -q get network.globals.packet_steering > /dev/null || {
