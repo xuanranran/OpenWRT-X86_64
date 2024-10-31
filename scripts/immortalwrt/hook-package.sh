@@ -1,7 +1,8 @@
 #!/bin/bash
 # Set to local prepare
 
-git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/system/autocore
+rm -rf package/emortal/autocore
+git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/emortal/autocore
 
 # custom packages
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
