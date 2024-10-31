@@ -164,10 +164,10 @@ popd
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
 # telephony
-pushd customfeeds/telephony
-rm -rf libs/dahdi-linux
-git clone https://github.com/sbwml/feeds_telephony_libs_dahdi-linux libs/dahdi-linux
-popd
+# pushd customfeeds/telephony
+# rm -rf libs/dahdi-linux
+# git clone https://github.com/sbwml/feeds_telephony_libs_dahdi-linux libs/dahdi-linux
+# popd
 
 # linux-firmware: rtw89 / rtl8723d / rtl8821c /i915 firmware
 rm -rf package/firmware/linux-firmware
