@@ -1,8 +1,13 @@
 #!/bin/bash
 # Set to local prepare
 
+# autocore
 rm -rf package/emortal/autocore
 git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/emortal/autocore
+
+# default settings
+rm -rf package/emortal/default-settings
+git clone https://github.com/xuanranran/default-settings package/emortal/default-settings
 
 # custom packages
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
@@ -149,20 +154,6 @@ git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applicatio
 rm -rf customfeeds/packages/utils/procps-ng
 cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
-
-# default settings
-rm -rf package/emortal/default-settings
-git clone https://github.com/xuanranran/default-settings package/emortal/default-settings
-
-# pushd customfeeds/packages
-# xr_usb_serial_common
-# curl -s https://github.com/openwrt/packages/commit/23a3ea2d6b3779cd48d318b95a3c72cad9433d50.patch | patch -p1
-# fix linux-6.6
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/xr_usb_serial_common/900-fix-linux-6.6.patch > libs/xr_usb_serial_common/patches/900-fix-linux-6.6.patch
-# coova-chilli
-# curl -s https://github.com/openwrt/packages/commit/9975e855adcfc24939080a5e0279e0a90553347b.patch | patch -p1
-# curl -s https://github.com/openwrt/packages/commit/c0683d3f012096fc7b2fbe8b8dc81ea424945e9b.patch | patch -p1
-# popd
 
 # perl
 rm -rf customfeeds/packages/lang/perl
