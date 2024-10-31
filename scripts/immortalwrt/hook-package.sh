@@ -1,6 +1,8 @@
 #!/bin/bash
 # Set to local prepare
 
+git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/system/autocore
+
 # custom packages
 rm -rf customfeeds/luci/applications/luci-app-filebrowser
 rm -rf customfeeds/packages/net/shadowsocks-libev
@@ -174,6 +176,31 @@ pushd customfeeds/telephony
 rm -rf libs/dahdi-linux
 git clone https://github.com/sbwml/feeds_telephony_libs_dahdi-linux libs/dahdi-linux
 popd
+
+# linux-firmware: rtw89 / rtl8723d / rtl8821c /i915 firmware
+rm -rf package/firmware/linux-firmware
+git clone https://github.com/sbwml/package_firmware_linux-firmware package/firmware/linux-firmware
+
+# rtl8812au-ct - fix linux-6.6
+rm -rf package/kernel/rtl8812au-ct
+git clone https://github.com/sbwml/package_kernel_rtl8812au-ct package/kernel/rtl8812au-ct
+# add rtl8812au-ac
+git clone https://github.com/sbwml/package_kernel_rtl8812au-ac package/kernel/rtl8812au-ac
+
+# iwinfo: add mt7922 device id
+mkdir -p package/network/utils/iwinfo/patches
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/iwinfo/0001-devices-add-MediaTek-MT7922-device-id.patch > package/network/utils/iwinfo/patches/0001-devices-add-MediaTek-MT7922-device-id.patch
+
+# iwinfo: add rtl8812/14/21au devices
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/iwinfo/0004-add-rtl8812au-devices.patch > package/network/utils/iwinfo/patches/0004-add-rtl8812au-devices.patch
+
+# mac80211 - 6.11
+rm -rf package/kernel/mac80211
+git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-23.05
+
+# ath10k-ct
+rm -rf package/kernel/ath10k-ct
+git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.11
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
