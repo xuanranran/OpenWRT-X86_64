@@ -50,10 +50,10 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
 # Update nginx-util
-# rm -rf customfeeds/packages/net/nginx-util/*
-# pushd customfeeds/packages/net/nginx-util/
-# git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
-# popd
+rm -rf customfeeds/packages/net/nginx-util/*
+pushd customfeeds/packages/net/nginx-util/
+git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
+popd
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
