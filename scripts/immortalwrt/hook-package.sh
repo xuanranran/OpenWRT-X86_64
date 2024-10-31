@@ -152,7 +152,7 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 
 # default settings
 rm -rf package/emortal/default-settings
-git clone https://github.com/sbwml/default-settings package/emortal/default-settings
+git clone https://github.com/xuanranran/default-settings package/emortal/default-settings
 
 # pushd customfeeds/packages
 # xr_usb_serial_common
