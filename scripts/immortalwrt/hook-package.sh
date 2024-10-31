@@ -165,10 +165,10 @@ git clone https://github.com/sbwml/default-settings package/emortal/default-sett
 # popd
 
 # perl
-# rm -rf customfeeds/packages/lang/perl
-# pushd customfeeds/packages/lang/
-# git clone --depth 1 https://github.com/coolsnowwolf/packages coolsnowwolf_perl && mv -n coolsnowwolf_perl/lang/perl ./ ; rm -rf coolsnowwolf_perl
-# popd
+rm -rf customfeeds/packages/lang/perl
+pushd customfeeds/packages/lang/
+git clone --depth 1 https://github.com/immortalwrt/packages coolsnowwolf_perl && mv -n coolsnowwolf_perl/lang/perl ./ ; rm -rf coolsnowwolf_perl
+popd
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
