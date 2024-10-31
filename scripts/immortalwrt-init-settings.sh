@@ -23,13 +23,6 @@ uci set system.@system[0].conloglevel='1'
 uci set system.@system[0].cronloglevel='9'
 uci commit system
 
-# zram
-mem_total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
-zram_size=$(echo | awk "{print int($mem_total*0.25/1024)}")
-uci set system.@system[0].zram_size_mb="$zram_size"
-uci set system.@system[0].zram_comp_algo='zstd'
-uci commit system
-
 # opkg mirror
 sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
 
@@ -58,11 +51,11 @@ crontab /etc/crontabs/root
 # Disable opkg signature check
 # sed -i 's/option check_signature/# option check_signature/g' /etc/opkg.conf
 # 禁用ipv6前缀
-# sed -i 's/^[^#].*option ula/#&/' /etc/config/network
+sed -i 's/^[^#].*option ula/#&/' /etc/config/network
 # Disable autostart by default for some packages
-# cd /etc/rc.d
-# rm -f S98udptools || true
-# rm -f S99nft-qos || true
+cd /etc/rc.d
+rm -f S98udptools || true
+rm -f S99nft-qos || true
 
 # Try to execute init.sh (if exists)
 
