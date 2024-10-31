@@ -427,9 +427,9 @@ git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/pa
 # sed -i '/-Dcapng=disabled/i\\t-Dnuma=disabled \\' customfeeds/packages/utils/irqbalance/Makefile
 
 # vim - fix E1187: Failed to source defaults.vim
-pushd feeds/packages
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/vim/0001-vim-fix-renamed-defaults-config-file.patch | patch -p1
-popd
+# pushd feeds/packages
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/vim/0001-vim-fix-renamed-defaults-config-file.patch | patch -p1
+# popd
 
 # watchcat - clean config
 true > customfeeds/packages/utils/watchcat/files/watchcat.config
