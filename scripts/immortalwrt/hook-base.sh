@@ -245,7 +245,7 @@ sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packa
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/openwrt-23.05-uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
 
 # perl
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/gcc-14/perl/1000-fix-implicit-declaration-error.patch > customfeeds/packages/lang/perl/patches/1000-fix-implicit-declaration-error.patch
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/gcc-14/perl/1000-fix-implicit-declaration-error.patch > customfeeds/packages/lang/perl/patches/1000-fix-implicit-declaration-error.patch
 
 # grub2
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/gcc-14/grub2/900-fix-incompatible-pointer-type.patch > package/boot/grub2/patches/900-fix-incompatible-pointer-type.patch
