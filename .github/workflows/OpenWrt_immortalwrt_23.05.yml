@@ -67,8 +67,8 @@ jobs:
         mkdir customfeeds
         git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
         git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
-        git clone --depth=1 https://github.com/xuanranran/packages customfeeds/packages -b openwrt-23.05
-        git clone --depth=1 https://github.com/xuanranran/luci customfeeds/luci -b openwrt-23.05
+        git clone --depth=1 https://github.com/immortalwrt/packages customfeeds/packages -b openwrt-23.05
+        git clone --depth=1 https://github.com/immortalwrt/luci customfeeds/luci -b openwrt-23.05
         git clone --depth=1 https://github.com/openwrt/routing customfeeds/routing -b openwrt-23.05
         git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
         chmod +x ../scripts/*.sh
