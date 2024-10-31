@@ -48,8 +48,8 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 # popd
 
 # unzip
-# rm -rf customfeeds/packages/utils/unzip
-# git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
+rm -rf customfeeds/packages/utils/unzip
+git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
 
 # tcp-brutal
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
