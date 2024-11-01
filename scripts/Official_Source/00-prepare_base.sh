@@ -210,7 +210,6 @@ sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/uran
 # openssl - lto
 sed -i "s/ no-lto//g" package/libs/openssl/Makefile
 sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
-fi
 
 # nghttp3
 rm -rf customfeeds/packages/libs/nghttp3
