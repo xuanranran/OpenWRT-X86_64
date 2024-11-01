@@ -56,8 +56,8 @@ rm -rf customfeeds/packages/utils/gzip
 git clone https://github.com/xuanranran/feeds_packages_utils_gzip customfeeds/packages/utils/gzip
 
 # tar
-rm -rf customfeeds/packages/utils/tar
-git clone https://github.com/xuanranran/feeds_packages_utils_tar customfeeds/packages/utils/tar
+# rm -rf customfeeds/packages/utils/tar
+# git clone https://github.com/xuanranran/feeds_packages_utils_tar customfeeds/packages/utils/tar
 
 # tcp-brutal
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
@@ -180,12 +180,6 @@ popd
 # linux-firmware: rtw89 / rtl8723d / rtl8821c /i915 firmware
 rm -rf package/firmware/linux-firmware
 git clone https://github.com/sbwml/package_firmware_linux-firmware package/firmware/linux-firmware
-
-# rtl8812au-ct - fix linux-6.6
-rm -rf package/kernel/rtl8812au-ct
-git clone https://github.com/sbwml/package_kernel_rtl8812au-ct package/kernel/rtl8812au-ct
-# add rtl8812au-ac
-git clone https://github.com/sbwml/package_kernel_rtl8812au-ac package/kernel/rtl8812au-ac
 
 # 替换杂项
 rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
