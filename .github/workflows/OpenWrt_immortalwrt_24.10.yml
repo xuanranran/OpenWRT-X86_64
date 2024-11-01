@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt_immortalwrt
+name: OpenWrt_immortalwrt_24.10
 
 on:
   repository_dispatch:
@@ -18,9 +18,9 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: master
-  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
-  DIY_SH: scripts/immortalwrt/immortalwrt.sh
+  REPO_BRANCH: openwrt-24.10
+  CONFIG_FILE: configs/immortalwrt_24.10/immortalwrt.config
+  DIY_SH: scripts/immortalwrt_24.10/immortalwrt.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -67,15 +67,15 @@ jobs:
         mkdir customfeeds
         git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
         git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
-        git clone --depth=1 https://github.com/immortalwrt/packages customfeeds/packages -b openwrt-23.05
-        git clone --depth=1 https://github.com/immortalwrt/luci customfeeds/luci -b openwrt-23.05
-        git clone --depth=1 https://github.com/openwrt/routing customfeeds/routing -b openwrt-23.05
-        git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
+        git clone --depth=1 https://github.com/immortalwrt/packages -b $REPO_BRANCH customfeeds/packages
+        git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
+        git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
+        git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt/*.sh
-        ../scripts/immortalwrt/hook-package.sh
-        ../scripts/immortalwrt/hook-base.sh
-        ../scripts/immortalwrt/hook-feeds.sh
+        chmod +x ../scripts/immortalwrt_24.10/*.sh
+        ../scripts/immortalwrt_24.10/hook-package.sh
+        ../scripts/immortalwrt_24.10/hook-base.sh
+        ../scripts/immortalwrt_24.10/hook-feeds.sh
         
     - name: Install Feeds
       run: |
@@ -161,7 +161,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt1" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt2" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "后台地址：192.168.11.1" >> release.txt
@@ -173,7 +173,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86-64-immortalwrt-23.05-SNAPSHOT 固件
+          name: ${{ steps.tag.outputs.release_date }} x86-64-immortalwrt-24.10-SNAPSHOT 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
