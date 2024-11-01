@@ -35,6 +35,7 @@ popd
 # fix sysupgrade
 rm -rf package/base-files/files/sbin/sysupgrade
 cp -f $GITHUB_WORKSPACE/data/sysupgrade package/base-files/files/sbin/sysupgrade
+chmod 755 package/base-files/files/sbin/sysupgrade
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
