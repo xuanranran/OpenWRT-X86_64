@@ -55,11 +55,14 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # fstools - enable any device with non-MTD rootfs_data volume
 rm -f package/system/fstools
 pushd package/system/
-git clone --depth 1 -b openwrt-23.05 https://github.com/immortalwrt/immortalwrt immortalwrt_fstools && mv -n immortalwrt_fstools/package/system/fstools ./ ; rm -rf immortalwrt_fstools
+git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools ./ ; rm -rf coolsnowwolf_fstools
 popd
+rm -f package/base-files/files/sbin/sysupgrade
+curl -s https://raw.githubusercontent.com/coolsnowwolf/lede/refs/heads/master/package/base-files/files/sbin/sysupgrade > package/base-files/files/sbin/sysupgrade
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/system/fstools/Makefile
 mkdir -p package/system/fstools/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/fstools/200-use-ntfs3-instead-of-ntfs.patch > package/system/fstools/patches/200-use-ntfs3-instead-of-ntfs.patch
+
 
 # FullCone module
 git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
