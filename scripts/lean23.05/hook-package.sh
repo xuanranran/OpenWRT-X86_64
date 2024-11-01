@@ -1,6 +1,12 @@
 #!/bin/bash
 # Set to local prepare
 
+rm -rf package/lean/autocore
+git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/lean/autocore
+
+rm -rf package/lean/default-settings/po/zh-cn/default.po
+curl -s https://raw.githubusercontent.com/xuanranran/default-settings/refs/heads/main/i18n/default.zh_Hans.po > package/lean/default-settings/po/zh-cn/default.po
+
 # Update FW4
 # rm -rf package/network/config/firewall4
 # cp -r $GITHUB_WORKSPACE/data/package/network/config/firewall4 package/network/config/firewall4
@@ -149,7 +155,7 @@ popd
 # procps-ng - top
 rm -rf customfeeds/packages/utils/procps-ng
 cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
-# sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # 替换杂项
 # rm -rf customfeeds/packages/libs/gnutls
