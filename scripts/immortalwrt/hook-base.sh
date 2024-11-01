@@ -16,7 +16,7 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0004-rootfs-add-r-w-permissions-for-UCI-configuration-fil.patch | patch -p1
 
 # rootfs: Add support for local kmod installation sources
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0005-rootfs-Add-support-for-local-kmod-installation-sourc.patch | patch -p1
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0005-rootfs-Add-support-for-local-kmod-installation-sourc.patch | patch -p1
 
 # BTF: fix failed to validate module
 # config/Config-kernel.in patch
@@ -48,6 +48,13 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 
 # GCC Optimization level -O3
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
+
+# fstools
+rm -rf package/system/fstools
+git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 package/system/fstools
+# util-linux
+rm -rf package/utils/util-linux
+git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
 
 # FullCone module
 git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
@@ -227,6 +234,11 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
 sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
 sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
+
+# rootfs files
+mkdir -p files/etc/sysctl.d
+curl -so files/etc/sysctl.d/15-vm-swappiness.conf https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/files/etc/sysctl.d/15-vm-swappiness.conf
+curl -so files/etc/sysctl.d/16-udp-buffer-size.conf https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/files/etc/sysctl.d/16-udp-buffer-size.conf
 
 # BBRv3 - linux-6.6/6.12
 pushd target/linux/generic/backport-6.6
