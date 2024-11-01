@@ -55,6 +55,10 @@ git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packag
 rm -rf customfeeds/packages/utils/gzip
 git clone https://github.com/xuanranran/feeds_packages_utils_gzip customfeeds/packages/utils/gzip
 
+# tar
+rm -rf customfeeds/packages/utils/tar
+git clone https://github.com/xuanranran/feeds_packages_utils_tar customfeeds/packages/utils/tar
+
 # tcp-brutal
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
