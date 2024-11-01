@@ -6,21 +6,21 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.1-Stable
+name: OpenWrt_Official_Source
 
 on:
   repository_dispatch:
   workflow_dispatch:
   # schedule:
-  #   - cron: 45 22 * * * 
+  #   - cron: 11 23 * * * 
   # watch:
   #   types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/lean_stable.config
-  DIY_SH: scripts/lean18.06/lean.sh
+  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: openwrt-24.10
+  CONFIG_FILE: configs/Official_Source/openwrt_24-10.config
+  DIY_SH: scripts/Official_Source/openwrt_24-10.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -65,12 +65,18 @@ jobs:
         echo "OPENWRTROOT=$PWD" >> $GITHUB_ENV
         echo "OPENWRTROOT=$PWD" >> $GITHUB_OUTPUT
         mkdir customfeeds
-        git clone --depth=1 https://github.com/coolsnowwolf/packages customfeeds/packages
-        git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci
+        git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
+        git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
+        git clone --depth=1 https://github.com/openwrt/packages customfeeds/packages -b $REPO_BRANCH
+        git clone --depth=1 https://github.com/openwrt/luci customfeeds/luci -b $REPO_BRANCH
+        git clone --depth=1 https://github.com/openwrt/routing customfeeds/routing -b $REPO_BRANCH
+        git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b $REPO_BRANCH
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/lean18.06/*.sh
-        ../scripts/lean18.06/hook-feeds.sh
-
+        chmod +x ../scripts/Official_Source/*.sh
+        ../scripts/Official_Source/hook-package.sh
+        ../scripts/Official_Source/hook-base.sh
+        ../scripts/Official_Source/hook-feeds.sh
+        
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
@@ -84,6 +90,7 @@ jobs:
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
+        ../scripts/preset-mihomo-core.sh amd64
         ../scripts/preset-terminal-tools.sh
         make defconfig
         
@@ -101,6 +108,7 @@ jobs:
       id: compile
       run: |
         cd $OPENWRTROOT
+        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         echo -e "$(nproc) thread compile"
         make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
         make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
@@ -128,66 +136,44 @@ jobs:
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
       id: generate
       run: |
-        cd configs/opkg
-        sed -i "s/subtarget/$SUBTARGET/g" distfeeds*.conf
-        sed -i "s/target\//$TARGET\//g" distfeeds*.conf
-        sed -i "s/platform/$PLATFORM/g" distfeeds*.conf
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
-        cp ../scripts/init-settings.sh files/etc/uci-defaults/99-init-settings
-        mkdir -p files/etc/opkg
-        cp ../configs/opkg/distfeeds-packages-server.conf files/etc/opkg/distfeeds.conf.server
-        if "$KMODS_IN_FIRMWARE" = 'true'
-        then
-            mkdir -p files/www/snapshots
-            cp -r bin/targets files/www/snapshots
-            cp ../configs/opkg/distfeeds-18.06-local.conf files/etc/opkg/distfeeds.conf
-        else
-            cp ../configs/opkg/distfeeds-18.06-remote.conf files/etc/opkg/distfeeds.conf
-        fi
-        cp files/etc/opkg/distfeeds.conf.server files/etc/opkg/distfeeds.conf.mirror
-        sed -i "s/http:\/\/192.168.123.100:2345\/snapshots/https:\/\/openwrt.cc\/snapshots\/$(date +"%Y-%m-%d")\/lean/g" files/etc/opkg/distfeeds.conf.mirror
+        cp ../scripts/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         pushd bin/targets/x86/64
-        kernelv=`cat openwrt-x86-64-generic.manifest | grep 'kernel - ' |  awk -F '[- ]' '{print $4}'`
-        echo "kernel_version=$kernelv" >> $GITHUB_OUTPUT
         rm -rf openwrt-x86-64-generic-kernel.bin
         rm -rf openwrt-x86-64-generic-rootfs.tar.gz
         rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
         rm -rf openwrt-x86-64-generic-squashfs-combined-efi.vmdk
         rm -rf openwrt-x86-64-generic.manifest
-        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz slim-x86-64-squashfs-efi.img.gz
+        rm -rf openwrt-x86-64-generic-ext4-combined.img.gz
+        rm -rf openwrt-x86-64-generic-ext4-combined-efi.img.gz
+        rm -rf openwrt-x86-64-generic-ext4-rootfs.img.gz
+        rm -rf openwrt-x86-64-generic-squashfs-combined.img.gz
+        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz $(date +"%Y.%m.%d")-openwrt-x86-64-squashfs-efi.img.gz
+        mv config.buildinfo $(date +"%Y.%m.%d")-official-config.buildinfo
         popd
         make checksum
-        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/slim-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-Lean3" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-OpenWrt" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
-          echo -e "**固件说明**:\n" >> release.txt
-          echo -e "### 后台地址: \`192.168.11.1\`\n" >> release.txt
-          echo -e "### 后台密码: \`password\`\n" >> release.txt
-          echo -e "-----------
-                \`full   = 全插件\`
-                \`docker = 带docker\`
-                \`slim   = 精简版\`
-                \`beggar = 乞丐版\`
-                \`bod    = Docker乞丐版\`\n" >> release.txt
+          echo "后台地址：192.168.11.1" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86_64-Linux-${{ steps.generate.outputs.kernel_version }} 固件
+          name: ${{ steps.tag.outputs.release_date }} x86-64-Official_Source 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
@@ -202,13 +188,13 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.3.4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-          keep_latest: 120
+          keep_latest: 240
           delete_tags: true
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Delete Artifacts
-      uses: geekyeggo/delete-artifact@v4
+      uses: geekyeggo/delete-artifact@v5
       with:
          name: |
             bin-archive

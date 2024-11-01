@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.6-Docker
+name: lean_x86_64_6.6-Stable
 
 on:
   repository_dispatch:
@@ -19,8 +19,8 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/lean/lean_docker_6_6.config
-  DIY_SH: scripts/lean18.06/lean_6_6.sh
+  CONFIG_FILE: configs/lean/lean_stable.config
+  DIY_SH: scripts/lean18.06/lean.sh
   KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -157,10 +157,10 @@ jobs:
         rm -rf openwrt-x86-64-generic-squashfs-rootfs.img.gz
         rm -rf openwrt-x86-64-generic-squashfs-combined-efi.vmdk
         rm -rf openwrt-x86-64-generic.manifest
-        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz docker-x86-64-squashfs-efi.img.gz
+        mv openwrt-x86-64-generic-squashfs-combined-efi.img.gz slim-x86-64-squashfs-efi.img.gz
         popd
         make checksum
-        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/docker-sha256sums
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/slim-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
@@ -202,7 +202,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.3.4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-          keep_latest: 120
+          keep_latest: 240
           delete_tags: true
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
