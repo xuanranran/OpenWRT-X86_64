@@ -154,6 +154,7 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/firewall4/openwrt-24.10/0004-luci-add-firewall-add-custom-nft-rule-support.patch | patch -p1
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/firewall4/openwrt-24.10/0005-luci-app-firewall-add-natflow-offload-support.patch | patch -p1
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/firewall4/openwrt-24.10/0006-luci-app-firewall-enable-hardware-offload-only-on-de.patch | patch -p1
+popd
 
 # openssl - quictls
 pushd package/libs/openssl/patches
