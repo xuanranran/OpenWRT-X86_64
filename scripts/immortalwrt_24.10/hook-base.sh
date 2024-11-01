@@ -34,21 +34,6 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # meson: add platform variable to cross-compilation file
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0011-meson-add-platform-variable-to-cross-compilation-fil.patch | patch -p1
 
-# dwarves 1.25
-# rm -rf tools/dwarves
-# git clone https://github.com/sbwml/tools_dwarves tools/dwarves
-
-# dwarves: Fix a dwarf type DW_ATE_unsigned_1024 to btf encoding issue
-mkdir -p tools/dwarves/patches
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/dwarves/100-btf_encoder-Fix-a-dwarf-type-DW_ATE_unsigned_1024-to-btf-encoding-issue.patch > tools/dwarves/patches/100-btf_encoder-Fix-a-dwarf-type-DW_ATE_unsigned_1024-to-btf-encoding-issue.patch
-
-
-# x86 - disable intel_pstate & mitigations
-# sed -i 's/noinitrd/noinitrd intel_pstate=disable mitigations=off/g' target/linux/x86/image/grub-efi.cfg
-
-# GCC Optimization level -O3
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/target-modify_for_x86_64.patch | patch -p1
-
 # fstools
 rm -rf package/system/fstools
 git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 package/system/fstools
