@@ -53,10 +53,10 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 mkdir -p package/utils/util-linux/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/util-linux/201-util-linux_ntfs3.patch > package/utils/util-linux/patches/201-util-linux_ntfs3.patch
 # fstools - enable any device with non-MTD rootfs_data volume
-rm -rf package/system/fstools
-pushd package/system/
-git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools ./ ; rm -rf coolsnowwolf_fstools
-popd
+# rm -rf package/system/fstools
+# pushd package/system/
+# git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools ./ ; rm -rf coolsnowwolf_fstools
+# popd
 rm -f package/base-files/files/sbin/sysupgrade
 curl -s https://raw.githubusercontent.com/coolsnowwolf/lede/refs/heads/master/package/base-files/files/sbin/sysupgrade > package/base-files/files/sbin/sysupgrade
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/system/fstools/Makefile
