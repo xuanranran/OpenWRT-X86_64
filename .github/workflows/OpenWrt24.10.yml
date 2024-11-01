@@ -67,14 +67,17 @@ jobs:
         mkdir customfeeds
         git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
         git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
-        git clone --depth=1 https://github.com/openwrt/packages customfeeds/packages -b $REPO_BRANCH
-        git clone --depth=1 https://github.com/openwrt/luci customfeeds/luci -b $REPO_BRANCH
-        git clone --depth=1 https://github.com/openwrt/routing customfeeds/routing -b $REPO_BRANCH
-        git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b $REPO_BRANCH
+        git clone --depth=1 https://github.com/openwrt/packages  -b $REPO_BRANCH customfeeds/packages
+        git clone --depth=1 https://github.com/openwrt/luci -b $REPO_BRANCH customfeeds/luci
+        git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
+        git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/Official_Source/*.sh
-        ../scripts/Official_Source/hook-package.sh
-        ../scripts/Official_Source/hook-base.sh
+        ../scripts/Official_Source/00-prepare_base.sh
+        ../scripts/Official_Source/01-prepare_base-mainline.sh
+        ../scripts/Official_Source/02-prepare_package.sh
+        ../scripts/Official_Source/04-fix_kmod.sh
+        ../scripts/Official_Source/05-fix-source.sh
         ../scripts/Official_Source/hook-feeds.sh
         
     - name: Install Feeds

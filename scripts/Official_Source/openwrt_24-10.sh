@@ -1,6 +1,6 @@
 #!/bin/bash
 #=================================================
-# File name: immortalwrt.sh
+# File name: openwrt_24-10.sh
 # System Required: Linux
 # Version: 1.0
 # Lisence: MIT
@@ -10,7 +10,6 @@
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community
-rm -rf ../../customfeeds/luci/themes/luci-theme-argon
 
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-package openwrt-package
