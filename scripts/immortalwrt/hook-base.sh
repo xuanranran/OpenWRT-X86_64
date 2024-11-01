@@ -53,9 +53,9 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 mkdir -p package/utils/util-linux/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/util-linux/201-util-linux_ntfs3.patch > package/utils/util-linux/patches/201-util-linux_ntfs3.patch
 # fstools - enable any device with non-MTD rootfs_data volume
-rm -f package/system/fstools
-pushd package/system/
-git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools ./ ; rm -rf coolsnowwolf_fstools
+rm -f package/system/fstools/*
+pushd package/system/fstools/
+git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools/* ./ ; rm -rf coolsnowwolf_fstools
 popd
 rm -f package/base-files/files/sbin/sysupgrade
 curl -s https://raw.githubusercontent.com/coolsnowwolf/lede/refs/heads/master/package/base-files/files/sbin/sysupgrade > package/base-files/files/sbin/sysupgrade
@@ -145,8 +145,8 @@ rm -rf customfeeds/packages/libs/ngtcp2
 git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
 
 # curl - fix passwall `time_pretransfer` check
-rm -rf feeds/packages/net/curl
-git clone https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
+rm -rf customfeeds/packages/net/curl
+git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
 
 # Docker
 # rm -rf customfeeds/luci/applications/luci-app-dockerman
