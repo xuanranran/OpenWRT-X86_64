@@ -4,6 +4,6 @@
 wget https://raw.githubusercontent.com/xuanranran/scripts/main/onlineupdate.sh && sh onlineupdate.sh
 ```
 
-# 插件展示
+# 界面展示
  ![Alt text](scripts/19.png?raw=true "Title")
  ![Alt text](scripts/20.png?raw=true "Title")
