@@ -86,23 +86,6 @@ popd
 # git clone --depth 1 https://github.com/sbwml/package_network_utils_iproute2 iproute2
 # popd
 
-# Update dnsmasq
-# rm -rf package/network/services/dnsmasq/*
-# pushd package/network/services/dnsmasq/
-# git clone --depth 1 https://github.com/immortalwrt/immortalwrt immortalwrt && mv -n immortalwrt/package/network/services/dnsmasq/* ./ ; rm -rf immortalwrt
-# popd
-# dnsmasq drop extraconftext parameter
-# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/dnsmasq/0001-dnsmasq-drop-extraconftext-parameter.patch | patch -p1
-
-# tools: add upx tools
-# rm -rf tools/Makefile
-# cp -r $GITHUB_WORKSPACE/data/tools/upx tools/upx
-# cp -r $GITHUB_WORKSPACE/data/tools/Makefile tools/Makefile
-
-# lantiq
-# rm -rf package/kernel/lantiq
-# git clone --depth 1 https://github.com/xuanranran/package_kerne_lantiq package/kernel/lantiq
-
 # apk-tools
 # curl -s https://init2.cooluc.com/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
 
