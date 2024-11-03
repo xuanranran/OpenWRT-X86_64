@@ -63,10 +63,10 @@ git clone https://github.com/xuanranran/feeds_packages_utils_gzip customfeeds/pa
 # git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
 # Update nginx-util
-rm -rf customfeeds/packages/net/nginx-util
-pushd customfeeds/packages/net/
-git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util ./ ; rm -rf nginxutil
-popd
+# rm -rf customfeeds/packages/net/nginx-util
+# pushd customfeeds/packages/net/
+# git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util ./ ; rm -rf nginxutil
+# popd
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
@@ -159,15 +159,15 @@ git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniup
 git clone https://git.cooluc.com/sbwml/luci-app-upnp customfeeds/luci/applications/luci-app-upnp -b main
 
 # procps-ng - top
-rm -rf customfeeds/packages/utils/procps-ng
-cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
+# rm -rf customfeeds/packages/utils/procps-ng
+# cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # perl
-rm -rf customfeeds/packages/lang/perl
-pushd customfeeds/packages/lang/
-git clone --depth 1 https://github.com/immortalwrt/packages coolsnowwolf_perl && mv -n coolsnowwolf_perl/lang/perl ./ ; rm -rf coolsnowwolf_perl
-popd
+# rm -rf customfeeds/packages/lang/perl
+# pushd customfeeds/packages/lang/
+# git clone --depth 1 https://github.com/immortalwrt/packages coolsnowwolf_perl && mv -n coolsnowwolf_perl/lang/perl ./ ; rm -rf coolsnowwolf_perl
+# popd
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
@@ -182,18 +182,18 @@ rm -rf package/firmware/linux-firmware
 git clone https://github.com/sbwml/package_firmware_linux-firmware package/firmware/linux-firmware
 
 # 替换杂项
-rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
-rm -rf customfeeds/packages/libs/libsodium
-rm -rf customfeeds/luci/contrib/package/lucihttp
-pushd customfeeds/packages/net/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/{*cgi-io,wsdd2} ./ ; rm -rf immortalwrt_packages
-popd
-pushd customfeeds/packages/libs/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_libsodium && mv -n immortalwrt_libsodium/libs/libsodium ./ ; rm -rf immortalwrt_libsodium
-popd
-pushd customfeeds/luci/contrib/package/
-git clone --depth 1 https://github.com/immortalwrt/luci immortalwrt_lucihttp && mv -n immortalwrt_lucihttp/contrib/package/lucihttp ./ ; rm -rf immortalwrt_lucihttp
-popd
+# rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
+# rm -rf customfeeds/packages/libs/libsodium
+# rm -rf customfeeds/luci/contrib/package/lucihttp
+# pushd customfeeds/packages/net/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/{*cgi-io,wsdd2} ./ ; rm -rf immortalwrt_packages
+# popd
+# pushd customfeeds/packages/libs/
+# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_libsodium && mv -n immortalwrt_libsodium/libs/libsodium ./ ; rm -rf immortalwrt_libsodium
+# popd
+# pushd customfeeds/luci/contrib/package/
+# git clone --depth 1 https://github.com/immortalwrt/luci immortalwrt_lucihttp && mv -n immortalwrt_lucihttp/contrib/package/lucihttp ./ ; rm -rf immortalwrt_lucihttp
+# popd
 
 # 测试杂项
 
