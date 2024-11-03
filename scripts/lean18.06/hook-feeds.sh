@@ -34,6 +34,11 @@ pushd toolchain/gcc/
 git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
 popd
 
+# procps-ng - top
+rm -rf customfeeds/packages/utils/procps-ng
+cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
+sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
+
 # custom packages
 rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
 rm -rf customfeeds/luci/applications/luci-app-ddns
