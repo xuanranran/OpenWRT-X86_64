@@ -15,9 +15,9 @@ pushd package/community
 git clone --depth=1 https://github.com/xuanranran/openwrt-package openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely openwrt-rely
 rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
+#rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
+# cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
