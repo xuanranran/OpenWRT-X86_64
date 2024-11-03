@@ -36,6 +36,7 @@ popd
 
 # custom packages
 rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
+rm -rf customfeeds/luci/applications/luci-app-ddns
 
 sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Makefile
 
