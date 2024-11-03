@@ -30,33 +30,6 @@ cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdoc
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
-# Update node 20.x
-rm -rf customfeeds/packages/lang/node
-git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
-
-# Update node-yarn
-rm -rf customfeeds/packages/lang/node-yarn/*
-pushd customfeeds/packages/lang/node-yarn/
-git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt && mv -n immortalwrt/lang/node-yarn/* ./ ; rm -rf immortalwrt
-popd
-
-# Update nginx-util
-rm -rf customfeeds/packages/net/nginx-util/*
-pushd customfeeds/packages/net/nginx-util/
-git clone --depth 1 https://github.com/immortalwrt/packages nginxutil && mv -n nginxutil/net/nginx-util/* ./ ; rm -rf nginxutil
-popd
-
-# Update golang 1.23.x
-rm -rf customfeeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
-
-# Update GCC 13.3.0
-rm -rf toolchain/gcc/*
-pushd toolchain/gcc/
-git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/toolchain/gcc/* ./ ; rm -rf gcc
-popd
-
 # Mod zzz-default-settings
 pushd package/lean/default-settings/files
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
