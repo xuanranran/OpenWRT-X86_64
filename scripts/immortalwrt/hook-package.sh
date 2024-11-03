@@ -182,6 +182,10 @@ rm -rf package/firmware/linux-firmware
 git clone https://github.com/sbwml/package_firmware_linux-firmware package/firmware/linux-firmware
 
 # 替换杂项
+rm -rf customfeeds/luci/applications/luci-app-package-manager
+pushd customfeeds/luci/applications/
+git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
+popd
 # rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
 # rm -rf customfeeds/packages/libs/libsodium
 # rm -rf customfeeds/luci/contrib/package/lucihttp
