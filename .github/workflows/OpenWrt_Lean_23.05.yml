@@ -195,7 +195,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86_64-23.05-SNAPSHOT-${{ steps.generate.outputs.kernel_version }} 固件
+          name: ${{ steps.tag.outputs.release_date }} x86_64-Lean-23.05-SNAPSHOT-${{ steps.generate.outputs.kernel_version }} 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
