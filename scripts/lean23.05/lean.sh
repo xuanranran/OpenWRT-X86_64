@@ -49,7 +49,7 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/luci2/bin/config_genera
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
 
 # 修改本地时间格式
-sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
+# sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
 # 修改Makefile 禁用iperf3-ssl
 sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
