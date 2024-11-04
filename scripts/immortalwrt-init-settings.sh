@@ -8,7 +8,6 @@
 # Blog: https://mlapp.cn
 #=================================================
 # Set default theme to luci-theme-argon
-# theme
 uci set luci.main.mediaurlbase='/luci-static/argon'
 uci set luci.main.pollinterval='1'
 uci commit luci
