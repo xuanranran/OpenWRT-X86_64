@@ -70,7 +70,7 @@ jobs:
         git clone --depth=1 https://github.com/coolsnowwolf/packages customfeeds/packages
         git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci -b openwrt-23.05
         git clone --depth=1 https://github.com/coolsnowwolf/routing customfeeds/routing
-        git clone --depth=1 https://github.com/openwrt/telephony customfeeds/telephony -b openwrt-23.05
+        git clone --depth=1 https://github.com/coolsnowwolf/telephony customfeeds/telephony
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/lean23.05/*.sh
         ../scripts/lean23.05/hook-package.sh
