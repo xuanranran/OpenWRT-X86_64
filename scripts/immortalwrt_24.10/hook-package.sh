@@ -10,7 +10,7 @@ rm -rf package/emortal/default-settings
 git clone https://github.com/xuanranran/default-settings package/emortal/default-settings
 
 # custom packages
-rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config}
+rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config,luci-theme-argon}
 rm -rf customfeeds/packages/net/shadowsocks-libev
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
