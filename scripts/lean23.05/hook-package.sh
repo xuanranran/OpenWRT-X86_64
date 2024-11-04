@@ -13,9 +13,8 @@ curl -s https://raw.githubusercontent.com/xuanranran/default-settings/refs/heads
 
 # custom packages
 rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
-rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config,luci-argon-config}
+rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config}
 rm -rf customfeeds/luci/themes/luci-theme-argon
-
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 # chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
