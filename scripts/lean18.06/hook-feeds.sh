@@ -49,8 +49,6 @@ rm -rf customfeeds/luci/applications/luci-app-ddns
 
 sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Makefile
 
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/kernel/mac80211/patches/build/236-fix-genlmsg_multicast_allns-build-error-on-kernel-6.6.59.patch > package/kernel/mac80211/patches/build/236-fix-genlmsg_multicast_allns-build-error-on-kernel-6.6.59.patch
-
 sed -i '/src-git packages/d' feeds.conf.default
 echo "src-link packages $packages_feed" >> feeds.conf.default
 sed -i '/src-git luci/d' feeds.conf.default

@@ -4,10 +4,7 @@
 rm -rf package/lean/autocore
 git clone https://github.com/sbwml/autocore-arm -b openwrt-24.10 package/lean/autocore
 
-rm -rf package/lean/default-settings/po/zh-cn/default.po
 curl -s https://raw.githubusercontent.com/xuanranran/default-settings/refs/heads/main/i18n/default.zh_Hans.po > package/lean/default-settings/po/zh-cn/default.po
-
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/kernel/mac80211/patches/build/236-fix-genlmsg_multicast_allns-build-error-on-kernel-6.6.59.patch > package/kernel/mac80211/patches/build/236-fix-genlmsg_multicast_allns-build-error-on-kernel-6.6.59.patch
 
 # custom packages
 rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
