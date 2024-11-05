@@ -88,7 +88,6 @@ jobs:
         chmod +x scripts/*.sh
         cd $OPENWRTROOT
         ../$DIY_SH
-        ../scripts/update-6-6-59.sh
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-mihomo-core.sh amd64
         ../scripts/preset-terminal-tools.sh
