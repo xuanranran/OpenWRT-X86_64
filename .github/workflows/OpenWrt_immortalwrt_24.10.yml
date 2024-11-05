@@ -18,7 +18,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: configs/immortalwrt_24.10/immortalwrt.config
   DIY_SH: scripts/immortalwrt_24.10/immortalwrt.sh
   UPLOAD_RELEASE: true
@@ -66,10 +66,10 @@ jobs:
         mkdir customfeeds
         git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
         git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
-        git clone --depth=1 https://github.com/immortalwrt/packages -b openwrt-24.10 customfeeds/packages
-        git clone --depth=1 https://github.com/immortalwrt/luci -b openwrt-24.10 customfeeds/luci
-        git clone --depth=1 https://github.com/openwrt/routing -b openwrt-24.10 customfeeds/routing
-        git clone --depth=1 https://github.com/openwrt/telephony -b openwrt-24.10 customfeeds/telephony
+        git clone --depth=1 https://github.com/immortalwrt/packages -b $REPO_BRANCH customfeeds/packages
+        git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
+        git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
+        git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/immortalwrt_24.10/*.sh
         ../scripts/immortalwrt_24.10/hook-package.sh
