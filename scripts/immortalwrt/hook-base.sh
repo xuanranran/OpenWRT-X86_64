@@ -57,8 +57,6 @@ rm -rf package/system/fstools
 pushd package/system/
 git clone --depth 1 https://github.com/coolsnowwolf/lede coolsnowwolf_fstools && mv -n coolsnowwolf_fstools/package/system/fstools ./ ; rm -rf coolsnowwolf_fstools
 popd
-rm -f package/base-files/files/sbin/sysupgrade
-curl -s https://raw.githubusercontent.com/coolsnowwolf/lede/refs/heads/master/package/base-files/files/sbin/sysupgrade > package/base-files/files/sbin/sysupgrade
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/system/fstools/Makefile
 mkdir -p package/system/fstools/patches
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/fstools/200-use-ntfs3-instead-of-ntfs.patch > package/system/fstools/patches/200-use-ntfs3-instead-of-ntfs.patch
@@ -74,8 +72,8 @@ git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
 git clone https://github.com/sbwml/package_new_natflow package/new/natflow
 
 # openssl - quictls
-rm -rf package/libs/openssl
-cp -r $GITHUB_WORKSPACE/data/openwrt-23.05/package/libs/openssl package/libs/openssl
+# rm -rf package/libs/openssl
+# cp -r $GITHUB_WORKSPACE/data/openwrt-23.05/package/libs/openssl package/libs/openssl
 pushd package/libs/openssl/patches
 curl -sO https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openssl/quic/0001-QUIC-Add-support-for-BoringSSL-QUIC-APIs.patch
 curl -sO https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openssl/quic/0002-QUIC-New-method-to-get-QUIC-secret-length.patch
@@ -231,12 +229,6 @@ popd
 
 # Luci diagnostics.js
 sed -i "s/openwrt.org/baidu.com/g" customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
-
-# luci - drop ethernet port status
-rm -f customfeeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js
-
-# luci - rollback dhcp.js
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/dhcp/openwrt-23.05-dhcp.js > customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js
 
 # profile
 sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile

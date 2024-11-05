@@ -3,7 +3,7 @@
 
 # autocore
 rm -rf package/emortal/autocore
-git clone https://github.com/sbwml/autocore-arm -b openwrt-23.05 package/emortal/autocore
+git clone https://github.com/sbwml/autocore-arm -b openwrt-24.10 package/emortal/autocore
 
 # default settings
 rm -rf package/emortal/default-settings
@@ -190,18 +190,6 @@ rm -rf customfeeds/luci/applications/luci-app-package-manager
 pushd customfeeds/luci/applications/
 git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
 popd
-# rm -rf customfeeds/packages/net/{*cgi-io,wsdd2}
-# rm -rf customfeeds/packages/libs/libsodium
-# rm -rf customfeeds/luci/contrib/package/lucihttp
-# pushd customfeeds/packages/net/
-# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_packages && mv -n immortalwrt_packages/net/{*cgi-io,wsdd2} ./ ; rm -rf immortalwrt_packages
-# popd
-# pushd customfeeds/packages/libs/
-# git clone --depth 1 https://github.com/immortalwrt/packages immortalwrt_libsodium && mv -n immortalwrt_libsodium/libs/libsodium ./ ; rm -rf immortalwrt_libsodium
-# popd
-# pushd customfeeds/luci/contrib/package/
-# git clone --depth 1 https://github.com/immortalwrt/luci immortalwrt_lucihttp && mv -n immortalwrt_lucihttp/contrib/package/lucihttp ./ ; rm -rf immortalwrt_lucihttp
-# popd
 
 # 测试杂项
 
