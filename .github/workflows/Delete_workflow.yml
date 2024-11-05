@@ -8,13 +8,6 @@ concurrency:
   # 自动取消其他运行中的workflow
   cancel-in-progress: true
 
-env:
-  REPO_URL: https://github.com/xuanranran/OpenWRT-X86_64
-  REPO_BRANCH: master
-  KMODS_IN_FIRMWARE: true
-  UPLOAD_RELEASE: true
-  TZ: Asia/Shanghai
-
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -39,7 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Delete Artifacts
-      uses: geekyeggo/delete-artifact@v4
+      uses: geekyeggo/delete-artifact@v5
       with:
          name: |
             bin-archive
