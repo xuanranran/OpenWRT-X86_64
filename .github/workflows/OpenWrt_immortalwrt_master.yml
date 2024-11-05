@@ -89,6 +89,7 @@ jobs:
         chmod +x scripts/*.sh
         cd $OPENWRTROOT
         ../$DIY_SH
+        ../scripts/update-6-6-59.sh
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-mihomo-core.sh amd64
         ../scripts/preset-terminal-tools.sh
@@ -136,9 +137,24 @@ jobs:
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
       id: generate
       run: |
+        cd configs/opkg
+        sed -i "s/subtarget/$SUBTARGET/g" distfeeds*.conf
+        sed -i "s/target\//$TARGET\//g" distfeeds*.conf
+        sed -i "s/platform/$PLATFORM/g" distfeeds*.conf
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
         cp ../scripts/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
+        mkdir -p files/etc/opkg
+        cp ../configs/opkg/distfeeds-packages-server.conf files/etc/opkg/distfeeds.conf.server
+        if "$KMODS_IN_FIRMWARE" = 'true'
+        then
+            mkdir -p files/www/snapshots
+            cp -r bin/targets files/www/snapshots
+            cp ../configs/opkg/distfeeds-snapshots-local.conf files/etc/opkg/distfeeds.conf
+        else
+            cp ../configs/opkg/distfeeds-snapshots-remote.conf files/etc/opkg/distfeeds.conf
+        fi
+        cp files/etc/opkg/distfeeds.conf.server files/etc/opkg/distfeeds.conf.mirror
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         pushd bin/targets/x86/64
@@ -155,6 +171,7 @@ jobs:
         mv config.buildinfo $(date +"%Y.%m.%d")-immortalwrt-config.buildinfo
         popd
         make checksum
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/$(date +"%Y.%m.%d")-immortalwrt-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
