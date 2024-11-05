@@ -21,7 +21,6 @@ env:
   REPO_BRANCH: openwrt-24.10
   CONFIG_FILE: configs/immortalwrt_24.10/immortalwrt.config
   DIY_SH: scripts/immortalwrt_24.10/immortalwrt.sh
-  KMODS_IN_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -145,16 +144,7 @@ jobs:
         mkdir -p files/etc/uci-defaults/
         cp ../scripts/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
         mkdir -p files/etc/opkg
-        cp ../configs/opkg/distfeeds-packages-server.conf files/etc/opkg/distfeeds.conf.server
-        if "$KMODS_IN_FIRMWARE" = 'true'
-        then
-            mkdir -p files/www/snapshots
-            cp -r bin/targets files/www/snapshots
-            cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
-        else
-            cp ../configs/opkg/distfeeds-24.10-remote.conf files/etc/opkg/distfeeds.conf
-        fi
-        cp files/etc/opkg/distfeeds.conf.server files/etc/opkg/distfeeds.conf.mirror
+        cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         pushd bin/targets/x86/64
