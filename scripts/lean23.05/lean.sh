@@ -39,7 +39,6 @@ popd
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
-# sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/luci2/etc/passwd
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
@@ -47,9 +46,6 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/luci2/bin/config_genera
 
 # x86 型号只显示 CPU 型号
 sed -i 's/${g}.*/${a}${b}${c}${d}${e}${f}${hydrid}/g' package/lean/autocore/files/x86/autocore
-
-# 修改本地时间格式
-# sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
 # 修改Makefile 禁用iperf3-ssl
 sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
