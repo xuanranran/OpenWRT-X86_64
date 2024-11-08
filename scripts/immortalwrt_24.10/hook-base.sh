@@ -1,8 +1,7 @@
 #!/bin/bash
 # Set to local prepare
 
-# build: kernel: add out-of-tree kernel config
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0007-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 
 # x86 - disable intel_pstate & mitigations
 sed -i 's/noinitrd/noinitrd intel_pstate=disable mitigations=off/g' target/linux/x86/image/grub-efi.cfg
