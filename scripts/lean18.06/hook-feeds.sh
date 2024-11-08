@@ -35,8 +35,8 @@ git clone --depth 1 https://github.com/immortalwrt/immortalwrt gcc && mv -n gcc/
 popd
 
 # uqmi
-rm -rf package/network/utils/uqmi
-cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
+# rm -rf package/network/utils/uqmi
+# cp -r $GITHUB_WORKSPACE/data/package/network/utils/uqmi package/network/utils/uqmi
 
 # procps-ng - top
 rm -rf customfeeds/packages/utils/procps-ng
