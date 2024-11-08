@@ -9,7 +9,7 @@ popd
 
 # Update node 20.x
 rm -rf customfeeds/packages/lang/node
-git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt customfeeds/packages/lang/node
+git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt -b packages-24.10 customfeeds/packages/lang/node
 
 # Update node-yarn
 rm -rf customfeeds/packages/lang/node-yarn/*
