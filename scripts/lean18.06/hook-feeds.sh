@@ -43,6 +43,10 @@ rm -rf customfeeds/packages/utils/procps-ng
 cp -r $GITHUB_WORKSPACE/data/packages-master/utils/procps-ng customfeeds/packages/utils/procps-ng
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
+# lame
+rm -rf customfeeds/packages/sound/lame
+git clone --depth 1 https://github.com/xuanranran/feeds_packages_sound_lame customfeeds/packages/sound/lame
+
 # custom packages
 rm -rf package/lean/{*ddns-scripts_aliyun,ddns-scripts_dnspod}
 rm -rf customfeeds/luci/applications/luci-app-ddns
