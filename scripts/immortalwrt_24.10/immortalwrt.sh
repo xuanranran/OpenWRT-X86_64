@@ -51,6 +51,8 @@ sed -i '/@OPENWRT/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.js
 # 修改本地时间格式
 # sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
+sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
+
 # Test kernel 6.6
 rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
