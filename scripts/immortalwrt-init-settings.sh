@@ -26,7 +26,7 @@ uci commit system
 sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
 
 # extra packages
-echo "src/gz openwrt_extras https://opkg.cooluc.com/openwrt-23.05/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
+echo "src/gz openwrt_extras https://opkg.cooluc.com/openwrt-24.10/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
 
 # diagnostics
 uci set luci.diag.dns='www.Baidu.com'
