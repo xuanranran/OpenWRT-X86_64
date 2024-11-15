@@ -73,10 +73,9 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
 # 替换杂项
-# rm -rf customfeeds/luci/applications/luci-app-package-manager
-# pushd customfeeds/luci/applications/
-# git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
-# popd
+rm -rf customfeeds/luci/applications/luci-app-package-manager
+pushd customfeeds/luci/applications/
+git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
+popd
 
-# 测试杂项
 
