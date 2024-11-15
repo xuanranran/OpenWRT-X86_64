@@ -1,8 +1,6 @@
 #!/bin/bash
 # Set to local prepare
 
-sed -i 's/default GCC_USE_VERSION_13/default GCC_USE_VERSION_14/g' toolchain/gcc/Config.in
-
 # apk-tools
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
 
