@@ -29,9 +29,9 @@ sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeed
 echo "src/gz openwrt_extras https://opkg.cooluc.com/openwrt-24.10/$(. /etc/openwrt_release ; echo $DISTRIB_ARCH)" >> /etc/opkg/distfeeds.conf
 
 # diagnostics
-uci set luci.diag.dns='www.Baidu.com'
-uci set luci.diag.ping='www.Baidu.com'
-uci set luci.diag.route='www.Baidu.com'
+uci set luci.diag.dns='www.baidu.com'
+uci set luci.diag.ping='www.baidu.com'
+uci set luci.diag.route='www.baidu.com'
 uci commit luci
 
 # packet steering

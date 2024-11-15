@@ -7,7 +7,7 @@ git clone https://github.com/sbwml/autocore-arm -b openwrt-24.10 package/emortal
 
 # default settings
 rm -rf package/emortal/default-settings
-git clone https://github.com/xuanranran/default-settings package/emortal/default-settings
+git clone https://github.com/xuanranran/default-settings -b openwrt-24.10 package/emortal/default-settings
 
 # custom packages
 rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config}
@@ -16,6 +16,9 @@ rm -rf customfeeds/packages/net/shadowsocks-libev
 
 rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing-box}
 # chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
+
+sed -i 's/video,+libmesa +libwayland +libgudev/video,+libgudev/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
+sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
