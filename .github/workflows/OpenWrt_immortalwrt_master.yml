@@ -137,7 +137,7 @@ jobs:
       run: |
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
-        cp ../scripts/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
+        cp ../scripts/immortalwrt_24.10/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
         mkdir -p files/etc/opkg
         cp ../configs/opkg/distfeeds-snapshots-local.conf files/etc/opkg/distfeeds.conf
         # cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
