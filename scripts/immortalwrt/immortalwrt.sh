@@ -15,10 +15,6 @@ pushd package/community
 git clone --depth=1 https://github.com/xuanranran/openwrt-package openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely openwrt-rely
 # git clone --depth=1 https://github.com/immortalwrt/wwan-packages wwan-packages
-# rm -rf openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-# rm -rf openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
-# cp -f $GITHUB_WORKSPACE/data/bg1.jpg openwrt-package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-# cp -f $GITHUB_WORKSPACE/data/favicon.ico openwrt-package/luci-theme-design/htdocs/luci-static/design/favicon.ico
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
@@ -47,9 +43,6 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 
 # 修改开源站地址
 sed -i '/@OPENWRT/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
-
-# 修改本地时间格式
-# sed -i 's/os.date()/os.date("%F %T %a")/g' package/lean/autocore/files/*/index.htm
 
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 
