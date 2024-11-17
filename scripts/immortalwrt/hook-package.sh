@@ -59,7 +59,7 @@ popd
 curl -s https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/refs/heads/master/data/openclash_make_version_alpine_compatible.patch | patch -p1
 
 # mihomo_version_reading
-curl -s https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/refs/heads/master/data/mihomo-apk/mihomo_version_reading.patch | patch -p1
+curl -s https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/refs/heads/master/data/mihomo-apk/mihomo-call > customfeeds/lovepackages/luci-app-mihomo/root/usr/libexec/mihomo-call
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
 # rm -rf package/kernel/r8168 package/kernel/r8152 package/kernel/r8101 package/kernel/r8125 package/kernel/r8126
