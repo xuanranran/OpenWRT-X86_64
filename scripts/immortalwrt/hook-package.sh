@@ -68,10 +68,6 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/network/utils/xdp-tools
 git clone https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
 
-# perf
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/openwrt-6.x/perf/Makefile.2 > package/devel/perf/Makefile
-sed -i 's/no-mold//g' package/devel/perf/Makefile
-
 # perl
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
