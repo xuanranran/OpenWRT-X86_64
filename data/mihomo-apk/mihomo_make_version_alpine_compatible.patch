@@ -1,0 +1,18 @@
+--- a/customfeeds/lovepackages/luci-app-mihomo/Makefile
++++ b/customfeeds/lovepackages/luci-app-mihomo/Makefile
+@@ -43,10 +43,10 @@ case "$action" in
+ 	version)
+ 		case "$1" in
+ 			app)
+-  				if [ -x "/bin/opkg" ]; then
+-  					opkg list-installed "luci-app-mihomo" | cut -d " " -f 3
+-  				elif [ -x "/usr/bin/apk" ]; then
++  				if [ -x "/usr/bin/apk" ]; then
+ 					apk list -I "luci-app-mihomo" | cut -d ' ' -f 1 | cut -d '-' -f 4
++ 				elif [ -x "/bin/opkg" ]; then
++ 					opkg list-installed "luci-app-mihomo" | cut -d " " -f 3
+ 				fi
+ 			;;
+ 			core)
+--
+2.17.1
