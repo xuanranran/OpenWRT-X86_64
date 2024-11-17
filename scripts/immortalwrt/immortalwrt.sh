@@ -22,9 +22,6 @@ git clone --depth=1 https://github.com/xuanranran/rely openwrt-rely
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
-# luci-app-openclash: make version alpine compatible
-curl -s https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/refs/heads/master/data/openclash_make_version_alpine_compatible.patch | patch -p1
-
 # Mod zzz-default-settings
 # pushd package/emortal/default-settings/default
 # sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
