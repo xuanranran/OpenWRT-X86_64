@@ -1,5 +1,5 @@
---- a/customfeeds/lovepackages/luci-app-mihomo/Makefile
-+++ b/customfeeds/lovepackages/luci-app-mihomo/Makefile
+--- a/customfeeds/lovepackages/luci-app-mihomo/root/usr/libexec/mihomo-call
++++ b/customfeeds/lovepackages/luci-app-mihomo/root/usr/libexec/mihomo-call
 @@ -43,10 +43,10 @@ case "$action" in
  	version)
  		case "$1" in
