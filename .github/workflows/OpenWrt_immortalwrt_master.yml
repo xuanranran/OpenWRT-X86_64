@@ -26,7 +26,7 @@ env:
 
 jobs:
   Build:
-    runs-on: ubuntu-24.04 #self-hosted
+    runs-on: self-hosted
     outputs:
       OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
       PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
