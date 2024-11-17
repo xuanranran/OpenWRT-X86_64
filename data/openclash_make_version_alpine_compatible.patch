@@ -1,5 +1,5 @@
---- a/customfeeds/luci/applications/luci-app-openclash/Makefile
-+++ b/customfeeds/luci/applications/luci-app-openclash/Makefile
+--- a/customfeeds/lovepackages/luci-app-openclash/Makefile
++++ b/customfeeds/lovepackages/luci-app-openclash/Makefile
 @@ -2,7 +2,6 @@ include $(TOPDIR)/rules.mk
  
  PKG_NAME:=luci-app-openclash
