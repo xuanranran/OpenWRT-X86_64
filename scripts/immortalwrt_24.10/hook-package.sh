@@ -64,6 +64,10 @@ popd
 # procps-ng - top
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
+# xdp-tools
+rm -rf package/network/utils/xdp-tools
+git clone https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
+
 # perl
 # rm -rf customfeeds/packages/lang/perl
 # pushd customfeeds/packages/lang/
