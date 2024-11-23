@@ -53,7 +53,7 @@ sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
 # 修改开源站地址
 sed -i 's/mirror.iscas.ac.cn/mirrors.mit.edu/g' scripts/download.pl
 sed -i 's/mirrors.aliyun.com/mirror.netcologne.de/g' scripts/download.pl
-sed -i '/mirror2.openwrt.org/a\push @mirrors, '\''https://source.cooluc.com'\'';' scripts/download.pl
+# sed -i '/mirror2.openwrt.org/a\push @mirrors, '\''https://source.cooluc.com'\'';' scripts/download.pl
 
 # sed -i 's/+firewall/+uci-firewall/g' customfeeds/luci/applications/luci-app-firewall/Makefile
 
