@@ -77,8 +77,8 @@ rm -rf package/network/utils/xdp-tools
 git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
 
 # lrzsz - 0.12.20
-rm -rf customfeeds/packages/utils/lrzsz
-git clone --depth 1 https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
+# rm -rf customfeeds/packages/utils/lrzsz
+# git clone --depth 1 https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
 
 # perl
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
