@@ -35,7 +35,7 @@ sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Make
 
 # liburing - 2.7 (samba-4.21.0)
 rm -rf customfeeds/packages/libs/liburing
-git clone https://github.com/sbwml/feeds_packages_libs_liburing customfeeds/packages/libs/liburing
+git clone --depth 1 https://github.com/sbwml/feeds_packages_libs_liburing customfeeds/packages/libs/liburing
 # enable multi-channel
 sed -i '/workgroup/a \\n\t## enable multi-channel' customfeeds/packages/net/samba4/files/smb.conf.template
 sed -i '/enable multi-channel/a \\tserver multi channel support = yes' customfeeds/packages/net/samba4/files/smb.conf.template
@@ -74,7 +74,11 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 
 # xdp-tools
 rm -rf package/network/utils/xdp-tools
-git clone https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
+git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
+
+# lrzsz - 0.12.20
+rm -rf customfeeds/packages/utils/lrzsz
+git clone --depth 1 https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
 
 # perl
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
