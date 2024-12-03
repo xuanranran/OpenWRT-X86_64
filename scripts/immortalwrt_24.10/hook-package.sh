@@ -68,6 +68,10 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/network/utils/xdp-tools
 git clone https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
 
+# lrzsz - 0.12.20
+rm -rf customfeeds/packages/utils/lrzsz
+git clone --depth 1 https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
+
 # perl
 # rm -rf customfeeds/packages/lang/perl
 # pushd customfeeds/packages/lang/
