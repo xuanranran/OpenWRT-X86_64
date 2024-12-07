@@ -138,7 +138,7 @@ jobs:
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
         cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
-        mkdir -p files/etc/apk
+        mkdir -p files/etc/apk/repositories.d 
         cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories
         cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories.d/distfeeds.list
         make package/install -j$(nproc) || make package/install -j1 V=s
