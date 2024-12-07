@@ -85,7 +85,6 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-terminal-tools.sh
         make defconfig
-        make kernel_menuconfig
         
     - name: Download Package
       id: package
