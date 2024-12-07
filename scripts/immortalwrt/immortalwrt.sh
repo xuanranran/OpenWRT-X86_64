@@ -14,7 +14,7 @@ pushd package/community
 # Add openwrt-packages
 git clone --depth=1 https://github.com/xuanranran/openwrt-package openwrt-package
 git clone --depth=1 https://github.com/xuanranran/rely openwrt-rely
-# git clone --depth=1 https://github.com/immortalwrt/wwan-packages wwan-packages
+git clone --depth=1 https://github.com/immortalwrt/wwan-packages wwan-packages
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
