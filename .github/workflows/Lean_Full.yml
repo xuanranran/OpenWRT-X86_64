@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.6-Full
+name: lean_x86_64-Full
 
 on:
   repository_dispatch:

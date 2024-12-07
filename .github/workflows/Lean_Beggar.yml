@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: lean_x86_64_6.6-Beggar
+name: lean_x86_64-Beggar
 
 on:
   repository_dispatch:
