@@ -70,6 +70,7 @@ jobs:
         git clone --depth=1 https://github.com/coolsnowwolf/luci customfeeds/luci -b openwrt-23.05
         git clone --depth=1 https://github.com/coolsnowwolf/routing customfeeds/routing
         git clone --depth=1 https://github.com/coolsnowwolf/telephony customfeeds/telephony
+        git clone --depth=1 https://github.com/openwrt/video customfeeds/video
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/lean23.05/*.sh
         ../scripts/lean23.05/hook-package.sh
@@ -139,7 +140,7 @@ jobs:
         mkdir -p files/etc/uci-defaults/
         cp ../scripts/init-settings.sh files/etc/uci-defaults/99-init-settings
         mkdir -p files/etc/opkg
-        cp ../configs/opkg/distfeeds-23.05-local.conf files/etc/opkg/distfeeds.conf
+        cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         pushd bin/targets/x86/64
