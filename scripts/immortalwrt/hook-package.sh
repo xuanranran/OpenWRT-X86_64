@@ -20,6 +20,8 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 sed -i 's/video,+libmesa +libwayland +libgudev/video,+libgudev/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 
+sed -i 's/+kmod-nf-conntrack +kmod-nf-conntrack-timeout @KERNEL_NF_CONNTRACK_TIMEOUT/+kmod-nf-conntrack @KERNEL_NF_CONNTRACK_TIMEOUT/g' package/kernel/linux/modules/netfilter.mk
+
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
