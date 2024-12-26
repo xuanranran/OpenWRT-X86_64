@@ -32,10 +32,12 @@ sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
 sed -i '$i uci commit nlbwmon' zzz-default-settings
 sed -i '/http/d' zzz-default-settings
 sed -i '/23.05/d' zzz-default-settings
-export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_DESCRIPTION= | awk -F "'" '{print $2}')
+export orig_version=$(cat "zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
 export date_version=$(date -d "$(rdate -n -4 -p ntp.aliyun.com)" +'%Y-%m-%d')
 sed -i "s/${orig_version}/${orig_version} (${date_version})/g" zzz-default-settings
 popd
+
+sed -i 's/boardinfo.release.description +/boardinfo.release.description + boardinfo.release.revision +/g' customfeeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
