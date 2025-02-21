@@ -9,6 +9,10 @@ git clone https://github.com/xuanranran/autocore-arm -b openwrt-24.10 package/em
 rm -rf package/emortal/default-settings
 git clone https://github.com/xuanranran/default-settings -b openwrt-24.10 package/emortal/default-settings
 
+# automake
+rm -rf tools/automake
+git clone https://github.com/xuanranran/tools_automake tools/automake
+
 # custom packages
 rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config}
 rm -rf customfeeds/luci/themes/luci-theme-argon
