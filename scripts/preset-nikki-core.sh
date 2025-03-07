@@ -1,6 +1,6 @@
 #!/bin/bash
 #=================================================
-# File name: preset-mihomo-core.sh
+# File name: preset-nikki-core.sh
 # System Required: Linux
 # Version: 1.0
 # Lisence: MIT
