@@ -20,8 +20,12 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 sed -i 's/video,+libmesa +libwayland +libgudev/video,+libgudev/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 
-sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
-sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
+# zerotier
+rm -rf feeds/packages/net/zerotier
+git clone https://github.com/sbwml/feeds_packages_net_zerotier feeds/packages/net/zerotier
+
+# sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
+# sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
