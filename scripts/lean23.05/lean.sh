@@ -65,4 +65,4 @@ cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
 
 # Test kernel 6.12
-# sed -i 's/6.6/6.12/g' target/linux/x86/Makefile
+sed -i 's/6.6/6.12/g' target/linux/x86/Makefile
