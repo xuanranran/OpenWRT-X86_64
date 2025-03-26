@@ -1,0 +1,202 @@
+#=================================================
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+# Lisence: MIT
+# Author: P3TERX
+# Blog: https://p3terx.com
+#=================================================
+
+name: OpenWrt_immortalwrt_6.12
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: 11 23 * * * 
+  # watch:
+  #   types: started
+
+env:
+  REPO_URL: https://github.com/xuanranran/immortalwrt
+  REPO_BRANCH: master
+  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
+  DIY_SH: scripts/immortalwrt/immortalwrt.sh
+  UPLOAD_RELEASE: true
+  TZ: Asia/Shanghai
+
+jobs:
+  Build:
+    runs-on: self-hosted
+    outputs:
+      OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
+      PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
+      TARGET: ${{ steps.compile.outputs.TARGET }}
+      SUBTARGET: ${{ steps.compile.outputs.SUBTARGET }}
+      FIRMWARE: ${{ steps.compile.outputs.FIRMWARE }}
+      GENERATE_STATUS: ${{ steps.generate.outputs.GENERATE_STATUS }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Initialization Environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        echo -e "Total CPU cores\t: $(nproc)"
+        cat /proc/cpuinfo | grep 'model name'
+        free -h
+        uname -a
+        [ -f /proc/version ] && cat /proc/version
+        [ -f /etc/issue.net ] && cat /etc/issue.net
+        [ -f /etc/issue ] && cat /etc/issue
+        ulimit -a
+        
+    - name: Clone Source Code
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b 6.12 openwrt
+
+    - name: Update Feeds
+      id: update
+      run: |
+        cd openwrt
+        echo "OPENWRTROOT=$PWD" >> $GITHUB_ENV
+        echo "OPENWRTROOT=$PWD" >> $GITHUB_OUTPUT
+        mkdir customfeeds
+        git clone --depth=1 https://github.com/xuanranran/openwrt-package customfeeds/lovepackages
+        git clone --depth=1 https://github.com/xuanranran/rely customfeeds/loverely
+        git clone --depth=1 https://github.com/immortalwrt/packages -b $REPO_BRANCH customfeeds/packages
+        git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
+        git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
+        git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
+        chmod +x ../scripts/*.sh
+        chmod +x ../scripts/immortalwrt_6.12/*.sh
+        ../scripts/immortalwrt_6.12/hook-package.sh
+        ../scripts/immortalwrt_6.12/hook-base.sh
+        ../scripts/immortalwrt_6.12/hook-feeds.sh
+        
+    - name: Install Feeds
+      run: |
+        cd $OPENWRTROOT
+        ./scripts/feeds install -a
+
+    - name: Load Custom Configuration
+      run: |
+        [ -e files ] && mv files $OPENWRTROOT/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
+        chmod +x scripts/*.sh
+        cd $OPENWRTROOT
+        ../$DIY_SH
+        ../scripts/preset-clash-core.sh amd64
+        ../scripts/preset-nikki-core.sh amd64
+        ../scripts/preset-terminal-tools.sh
+        make defconfig
+        
+    - name: Download Package
+      id: package
+      run: |
+        cd $OPENWRTROOT
+        cat .config
+        make download -j100
+        make download -j10
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+  
+    - name: Compile Packages
+      id: compile
+      run: |
+        cd $OPENWRTROOT
+        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        echo -e "$(nproc) thread compile"
+        make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
+        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1
+        make diffconfig
+        make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
+        make package/index
+        cd $OPENWRTROOT/bin/packages/*
+        PLATFORM=$(basename `pwd`)
+        echo "PLATFORM=$PLATFORM" >> $GITHUB_ENV
+        echo "PLATFORM=$PLATFORM" >> $GITHUB_OUTPUT
+        cd $OPENWRTROOT/bin/targets/*
+        TARGET=$(basename `pwd`)
+        echo "TARGET=$TARGET" >> $GITHUB_ENV
+        echo "TARGET=$TARGET" >> $GITHUB_OUTPUT
+        cd *
+        SUBTARGET=$(basename `pwd`)
+        echo "SUBTARGET=$SUBTARGET" >> $GITHUB_ENV
+        echo "SUBTARGET=$SUBTARGET" >> $GITHUB_OUTPUT
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "FIRMWARE=$PWD" >> $GITHUB_OUTPUT
+        echo "COMPILE_STATUS=success" >> $GITHUB_OUTPUT
+
+    - name: Generate Firmware
+      if: steps.compile.outputs.COMPILE_STATUS == 'success'
+      id: generate
+      run: |
+        cd $OPENWRTROOT
+        mkdir -p files/etc/uci-defaults/
+        cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
+        mkdir -p files/etc/apk/repositories.d 
+        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories
+        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories.d/distfeeds.list
+        make package/install -j$(nproc) || make package/install -j1 V=s
+        make target/install -j$(nproc) || make target/install -j1 V=s
+        pushd bin/targets/x86/64
+        # rm -rf immortalwrt-x86-64-generic-kernel.bin
+        # rm -rf immortalwrt-x86-64-generic-rootfs.tar.gz
+        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vhdx
+        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vmdk
+        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.img.gz
+        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vhdx
+        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vmdk
+        # rm -rf immortalwrt-x86-64-generic-squashfs-rootfs.img.gz
+        # mv immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz $(date +"%Y.%m.%d")-immortalwrt-x86-64-squashfs-efi.img.gz
+        mv config.buildinfo $(date +"%Y.%m.%d")-immortalwrt-config.buildinfo
+        popd
+        make checksum
+        mv bin/targets/x86/64/sha256sums bin/targets/x86/64/$(date +"%Y.%m.%d")-immortalwrt-sha256sums
+        echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
+
+    - name: Generate release tag
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt3" >> $GITHUB_OUTPUT
+          echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
+          touch release.txt
+          echo "后台地址：192.168.11.1" >> release.txt
+          echo "status=success" >> $GITHUB_OUTPUT
+          
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@v2
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          name: ${{ steps.tag.outputs.release_date }} x86_64-immortalwrt-6.12 固件
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          body_path: release.txt
+          files: ${{ env.FIRMWARE }}/*
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+          retain_days: 5
+          keep_minimum_runs: 5
+
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.3.4
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+          keep_latest: 240
+          delete_tags: true
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Delete Artifacts
+      uses: geekyeggo/delete-artifact@v5
+      with:
+         name: |
+            bin-archive
