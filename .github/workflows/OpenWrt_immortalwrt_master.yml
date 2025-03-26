@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: immortalwrt_master
+name: OpenWrt_immortalwrt_master
 
 on:
   repository_dispatch:
@@ -71,10 +71,10 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt/*.sh
-        ../scripts/immortalwrt/hook-package.sh
-        ../scripts/immortalwrt/hook-base.sh
-        ../scripts/immortalwrt/hook-feeds.sh
+        chmod +x ../scripts/immortalwrt_6.12/*.sh
+        ../scripts/immortalwrt_6.12/hook-package.sh
+        ../scripts/immortalwrt_6.12/hook-base.sh
+        ../scripts/immortalwrt_6.12/hook-feeds.sh
         
     - name: Install Feeds
       run: |
@@ -163,7 +163,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt1" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt3" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "后台地址：192.168.11.1" >> release.txt
@@ -175,7 +175,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86_64-immortalwrt-master 固件
+          name: ${{ steps.tag.outputs.release_date }} x86_64-immortalwrt-6.12 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
