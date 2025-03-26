@@ -29,6 +29,13 @@ mkdir -p package/kernel/mt76/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/mt76/patches/100-fix-build-with-mac80211-6.11-backport.patch > package/kernel/mt76/patches/100-fix-build-with-mac80211-6.11-backport.patch
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/mt76/patches/101-fix-build-with-linux-6.12rc2.patch > package/kernel/mt76/patches/101-fix-build-with-linux-6.12rc2.patch
 
+# mac80211 - 6.12
+rm -rf package/kernel/mac80211
+git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-24.10
+
+# bpf-headers - 6.12
+sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
+
 sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
 sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
@@ -88,10 +95,6 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 # xdp-tools
 rm -rf package/network/utils/xdp-tools
 git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
-
-# lrzsz - 0.12.20
-# rm -rf customfeeds/packages/utils/lrzsz
-# git clone --depth 1 https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
 
 # perl
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
