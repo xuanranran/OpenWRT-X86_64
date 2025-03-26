@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt_immortalwrt_24.10
+name: immortalwrt_6.12
 
 on:
   repository_dispatch:
@@ -17,10 +17,10 @@ on:
   #   types: started
 
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-24.10
-  CONFIG_FILE: configs/immortalwrt_24.10/immortalwrt.config
-  DIY_SH: scripts/immortalwrt_24.10/immortalwrt.sh
+  REPO_URL: https://github.com/xuanranran/immortalwrt
+  REPO_BRANCH: master
+  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
+  DIY_SH: scripts/immortalwrt/immortalwrt.sh
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -55,7 +55,7 @@ jobs:
     - name: Clone Source Code
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        git clone $REPO_URL -b 6.12 openwrt
 
     - name: Update Feeds
       id: update
@@ -71,10 +71,10 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt_24.10/*.sh
-        ../scripts/immortalwrt_24.10/hook-package.sh
-        ../scripts/immortalwrt_24.10/hook-base.sh
-        ../scripts/immortalwrt_24.10/hook-feeds.sh
+        chmod +x ../scripts/immortalwrt/*.sh
+        ../scripts/immortalwrt/hook-package.sh
+        ../scripts/immortalwrt/hook-base.sh
+        ../scripts/immortalwrt/hook-feeds.sh
         
     - name: Install Feeds
       run: |
@@ -137,14 +137,13 @@ jobs:
       run: |
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
-        cp ../scripts/immortalwrt_24.10/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
-        mkdir -p files/etc/opkg
-        cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
+        cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
+        mkdir -p files/etc/apk/repositories.d 
+        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories
+        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories.d/distfeeds.list
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         pushd bin/targets/x86/64
-        kernelv=`cat immortalwrt-x86-64-generic.manifest | grep 'kernel - ' |  awk -F '[- ]' '{print $4}'`
-        echo "kernel_version=$kernelv" >> $GITHUB_OUTPUT
         # rm -rf immortalwrt-x86-64-generic-kernel.bin
         # rm -rf immortalwrt-x86-64-generic-rootfs.tar.gz
         # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vhdx
@@ -164,7 +163,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt2" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt1" >> $GITHUB_OUTPUT
           echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
           touch release.txt
           echo "后台地址：192.168.11.1" >> release.txt
@@ -176,7 +175,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} x86_64-immortalwrt-24.10 固件
+          name: ${{ steps.tag.outputs.release_date }} x86_64-immortalwrt-master 固件
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
