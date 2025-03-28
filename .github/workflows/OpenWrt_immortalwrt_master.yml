@@ -71,10 +71,10 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt_6.12/*.sh
-        ../scripts/immortalwrt_6.12/hook-package.sh
-        ../scripts/immortalwrt_6.12/hook-base.sh
-        ../scripts/immortalwrt_6.12/hook-feeds.sh
+        chmod +x ../scripts/immortalwrt/*.sh
+        ../scripts/immortalwrt/hook-package.sh
+        ../scripts/immortalwrt/hook-base.sh
+        ../scripts/immortalwrt/hook-feeds.sh
         
     - name: Install Feeds
       run: |
@@ -91,6 +91,7 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
+        ../scripts/up6684.sh
         make defconfig
         
     - name: Download Package
