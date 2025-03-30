@@ -31,6 +31,19 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # rm -rf feeds/packages/utils/lrzsz
 # git clone https://github.com/sbwml/packages_utils_lrzsz package/new/lrzsz
 
+# frpc
+sed -i 's/procd_set_param stdout $stdout/procd_set_param stdout 0/g' customfeeds/packages/net/frp/files/frpc.init
+sed -i 's/procd_set_param stderr $stderr/procd_set_param stderr 0/g' customfeeds/packages/net/frp/files/frpc.init
+sed -i 's/stdout stderr //g' customfeeds/packages/net/frp/files/frpc.init
+sed -i '/stdout:bool/d;/stderr:bool/d' customfeeds/packages/net/frp/files/frpc.init
+sed -i '/stdout/d;/stderr/d' customfeeds/packages/net/frp/files/frpc.config
+sed -i 's/env conf_inc/env conf_inc enable/g' customfeeds/packages/net/frp/files/frpc.init
+sed -i "s/'conf_inc:list(string)'/& \\\\/" customfeeds/packages/net/frp/files/frpc.init
+sed -i "/conf_inc:list/a\\\t\t\'enable:bool:0\'" customfeeds/packages/net/frp/files/frpc.init
+sed -i '/procd_open_instance/i\\t\[ "$enable" -ne 1 \] \&\& return 1\n' customfeeds/packages/net/frp/files/frpc.init
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/applications/luci-app-frpc/001-luci-app-frpc-hide-token.patch | patch -p1
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/applications/luci-app-frpc/002-luci-app-frpc-add-enable-flag.patch | patch -p1
+
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
 git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
