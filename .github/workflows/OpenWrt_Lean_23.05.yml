@@ -160,17 +160,11 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
           echo "release_tag=$(date +"%Y.%m.%d")-Lean5" >> $GITHUB_OUTPUT
-          echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
+          echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**固件说明**:\n" >> release.txt
           echo -e "### 后台地址: \`192.168.11.1\`\n" >> release.txt
           echo -e "### 后台密码: \`password\`\n" >> release.txt
-          echo -e "-----------
-                \`full   = 全插件\`
-                \`docker = 带docker\`
-                \`slim   = 精简版\`
-                \`beggar = 乞丐版\`
-                \`bod    = Docker乞丐版\`\n" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
           
     - name: Upload firmware to release
@@ -194,7 +188,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.3.4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-          keep_latest: 240
+          keep_latest: 480
           delete_tags: true
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
