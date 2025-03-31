@@ -99,8 +99,7 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
-        make download -j100
-        make download -j10
+        make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
   
