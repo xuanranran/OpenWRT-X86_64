@@ -91,6 +91,7 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
+        ../scripts/up6_6.sh
         make defconfig
         
     - name: Download Package

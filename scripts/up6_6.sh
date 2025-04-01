@@ -12,3 +12,14 @@ curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/hack-6.6/711-net-dsa-mv88e6xxx-disable-ATU-violation.patch > target/linux/generic/hack-6.6/711-net-dsa-mv88e6xxx-disable-ATU-violation.patch
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/hack-6.6/904-debloat_dma_buf.patch > target/linux/generic/hack-6.6/904-debloat_dma_buf.patch
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.6/701-netfilter-nf_tables-ignore-EOPNOTSUPP-on-flowtable-d.patch > target/linux/generic/pending-6.6/701-netfilter-nf_tables-ignore-EOPNOTSUPP-on-flowtable-d.patch
+
+
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.6/950-0464-drm-v3d-New-debugfs-end-points-to-query-GPU-usage-st.patch > target/linux/bcm27xx/patches-6.6/950-0464-drm-v3d-New-debugfs-end-points-to-query-GPU-usage-st.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.6/950-0555-drm-v3d-fix-up-register-addresses-for-V3D-7.x.patch > target/linux/bcm27xx/patches-6.6/950-0555-drm-v3d-fix-up-register-addresses-for-V3D-7.x.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.6/950-1512-dts-bcm2711-Don-t-mark-timer-regs-unconfigured.patch > target/linux/bcm27xx/patches-6.6/950-1512-dts-bcm2711-Don-t-mark-timer-regs-unconfigured.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.6/670-ipv6-allow-rejecting-with-source-address-failed-policy.patch > target/linux/generic/pending-6.6/670-ipv6-allow-rejecting-with-source-address-failed-policy.patch
+
+
+
+rm -rf target/linux/bcm27xx/patches-6.6/950-1498-dts-bcm2711-PL011-UARTs-are-actually-r1p5.patch
+rm -rf target/linux/bcm27xx/patches-6.6/950-1551-drm-v3d-Don-t-run-jobs-that-have-errors-flagged-in-i.patch
