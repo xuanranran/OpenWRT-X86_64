@@ -24,6 +24,7 @@ git clone https://git.cooluc.com/sbwml/shortcut-fe package/new/shortcut-fe
     # firewall4
     sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/config/firewall4/Makefile
     mkdir -p package/network/config/firewall4/patches
+	rm -rf package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
     # fix ct status dnat
     curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/firewall4/firewall4_patches/990-unconditionally-allow-ct-status-dnat.patch > package/network/config/firewall4/patches/990-unconditionally-allow-ct-status-dnat.patch
     # fullcone
