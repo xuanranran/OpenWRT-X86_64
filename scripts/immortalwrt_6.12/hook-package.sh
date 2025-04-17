@@ -212,4 +212,10 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
     # coova-chilli
     sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
 
+# unzip
+rm -rf customfeeds/packages/utils/unzip
+git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packages/utils/unzip
+
+# tcp-brutal
+git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
 
