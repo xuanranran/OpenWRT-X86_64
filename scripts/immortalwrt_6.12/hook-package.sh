@@ -21,11 +21,11 @@ sed -i 's/video,+libmesa +libwayland +libgudev/video,+libgudev/g' customfeeds/pa
 sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 
 # zerotier
-rm -rf customfeeds/packages/net/zerotier
-git clone https://github.com/sbwml/feeds_packages_net_zerotier customfeeds/packages/net/zerotier
+# rm -rf customfeeds/packages/net/zerotier
+# git clone https://github.com/sbwml/feeds_packages_net_zerotier customfeeds/packages/net/zerotier
 
-rm -rf customfeeds/luci/applications/luci-app-zerotier
-git clone https://github.com/xuanranran/luci-app-zerotier customfeeds/luci/applications/luci-app-zerotier
+# rm -rf customfeeds/luci/applications/luci-app-zerotier
+# git clone https://github.com/xuanranran/luci-app-zerotier customfeeds/luci/applications/luci-app-zerotier
 
 # mt76
 mkdir -p package/kernel/mt76/patches
