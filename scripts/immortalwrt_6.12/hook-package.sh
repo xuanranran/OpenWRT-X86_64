@@ -129,3 +129,24 @@ rm -rf customfeeds/luci/applications/luci-app-package-manager
 pushd customfeeds/luci/applications/
 git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
 popd
+
+# fix gcc14
+# linux-atm
+rm -rf package/network/utils/linux-atm
+git clone https://github.com/sbwml/package_network_utils_linux-atm package/network/utils/linux-atm
+# perl
+sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
+sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
+# lucihttp
+sed -i "/TARGET_CFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/lucihttp/Makefile
+# rpcd
+sed -i "/TARGET_LDFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" package/system/rpcd/Makefile
+# ucode-mod-lua
+sed -i "/Build\/Configure/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/ucode-mod-lua/Makefile
+# luci-base
+sed -i "s/-DNDEBUG/-DNDEBUG -Wno-implicit-function-declaration/g" customfeeds/luci/modules/luci-base/src/Makefile
+# uhttpd
+sed -i "/Package\/uhttpd\/install/i\TARGET_CFLAGS += -Wno-implicit-function-declaration\n" package/network/services/uhttpd/Makefile
+# shadow
+sed -i '/TARGET_LDFLAGS/d' customfeeds/packages/utils/shadow/Makefile
+sed -i 's/libxcrypt/openssl/g' feeds/packages/utils/shadow/Makefile
