@@ -21,8 +21,11 @@ sed -i 's/video,+libmesa +libwayland +libgudev/video,+libgudev/g' customfeeds/pa
 sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng/g' customfeeds/packages/multimedia/gst1-plugins-base/Makefile
 
 # zerotier
-# rm -rf customfeeds/packages/net/zerotier
-# git clone https://github.com/sbwml/feeds_packages_net_zerotier customfeeds/packages/net/zerotier
+rm -rf customfeeds/packages/net/zerotier
+git clone https://github.com/sbwml/feeds_packages_net_zerotier customfeeds/packages/net/zerotier
+
+rm -rf customfeeds/luci/applications/luci-app-zerotier
+git clone https://github.com/xuanranran/luci-app-zerotier customfeeds/luci/applications/luci-app-zerotier
 
 # mt76
 mkdir -p package/kernel/mt76/patches
@@ -41,8 +44,8 @@ git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10
 # bpf-headers - 6.12
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
 
-sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
-sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
+# sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
+# sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
