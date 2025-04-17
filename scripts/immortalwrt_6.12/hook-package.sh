@@ -28,10 +28,15 @@ sed -i 's/controller,,+libgraphene +libjpeg +libpng/controller,,+libjpeg +libpng
 mkdir -p package/kernel/mt76/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/mt76/patches/100-fix-build-with-mac80211-6.11-backport.patch > package/kernel/mt76/patches/100-fix-build-with-mac80211-6.11-backport.patch
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/mt76/patches/101-fix-build-with-linux-6.12rc2.patch > package/kernel/mt76/patches/101-fix-build-with-linux-6.12rc2.patch
+curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch > package/kernel/mt76/patches/102-fix-build-with-mac80211-6.14-backport.patch
 
-# mac80211 - 6.12
+# mac80211 - 6.14
 rm -rf package/kernel/mac80211
 git clone https://github.com/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b openwrt-24.10
+
+# ath10k-ct
+rm -rf package/kernel/ath10k-ct
+git clone https://github.com/sbwml/package_kernel_ath10k-ct package/kernel/ath10k-ct -b v6.14
 
 # bpf-headers - 6.12
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
@@ -108,6 +113,11 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 # xdp-tools
 rm -rf package/network/utils/xdp-tools
 git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
+
+# nat46
+mkdir -p package/kernel/nat46/patches
+curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/nat46/100-fix-build-with-kernel-6.9.patch > package/kernel/nat46/patches/100-fix-build-with-kernel-6.9.patch
+curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/nat46/101-fix-build-with-kernel-6.12.patch > package/kernel/nat46/patches/101-fix-build-with-kernel-6.12.patch
 
 # perl
 # sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
