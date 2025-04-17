@@ -149,4 +149,4 @@ sed -i "s/-DNDEBUG/-DNDEBUG -Wno-implicit-function-declaration/g" customfeeds/lu
 sed -i "/Package\/uhttpd\/install/i\TARGET_CFLAGS += -Wno-implicit-function-declaration\n" package/network/services/uhttpd/Makefile
 # shadow
 sed -i '/TARGET_LDFLAGS/d' customfeeds/packages/utils/shadow/Makefile
-sed -i 's/libxcrypt/openssl/g' feeds/packages/utils/shadow/Makefile
+sed -i 's/libxcrypt/openssl/g' customfeeds/packages/utils/shadow/Makefile
