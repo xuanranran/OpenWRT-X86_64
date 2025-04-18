@@ -53,19 +53,3 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
-# glibc
-sed -i '/NaiveProxy/d' .config
-
-# IF USE GLIBC
-# musl-libc
-git clone https://git.cooluc.com/sbwml/package_libs_musl-libc package/libs/musl-libc
-# glibc-common
-curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/glibc/glibc-common.patch | patch -p1
-# glibc-common - locale data
-mkdir -p package/libs/toolchain/glibc-locale
-curl -Lso package/libs/toolchain/glibc-locale/locale-archive https://github.com/sbwml/r4s_build_script/releases/download/locale/locale-archive
-# GNU LANG
-mkdir package/base-files/files/etc/profile.d
-echo 'export LANG="en_US.UTF-8" I18NPATH="/usr/share/i18n"' > package/base-files/files/etc/profile.d/sys_locale.sh
-# build - drop `--disable-profile`
-sed -i "/disable-profile/d" toolchain/glibc/common.mk
