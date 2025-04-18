@@ -104,16 +104,6 @@ mkdir -p package/kernel/nat46/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/nat46/100-fix-build-with-kernel-6.9.patch > package/kernel/nat46/patches/100-fix-build-with-kernel-6.9.patch
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/nat46/101-fix-build-with-kernel-6.12.patch > package/kernel/nat46/patches/101-fix-build-with-kernel-6.12.patch
 
-# perl
-# sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
-# sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
-
-# 替换杂项
-rm -rf customfeeds/luci/applications/luci-app-package-manager
-pushd customfeeds/luci/applications/
-git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
-popd
-
 # fix gcc14
 # linux-atm
 rm -rf package/network/utils/linux-atm
@@ -223,3 +213,15 @@ git clone https://github.com/sbwml/feeds_packages_utils_unzip customfeeds/packag
 
 # tcp-brutal
 git clone https://github.com/sbwml/package_kernel_tcp-brutal package/kernel/tcp-brutal
+
+# vlmcsd
+pushd customfeeds/packages/net
+rm -rf vlmcsd
+git clone --depth 1 https://github.com/sbwml/openwrt_pkgs openwrt_pkgs && mv -n openwrt_pkgs/vlmcsd ./ ; rm -rf openwrt_pkgs
+popd
+
+# 替换杂项
+rm -rf customfeeds/luci/applications/luci-app-package-manager
+pushd customfeeds/luci/applications/
+git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
+popd
