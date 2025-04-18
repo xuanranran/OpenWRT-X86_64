@@ -173,6 +173,39 @@ curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mas
 curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/bbr3/010-bbr3-0019-x86-cfi-bpf-Add-tso_segs-and-skb_marked_lost-to-bpf_.patch
 popd
 
+# LRNG - 6.12
+pushd target/linux/generic/hack-6.12
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0001-LRNG-Entropy-Source-and-DRNG-Manager.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0002-LRNG-allocate-one-DRNG-instance-per-NUMA-node.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0003-LRNG-proc-interface.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0004-LRNG-add-switchable-DRNG-support.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0005-LRNG-add-common-generic-hash-support.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0006-crypto-DRBG-externalize-DRBG-functions-for-LRNG.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0007-LRNG-add-SP800-90A-DRBG-extension.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0008-LRNG-add-kernel-crypto-API-PRNG-extension.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0009-LRNG-add-atomic-DRNG-implementation.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0010-LRNG-add-common-timer-based-entropy-source-code.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0011-LRNG-add-interrupt-entropy-source.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0012-scheduler-add-entropy-sampling-hook.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0013-LRNG-add-scheduler-based-entropy-source.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0014-LRNG-add-SP800-90B-compliant-health-tests.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0015-LRNG-add-random.c-entropy-source-support.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0016-LRNG-CPU-entropy-source.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0017-LRNG-add-Jitter-RNG-fast-noise-source.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0018-LRNG-add-option-to-enable-runtime-entropy-rate-confi.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0019-LRNG-add-interface-for-gathering-of-raw-entropy.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0020-LRNG-add-power-on-and-runtime-self-tests.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0021-LRNG-sysctls-and-proc-interface.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0022-LRMG-add-drop-in-replacement-random-4-API.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0023-LRNG-add-kernel-crypto-API-interface.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0024-LRNG-add-dev-lrng-device-file-support.patch
+curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/lrng/011-LRNG-0025-LRNG-add-hwrand-framework-interface.patch
+popd
+echo -e "\n# Kernel - LRNG" >> .config
+echo "CONFIG_KERNEL_LRNG=y" >> .config
+echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
+echo "# CONFIG_PACKAGE_urngd is not set" >> .config
+
 # linux-rt - i915
 pushd target/linux/generic/hack-6.12
 curl -Os https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/linux-rt/012-0001-drm-i915-Use-preempt_disable-enable_rt-where-recomme.patch
