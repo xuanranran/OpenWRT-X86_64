@@ -53,20 +53,6 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
-# bcm53xx
-# libpfring
-sed -i '/CONFIGURE_VARS +=/iEXTRA_CFLAGS += -Wno-int-conversion\n' customfeeds/packages/libs/libpfring/Makefile
-
-# bcm53xx
-# mtd
-sed -i 's/=1 -Wall/=1 -Wall -Wno-implicit-function-declaration/g' package/system/mtd/Makefile
-# uwsgi
-sed -i '/MAKE_VARS+=/iTARGET_CFLAGS += -Wno-incompatible-pointer-types\n' customfeeds/packages/net/uwsgi/Makefile
-# libsoxr
-sed -i '/CMAKE_INSTALL/iPKG_BUILD_FLAGS:=no-lto no-mold\n' customfeeds/packages/libs/libsoxr/Makefile
-# wsdd2
-sed -i '/Build\/Compile/iTARGET_CFLAGS += -Wno-error -Wno-int-conversion\n' customfeeds/packages/net/wsdd2/Makefile
-
 # glibc
 sed -i '/NaiveProxy/d' .config
 
