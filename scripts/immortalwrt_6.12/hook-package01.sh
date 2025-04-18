@@ -83,9 +83,3 @@ mkdir package/base-files/files/etc/profile.d
 echo 'export LANG="en_US.UTF-8" I18NPATH="/usr/share/i18n"' > package/base-files/files/etc/profile.d/sys_locale.sh
 # build - drop `--disable-profile`
 sed -i "/disable-profile/d" toolchain/glibc/common.mk
-
-# ccache
-echo "CONFIG_CCACHE=y" >> .config
-echo "CONFIG_CCACHE_DIR=\"/builder/.ccache\"" >> .config
-echo "CONFIG_CCACHE_DIR=\"/home/xuanranran/.ccache\"" >> .config
-tools_suffix="_ccache"
