@@ -173,7 +173,7 @@ sed -i '/CONFIGURE_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/li
 # libical
 sed -i '/CMAKE_OPTIONS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libical/Makefile
 # libconfig
-sed -i '/CONFIGURE_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libconfig/Makefile
+sed -i '/CONFIGURE_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libconfig/Makefile
 # lsof
 sed -i '/CONFIGURE_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/utils/lsof/Makefile
 # screen
