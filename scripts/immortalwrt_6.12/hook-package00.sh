@@ -80,7 +80,6 @@ pushd customfeeds/luci
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/applications/luci-app-natmap/0001-luci-app-natmap-add-default-STUN-server-lists.patch | patch -p1
 popd
 
-# Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101
 rm -rf package/kernel/r8152
 git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
 
