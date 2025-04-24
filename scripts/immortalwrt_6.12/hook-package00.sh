@@ -24,8 +24,8 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 # rm -rf customfeeds/luci/applications/luci-app-zerotier
 # git clone https://github.com/xuanranran/luci-app-zerotier customfeeds/luci/applications/luci-app-zerotier
 
-sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
-sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
+# sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
+# sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 # mt76
 mkdir -p package/kernel/mt76/patches
