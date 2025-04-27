@@ -183,3 +183,8 @@ git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/pa
 
 # watchcat - clean config
 # true > customfeeds/packages/utils/watchcat/files/watchcat.config
+
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.6/691-net-ipv6-fix-UDPv6-GSO-segmentation-with-NAT.patch > target/linux/generic/pending-6.6/691-net-ipv6-fix-UDPv6-GSO-segmentation-with-NAT.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.6/739-03-net-pcs-pcs-mtk-lynxi-add-platform-driver-for-MT7988.patch > target/linux/generic/pending-6.6/739-03-net-pcs-pcs-mtk-lynxi-add-platform-driver-for-MT7988.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.6/739-05-net-pcs-add-driver-for-MediaTek-USXGMII-PCS.patch > target/linux/generic/pending-6.6/739-05-net-pcs-add-driver-for-MediaTek-USXGMII-PCS.patch
+
