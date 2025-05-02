@@ -191,3 +191,5 @@ sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
 
 # watchcat - clean config
 # true > customfeeds/packages/utils/watchcat/files/watchcat.config
+
+sed -i 's/CLS_ACT=n/HW_STEERING=y/g' package/kernel/linux/modules/netdevices.mk
