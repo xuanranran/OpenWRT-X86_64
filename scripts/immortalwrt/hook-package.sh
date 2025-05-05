@@ -25,10 +25,6 @@ rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
-# lrzsz - 0.12.20
-rm -rf feeds/packages/utils/lrzsz
-git clone https://github.com/sbwml/packages_utils_lrzsz package/new/lrzsz
-
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
 git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
