@@ -78,4 +78,5 @@ pushd customfeeds/luci/applications/
 git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
 popd
 
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch
 
