@@ -25,6 +25,10 @@ rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
+# lrzsz - 0.12.20
+rm -rf customfeeds/packages/utils/lrzsz
+git clone https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
+
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
 git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
@@ -80,3 +84,26 @@ popd
 
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch
 
+# GLIBC
+# musl-libc
+git clone https://git.cooluc.com/sbwml/package_libs_musl-libc package/libs/musl-libc
+# glibc-common
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/glibc/glibc-common.patch | patch -p1
+# build - drop `--disable-profile`
+sed -i "/disable-profile/d" toolchain/glibc/common.mk
+# perl
+sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
+sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
+# lucihttp
+sed -i "/TARGET_CFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/lucihttp/Makefile
+# rpcd
+sed -i "/TARGET_LDFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" package/system/rpcd/Makefile
+# ucode-mod-lua
+sed -i "/Build\/Configure/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/ucode-mod-lua/Makefile
+# luci-base
+sed -i "s/-DNDEBUG/-DNDEBUG -Wno-implicit-function-declaration/g" customfeeds/luci/modules/luci-base/src/Makefile
+# uhttpd
+sed -i "/Package\/uhttpd\/install/i\TARGET_CFLAGS += -Wno-implicit-function-declaration\n" package/network/services/uhttpd/Makefile
+# shadow
+sed -i '/TARGET_LDFLAGS/d' customfeeds/packages/utils/shadow/Makefile
+sed -i 's/libxcrypt/openssl/g' customfeeds/packages/utils/shadow/Makefile
