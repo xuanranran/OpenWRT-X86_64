@@ -83,23 +83,3 @@ git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && m
 popd
 
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch
-
-# GLIBC
-# build - drop `--disable-profile`
-sed -i "/disable-profile/d" toolchain/glibc/common.mk
-# perl
-sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
-sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
-# lucihttp
-sed -i "/TARGET_CFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/lucihttp/Makefile
-# rpcd
-sed -i "/TARGET_LDFLAGS/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" package/system/rpcd/Makefile
-# ucode-mod-lua
-sed -i "/Build\/Configure/i\TARGET_CFLAGS += -Wno-implicit-function-declaration" customfeeds/luci/contrib/package/ucode-mod-lua/Makefile
-# luci-base
-sed -i "s/-DNDEBUG/-DNDEBUG -Wno-implicit-function-declaration/g" customfeeds/luci/modules/luci-base/src/Makefile
-# uhttpd
-sed -i "/Package\/uhttpd\/install/i\TARGET_CFLAGS += -Wno-implicit-function-declaration\n" package/network/services/uhttpd/Makefile
-# shadow
-sed -i '/TARGET_LDFLAGS/d' customfeeds/packages/utils/shadow/Makefile
-sed -i 's/libxcrypt/openssl/g' customfeeds/packages/utils/shadow/Makefile
