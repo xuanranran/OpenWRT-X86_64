@@ -85,13 +85,6 @@ popd
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch
 
 # GLIBC
-# musl-libc
-git clone https://git.cooluc.com/sbwml/package_libs_musl-libc package/libs/musl-libc
-# glibc-common
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/glibc/glibc-common.patch | patch -p1
-# glibc-common - locale data
-mkdir -p package/libs/toolchain/glibc-locale
-curl -Lso package/libs/toolchain/glibc-locale/locale-archive https://github.com/sbwml/r4s_build_script/releases/download/locale/locale-archive
 # build - drop `--disable-profile`
 sed -i "/disable-profile/d" toolchain/glibc/common.mk
 # perl
