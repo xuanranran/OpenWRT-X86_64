@@ -19,7 +19,7 @@ on:
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: master
-  CONFIG_FILE: configs/immortalwrt_6.12/immortalwrt.config
+  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
   DIY_SH: scripts/immortalwrt_6.12/immortalwrt.sh
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
