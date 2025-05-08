@@ -35,10 +35,6 @@ rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
-# lrzsz - 0.12.20
-rm -rf customfeeds/packages/utils/lrzsz
-git clone https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
-
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
 git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
@@ -106,16 +102,5 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 rm -rf customfeeds/packages/net/coova-chilli
 git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/packages/net/coova-chilli
 
-# vlmcsd
-# pushd customfeeds/packages/net
-# rm -rf vlmcsd
-# git clone --depth 1 https://github.com/sbwml/openwrt_pkgs openwrt_pkgs && mv -n openwrt_pkgs/vlmcsd ./ ; rm -rf openwrt_pkgs
-# popd
-
 # 替换杂项
-rm -rf customfeeds/luci/applications/luci-app-package-manager
-pushd customfeeds/luci/applications/
-git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
-popd
 
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch

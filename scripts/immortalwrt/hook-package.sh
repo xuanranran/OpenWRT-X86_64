@@ -77,9 +77,6 @@ git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools pac
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
 # 替换杂项
-rm -rf customfeeds/luci/applications/luci-app-package-manager
-pushd customfeeds/luci/applications/
-git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
-popd
 
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch > toolchain/musl/patches/100-tools-Rework-adding-of-CFI-annotations.patch
+# kselftests-bpf
+curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/kselftests-bpf/Makefile > package/devel/kselftests-bpf/Makefile
