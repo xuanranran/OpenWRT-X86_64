@@ -91,7 +91,6 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
-        echo "# CONFIG_KMSAN is not set" >> .config
         make defconfig
         
     - name: Download Package
@@ -99,6 +98,7 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
+        echo "# CONFIG_KMSAN is not set" >> .config
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
