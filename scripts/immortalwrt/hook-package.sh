@@ -77,6 +77,3 @@ git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools pac
 # sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
 
 # 替换杂项
-
-# kselftests-bpf
-curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/kselftests-bpf/Makefile > package/devel/kselftests-bpf/Makefile
