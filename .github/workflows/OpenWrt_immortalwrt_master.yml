@@ -72,6 +72,7 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/immortalwrt/*.sh
+        echo "# CONFIG_KMSAN is not set" >> target/linux/x86/config-6.6
         ../scripts/immortalwrt/hook-package.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
@@ -98,7 +99,6 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
-        echo "# CONFIG_KMSAN is not set" >> .config
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
