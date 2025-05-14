@@ -26,8 +26,8 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 # git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
 # lrzsz - 0.12.20
-# rm -rf customfeeds/packages/utils/lrzsz
-# git clone https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
+rm -rf customfeeds/packages/utils/lrzsz
+git clone https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
 
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
@@ -50,6 +50,11 @@ sed -i 's/#directory mask/directory mask/g' customfeeds/packages/net/samba4/file
 sed -i 's/0666/0644/g;s/0744/0755/g;s/0777/0755/g' customfeeds/luci/applications/luci-app-samba4/htdocs/luci-static/resources/view/samba4.js
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba.config
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
+
+# natmap
+pushd customfeeds/luci
+curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/applications/luci-app-natmap/0001-luci-app-natmap-add-default-STUN-server-lists.patch | patch -p1
+popd
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101 & r8127
 # rm -rf package/kernel/{r8168,r8101,r8125,r8126,r8127,r8152}
