@@ -76,19 +76,6 @@ sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages
 rm -rf package/network/utils/xdp-tools
 git clone https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
 
-# perl
-# rm -rf customfeeds/packages/lang/perl
-# pushd customfeeds/packages/lang/
-# git clone --depth 1 https://github.com/immortalwrt/packages coolsnowwolf_perl && mv -n coolsnowwolf_perl/lang/perl ./ ; rm -rf coolsnowwolf_perl
-# popd
-# sed -i "/Target perl/i\TARGET_CFLAGS_PERL += -Wno-implicit-function-declaration -Wno-int-conversion\n" customfeeds/packages/lang/perl/Makefile
-# sed -i '/HOST_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/lang/perl/Makefile
-
-# 替换杂项
-# rm -rf customfeeds/luci/applications/luci-app-package-manager
-# pushd customfeeds/luci/applications/
-# git clone --depth 1 https://github.com/openwrt/luci openwrt_package-manager && mv -n openwrt_package-manager/applications/luci-app-package-manager ./ ; rm -rf openwrt_package-manager
-# popd
 
 # 测试杂项
 
