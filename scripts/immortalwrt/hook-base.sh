@@ -97,8 +97,8 @@ git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 pac
 # git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
 
 # curl - fix passwall `time_pretransfer` check
-rm -rf customfeeds/packages/net/curl
-git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
+# rm -rf customfeeds/packages/net/curl
+# git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
 
 # TTYD
 sed -i 's/services/system/g' customfeeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
