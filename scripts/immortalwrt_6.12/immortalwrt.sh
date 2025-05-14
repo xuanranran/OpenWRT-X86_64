@@ -18,6 +18,13 @@ git clone --depth=1 https://github.com/sbwml/wwan-packages wwan-packages
 chmod 755 openwrt-package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 popd
 
+# Update OpenClash Panel
+pushd customfeeds/lovepackages/luci-app-openclash/root/usr/share/openclash/ui/
+rm -rf zashboard metacubexd
+git clone --depth 1 -b gh-pages https://github.com/metacubex/metacubexd metacubexd
+git clone --depth 1 -b gh-pages https://github.com/Zephyruso/zashboard zashboard
+popd
+
 # Mod zzz-default-settings
 # pushd package/emortal/default-settings/default
 # sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=1s' zzz-default-settings
