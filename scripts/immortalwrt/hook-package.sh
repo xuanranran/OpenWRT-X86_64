@@ -23,11 +23,10 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
 
-# lrzsz - 0.12.20
-rm -rf customfeeds/packages/utils/lrzsz
-git clone https://github.com/sbwml/packages_utils_lrzsz customfeeds/packages/utils/lrzsz
+# linux-atm
+rm -rf package/network/utils/linux-atm
+git clone https://github.com/sbwml/package_network_utils_linux-atm package/network/utils/linux-atm
 
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
