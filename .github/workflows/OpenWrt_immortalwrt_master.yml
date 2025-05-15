@@ -93,6 +93,7 @@ jobs:
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
         echo 'CONFIG_USE_MOLD=y' >> .config
+        echo 'CONFIG_MOLD=y' >> .config
         echo '# Kernel - CLANG LTO' >> .config
         echo 'CONFIG_KERNEL_CC="clang"' >> .config
         echo 'CONFIG_EXTRA_OPTIMIZATION=""' >> .config
