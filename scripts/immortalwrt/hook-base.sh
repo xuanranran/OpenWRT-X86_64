@@ -25,10 +25,10 @@ git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 pac
 # git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
 
 # IPv6 NAT
-git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
+# git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
 
 # natflow
-git clone https://github.com/sbwml/package_new_natflow package/new/natflow
+# git clone https://github.com/sbwml/package_new_natflow package/new/natflow
 
 # openssl - quictls
 pushd package/libs/openssl/patches
