@@ -77,16 +77,16 @@ git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 pac
 # sed -i '/USE_QUIC_OPENSSL_COMPAT/d' customfeeds/packages/net/haproxy/Makefile
 
 # nghttp3
-rm -rf customfeeds/packages/libs/nghttp3
-git clone https://github.com/sbwml/package_libs_nghttp3 customfeeds/packages/libs/nghttp3
+# rm -rf customfeeds/packages/libs/nghttp3
+# git clone https://github.com/sbwml/package_libs_nghttp3 customfeeds/packages/libs/nghttp3
 
 # ngtcp2
-rm -rf customfeeds/packages/libs/ngtcp2
-git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
+# rm -rf customfeeds/packages/libs/ngtcp2
+# git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
 
 # curl - fix passwall `time_pretransfer` check
-rm -rf customfeeds/packages/net/curl
-git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
+# rm -rf customfeeds/packages/net/curl
+# git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
 
 # TTYD
 sed -i 's/services/system/g' customfeeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
