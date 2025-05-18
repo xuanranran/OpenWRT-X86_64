@@ -18,18 +18,6 @@ git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 packa
 rm -rf package/utils/util-linux
 git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
 
-# Shortcut Forwarding Engine
-# git clone https://git.cooluc.com/sbwml/shortcut-fe package/new/shortcut-fe
-
-# FullCone module
-# git clone https://git.cooluc.com/sbwml/nft-fullcone package/new/nft-fullcone
-
-# IPv6 NAT
-# git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6
-
-# natflow
-# git clone https://github.com/sbwml/package_new_natflow package/new/natflow
-
 # openssl - quictls
 # pushd package/libs/openssl/patches
 # curl -sO https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/openssl/quic/0001-QUIC-Add-support-for-BoringSSL-QUIC-APIs.patch
