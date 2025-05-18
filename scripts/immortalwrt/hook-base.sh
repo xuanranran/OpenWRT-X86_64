@@ -98,23 +98,18 @@ sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packa
 # mkdir -p package/system/opkg/patches
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/opkg/900-opkg-download-disable-hsts.patch > package/system/opkg/patches/900-opkg-download-disable-hsts.patch
 
-# Nginx
-sed -i "s/large_client_header_buffers 2 1k/large_client_header_buffers 4 32k/g" customfeeds/packages/net/nginx-util/files/uci.conf.template
-sed -i "s/client_max_body_size 128M/client_max_body_size 2048M/g" customfeeds/packages/net/nginx-util/files/uci.conf.template
-sed -i '/client_max_body_size/a\\tclient_body_buffer_size 8192M;' customfeeds/packages/net/nginx-util/files/uci.conf.template
-sed -i '/client_max_body_size/a\\tserver_names_hash_bucket_size 128;' customfeeds/packages/net/nginx-util/files/uci.conf.template
-sed -i '/ubus_parallel_req/a\        ubus_script_timeout 600;' customfeeds/packages/net/nginx/files-luci-support/60_nginx-luci-support
-sed -ri "/luci-webui.socket/i\ \t\tuwsgi_send_timeout 600\;\n\t\tuwsgi_connect_timeout 600\;\n\t\tuwsgi_read_timeout 600\;" customfeeds/packages/net/nginx/files-luci-support/luci.locations
-sed -ri "/luci-cgi_io.socket/i\ \t\tuwsgi_send_timeout 600\;\n\t\tuwsgi_connect_timeout 600\;\n\t\tuwsgi_read_timeout 600\;" customfeeds/packages/net/nginx/files-luci-support/luci.locations
-# uwsgi
-sed -i 's,procd_set_param stderr 1,procd_set_param stderr 0,g' customfeeds/packages/net/uwsgi/files/uwsgi.init
-sed -i 's,buffer-size = 10000,buffer-size = 131072,g' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-sed -i 's,logger = luci,#logger = luci,g' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+# uwsgi - fix timeout
 sed -i '$a cgi-timeout = 600' customfeeds/packages/net/uwsgi/files-luci-support/luci-*.ini
+sed -i '/limit-as/c\limit-as = 5000' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+# disable error log
+sed -i "s/procd_set_param stderr 1/procd_set_param stderr 0/g" customfeeds/packages/net/uwsgi/files/uwsgi.init
+
+# uwsgi - performance
 sed -i 's/threads = 1/threads = 2/g' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
 sed -i 's/processes = 3/processes = 4/g' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
 sed -i 's/cheaper = 1/cheaper = 2/g' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-# rpcd
+
+# rpcd - fix timeout
 sed -i 's/option timeout 30/option timeout 60/g' package/system/rpcd/files/rpcd.config
 sed -i 's#20) \* 1000#60) \* 1000#g' customfeeds/luci/modules/luci-base/htdocs/luci-static/resources/rpc.js
 
