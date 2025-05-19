@@ -167,19 +167,6 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # BBRv3
 cp -rf $GITHUB_WORKSPACE/data/PATCH/kernel/bbr3/* ./target/linux/generic/backport-6.6/
-# LRNG
-cp -rf $GITHUB_WORKSPACE/data/PATCH/kernel/lrng/* ./target/linux/generic/hack-6.6/
-echo '
-# CONFIG_RANDOM_DEFAULT_IMPL is not set
-CONFIG_LRNG=y
-CONFIG_LRNG_DEV_IF=y
-# CONFIG_LRNG_IRQ is not set
-CONFIG_LRNG_JENT=y
-CONFIG_LRNG_CPU=y
-# CONFIG_LRNG_SCHED is not set
-CONFIG_LRNG_SELFTEST=y
-# CONFIG_LRNG_SELFTEST_PANIC is not set
-' >>./target/linux/generic/config-6.6
 
 # clang
 # xtables-addons module
