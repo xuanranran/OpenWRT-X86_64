@@ -23,7 +23,7 @@ pushd customfeeds/lovepackages/luci-app-openclash/root/usr/share/openclash/ui/
 rm -rf zashboard metacubexd
 git clone --depth 1 -b gh-pages https://github.com/metacubex/metacubexd metacubexd
 curl -LJO https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
-unzip -qq dist-cdn-fonts.zip
+unzip -q dist-cdn-fonts.zip
 mv dist zashboard
 rm -rf dist-cdn-fonts.zip
 # git clone --depth 1 -b gh-pages https://github.com/Zephyruso/zashboard zashboard
