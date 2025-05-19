@@ -166,9 +166,9 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/iproute2/902-ss-display-ecn_low-if-tcp_info-tcpi_options-TCPI_OPT.patch > package/network/utils/iproute2/patches/902-ss-display-ecn_low-if-tcp_info-tcpi_options-TCPI_OPT.patch
 
 # BBRv3
-cp -rf ../PATCH/kernel/bbr3/* ./target/linux/generic/backport-6.6/
+cp -rf $GITHUB_WORKSPACE/data/PATCH/kernel/bbr3/* ./target/linux/generic/backport-6.6/
 # LRNG
-cp -rf ../PATCH/kernel/lrng/* ./target/linux/generic/hack-6.6/
+cp -rf $GITHUB_WORKSPACE/data/PATCH/kernel/lrng/* ./target/linux/generic/hack-6.6/
 echo '
 # CONFIG_RANDOM_DEFAULT_IMPL is not set
 CONFIG_LRNG=y
