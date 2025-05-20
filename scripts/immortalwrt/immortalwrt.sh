@@ -1,12 +1,4 @@
 #!/bin/bash
-#=================================================
-# File name: immortalwrt.sh
-# System Required: Linux
-# Version: 1.0
-# Lisence: MIT
-# Author: SuLingGG
-# Blog: https://mlapp.cn
-#=================================================
 # Clone community packages to package/community
 mkdir package/community
 pushd package/community
