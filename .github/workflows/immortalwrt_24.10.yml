@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt_immortalwrt_6.12
+name: immortalwrt_24.10
 
 on:
   repository_dispatch:
@@ -18,9 +18,9 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: master
-  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
-  DIY_SH: scripts/immortalwrt_6.12/immortalwrt.sh
+  REPO_BRANCH: openwrt-24.10
+  CONFIG_FILE: configs/immortalwrt_24.10/immortalwrt.config
+  DIY_SH: scripts/immortalwrt_24.10/immortalwrt.sh
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -71,11 +71,10 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt_6.12/*.sh
-        ../scripts/immortalwrt_6.12/hook-package00.sh
-        ../scripts/immortalwrt_6.12/hook-package01.sh
-        ../scripts/immortalwrt_6.12/hook-base.sh
-        ../scripts/immortalwrt_6.12/hook-feeds.sh
+        chmod +x ../scripts/immortalwrt_24.10/*.sh
+        ../scripts/immortalwrt_24.10/hook-package.sh
+        ../scripts/immortalwrt_24.10/hook-base.sh
+        ../scripts/immortalwrt_24.10/hook-feeds.sh
         
     - name: Install Feeds
       run: |
@@ -99,7 +98,6 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
-        sed -i 's/rtl8152-vendor=y/rtl8152-vendor=m/g' .config
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
@@ -110,9 +108,9 @@ jobs:
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         echo -e "$(nproc) thread compile"
-        make tools/compile -j$(nproc) || make tools/compile -j$(nproc) || make tools/compile -j1 IGNORE_ERRORS=1 V=s
-        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) || make toolchain/compile -j1 IGNORE_ERRORS=1 V=s
-        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1 || make target/compile -j1 IGNORE_ERRORS=1 V=s
+        make tools/compile -j$(nproc) || make tools/compile -j$(nproc)
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc)
+        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1
         make diffconfig
         make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
         make package/index
@@ -138,10 +136,9 @@ jobs:
       run: |
         cd $OPENWRTROOT
         mkdir -p files/etc/uci-defaults/
-        cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
-        mkdir -p files/etc/apk/repositories.d 
-        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories
-        cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories.d/distfeeds.list
+        cp ../scripts/immortalwrt_24.10/immortalwrt-init-settings.sh files/etc/uci-defaults/99-init-settings
+        mkdir -p files/etc/opkg
+        cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
         # pushd bin/targets/x86/64
@@ -164,7 +161,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt3" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt2" >> $GITHUB_OUTPUT
           echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**📥固件说明**: \n" >> release.txt
@@ -178,7 +175,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} immortalwrt Linux-6.12
+          name: ${{ steps.tag.outputs.release_date }} immortalwrt-24.10
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*

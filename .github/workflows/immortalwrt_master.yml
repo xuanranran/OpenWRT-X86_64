@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt_immortalwrt_master
+name: immortalwrt_master
 
 on:
   repository_dispatch:
@@ -72,7 +72,8 @@ jobs:
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/immortalwrt/*.sh
-        ../scripts/immortalwrt/hook-package.sh
+        ../scripts/immortalwrt/hook-package00.sh
+        ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
         
@@ -98,6 +99,7 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
+        sed -i 's/rtl8152-vendor=y/rtl8152-vendor=m/g' .config
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
@@ -162,7 +164,7 @@ jobs:
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt1" >> $GITHUB_OUTPUT
+          echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt" >> $GITHUB_OUTPUT
           echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**📥固件说明**: \n" >> release.txt
@@ -176,7 +178,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          name: ${{ steps.tag.outputs.release_date }} immortalwrt-master
+          name: ${{ steps.tag.outputs.release_date }} immortalwrt
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
