@@ -3,10 +3,6 @@
 ```
 bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/main/upgrade_openwrt.sh)
 ```
-上面仅限于latest
-```
-wget https://raw.githubusercontent.com/xuanranran/scripts/main/onlineupdate.sh && sh onlineupdate.sh
-```
 
 # 界面展示
  ![Alt text](scripts/19.png?raw=true "Title")
