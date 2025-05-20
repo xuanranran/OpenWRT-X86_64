@@ -99,7 +99,6 @@ jobs:
       run: |
         cd $OPENWRTROOT
         cat .config
-        sed -i 's/rtl8152-vendor=y/rtl8152-vendor=m/g' .config
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
@@ -144,20 +143,7 @@ jobs:
         cp ../configs/apk/openwrt-repositories-snapshots.conf files/etc/apk/repositories.d/distfeeds.list
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
-        # pushd bin/targets/x86/64
-        # rm -rf immortalwrt-x86-64-generic-kernel.bin
-        # rm -rf immortalwrt-x86-64-generic-rootfs.tar.gz
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vhdx
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vmdk
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.img.gz
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vhdx
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vmdk
-        # rm -rf immortalwrt-x86-64-generic-squashfs-rootfs.img.gz
-        # mv immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz $(date +"%Y.%m.%d")-immortalwrt-x86-64-squashfs-efi.img.gz
-        # mv config.buildinfo $(date +"%Y.%m.%d")-immortalwrt-config.buildinfo
-        # popd
         make checksum
-        # mv bin/targets/x86/64/sha256sums bin/targets/x86/64/$(date +"%Y.%m.%d")-immortalwrt-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
