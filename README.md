@@ -6,4 +6,3 @@ bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/main/upgrad
 
 # 界面展示
  ![Alt text](scripts/19.png?raw=true "Title")
- ![Alt text](scripts/20.png?raw=true "Title")
