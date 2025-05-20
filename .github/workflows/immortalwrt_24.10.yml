@@ -141,20 +141,7 @@ jobs:
         cp ../configs/opkg/distfeeds-24.10-local.conf files/etc/opkg/distfeeds.conf
         make package/install -j$(nproc) || make package/install -j1 V=s
         make target/install -j$(nproc) || make target/install -j1 V=s
-        # pushd bin/targets/x86/64
-        # rm -rf immortalwrt-x86-64-generic-kernel.bin
-        # rm -rf immortalwrt-x86-64-generic-rootfs.tar.gz
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vhdx
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined-efi.vmdk
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.img.gz
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vhdx
-        # rm -rf immortalwrt-x86-64-generic-squashfs-combined.vmdk
-        # rm -rf immortalwrt-x86-64-generic-squashfs-rootfs.img.gz
-        # mv immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz $(date +"%Y.%m.%d")-immortalwrt-x86-64-squashfs-efi.img.gz
-        # mv config.buildinfo $(date +"%Y.%m.%d")-immortalwrt-config.buildinfo
-        # popd
         make checksum
-        # mv bin/targets/x86/64/sha256sums bin/targets/x86/64/$(date +"%Y.%m.%d")-immortalwrt-sha256sums
         echo "GENERATE_STATUS=success" >> $GITHUB_OUTPUT
 
     - name: Generate release tag
