@@ -85,7 +85,7 @@ git clone https://github.com/sbwml/package_libs_nghttp3 customfeeds/packages/lib
 
 # ngtcp2
 rm -rf customfeeds/packages/libs/ngtcp2
-git clone https://github.com/xuanranran/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
+git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
 
 # curl - fix passwall `time_pretransfer` check
 rm -rf customfeeds/packages/net/curl
