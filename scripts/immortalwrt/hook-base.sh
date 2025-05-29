@@ -14,8 +14,8 @@ rm -rf package/system/fstools
 git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 package/system/fstools
 
 # util-linux
-rm -rf package/utils/util-linux
-git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
+# rm -rf package/utils/util-linux
+# git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
 
 # openssl 3.0.16
 rm -rf package/libs/openssl
