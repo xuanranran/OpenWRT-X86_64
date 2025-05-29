@@ -12,13 +12,14 @@ popd
 
 # Update OpenClash Panel
 pushd customfeeds/lovepackages/luci-app-openclash/root/usr/share/openclash/ui/
-rm -rf zashboard metacubexd
-git clone --depth 1 -b gh-pages https://github.com/metacubex/metacubexd metacubexd
-curl -LJO https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
-unzip -qq dist-cdn-fonts.zip
-mv dist zashboard
-rm -rf dist-cdn-fonts.zip
-# git clone --depth 1 -b gh-pages https://github.com/Zephyruso/zashboard zashboard
+rm -rf yacd zashboard metacubexd/*
+curl -sSL https://codeload.github.com/haishanh/yacd/zip/refs/heads/gh-pages -o yacd-dist-cdn-fonts.zip
+curl -sSL https://github.com/MetaCubeX/metacubexd/releases/latest/download/compressed-dist.tgz -o compressed-dist.tgz
+curl -sSL https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip -o dist-cdn-fonts.zip
+tar zxvf compressed-dist.tgz -C ./metacubexd
+unzip -q dist-cdn-fonts.zip && unzip -q yacd-dist-cdn-fonts.zip
+mv dist zashboard && mv yacd-gh-pages yacd
+rm -rf yacd-dist-cdn-fonts.zip dist-cdn-fonts.zip compressed-dist.tgz
 popd
 
 # Change default shell to zsh
