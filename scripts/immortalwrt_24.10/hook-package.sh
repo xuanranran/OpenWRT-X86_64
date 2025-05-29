@@ -26,17 +26,10 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # Update golang 1.23.x
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 23.x customfeeds/packages/lang/golang
-
 
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
-git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
-sed -i 's/ftp.gwdg.de/download.samba.org/g' customfeeds/packages/net/samba4/Makefile
-
-# liburing - 2.7 (samba-4.21.0)
-rm -rf customfeeds/packages/libs/liburing
-git clone https://github.com/sbwml/feeds_packages_libs_liburing customfeeds/packages/libs/liburing
+git clone https://github.com/sbwml/customfeeds_packages_net_samba4 customfeeds/packages/net/samba4
 # enable multi-channel
 sed -i '/workgroup/a \\n\t## enable multi-channel' customfeeds/packages/net/samba4/files/smb.conf.template
 sed -i '/enable multi-channel/a \\tserver multi channel support = yes' customfeeds/packages/net/samba4/files/smb.conf.template
