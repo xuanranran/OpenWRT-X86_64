@@ -29,7 +29,7 @@ git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lan
 
 # samba4 - bump version
 rm -rf customfeeds/packages/net/samba4
-git clone https://github.com/sbwml/customfeeds_packages_net_samba4 customfeeds/packages/net/samba4
+git clone https://github.com/sbwml/feeds_packages_net_samba4 customfeeds/packages/net/samba4
 # enable multi-channel
 sed -i '/workgroup/a \\n\t## enable multi-channel' customfeeds/packages/net/samba4/files/smb.conf.template
 sed -i '/enable multi-channel/a \\tserver multi channel support = yes' customfeeds/packages/net/samba4/files/smb.conf.template
