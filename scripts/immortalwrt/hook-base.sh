@@ -16,6 +16,7 @@ git clone https://github.com/sbwml/package_system_fstools -b openwrt-24.10 packa
 # util-linux
 # rm -rf package/utils/util-linux
 # git clone https://github.com/sbwml/package_utils_util-linux -b openwrt-24.10 package/utils/util-linux
+curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/heads/openwrt-24.10/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch > package/utils/util-linux/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch
 
 # openssl 3.0.16
 rm -rf package/libs/openssl
