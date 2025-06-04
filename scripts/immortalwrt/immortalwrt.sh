@@ -41,3 +41,8 @@ rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
+
+echo -e "\n# Kernel - LRNG" >> .config
+echo "CONFIG_KERNEL_LRNG=y" >> .config
+echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
+echo "# CONFIG_PACKAGE_urngd is not set" >> .config
