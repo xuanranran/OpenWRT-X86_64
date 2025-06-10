@@ -23,7 +23,7 @@ sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64
 
 curl -s https://raw.githubusercontent.com/jjm2473/packages/refs/heads/zerotier-fix-miniupnp-path/net/zerotier/patches/0007-fix-system-include-path.patch > customfeeds/packages/net/zerotier/patches/0007-fix-system-include-path.patch
 
-# Update golang 1.23.x
+# Update golang
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 
