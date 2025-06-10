@@ -18,8 +18,8 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 # chmod 755 customfeeds/lovepackages/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 
 # ZeroTier
-# sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
-# sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
+sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
+sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 curl -s https://raw.githubusercontent.com/jjm2473/packages/refs/heads/zerotier-fix-miniupnp-path/net/zerotier/patches/0007-fix-system-include-path.patch > customfeeds/packages/net/zerotier/patches/0007-fix-system-include-path.patch
 
