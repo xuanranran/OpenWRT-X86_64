@@ -84,3 +84,7 @@ rm -rf customfeeds/packages/net/coova-chilli
 git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/packages/net/coova-chilli
 
 # 替换杂项
+
+# libxcrypt
+mkdir -p customfeeds/packages/libs/libxcrypt
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/libs/xcrypt/Makefile > customfeeds/packages/libs/libxcrypt/Makefile
