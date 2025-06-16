@@ -20,6 +20,6 @@ wget -qO- $GEOSITE_URL > files/etc/nikki/run/GeoSite.dat
 wget -qO- $GEOIP_METADB_URL > files/etc/nikki/run/geoip.metadb
 wget -qO- $ASN_MMDB_URL > files/etc/nikki/run/ASN.mmdb
 
-wget -qO- $GEOIP_URL > files/etc/fchomo/geoip.dat
-wget -qO- $GEOSITE_URL > files/etc/fchomo/geosite.dat
-wget -qO- $ASN_MMDB_URL > files/etc/fchomo/asn.mmdb
+# wget -qO- $GEOIP_URL > files/etc/fchomo/geoip.dat
+# wget -qO- $GEOSITE_URL > files/etc/fchomo/geosite.dat
+# wget -qO- $ASN_MMDB_URL > files/etc/fchomo/asn.mmdb
