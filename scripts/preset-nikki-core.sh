@@ -8,7 +8,6 @@
 # github: https://github.com/xuanranran
 #=================================================
 mkdir -p files/etc/nikki/run/ui
-mkdir -p files/etc/fchomo/
 
 GEOIP_URL="https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
 GEOSITE_URL="https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
@@ -20,6 +19,7 @@ wget -qO- $GEOSITE_URL > files/etc/nikki/run/GeoSite.dat
 wget -qO- $GEOIP_METADB_URL > files/etc/nikki/run/geoip.metadb
 wget -qO- $ASN_MMDB_URL > files/etc/nikki/run/ASN.mmdb
 
+# mkdir -p files/etc/fchomo/
 # wget -qO- $GEOIP_URL > files/etc/fchomo/geoip.dat
 # wget -qO- $GEOSITE_URL > files/etc/fchomo/geosite.dat
 # wget -qO- $ASN_MMDB_URL > files/etc/fchomo/asn.mmdb
