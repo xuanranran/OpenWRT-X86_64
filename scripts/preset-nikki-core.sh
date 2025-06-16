@@ -7,7 +7,7 @@
 # Author: LovinYarn
 # github: https://github.com/xuanranran
 #=================================================
-mkdir -p files/etc/nikki/run/ui
+mkdir -p files/etc/nikki/run/ui/metacubexd
 
 GEOIP_URL="https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
 GEOSITE_URL="https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
