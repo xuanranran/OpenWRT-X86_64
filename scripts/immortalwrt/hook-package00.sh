@@ -43,8 +43,8 @@ sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
 
 # luci-app-sqm
-rm -rf customfeeds/luci/applications/luci-app-sqm
-git clone https://git.cooluc.com/sbwml/luci-app-sqm customfeeds/luci/applications/luci-app-sqm
+# rm -rf customfeeds/luci/applications/luci-app-sqm
+# git clone https://git.cooluc.com/sbwml/luci-app-sqm customfeeds/luci/applications/luci-app-sqm
 
 # Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101 & r8127
 # rm -rf package/kernel/{r8168,r8101,r8125,r8126,r8127,r8152}
