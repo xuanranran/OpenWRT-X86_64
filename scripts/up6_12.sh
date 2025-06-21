@@ -1,0 +1,39 @@
+#!/bin/bash
+# Set to local prepare
+
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/kernel-6.12 > target/linux/generic/kernel-6.12
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0087-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch > target/linux/bcm27xx/patches-6.12/950-0087-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0231-drm-panel-simple-Add-a-timing-for-the-Raspberry-Pi-7.patch > target/linux/bcm27xx/patches-6.12/950-0231-drm-panel-simple-Add-a-timing-for-the-Raspberry-Pi-7.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0277-mm-page_alloc-cma-introduce-a-customisable-threshold.patch > target/linux/bcm27xx/patches-6.12/950-0277-mm-page_alloc-cma-introduce-a-customisable-threshold.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0322-Bluetooth-hci_sync-Add-fallback-bd-address-prop.patch > target/linux/bcm27xx/patches-6.12/950-0322-Bluetooth-hci_sync-Add-fallback-bd-address-prop.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0344-sdhci-Add-SD-Express-hook.patch > target/linux/bcm27xx/patches-6.12/950-0344-sdhci-Add-SD-Express-hook.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0358-mmc-sdhci-of-dwcmshc-define-sdio-timeout-clocks.patch > target/linux/bcm27xx/patches-6.12/950-0358-mmc-sdhci-of-dwcmshc-define-sdio-timeout-clocks.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0379-drivers-iommu-Add-BCM2712-IOMMU.patch > target/linux/bcm27xx/patches-6.12/950-0379-drivers-iommu-Add-BCM2712-IOMMU.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0502-Bluetooth-hci_sync-Fix-crash-on-NULL-parent.patch > target/linux/bcm27xx/patches-6.12/950-0502-Bluetooth-hci_sync-Fix-crash-on-NULL-parent.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0539-firmware-Add-an-RP1-firmware-interface-over-mbox.patch > target/linux/bcm27xx/patches-6.12/950-0539-firmware-Add-an-RP1-firmware-interface-over-mbox.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0665-drm-vc4-tests-Drop-drm-parameter-for-vc4_find_crtc_f.patch > target/linux/bcm27xx/patches-6.12/950-0665-drm-vc4-tests-Drop-drm-parameter-for-vc4_find_crtc_f.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0666-drm-vc4-tests-Return-the-allocated-output.patch > target/linux/bcm27xx/patches-6.12/950-0666-drm-vc4-tests-Return-the-allocated-output.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/bcm27xx/patches-6.12/950-0947-fixup-mmc-sdhci-of-dwcmshc-define-sdio-timeout-clock.patch > target/linux/bcm27xx/patches-6.12/950-0947-fixup-mmc-sdhci-of-dwcmshc-define-sdio-timeout-clock.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/610-02-v6.14-net-dsa-b53-bcm_sf2-implement-.support_eee-method.patch > target/linux/generic/backport-6.12/610-02-v6.14-net-dsa-b53-bcm_sf2-implement-.support_eee-method.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/610-03-v6.15-net-dsa-b53-mdio-add-support-for-BCM53101.patch > target/linux/generic/backport-6.12/610-03-v6.15-net-dsa-b53-mdio-add-support-for-BCM53101.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/610-04-v6.16-net-dsa-b53-implement-setting-ageing-time.patch > target/linux/generic/backport-6.12/610-04-v6.16-net-dsa-b53-implement-setting-ageing-time.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/610-05-v6.16-net-dsa-b53-do-not-enable-EEE-on-bcm63xx.patch > target/linux/generic/backport-6.12/610-05-v6.16-net-dsa-b53-do-not-enable-EEE-on-bcm63xx.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/610-07-v6.16-net-dsa-b53-do-not-configure-bcm63xx-s-IMP-port-inte.patch > target/linux/generic/backport-6.12/610-07-v6.16-net-dsa-b53-do-not-configure-bcm63xx-s-IMP-port-inte.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/612-03-v6.17-net-dsa-b53-support-legacy-FCS-tags.patch > target/linux/generic/backport-6.12/612-03-v6.17-net-dsa-b53-support-legacy-FCS-tags.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/612-04-v6.17-net-dsa-b53-detect-BCM5325-variants.patch > target/linux/generic/backport-6.12/612-04-v6.17-net-dsa-b53-detect-BCM5325-variants.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/612-09-v6.17-net-dsa-b53-prevent-DIS_LEARNING-access-on-BCM5325.patch > target/linux/generic/backport-6.12/612-09-v6.17-net-dsa-b53-prevent-DIS_LEARNING-access-on-BCM5325.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/backport-6.12/730-03-v6.13-net-phy-support-active-high-property-for-PHY-LEDs.patch > target/linux/generic/backport-6.12/730-03-v6.13-net-phy-support-active-high-property-for-PHY-LEDs.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/hack-6.12/610-net-page_pool-try-to-free-deferred-skbs-while-waitin.patch > target/linux/generic/hack-6.12/610-net-page_pool-try-to-free-deferred-skbs-while-waitin.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/hack-6.12/904-debloat_dma_buf.patch > target/linux/generic/hack-6.12/904-debloat_dma_buf.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/generic/pending-6.12/703-phy-add-detach-callback-to-struct-phy_driver.patch > target/linux/generic/pending-6.12/703-phy-add-detach-callback-to-struct-phy_driver.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/mediatek/patches-6.12/739-net-add-negotiation-of-in-band-capabilities.patch > target/linux/mediatek/patches-6.12/739-net-add-negotiation-of-in-band-capabilities.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/realtek/patches-6.12/706-include-linux-add-phy-ops-for-rtl838x.patch > target/linux/realtek/patches-6.12/706-include-linux-add-phy-ops-for-rtl838x.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/starfive/patches-6.12/1011-net-stmmac-use-GFP_DMA32.patch > target/linux/starfive/patches-6.12/1011-net-stmmac-use-GFP_DMA32.patch
+
+
+rm -rf target/linux/generic/backport-6.12/421-01-v6.16-spi-bcm63xx-spi-fix-shared-reset.patch
+rm -rf target/linux/generic/backport-6.12/421-02-v6.16-spi-bcm63xx-hsspi-fix-shared-reset.patch
+rm -rf target/linux/generic/backport-6.12/610-06-v6.16-net-dsa-b53-do-not-enable-RGMII-delay-on-bcm63xx.patch
+rm -rf target/linux/generic/backport-6.12/610-08-v6.16-net-dsa-b53-allow-RGMII-for-bcm63xx-RGMII-ports.patch
+rm -rf target/linux/generic/backport-6.12/610-09-v6.16-net-dsa-b53-do-not-touch-DLL_IQQD-on-bcm53115.patch
+rm -rf target/linux/generic/backport-6.12/611-v6.16-net-dsa-tag_brcm-legacy-fix-pskb_may_pull-length.patch
