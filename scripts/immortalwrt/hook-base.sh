@@ -8,6 +8,12 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
 echo "# CONFIG_KMSAN is not set" >> target/linux/x86/config-6.12
 
+# 1. 添加 CONFIG_MMCONF_FAM10H=y （如果不存在则追加到 CONFIG_MMC=y 后一行）
+sed -i '/^CONFIG_MMC=y$/a CONFIG_MMCONF_FAM10H=y' target/linux/x86/64/config-6.12
+
+# 2. 将 # CONFIG_PCI_MMCONFIG is not set 改为 CONFIG_PCI_MMCONFIG=y
+sed -i 's/^# CONFIG_PCI_MMCONFIG is not set$/CONFIG_PCI_MMCONFIG=y/' target/linux/x86/64/config-6.12
+
 # x86 - disable mitigations
 sed -i 's/noinitrd/noinitrd mitigations=off/g' target/linux/x86/image/grub-efi.cfg
 
