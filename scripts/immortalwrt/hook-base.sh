@@ -79,7 +79,7 @@ curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/he
 # popd
 
 # openssl urandom
-sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+# sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
 sed -i "s/ no-lto//g" package/libs/openssl/Makefile
