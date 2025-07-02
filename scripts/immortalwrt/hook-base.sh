@@ -79,7 +79,7 @@ curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/he
 # popd
 
 # openssl urandom
-# sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
 sed -i "s/ no-lto//g" package/libs/openssl/Makefile
@@ -111,10 +111,10 @@ rm -rf customfeeds/packages/net/miniupnpd
 git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.9
 
 # nginx - latest version
-# rm -rf customfeeds/packages/net/nginx
-# git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-24.10
-sed -i 's/1.26.3/1.29.0/g' customfeeds/packages/net/nginx/Makefile
-sed -i 's/69ee2b237744036e61d24b836668aad3040dda461fe6f570f1787eab570c75aa/109754dfe8e5169a7a0cf0db6718e7da2db495753308f933f161e525a579a664/g' customfeeds/packages/net/nginx/Makefile
+rm -rf customfeeds/packages/net/nginx
+git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-24.10
+sed -i 's/1.28.0/1.29.0/g' customfeeds/packages/net/nginx/Makefile
+sed -i 's/c6b5c6b086c0df9d3ca3ff5e084c1d0ef909e6038279c71c1c3e985f576ff76a/109754dfe8e5169a7a0cf0db6718e7da2db495753308f933f161e525a579a664/g' customfeeds/packages/net/nginx/Makefile
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
 
 # nginx - ubus
