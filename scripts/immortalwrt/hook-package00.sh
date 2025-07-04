@@ -73,7 +73,6 @@ git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/pa
 # libxcrypt
 mkdir -p customfeeds/packages/libs/libxcrypt
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/a461f53bfdff14341bf84ba4221daeedea3f74bb/package/libs/xcrypt/Makefile > customfeeds/packages/libs/libxcrypt/Makefile
-# curl -s https://raw.githubusercontent.com/openwrt/openwrt/a461f53bfdff14341bf84ba4221daeedea3f74bb/package/libs/xcrypt/Makefile > package/libs/xcrypt/Makefile
 
 sed -i 's/xcrypt/libxcrypt/g' customfeeds/packages/utils/shadow/Makefile
 
