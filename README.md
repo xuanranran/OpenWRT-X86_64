@@ -5,4 +5,5 @@ bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/main/upgrad
 ```
 
 # 界面展示
- ![Alt text](scripts/19.png?raw=true "Title")
+ ![Alt text](scripts/lightmode.png?raw=true "Title")
+ ![Alt text](scripts/darkmode.png?raw=true "Title")
