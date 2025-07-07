@@ -174,5 +174,3 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # bpf-headers - 6.12
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
-
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch > package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch
