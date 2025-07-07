@@ -27,3 +27,18 @@ sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -ffat-lto-objects\n" customfeeds/pack
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
+
+
+# 补丁
+# https://github.com/openwrt/openwrt/commit/bb279e1a69b17d68d4cab299c4bb290a948b9930
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/030-Revert-nl80211-Accept-a-global-nl80211-event-to-a-br.patch > package/network/services/hostapd/patches/030-Revert-nl80211-Accept-a-global-nl80211-event-to-a-br.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/350-nl80211_del_beacon_bss.patch > package/network/services/hostapd/patches/350-nl80211_del_beacon_bss.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/370-preserve_radio_mask.patch > package/network/services/hostapd/patches/370-preserve_radio_mask.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/463-add-mcast_rate-to-11s.patch > package/network/services/hostapd/patches/463-add-mcast_rate-to-11s.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/601-ucode_support.patch > package/network/services/hostapd/patches/601-ucode_support.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/740-snoop_iface.patch > package/network/services/hostapd/patches/740-snoop_iface.patch
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/network/services/hostapd/patches/780-Implement-APuP-Access-Point-Micro-Peering.patch > package/network/services/hostapd/patches/780-Implement-APuP-Access-Point-Micro-Peering.patch
+
+
+# https://github.com/openwrt/openwrt/commit/77b9393d2f3609956a54a6e7d38bda8ddba6046a
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch > package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch
