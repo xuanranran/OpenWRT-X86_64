@@ -42,19 +42,3 @@ curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/packag
 
 # https://github.com/openwrt/openwrt/commit/77b9393d2f3609956a54a6e7d38bda8ddba6046a
 curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch > package/utils/ucode/patches/102-ubus-add-exception_handler_set-function.patch
-
-sed -i \
--e 's/^PKG_VERSION:=1\.2\.8$/PKG_VERSION:=1.2.9/' \
--e 's/^PKG_HASH:=37fea5d6b5c9b08de7920d298de3cdc942e7ae64b1a3e8b880b2d390ae67ad95$/PKG_HASH:=e8c216255e129f26270639fee7775265665a31b11aa920253c3e5d5d62dfc4b8/' \
-package/libs/libnftnl/Makefile
-
-sed -i \
--e 's/PKG_VERSION:=1.1.1/PKG_VERSION:=1.1.3/' \
--e 's/PKG_HASH:=6358830f3a64f31e39b0ad421d7dadcd240b72343ded48d8ef13b8faf204865a/PKG_HASH:=9c8a64b59c90b0825e540a9b8fcb9d2d942c636f81ba50199f068fde44f34ed8/' \
-package/network/utils/nftables/Makefile
-
-
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/package/kernel/mt76/Makefile > package/kernel/mt76/Makefile
-rm -rf package/kernel/mt76/patches/001-wifi-mt76-convert-platform-driver-.remove-to-.remove.patch
-rm -rf package/kernel/mt76/patches/002-wifi-mt76-replace-strlcpy-with-strscpy.patch
-rm -rf package/kernel/mt76/patches/003-wifi-mt76-link_id.patch
