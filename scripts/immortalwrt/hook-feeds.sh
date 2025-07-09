@@ -36,8 +36,5 @@ echo "src-link routing $routing_feed" >> feeds.conf.default
 sed -i '/src-git telephony/d' feeds.conf.default
 echo "src-link telephony $telephony_feed" >> feeds.conf.default
 
-sed -i '/src-git video/d' feeds.conf.default
-echo "src-link video $video_feed" >> feeds.conf.default
-
 # Update feeds
 ./scripts/feeds update -a

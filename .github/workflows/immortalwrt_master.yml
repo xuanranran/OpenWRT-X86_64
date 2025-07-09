@@ -62,7 +62,6 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
-        git clone --depth=1 https://github.com/openwrt/video -b $REPO_BRANCH customfeeds/video
         chmod +x ../scripts/*.sh
         chmod +x ../scripts/immortalwrt/*.sh
         ../scripts/immortalwrt/hook-package00.sh
