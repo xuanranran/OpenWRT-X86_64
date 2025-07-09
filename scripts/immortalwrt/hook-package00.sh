@@ -70,5 +70,8 @@ git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/pa
 
 # 替换杂项
 
+# libxcrypt
+sed -i 's/xcrypt/libxcrypt/g' customfeeds/packages/utils/shadow/Makefile
+
 # del mqttled
 rm -rf customfeeds/packages/utils/mqttled
