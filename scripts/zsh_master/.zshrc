@@ -102,4 +102,4 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit
 compinit -i
 
-cat /etc/banner
+# cat /etc/banner

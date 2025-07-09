@@ -78,12 +78,12 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
-        chmod +x scripts/*.sh
+        chmod +x scripts/*.sh scripts/zsh_master/*.sh
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
-        ../scripts/preset-terminal-tools.sh
+        ../scripts/zsh_master/preset-terminal-tools.sh
         make defconfig
         
     - name: Download Package
