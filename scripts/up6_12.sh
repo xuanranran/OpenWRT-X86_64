@@ -64,3 +64,6 @@ curl -s https://raw.githubusercontent.com/DragonBluep/openwrt/refs/heads/kernel-
 rm -rf target/linux/generic/backport-6.12/780-09-v6.13-r8169-add-support-for-RTL8125D.patch
 rm -rf target/linux/generic/backport-6.12/781-04-v6.13-net-phy-realtek-merge-the-drivers-for-internal-NBase.patch
 rm -rf target/linux/generic/backport-6.12/781-05-v6.13-net-phy-realtek-add-RTL8125D-internal-PHY.patch
+
+
+sed -i '/CONFIG_MITIGATION_TAA=y/a CONFIG_MITIGATION_TSA=y' target/linux/x86/config-6.12
