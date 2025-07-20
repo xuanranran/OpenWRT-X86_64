@@ -68,7 +68,7 @@ jobs:
         ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
-        
+
     - name: Install Feeds
       run: |
         cd $OPENWRTROOT
@@ -85,7 +85,7 @@ jobs:
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/zsh_master/preset-terminal-tools.sh
         make defconfig
-        
+
     - name: Download Package
       id: package
       run: |
@@ -149,7 +149,7 @@ jobs:
           echo -e "#### 后台地址: \`192.168.11.1\`\n" >> release.txt
           echo -e "#### 后台密码: \`password\`\n" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
-          
+
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v2
       if: steps.tag.outputs.status == 'success' && !cancelled()
