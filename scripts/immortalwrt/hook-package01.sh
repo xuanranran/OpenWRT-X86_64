@@ -27,3 +27,6 @@ sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += $(FPIC) -std=gnu17\n" customfeeds/pac
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
+# bind
+rm -rf customfeeds/packages/net/bind
+git clone https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
