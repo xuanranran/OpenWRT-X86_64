@@ -29,4 +29,4 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # bind
 rm -rf customfeeds/packages/net/bind
-git clone https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
+git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
