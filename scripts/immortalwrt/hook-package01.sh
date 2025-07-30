@@ -32,5 +32,7 @@ rm -rf customfeeds/packages/net/bind
 git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
 
 # gettext-full
-rm -rf package/libs/gettext-full
-git clone --depth=1 https://github.com/xuanranran/package_libs_gettext-full package/libs/gettext-full
+sed -i '/--without-emacs \\/{
+    N
+    s/^\(\s*\)--without-emacs \\\n/\1--without-emacs \\\n\1--with-bison-prefix=$(STAGING_DIR_HOST) \\\n/
+}' package/libs/gettext-full/Makefile
