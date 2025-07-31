@@ -20,9 +20,6 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 # routing - batman-adv fix build with linux-6.12
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/batman-adv/901-fix-linux-6.12rc2-builds.patch > customfeeds/routing/batman-adv/patches/901-fix-linux-6.12rc2-builds.patch
 
-# libsodium - fix build with lto (GNU BUG - 89147)
-sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -std=gnu17\n" customfeeds/packages/libs/libsodium/Makefile
-
 # sms-tools
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
