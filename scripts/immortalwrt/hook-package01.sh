@@ -30,4 +30,4 @@ git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind custom
 
 # rpcsvc-proto
 rm -rf customfeeds/packages/libs/rpcsvc-proto
-https://github.com/xuanranran/feeds_packages_libs_rpcsvc-proto customfeeds/packages/libs/rpcsvc-proto
+git clone --depth=1 https://github.com/xuanranran/feeds_packages_libs_rpcsvc-proto customfeeds/packages/libs/rpcsvc-proto
