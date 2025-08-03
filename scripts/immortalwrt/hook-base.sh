@@ -177,3 +177,7 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # bpf-headers - 6.12
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.12/" package/kernel/bpf-headers/Makefile
+
+# luci-theme-bootstrap
+sed -i 's/font-size: 13px/font-size: 14px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css
+sed -i 's/9.75px/10.75px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css
