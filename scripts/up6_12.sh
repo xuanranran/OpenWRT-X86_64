@@ -18,5 +18,3 @@ curl -s https://raw.githubusercontent.com/graysky2/openwrt/refs/heads/6/target/l
 
 # rm -rf target/linux/generic/pending-6.12/680-net-fix-TCP-UDP-fraglist-GRO.patch
 # rm -rf target/linux/generic/pending-6.12/802-nvmem-u-boot-env-align-endianness-of-crc32-values.patch
-
-# curl -s https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/refs/heads/master/scripts/1.patch | patch -p1
