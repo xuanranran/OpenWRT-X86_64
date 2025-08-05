@@ -68,7 +68,6 @@ jobs:
         ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
-        ../scripts/up6_12.sh
 
     - name: Install Feeds
       run: |
