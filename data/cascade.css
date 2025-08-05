@@ -3924,6 +3924,64 @@ pre.command-output {
   width: auto
 }
 
+[data-page^="admin-services-openclash"] .cm-s-material-log.CodeMirror {
+  background-color: #000000;
+  color: #EEFFFF;
+}
+
+:root[data-darkmode="true"] [data-page^="admin-services-openclash"] #tab-header ul.cbi-tabmenu li.cbi-tab-disabled {
+    color: #000000;
+    background: #000000;
+    opacity: 0.7;
+}
+
+:root[data-darkmode="true"] [data-page^="admin-services-openclash"] #tab-header {
+    background: #242424;
+    border-bottom: 1px solid #242424;
+}
+
+:root[data-darkmode="true"] [data-page^="admin-services-openclash"] #tab-header ul.cbi-tabmenu {
+    background: #242424;
+}
+
+[data-page^="admin-services-openclash"] .cm-s-material .CodeMirror-gutters {
+  background: #263238;
+  color: rgba(156, 163, 175, 0.7);
+  border: none;
+}
+
+[data-page^="admin-services-openclash"] .cm-s-material .CodeMirror-guttermarker,
+[data-page^="admin-services-openclash"] .cm-s-material .CodeMirror-guttermarker-subtle,
+[data-page^="admin-services-openclash"] .cm-s-material .CodeMirror-linenumber {
+  color: rgba(156, 163, 175, 0.7);
+}
+
+[data-page^="admin-services-openclash"] .cm-s-material-log .CodeMirror-gutters {
+  background: #263238;
+  color: rgba(156, 163, 175, 0.7);
+  border: none;
+}
+
+[data-page^="admin-services-openclash"] .cm-s-material-log .CodeMirror-guttermarker,
+[data-page^="admin-services-openclash"] .cm-s-material-log .CodeMirror-guttermarker-subtle,
+[data-page^="admin-services-openclash"] .cm-s-material-log .CodeMirror-linenumber {
+  color: rgba(156, 163, 175, 0.7);
+}
+
+:root[data-darkmode="true"] [data-page^="admin-services-openclash"] .diag-style {
+    background-color: #242424;
+}
+
+:root[data-darkmode="true"] [data-page^="admin-services-openclash"] #diag-rc-output > pre {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+[data-page^="admin-services-openclash"] .cm-s-material.CodeMirror {
+    background-color: #000000;
+    color: #EEFFFF;
+}
+
 /* IE hacks */
 @media all and (-ms-high-contrast: none) {
   .main>.main-left>.nav>.slide>.menu::before {
