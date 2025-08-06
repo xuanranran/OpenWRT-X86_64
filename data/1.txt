@@ -120,17 +120,7 @@
   }
 }
 
-@media screen and (max-width: 1600px) {
-  [data-page^="admin-services-openclash"] .cbi-input-textarea {
-      font-size: 14px !important;
-      font-family: 'Google Sans' !important;
-  }
-}
-
-@media screen and (max-width: 1366px) {
-  [data-page^="admin-services-openclash"] table {
-      display: flex;
-      font-size: 0.835rem !important;
-      width: 100% !important;
-  }
+[data-page^="admin-services-openclash"] .cbi-input-textarea {
+    font-size: 14px !important;
+    font-family: 'Google Sans' !important;
 }
