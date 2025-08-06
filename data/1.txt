@@ -133,3 +133,7 @@
     font-size: 11px !important;
     font-weight: 600 !important;
 }
+
+[data-page^="admin-services-openclash"] .oc .subscription-info-text {
+    white-space: normal;
+}
