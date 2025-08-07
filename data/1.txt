@@ -137,3 +137,11 @@
 [data-page^="admin-services-openclash"] .oc .subscription-info-text {
     white-space: normal;
 }
+
+[data-page^="admin-services-openclash"] .form-group label, .status-item .label {
+    font-family: 'Google Sans' !important;
+}
+
+[data-page^="admin-services-openclash"] .status-item .value b {
+    font-family: 'Google Sans' !important;
+}
