@@ -87,7 +87,10 @@
 [data-page^="admin-services-openclash"] .oc,
 [data-page^="admin-services-openclash"] .cbi-section p,
 [data-page^="admin-services-openclash"] .tool_label_span,
-[data-page^="admin-services-openclash"] b, strong {
+[data-page^="admin-services-openclash"] b, strong,
+[data-page^="admin-services-openclash"] .form-group label, .status-item .label,
+[data-page^="admin-services-openclash"] .info-cell-title,
+[data-page^="admin-services-openclash"] .sub_div * {
   font-family: 'Google Sans' !important;
 }
 
@@ -132,11 +135,6 @@
 
 [data-page^="admin-services-openclash"] .oc .subscription-info-text {
     white-space: normal;
-}
-
-[data-page^="admin-services-openclash"] .form-group label, .status-item .label,
-[data-page^="admin-services-openclash"] .info-cell-title {
-    font-family: 'Google Sans' !important;
 }
 
 [data-page^="admin-services-openclash"] .status-item .value b {
