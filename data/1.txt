@@ -90,7 +90,7 @@
 [data-page^="admin-services-openclash"] b, strong,
 [data-page^="admin-services-openclash"] .form-group label, .status-item .label,
 [data-page^="admin-services-openclash"] .info-cell-title,
-[data-page^="admin-services-openclash"] .sub_div * {
+[data-page^="admin-services-openclash"] .sub_div {
   font-family: 'Google Sans' !important;
 }
 
