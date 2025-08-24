@@ -83,7 +83,9 @@ jobs:
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/zsh_master/preset-terminal-tools.sh
         ../scripts/patch/up6_12_patch.sh
+        echo "::group::View 'make defconfig' output"
         make defconfig
+        echo "::endgroup::"
 
     - name: Download Package
       id: package
@@ -99,13 +101,18 @@ jobs:
       run: |
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        echo -e "$(nproc) thread compile"
-        make tools/compile -j$(nproc) || make tools/compile -j$(nproc) || make tools/compile -j1 IGNORE_ERRORS=1 V=s
-        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) || make toolchain/compile -j1 IGNORE_ERRORS=1 V=s
-        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1 || make target/compile -j1 IGNORE_ERRORS=1 V=s
-        make diffconfig
-        make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
+        echo "::group::Compile Firmware"
+        echo "Starting compile using $(nproc) threads"
+        make tools/compile -j$(nproc) || make tools/compile -j1 V=s
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j1 V=s
+        make target/compile -j$(nproc) || make target/compile -j1 IGNORE_ERRORS=1 V=s
+        make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j1 IGNORE_ERRORS=1 V=s
+        
         make package/index
+        make diffconfig
+        echo "::endgroup::"
+        
+        echo "::group::Gathering build information"
         cd $OPENWRTROOT/bin/packages/*
         PLATFORM=$(basename `pwd`)
         echo "PLATFORM=$PLATFORM" >> $GITHUB_ENV
@@ -121,6 +128,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "FIRMWARE=$PWD" >> $GITHUB_OUTPUT
         echo "COMPILE_STATUS=success" >> $GITHUB_OUTPUT
+        echo "::endgroup::"
 
     - name: Generate Firmware
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
