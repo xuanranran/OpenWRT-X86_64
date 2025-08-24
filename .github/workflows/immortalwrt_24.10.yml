@@ -29,7 +29,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Initialization Environment
       env:
@@ -62,10 +62,12 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
-        chmod +x ../scripts/*.sh
+        echo "::group::Executing package hook scripts"
+        find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         chmod +x ../scripts/immortalwrt_24.10/*.sh
         ../scripts/immortalwrt_24.10/hook-package.sh
         ../scripts/immortalwrt_24.10/hook-base.sh
+        echo "::endgroup::"
         ../scripts/immortalwrt_24.10/hook-feeds.sh
         
     - name: Install Feeds
@@ -77,13 +79,14 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
-        chmod +x scripts/*.sh
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
+        echo "::group::View 'make defconfig' output"
         make defconfig
+        echo "::endgroup::"
         
     - name: Download Package
       id: package
