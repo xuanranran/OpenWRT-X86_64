@@ -62,10 +62,12 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
+        echo "::group::Executing package hook scripts"
         find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         ../scripts/immortalwrt/hook-package00.sh
         ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
+        echo "::endgroup::"
         ../scripts/immortalwrt/hook-feeds.sh
 
     - name: Install Feeds
@@ -101,19 +103,13 @@ jobs:
       run: |
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        echo "::group::Compile Firmware (Verbose Log)"
-        echo "--> Compiling tools..."
-        make tools/compile -j$(nproc) V=s || make tools/compile -j1 V=s
-        echo "--> Compiling toolchain..."
-        make toolchain/compile -j$(nproc) V=s || make toolchain/compile -j1 V=s
-        echo "--> Compiling target..."
-        make target/compile -j$(nproc) V=s || make target/compile -j1 IGNORE_ERRORS=1 V=s
-        echo "--> Compiling packages..."
-        make package/compile -j$(nproc) IGNORE_ERRORS=1 V=s || make package/compile -j1 IGNORE_ERRORS=1 V=s
-        make package/index
+        echo -e "$(nproc) thread compile"
+        make tools/compile -j$(nproc) || make tools/compile -j$(nproc) || make tools/compile -j1 IGNORE_ERRORS=1 V=s
+        make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) || make toolchain/compile -j1 IGNORE_ERRORS=1 V=s
+        make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1 || make target/compile -j1 IGNORE_ERRORS=1 V=s
         make diffconfig
-        echo "::endgroup::"
-        echo "::group::Gathering build information"
+        make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
+        make package/index
         cd $OPENWRTROOT/bin/packages/*
         PLATFORM=$(basename `pwd`)
         echo "PLATFORM=$PLATFORM" >> $GITHUB_ENV
@@ -129,7 +125,6 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "FIRMWARE=$PWD" >> $GITHUB_OUTPUT
         echo "COMPILE_STATUS=success" >> $GITHUB_OUTPUT
-        echo "::endgroup::"
 
     - name: Generate Firmware
       if: steps.compile.outputs.COMPILE_STATUS == 'success'
