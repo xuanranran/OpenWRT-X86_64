@@ -77,7 +77,6 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
-        find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
