@@ -67,7 +67,6 @@ jobs:
         ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
-        ../scripts/patch/up6_12_patch.sh
 
     - name: Install Feeds
       run: |
@@ -78,12 +77,13 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
-        chmod +x scripts/*.sh scripts/zsh_master/*.sh
+        find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/zsh_master/preset-terminal-tools.sh
+        ../scripts/patch/up6_12_patch.sh
         make defconfig
 
     - name: Download Package
