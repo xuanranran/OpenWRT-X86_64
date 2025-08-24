@@ -62,13 +62,12 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/luci -b $REPO_BRANCH customfeeds/luci
         git clone --depth=1 https://github.com/openwrt/routing -b $REPO_BRANCH customfeeds/routing
         git clone --depth=1 https://github.com/openwrt/telephony -b $REPO_BRANCH customfeeds/telephony
-        chmod +x ../scripts/*.sh
-        chmod +x ../scripts/immortalwrt/*.sh
+        find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         ../scripts/immortalwrt/hook-package00.sh
         ../scripts/immortalwrt/hook-package01.sh
         ../scripts/immortalwrt/hook-base.sh
         ../scripts/immortalwrt/hook-feeds.sh
-        ../scripts/up6_12.sh
+        ../scripts/patch/up6_12_patch.sh
 
     - name: Install Feeds
       run: |
