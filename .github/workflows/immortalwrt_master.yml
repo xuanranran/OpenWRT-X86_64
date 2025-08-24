@@ -101,17 +101,18 @@ jobs:
       run: |
         cd $OPENWRTROOT
         export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        echo "::group::Compile Firmware"
-        echo "Starting compile using $(nproc) threads"
-        make tools/compile -j$(nproc) || make tools/compile -j1 V=s
-        make toolchain/compile -j$(nproc) || make toolchain/compile -j1 V=s
-        make target/compile -j$(nproc) || make target/compile -j1 IGNORE_ERRORS=1 V=s
-        make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j1 IGNORE_ERRORS=1 V=s
-        
+        echo "::group::Compile Firmware (Verbose Log)"
+        echo "--> Compiling tools..."
+        make tools/compile -j$(nproc) V=s || make tools/compile -j1 V=s
+        echo "--> Compiling toolchain..."
+        make toolchain/compile -j$(nproc) V=s || make toolchain/compile -j1 V=s
+        echo "--> Compiling target..."
+        make target/compile -j$(nproc) V=s || make target/compile -j1 IGNORE_ERRORS=1 V=s
+        echo "--> Compiling packages..."
+        make package/compile -j$(nproc) IGNORE_ERRORS=1 V=s || make package/compile -j1 IGNORE_ERRORS=1 V=s
         make package/index
         make diffconfig
         echo "::endgroup::"
-        
         echo "::group::Gathering build information"
         cd $OPENWRTROOT/bin/packages/*
         PLATFORM=$(basename `pwd`)
