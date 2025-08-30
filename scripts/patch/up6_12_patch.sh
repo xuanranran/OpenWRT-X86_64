@@ -4,7 +4,7 @@
 # OpenWrt 源码目录
 OPENWRT_DIR="."
 # GitHub Pull Request 编号
-PR_NUMBER="19618"
+PR_NUMBER="19892"
 
 
 # --- 脚本主体 (请勿修改以下内容) ---
