@@ -30,6 +30,3 @@ git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind custom
 
 # boost
 curl -s https://raw.githubusercontent.com/openwrt/packages/3585ddfc446c38721d3ca4d1c708cbd9d3114726/libs/boost/Makefile > customfeeds/packages/libs/boost/Makefile
-
-# lsof
-sed -i 's/--without-selinux/--without-selinux --without-libtirpc/g' customfeeds/packages/utils/lsof/Makefile
