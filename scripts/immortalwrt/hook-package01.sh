@@ -30,3 +30,8 @@ git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind custom
 
 # boost
 curl -s https://raw.githubusercontent.com/openwrt/packages/3585ddfc446c38721d3ca4d1c708cbd9d3114726/libs/boost/Makefile > customfeeds/packages/libs/boost/Makefile
+
+# libtirpc
+sed -i 's/^PKG_RELEASE:=1$/PKG_RELEASE:=2/' customfeeds/packages/libs/libtirpc/Makefile
+sed -i 's/^CONFIGURE_ARGS += --disable-gssapi$/CONFIGURE_ARGS += --disable-gssapi --enable-rpcdb/' customfeeds/packages/libs/libtirpc/Makefile
+sed -i 's/^HOST_CONFIGURE_ARGS += --disable-gssapi --disable-shared$/HOST_CONFIGURE_ARGS += --disable-gssapi --disable-shared --enable-rpcdb/' customfeeds/packages/libs/libtirpc/Makefile
