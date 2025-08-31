@@ -149,8 +149,7 @@ jobs:
       run: |
           echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt" >> $GITHUB_OUTPUT
           echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
-          FULL_KERNEL_VERSION=$(cat build_dir/target-*/linux-*/linux-*/include/config/kernel.release)
-          KERNEL_VERSION=$(echo $FULL_KERNEL_VERSION | cut -d'~' -f1)
+          KERNEL_VERSION=$(cat $OPENWRTROOT/build_dir/target-*/linux-*/linux-*/include/config/kernel.release)
           echo "release_kernel=$KERNEL_VERSION" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**📥固件说明**: \n" >> release.txt
