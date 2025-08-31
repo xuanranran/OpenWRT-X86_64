@@ -149,10 +149,12 @@ jobs:
       run: |
           echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt" >> $GITHUB_OUTPUT
           echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
+          echo "release_kernel=$(jq -r '.packages.kernel' bin/targets/x86/64/packages/index.json | cut -d'~' -f1)" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**📥固件说明**: \n" >> release.txt
           echo -e "#### 后台地址: \`192.168.11.1\`\n" >> release.txt
           echo -e "#### 后台密码: \`password\`\n" >> release.txt
+          echo -e "#### Linux Kernel: **${{ steps.tag.outputs.release_kernel }}**\n" >> release.txt
           echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
