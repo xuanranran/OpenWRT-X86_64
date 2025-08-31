@@ -149,7 +149,7 @@ jobs:
       run: |
           echo "release_tag=$(date +"%Y.%m.%d")-immortalwrt" >> $GITHUB_OUTPUT
           echo "release_date=$(date "+%Y年%m月%d日")" >> $GITHUB_OUTPUT
-          echo "release_kernel=$(jq -r '.packages.kernel' bin/targets/x86/64/packages/index.json | cut -d'~' -f1)" >> $GITHUB_OUTPUT
+          echo "release_kernel=$(cat build_dir/target-*/linux-*/linux-*/include/config/kernel.release)" >> $GITHUB_OUTPUT
           touch release.txt
           echo -e "**📥固件说明**: \n" >> release.txt
           echo -e "#### 后台地址: \`192.168.11.1\`\n" >> release.txt
