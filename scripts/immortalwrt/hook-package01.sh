@@ -25,8 +25,8 @@ mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
 # bind
-rm -rf customfeeds/packages/net/bind
-git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
+# rm -rf customfeeds/packages/net/bind
+# git clone --depth=1 https://github.com/xuanranran/feeds_packages_net_bind customfeeds/packages/net/bind
 
 # boost
 # curl -s https://raw.githubusercontent.com/openwrt/packages/3585ddfc446c38721d3ca4d1c708cbd9d3114726/libs/boost/Makefile > customfeeds/packages/libs/boost/Makefile
