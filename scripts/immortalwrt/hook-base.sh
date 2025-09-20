@@ -45,8 +45,8 @@ sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' customfeeds/packa
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/utils/ttyd/files/ttyd.init
 
 # UPnP
-# rm -rf customfeeds/packages/net/miniupnpd
-# git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.9
+rm -rf customfeeds/packages/net/miniupnpd
+git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.9
 
 # nginx - latest version
 rm -rf customfeeds/packages/net/nginx
