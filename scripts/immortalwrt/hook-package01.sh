@@ -28,3 +28,8 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 rm -rf customfeeds/packages/net/zerotier
 git clone https://github.com/xuanranran/packages_net_zerotier customfeeds/packages/net/zerotier
 
+# rust
+pushd customfeeds/packages
+  curl -s https://patch-diff.githubusercontent.com/raw/openwrt/packages/pull/27487.patch | patch -p1
+popd
+
