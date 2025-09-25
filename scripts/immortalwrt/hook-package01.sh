@@ -25,8 +25,11 @@ mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
 
 # ZeroTier
-rm -rf customfeeds/packages/net/zerotier
-git clone https://github.com/xuanranran/packages_net_zerotier customfeeds/packages/net/zerotier
+# rm -rf customfeeds/packages/net/zerotier
+# git clone https://github.com/xuanranran/packages_net_zerotier customfeeds/packages/net/zerotier
+
+sed -i 's/1.14.1/1.14.2/g' customfeeds/packages/net/zerotier/Makefile
+sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 # rust
 pushd customfeeds/packages
