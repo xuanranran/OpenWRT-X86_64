@@ -32,7 +32,7 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 # sed -i 's/4f9f40b27c5a78389ed3f3216c850921f6298749e5819e9f2edabb2672ce9ca0/c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb/g' customfeeds/packages/net/zerotier/Makefile
 
 # rust
-pushd customfeeds/packages
-  curl -s https://patch-diff.githubusercontent.com/raw/openwrt/packages/pull/27487.patch | patch -p1
-popd
+# pushd customfeeds/packages
+  # curl -s https://patch-diff.githubusercontent.com/raw/openwrt/packages/pull/27487.patch | patch -p1
+# popd
 
