@@ -23,6 +23,3 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 # sms-tools
 mkdir -p customfeeds/packages/utils/sms-tool/patches
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/sms-tools/900-fix-incompatible-pointer-type-error-for-signal-function.patch > customfeeds/packages/utils/sms-tool/patches/900-fix-incompatible-pointer-type-error-for-signal-function.patch
-
-# firmware-utils
-curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/tools/firmware-utils/Makefile > tools/firmware-utils/Makefile
