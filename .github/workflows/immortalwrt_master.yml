@@ -85,7 +85,7 @@ jobs:
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/zsh_master/preset-terminal-tools.sh
         echo "::group::Run the 6.12 upgrade patch"
-        ../scripts/patch/up6_12_patch.sh
+        ../scripts/patch/up6_12.sh
         echo "::endgroup::"
         echo "::group::View 'make defconfig' output"
         make defconfig
