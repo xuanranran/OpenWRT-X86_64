@@ -23,6 +23,7 @@ echo "Downloading patch: ${PATCH_FILE}..."
 # -sS: 静默模式，但显示错误
 # -L:  跟随重定向
 # -o:  指定输出文件
+curl -s https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/target/linux/mediatek/patches-6.12/810-tty-serial-8250_mtk-enable-baud-clock.patch > target/linux/mediatek/patches-6.12/810-tty-serial-8250_mtk-enable-baud-clock.patch
 curl -sS -L -o "$PATCH_FILE" "$PATCH_URL"
 
 # 检查上一条命令 (curl) 的退出状态码
