@@ -9,3 +9,11 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # libxcrypt
 sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -Wno-error=pedantic\n" package/libs/xcrypt/libxcrypt/Makefile
+
+# protobuf
+curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/protobuf/Makefile > customfeeds/packages/libs/protobuf/Makefile
+curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/protobuf/patches/001-cmake4.patch > customfeeds/packages/libs/protobuf/patches/001-cmake4.patch
+
+# qrencode
+curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/ibs/qrencode/Makefile > customfeeds/packages/ibs/qrencode/Makefile
+curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/qrencode/patches/001-cmake-version.patch > customfeeds/packages/libs/qrencode/patches/001-cmake-version.patch
