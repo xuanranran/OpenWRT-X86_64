@@ -15,5 +15,5 @@ curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/lib
 curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/protobuf/patches/001-cmake4.patch > customfeeds/packages/libs/protobuf/patches/001-cmake4.patch
 
 # qrencode
-curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/ibs/qrencode/Makefile > customfeeds/packages/ibs/qrencode/Makefile
+curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/qrencode/Makefile > customfeeds/packages/libs/qrencode/Makefile
 curl -s https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/libs/qrencode/patches/001-cmake-version.patch > customfeeds/packages/libs/qrencode/patches/001-cmake-version.patch
