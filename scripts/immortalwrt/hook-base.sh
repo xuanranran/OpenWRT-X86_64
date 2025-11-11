@@ -13,7 +13,7 @@ sed -i 's/noinitrd/noinitrd mitigations=off/g' target/linux/x86/image/grub-efi.c
 
 # fstools
 pushd package/system/fstools
-patch -p1 < $GITHUB_WORKSPACE/data/fstools-add-xfs-ntfs3-extroot-support-and-fix-packaging.patch
+patch -p1 < $GITHUB_WORKSPACE/data/fstools/fstools-add-xfs-ntfs3-extroot-support-and-fix-packaging.patch
 sed -i 's/+libjson-c/+libjson-c +fstools/' Makefile
 popd
 
