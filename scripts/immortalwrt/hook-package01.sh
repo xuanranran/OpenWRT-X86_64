@@ -9,6 +9,3 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 
 # libxcrypt
 sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -Wno-error=pedantic\n" package/libs/xcrypt/libxcrypt/Makefile
-
-# nmap
-curl -s https://raw.githubusercontent.com/nunojpg/packages/refs/heads/nmap/net/nmap/Makefile > customfeeds/packages/net/nmap/Makefile
