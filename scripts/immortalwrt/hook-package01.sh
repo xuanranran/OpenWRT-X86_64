@@ -8,4 +8,4 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/batman-adv/901-fix-linux-6.12rc2-builds.patch > customfeeds/routing/batman-adv/patches/901-fix-linux-6.12rc2-builds.patch
 
 # libxcrypt
-# sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -Wno-error=pedantic\n" package/libs/xcrypt/libxcrypt/Makefile
+sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -Wno-error=pedantic\n" package/libs/xcrypt/libxcrypt/Makefile

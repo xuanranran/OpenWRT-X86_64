@@ -22,11 +22,11 @@ mkdir -p package/utils/util-linux/patches
 curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/heads/openwrt-24.10/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch > package/utils/util-linux/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch
 
 # openssl urandom
-# sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
-# sed -i "s/ no-lto//g" package/libs/openssl/Makefile
-# sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
+sed -i "s/ no-lto//g" package/libs/openssl/Makefile
+sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
 
 # nghttp3
 # rm -rf customfeeds/packages/libs/nghttp3
