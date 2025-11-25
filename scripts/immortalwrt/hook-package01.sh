@@ -10,4 +10,5 @@ curl -s https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 # libxcrypt
 sed -i "/CONFIGURE_ARGS/i\TARGET_CFLAGS += -Wno-error=pedantic\n" package/libs/xcrypt/libxcrypt/Makefile
 
-rm -rf target/linux/generic/hack-6.12/400-mtd-spinand-Support-fmsh.patch
+rm -rf target/linux/generic/backport-6.12/404-v6.19-mtd-spinand-fmsh-remove-QE-bit-for-FM25S01A-flash.patch
+rm -rf target/linux/generic/pending-6.12/403-mtd-spinand-add-support-for-FudanMicro-FM25S01BI3.patch
