@@ -98,8 +98,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# 确保 Zsh 补全系统正确、安全地初始化
-autoload -U compinit
-compinit -i
+# 修复 OpenWrt 下的权限和路径问题
+autoload -Uz compinit
+compinit -u -C -d $HOME/.zcompdump
 
 # cat /etc/banner
