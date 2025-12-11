@@ -7,3 +7,6 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 # routing - batman-adv fix build with linux-6.12
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/batman-adv/901-fix-linux-6.12rc2-builds.patch > customfeeds/routing/batman-adv/patches/901-fix-linux-6.12rc2-builds.patch
 
+# del packages
+rm -rf customfeeds/packages/utils/mqttled
+rm -rf customfeeds/packages/net/onionshare-cli
