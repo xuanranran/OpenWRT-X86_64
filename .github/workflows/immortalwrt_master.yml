@@ -9,7 +9,8 @@ on:
   #   types: started
 
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
+  USER_NAME: immortalwrt
+  REPO_URL: https://github.com/$USER_NAME/immortalwrt
   REPO_BRANCH: master
   CONFIG_FILE: configs/immortalwrt/immortalwrt.config
   DIY_SH: scripts/immortalwrt/immortalwrt.sh
