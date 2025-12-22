@@ -3,7 +3,7 @@
 
 # autocore
 rm -rf package/emortal/autocore
-git clone https://github.com/xuanranran/autocore-arm -b openwrt-24.10 package/emortal/autocore
+git clone https://github.com/xuanranran/autocore-arm -b openwrt-25.12 package/emortal/autocore
 
 # default settings
 rm -rf package/emortal/default-settings
