@@ -10,6 +10,8 @@ curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads
 sed -i '/ifneq (0,0)/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/xl2tpd/Makefile
 # netdata
 sed -i '/TARGET_CFLAGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/admin/netdata/Makefile
+# uwsgi
+sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uwsgi/Makefile
 
 # del packages
 # rm -rf customfeeds/packages/net/onionshare-cli
