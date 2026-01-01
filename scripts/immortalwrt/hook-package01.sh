@@ -16,4 +16,5 @@ sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uws
 sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libpam/Makefile
 
 # del packages
-# rm -rf customfeeds/packages/net/onionshare-cli
+rm -rf customfeeds/packages/net/onionshare-cli
+# rm -rf customfeeds/telephony/asterisk
