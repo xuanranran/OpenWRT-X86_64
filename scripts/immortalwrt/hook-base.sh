@@ -52,7 +52,7 @@ git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniup
 
 # nginx - latest version
 rm -rf customfeeds/packages/net/nginx
-git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-24.10
+git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-25.12
 sed -i 's/1.28.0/1.29.0/g' customfeeds/packages/net/nginx/Makefile
 sed -i 's/c6b5c6b086c0df9d3ca3ff5e084c1d0ef909e6038279c71c1c3e985f576ff76a/109754dfe8e5169a7a0cf0db6718e7da2db495753308f933f161e525a579a664/g' customfeeds/packages/net/nginx/Makefile
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
