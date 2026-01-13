@@ -4,6 +4,10 @@
 # rtpengine
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/rtpengine/900-fix-linux-6.12-11.5.1.18.patch > customfeeds/telephony/net/rtpengine/patches/900-fix-linux-6.12-11.5.1.18.patch
 
+# quectel-cm
+rm -rf customfeeds/packages/net/quectel-cm
+git clone https://github.com/xuanranran/quectel-cm customfeeds/packages/net/quectel-cm
+
 # fix gcc-15.0.1 gnu17
 
 # xl2tpd
