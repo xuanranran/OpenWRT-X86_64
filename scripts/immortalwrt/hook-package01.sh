@@ -4,10 +4,6 @@
 # rtpengine
 curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/rtpengine/900-fix-linux-6.12-11.5.1.18.patch > customfeeds/telephony/net/rtpengine/patches/900-fix-linux-6.12-11.5.1.18.patch
 
-# quectel-cm
-rm -rf customfeeds/packages/net/quectel-cm
-git clone https://github.com/xuanranran/quectel-cm customfeeds/packages/net/quectel-cm
-
 # boots
 sed -i 's|^PKG_SOURCE_URL:=.*|PKG_SOURCE_URL:=@SF/$(PKG_NAME)/$(PKG_NAME)/$(PKG_VERSION)|g' customfeeds/packages/libs/boost/Makefile
 
