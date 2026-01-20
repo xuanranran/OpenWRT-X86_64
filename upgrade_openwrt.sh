@@ -30,7 +30,7 @@ GITHUB_PROXY=""  # GitHub 代理前缀
 select_github_access() {
     echo
     echo -e "${C_CYAN}╔═══════════════════════════════════════════════════════════════════════╗${C_RESET}"
-    echo -e "${C_CYAN}║${C_RESET}                 ${C_B_YELLOW}[🌐] GitHub 访问方式选择${C_RESET}                    ${C_CYAN}║${C_RESET}"
+    echo -e "${C_CYAN}║${C_RESET}                 ${C_B_YELLOW}[#] GitHub 访问方式选择${C_RESET}                    ${C_CYAN}║${C_RESET}"
     echo -e "${C_CYAN}╚═══════════════════════════════════════════════════════════════════════╝${C_RESET}"
     echo
     echo -e "${C_CYAN}┌───────────────────────────────────────────────────────────────────────┐${C_RESET}"
