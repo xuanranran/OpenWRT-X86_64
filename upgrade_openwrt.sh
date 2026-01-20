@@ -406,7 +406,7 @@ echo
 # --- 4. 获取最新 Release 信息 ---
 echo -e "${C_BLUE}--- 步骤 4: 获取最新 Release 信息 ---${C_RESET}"
 echo -e "${C_BLUE}信息：${C_RESET}正在从 GitHub 仓库 '${C_CYAN}${REPO}${C_RESET}' 获取最新版本信息..."
-API_URL="${GITHUB_PROXY}https://api.github.com/repos/$REPO/releases/latest"
+API_URL="https://api.github.com/repos/$REPO/releases/latest"
 RELEASE_INFO=$(wget -qO- --no-check-certificate "$API_URL")
 if [ -z "$RELEASE_INFO" ]; then echo -e "${C_B_RED}错误：${C_RESET}无法从 GitHub API 获取版本信息。" >&2; exit 1; fi
 RELEASE_TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name // "未知标签"')
@@ -459,13 +459,13 @@ echo
 # --- 7. 下载文件 ---
 echo -e "${C_BLUE}--- 步骤 7: 下载文件 ---${C_RESET}"
 echo -e "${C_BLUE}信息：${C_RESET}正在下载压缩固件 '${C_CYAN}${IMAGE_FILENAME_GZ}${C_RESET}' 到 '${C_CYAN}${IMAGE_PATH_GZ}${C_RESET}' ..."
-wget --progress=bar:force --no-check-certificate -O "$IMAGE_PATH_GZ" "$IMAGE_URL"
+wget --progress=bar:force --no-check-certificate -O "$IMAGE_PATH_GZ" "${GITHUB_PROXY}${IMAGE_URL}"
 echo -e "${C_B_GREEN}信息：${C_RESET}压缩固件下载完成。"
 
 # 下载校验文件
 if [ $SKIP_CHECKSUM -eq 0 ]; then
     echo -e "${C_BLUE}信息：${C_RESET}正在下载校验文件 '${C_CYAN}${CHECKSUM_FILENAME}${C_RESET}' 到 '${C_CYAN}${CHECKSUM_PATH}${C_RESET}' ..."
-    set +e; wget -q --no-check-certificate -O "$CHECKSUM_PATH" "$CHECKSUM_URL"; dl_status=$?; set -e
+    set +e; wget -q --no-check-certificate -O "$CHECKSUM_PATH" "${GITHUB_PROXY}${CHECKSUM_URL}"; dl_status=$?; set -e
     if [ $dl_status -ne 0 ]; then
         echo -e "${C_YELLOW}警告：${C_RESET}下载校验文件 '${C_YELLOW}${CHECKSUM_FILENAME}${C_RESET}' 失败，将跳过文件完整性校验。"
         rm -f "$CHECKSUM_PATH"; SKIP_CHECKSUM=1;
@@ -706,11 +706,54 @@ if [[ "$confirm_upgrade" =~ ^[Yy]$ ]]; then
     echo -e "$MSG_DESC"
 
     # 执行命令
-    sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+    
+    if [ -n "$FORCE_FLAG" ]; then
+        # 如果启用了强制升级，使用 exec 直接替换进程，防止 SSH 断开后的误报错误
+        echo -e "${C_B_GREEN}✅ 信息：sysupgrade 命令已启动。SSH 连接即将断开，设备将重启。${C_RESET}"
+        echo
+        exec sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+    else
+        # 未启用强制升级，使用常规调用以捕获潜在的校验错误
+        # 临时禁用 strict error checking
+        set +e
+        sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+        sysupgrade_status=$?
+        set -e
 
-    echo # 换行
-    echo -e "${C_B_GREEN}✅ 信息：sysupgrade 命令已执行。如果成功，系统将会重启。${C_RESET}"
-    exit 0
+        if [ $sysupgrade_status -eq 0 ]; then
+            echo # 换行
+            echo -e "${C_B_GREEN}✅ 信息：sysupgrade 命令已执行。如果成功，系统将会重启。${C_RESET}"
+            exit 0
+        else
+            echo
+            echo -e "${C_B_RED}❌ 错误：sysupgrade 命令执行失败 (退出码 $sysupgrade_status)。${C_RESET}"
+            
+            # 如果之前没用过 -F，询问是否尝试强制升级
+            if [[ "$FORCE_FLAG" != "-F" ]]; then
+                echo -e "${C_YELLOW}分析：升级失败通常是因为固件版本检查不通过 (如 'Image metadata not present' 或 'Image check failed')。${C_RESET}"
+                echo -e "${C_YELLOW}      这在跨版本升级或刷写不同固件时很常见。${C_RESET}"
+                
+                read -p "$(echo -e "\n${C_B_YELLOW}❓ 是否尝试使用强制升级 '-F' 选项重试？(y/N) [默认: ${C_B_GREEN}是${C_RESET}${C_B_YELLOW}]: ${C_RESET}")" retry_force
+                retry_force=${retry_force:-Y}
+                
+                if [[ "$retry_force" =~ ^[Yy]$ ]]; then
+                    echo -e "${C_BLUE}信息：${C_RESET}正在尝试使用强制升级选项 (-F) 重试..."
+                    FORCE_FLAG="-F"
+                    
+                    echo -e "${C_B_GREEN}✅ 信息：正在执行强制升级命令。连接即将断开，请等待设备重启...${C_RESET}"
+                    echo
+                    
+                    # 使用 exec 替换当前 shell 进程
+                    exec sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+                else
+                    echo -e "${C_YELLOW}信息：用户选择不重试。脚本退出。${C_RESET}"
+                    exit 1
+                fi
+            else
+                exit 1
+            fi
+        fi
+    fi
 else
     echo # 换行
     echo -e "${C_YELLOW}操作已取消。${C_RESET}解压后的固件文件保留在 '${C_CYAN}${IMAGE_PATH_IMG}${C_RESET}'，您可以手动升级或删除它。"
