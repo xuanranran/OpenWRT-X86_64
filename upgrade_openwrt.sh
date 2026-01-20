@@ -713,12 +713,30 @@ if [[ "$confirm_upgrade" =~ ^[Yy]$ ]]; then
         echo
         exec sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
     else
-        # 未启用强制升级，使用常规调用以捕获潜在的校验错误
+        # 未启用强制升级
+        # 先进行模拟测试 (-T) 以检查固件有效性
+        echo -e "${C_BLUE}信息：${C_RESET}正在执行固件兼容性预检查 (sysupgrade -T)..."
+        
         # 临时禁用 strict error checking
         set +e
-        sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
-        sysupgrade_status=$?
+        sysupgrade -T $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG" >/dev/null 2>&1
+        test_status=$?
         set -e
+        
+        if [ $test_status -eq 0 ]; then
+            # 校验通过
+            echo -e "${C_B_GREEN}✅ 信息：固件校验通过。sysupgrade 命令已启动。SSH 连接即将断开，设备将重启。${C_RESET}"
+            echo
+            # 使用 exec 执行真正的升级
+            exec sysupgrade $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+        else
+            # 校验失败，执行原命令以显示错误并进入错误处理流程
+            echo -e "${C_YELLOW}警告：${C_RESET}固件预检查未通过，正在执行常规升级以显示详细错误..."
+            set +e
+            sysupgrade $FORCE_FLAG $VERBOSE_FLAG $SYSUPGRADE_ARGS "$IMAGE_PATH_IMG"
+            sysupgrade_status=$?
+            set -e
+        fi
 
         if [ $sysupgrade_status -eq 0 ]; then
             echo # 换行
