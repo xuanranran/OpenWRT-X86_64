@@ -9,7 +9,7 @@ on:
   #   types: started
 
 env:
-  USER_NAME: immortalwrt
+  USER_NAME: xuanranran
   REPO_BRANCH: master
   CONFIG_FILE: configs/immortalwrt/immortalwrt.config
   DIY_SH: scripts/immortalwrt/immortalwrt.sh
