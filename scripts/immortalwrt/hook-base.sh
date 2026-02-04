@@ -49,6 +49,7 @@ sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packa
 # UPnP
 rm -rf customfeeds/packages/net/miniupnpd
 git clone https://git.cooluc.com/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.9
+sed -i 's/PKG_RELEASE:=1/PKG_RELEASE:=2/g' customfeeds/packages/net/miniupnpd/Makefile
 
 # nginx - latest version
 rm -rf customfeeds/packages/net/nginx
