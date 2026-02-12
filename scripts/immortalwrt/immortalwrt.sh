@@ -49,8 +49,3 @@ echo -e "\n# Kernel - LRNG" >> .config
 echo "CONFIG_KERNEL_LRNG=y" >> .config
 echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
 echo "# CONFIG_PACKAGE_urngd is not set" >> .config
-
-# Del luci-app-attendedsysupgrade
-# sed -i '18d' customfeeds/luci/collections/luci-nginx/Makefile
-# sed -i '17d' customfeeds/luci/collections/luci/Makefile
-# sed -i '16s/ \\$//' customfeeds/luci/collections/luci/Makefile
