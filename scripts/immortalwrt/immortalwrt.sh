@@ -30,9 +30,7 @@ sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_genera
 sed -i "s/ImmortalWrt/OpenWrt/g" package/base-files/files/bin/config_generate
 
 # 修改开源站地址
-sed -i 's/mirror.iscas.ac.cn/mirrors.ustc.edu.cn/g' scripts/projectsmirrors.json
-sed -i '63d' scripts/projectsmirrors.json
-# sed -i '6,8d;15,18d;33,36d' scripts/projectsmirrors.json
+sed -i '54,56d;63d' scripts/projectsmirrors.json
 
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 sed -i 's/services/vpn/g' customfeeds/luci/applications/luci-app-frpc/root/usr/share/luci/menu.d/luci-app-frpc.json
