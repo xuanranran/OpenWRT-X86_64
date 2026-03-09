@@ -5,12 +5,12 @@
 **方式一：使用本地脚本（推荐）**
 ```bash
 # 下载并运行升级脚本
-wget https://raw.githubusercontent.com/xuanranran/OpenWRT-X86_64/master/upgrade_openwrt.sh && chmod +x upgrade_openwrt.sh && ./upgrade_openwrt.sh
+wget https://raw.githubusercontent.com/xuanranran/scripts/main/update_openwrt.sh && chmod +x update_openwrt.sh && ./upgrade_openwrt.sh
 ```
 
 **方式二：直接运行（在线）**
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/main/upgrade_openwrt.sh)
+bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/main/update_openwrt.sh)
 ```
 
 # 界面展示
