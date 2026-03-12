@@ -15,6 +15,7 @@ env:
   DIY_SH: scripts/immortalwrt/immortalwrt.sh
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   Build:
