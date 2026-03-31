@@ -5,13 +5,6 @@ mirror="https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 github="github.com"
 gitea="git.cooluc.com"
 
-# jool
-rm -rf customfeeds/packages/net/jool
-mkdir -p customfeeds/packages/net/jool/patches
-curl -s $mirror/openwrt/patch/packages-patches/jool/Makefile > customfeeds/packages/net/jool/Makefile
-curl -s $mirror/openwrt/patch/packages-patches/jool/patches/100-fix-compilation-warning-simple-fix.patch > customfeeds/packages/net/jool/patches/100-fix-compilation-warning-simple-fix.patch
-curl -s $mirror/openwrt/patch/packages-patches/jool/patches/900-fix-build-with-linux-6.18.patch > customfeeds/packages/net/jool/patches/900-fix-build-with-linux-6.18.patch
-
 # nat46
 mkdir -p package/kernel/nat46/patches
 curl -s $mirror/openwrt/patch/packages-patches/nat46/102-fix-build-with-kernel-6.18.patch > package/kernel/nat46/patches/102-fix-build-with-kernel-6.18.patch
@@ -53,6 +46,8 @@ sed -i '/TARGET_CFLAGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/adm
 sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uwsgi/Makefile
 # libpam
 sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libpam/Makefile
+# coova-chilli - fix gcc 15 c23
+sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
 
 
 # waiting fix
