@@ -53,6 +53,8 @@ sed -i '/^CONFIG_FAILOVER=y$/a # CONFIG_SHORTCUT_FE is not set' target/linux/x86
 
 # libnftnl
 rm -rf package/libs/libnftnl/patches
+# nftables
+rm -rf package/network/utils/nftables/patches
 
 # del packages
 rm -rf customfeeds/packages/net/onionshare-cli
