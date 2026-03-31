@@ -47,7 +47,7 @@ jobs:
     - name: Clone Source Code
       run: |
         df -hT $PWD
-        git clone https://github.com/LovinYarn/immortalwrt -b $REPO_BRANCH openwrt
+        git clone https://github.com/$USER_NAME/immortalwrt -b $REPO_BRANCH openwrt
 
     - name: Update Feeds
       id: update
