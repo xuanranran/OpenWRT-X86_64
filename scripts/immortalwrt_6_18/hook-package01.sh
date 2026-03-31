@@ -51,6 +51,9 @@ sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/M
 
 sed -i '/^CONFIG_FAILOVER=y$/a # CONFIG_SHORTCUT_FE is not set' target/linux/x86/64/config-6.18
 
+# libnftnl
+rm -rf package/libs/libnftnl/patches
+
 # del packages
 rm -rf customfeeds/packages/net/onionshare-cli
 # rm -rf customfeeds/telephony/asterisk
