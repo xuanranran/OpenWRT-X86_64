@@ -49,9 +49,7 @@ sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/l
 # coova-chilli - fix gcc 15 c23
 sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
 
-
-# waiting fix
-curl -s $mirror/openwrt/6.18-disable-config >> .config
+sed '/^CONFIG_FAILOVER=y$/a # CONFIG_SHORTCUT_FE is not set' target/linux/x86/64/config-6.18
 
 # del packages
 rm -rf customfeeds/packages/net/onionshare-cli
