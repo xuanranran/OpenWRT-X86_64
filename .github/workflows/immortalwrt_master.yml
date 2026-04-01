@@ -43,6 +43,8 @@ jobs:
         [ -f /etc/issue.net ] && cat /etc/issue.net
         [ -f /etc/issue ] && cat /etc/issue
         ulimit -a
+        sudo locale-gen en_US en_US.UTF-8
+        sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
         
     - name: Clone Source Code
       run: |
