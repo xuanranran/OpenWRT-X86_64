@@ -49,12 +49,6 @@ echo "CONFIG_KERNEL_LRNG=y" >> .config
 echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
 echo "# CONFIG_PACKAGE_urngd is not set" >> .config
 
-# Force Hyper-V storage/net drivers built-in
-# CONFIG_HYPERV_STORAGE depends on CONFIG_SCSI_FC_ATTRS; without it olddefconfig silently forces to n
-echo "CONFIG_KERNEL_SCSI_FC_ATTRS=y" >> .config
-echo "CONFIG_KERNEL_HYPERV_STORAGE=y" >> .config
-echo "CONFIG_KERNEL_HYPERV_NET=y" >> .config
-
 # DPDK
 echo 'CONFIG_PACKAGE_dpdk-tools=y' >> .config
 echo 'CONFIG_PACKAGE_numactl=y' >> .config

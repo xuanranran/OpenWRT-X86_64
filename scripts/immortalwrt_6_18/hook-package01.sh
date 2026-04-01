@@ -48,14 +48,3 @@ sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uws
 sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libpam/Makefile
 # coova-chilli - fix gcc 15 c23
 sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
-
-sed -i '/^CONFIG_FAILOVER=y$/a # CONFIG_SHORTCUT_FE is not set' target/linux/x86/64/config-6.18
-
-# libnftnl
-rm -rf package/libs/libnftnl/patches
-# nftables
-rm -rf package/network/utils/nftables/patches
-
-# del packages
-rm -rf customfeeds/packages/net/onionshare-cli
-# rm -rf customfeeds/telephony/asterisk
