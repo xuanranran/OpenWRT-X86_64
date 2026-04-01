@@ -5,8 +5,17 @@ mirror="https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/mast
 github="github.com"
 gitea="git.cooluc.com"
 
+# lto jobserver
+sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
+
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
+# Disable LRNG scheduler entropy - compiled out via #ifdef, removes Hyper-V paravirtualized scheduler conflict
+sed -i "s/echo 'CONFIG_LRNG_SCHED=y'/echo '# CONFIG_LRNG_SCHED is not set'/" include/kernel-defaults.mk
+sed -i "/echo 'CONFIG_LRNG_SCHED_ENTROPY_RATE=/d" include/kernel-defaults.mk
+# Lower IRQ entropy rate 256->8 so LRNG seeds from interrupts in ~0.4s instead of 65536 IRQs
+# JENT remains enabled as secondary source; IRQ seeds first so hv_vmbus is not blocked
+sed -i "s/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=256'/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=8'/" include/kernel-defaults.mk
 
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
