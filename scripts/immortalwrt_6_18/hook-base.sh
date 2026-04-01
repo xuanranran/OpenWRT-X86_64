@@ -228,8 +228,7 @@ pushd target/linux/generic/backport-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/bbr3/010-bbr3-0020-net-tcp_bbr-v3-silence-Wconstant-logical-operand.patch
 popd
 
-# LRNG - 6.18 (temporarily disabled for Hyper-V hv_storvsc diagnostic)
-: <<'LRNG_DISABLED'
+# LRNG - 6.18
 pushd target/linux/generic/hack-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0001-LRNG-Entropy-Source-and-DRNG-Manager.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0002-LRNG-allocate-one-DRNG-instance-per-NUMA-node.patch
@@ -257,7 +256,6 @@ pushd target/linux/generic/hack-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0024-LRNG-add-dev-lrng-device-file-support.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0025-LRNG-add-hwrand-framework-interface.patch
 popd
-LRNG_DISABLED
 
 # linux-rt - i915
 pushd target/linux/generic/hack-6.18
