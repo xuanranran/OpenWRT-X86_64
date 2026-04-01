@@ -151,11 +151,6 @@ curl -s $mirror/openwrt/nginx/uci.conf.template > customfeeds/packages/net/nginx
 mkdir -p package/system/apk/patches
 curl -s $mirror/openwrt/patch/apk/9000-io_url_wget-disbale-hsts.patch > package/system/apk/patches/9000-io_url_wget-disbale-hsts.patch
 
-# opkg
-mkdir -p package/system/opkg/patches
-curl -s $mirror/openwrt/patch/opkg/900-opkg-download-disable-hsts.patch > package/system/opkg/patches/900-opkg-download-disable-hsts.patch
-curl -s $mirror/openwrt/patch/opkg/901-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch > package/system/opkg/patches/901-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch
-
 # uwsgi - fix timeout
 sed -i '$a cgi-timeout = 600' customfeeds/packages/net/uwsgi/files-luci-support/luci-*.ini
 sed -i '/limit-as/c\limit-as = 5000' customfeeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
