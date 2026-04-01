@@ -10,12 +10,6 @@ sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
 
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
-# Disable LRNG scheduler entropy - compiled out via #ifdef, removes Hyper-V paravirtualized scheduler conflict
-sed -i "s/echo 'CONFIG_LRNG_SCHED=y'/echo '# CONFIG_LRNG_SCHED is not set'/" include/kernel-defaults.mk
-sed -i "/echo 'CONFIG_LRNG_SCHED_ENTROPY_RATE=/d" include/kernel-defaults.mk
-# Lower IRQ entropy rate 256->8 so LRNG seeds from interrupts in ~0.4s instead of 65536 IRQs
-# JENT remains enabled as secondary source; IRQ seeds first so hv_vmbus is not blocked
-sed -i "s/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=256'/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=8'/" include/kernel-defaults.mk
 
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
@@ -239,7 +233,8 @@ pushd target/linux/generic/backport-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/bbr3/010-bbr3-0020-net-tcp_bbr-v3-silence-Wconstant-logical-operand.patch
 popd
 
-# LRNG - 6.18
+# LRNG - 6.18 (temporarily disabled for Hyper-V hv_storvsc diagnostic)
+: <<'LRNG_DISABLED'
 pushd target/linux/generic/hack-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0001-LRNG-Entropy-Source-and-DRNG-Manager.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0002-LRNG-allocate-one-DRNG-instance-per-NUMA-node.patch
@@ -267,6 +262,7 @@ pushd target/linux/generic/hack-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0024-LRNG-add-dev-lrng-device-file-support.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/lrng/011-LRNG-0025-LRNG-add-hwrand-framework-interface.patch
 popd
+LRNG_DISABLED
 
 # linux-rt - i915
 pushd target/linux/generic/hack-6.18
