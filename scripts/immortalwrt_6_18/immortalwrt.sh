@@ -49,9 +49,5 @@ echo "CONFIG_KERNEL_LRNG=y" >> .config
 echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
 echo "# CONFIG_PACKAGE_urngd is not set" >> .config
 
-# DPDK
-echo 'CONFIG_PACKAGE_dpdk-tools=y' >> .config
-echo 'CONFIG_PACKAGE_numactl=y' >> .config
-
 # test 6.18
 sed -i 's/6.12/6.18/g' target/linux/x86/Makefile
