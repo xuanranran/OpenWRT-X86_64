@@ -48,3 +48,8 @@ sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uws
 sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libpam/Makefile
 # coova-chilli - fix gcc 15 c23
 sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
+
+# del packages
+rm -rf customfeeds/packages/net/onionshare-cli
+rm -rf customfeeds/packages/net/fail2ban
+rm -rf customfeeds/packages/utils/setools

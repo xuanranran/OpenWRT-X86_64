@@ -24,4 +24,5 @@ sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/l
 
 # del packages
 rm -rf customfeeds/packages/net/onionshare-cli
-# rm -rf customfeeds/telephony/asterisk
+rm -rf customfeeds/packages/net/fail2ban
+rm -rf customfeeds/packages/utils/setools
