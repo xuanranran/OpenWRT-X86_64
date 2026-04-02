@@ -11,6 +11,15 @@ sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
 
+# Hyper-V: SCSI_FC_ATTRS=y is a required dependency for HYPERV_STORAGE=y (hv_storvsc built-in)
+echo "CONFIG_SCSI_FC_ATTRS=y" >> target/linux/x86/64/config-6.18
+
+# Hyper-V: lower LRNG IRQ entropy rate so LRNG seeds before VMBus 5s connection timeout
+# and disable LRNG scheduler entropy source that conflicts with Hyper-V paravirt scheduler
+# sed -i "s/echo 'CONFIG_LRNG_SCHED=y'/echo '# CONFIG_LRNG_SCHED is not set'/" include/kernel-defaults.mk
+# sed -i "/echo 'CONFIG_LRNG_SCHED_ENTROPY_RATE=/d" include/kernel-defaults.mk
+# sed -i "s/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=256'/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=8'/" include/kernel-defaults.mk
+
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
 
