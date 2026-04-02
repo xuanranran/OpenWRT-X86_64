@@ -37,6 +37,14 @@ curl -s $mirror/openwrt/patch/target-modify_for_aarch64_x86_64.patch | patch -p1
 # libubox
 sed -i '/TARGET_CFLAGS/ s/$/ -O2/' package/libs/libubox/Makefile
 
+# DPDK & NUMACTL
+mkdir -p package/emortal/{dpdk/patches,numactl}
+curl -s $mirror/openwrt/patch/dpdk/dpdk/Makefile > package/emortal/dpdk/Makefile
+curl -s $mirror/openwrt/patch/dpdk/dpdk/Config.in > package/emortal/dpdk/Config.in
+curl -s $mirror/openwrt/patch/dpdk/dpdk/patches/010-dpdk_arm_build_platform_fix.patch > package/emortal/dpdk/patches/010-dpdk_arm_build_platform_fix.patch
+curl -s $mirror/openwrt/patch/dpdk/dpdk/patches/201-r8125-add-r8125-ethernet-poll-mode-driver.patch > package/emortal/dpdk/patches/201-r8125-add-r8125-ethernet-poll-mode-driver.patch
+curl -s $mirror/openwrt/patch/dpdk/numactl/Makefile > package/emortal/numactl/Makefile
+
 # fstools
 rm -rf package/system/fstools
 git clone https://$github/sbwml/package_system_fstools -b openwrt-25.12 package/system/fstools

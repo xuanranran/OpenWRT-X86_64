@@ -63,5 +63,9 @@ echo "CONFIG_KERNEL_PCI_HYPERV=y" >> .config
 echo "CONFIG_KERNEL_PCI_MMCONFIG=y" >> .config
 echo "CONFIG_KERNEL_SCSI_FC_ATTRS=y" >> .config
 
+# DPDK
+echo 'CONFIG_PACKAGE_dpdk-tools=y' >> .config
+echo 'CONFIG_PACKAGE_numactl=y' >> .config
+
 # test 6.18
 sed -i 's/6.12/6.18/g' target/linux/x86/Makefile
