@@ -248,8 +248,6 @@ popd
 rm -rf package/kernel/mac80211
 git clone https://$github/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b v6.18
 
-git clone https://$github/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b v6.18
-
 # kernel patch
 # btf: silence btf module warning messages
 curl -s $mirror/openwrt/patch/kernel-6.18/btf/990-btf-silence-btf-module-warning-messages.patch > target/linux/generic/hack-6.18/990-btf-silence-btf-module-warning-messages.patch
