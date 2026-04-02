@@ -11,15 +11,6 @@ sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
 
-# Hyper-V: SCSI_FC_ATTRS=y is a required dependency for HYPERV_STORAGE=y (hv_storvsc built-in)
-echo "CONFIG_SCSI_FC_ATTRS=y" >> target/linux/x86/64/config-6.18
-
-# Hyper-V: lower LRNG IRQ entropy rate so LRNG seeds before VMBus 5s connection timeout
-# and disable LRNG scheduler entropy source that conflicts with Hyper-V paravirt scheduler
-# sed -i "s/echo 'CONFIG_LRNG_SCHED=y'/echo '# CONFIG_LRNG_SCHED is not set'/" include/kernel-defaults.mk
-# sed -i "/echo 'CONFIG_LRNG_SCHED_ENTROPY_RATE=/d" include/kernel-defaults.mk
-# sed -i "s/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=256'/echo 'CONFIG_LRNG_IRQ_ENTROPY_RATE=8'/" include/kernel-defaults.mk
-
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
 
@@ -52,6 +43,31 @@ git clone https://$github/sbwml/package_system_fstools -b openwrt-25.12 package/
 # util-linux
 rm -rf package/utils/util-linux
 git clone https://$github/sbwml/package_utils_util-linux -b openwrt-25.12 package/utils/util-linux
+
+mkdir -p package/network/utils/nftables/patches
+curl -s $mirror/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
+curl -s $mirror/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
+
+# FullCone module
+# rm -rf package/network/utils/fullconenat-nft
+# git clone https://$gitea/sbwml/nft-fullcone package/network/utils/fullconenat-nft
+
+# IPv6 NAT
+git clone https://$github/sbwml/packages_new_nat6 package/utils/nat6 -b openwrt-25.12
+
+# natflow
+git clone https://$github/sbwml/package_new_natflow package/utils/natflow
+
+# Patch Luci add nft_fullcone/bcm_fullcone & shortcut-fe & natflow & ipv6-nat & custom nft command option
+pushd customfeeds/luci
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0001-luci-app-firewall-add-nft-fullcone-and-bcm-fullcone-.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0002-luci-app-firewall-add-shortcut-fe-option.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0003-luci-app-firewall-add-ipv6-nat-option.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0004-luci-add-firewall-add-custom-nft-rule-support.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0005-luci-app-firewall-add-natflow-offload-support.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0006-luci-app-firewall-enable-hardware-offload-only-on-de.patch | patch -p1
+    curl -s $mirror/openwrt/patch/firewall4/luci-25.12/0007-luci-app-firewall-add-fullcone6-option-for-nftables-.patch | patch -p1
+popd
 
 # openssl urandom
 sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
@@ -223,3 +239,18 @@ popd
 # mac80211 - 6.18
 rm -rf package/kernel/mac80211
 git clone https://$github/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b v6.18
+
+git clone https://$github/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b v6.18
+
+# kernel patch
+# btf: silence btf module warning messages
+curl -s $mirror/openwrt/patch/kernel-6.18/btf/990-btf-silence-btf-module-warning-messages.patch > target/linux/generic/hack-6.18/990-btf-silence-btf-module-warning-messages.patch
+# cpu model
+curl -s $mirror/openwrt/patch/kernel-6.18/arm64/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch > target/linux/generic/hack-6.18/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch
+# bcm-fullcone
+curl -s $mirror/openwrt/patch/kernel-6.18/net/982-add-bcm-fullcone-support.patch > target/linux/generic/hack-6.18/982-add-bcm-fullcone-support.patch
+curl -s $mirror/openwrt/patch/kernel-6.18/net/983-add-bcm-fullcone-nft_masq-support.patch > target/linux/generic/hack-6.18/983-add-bcm-fullcone-nft_masq-support.patch
+# shortcut-fe
+curl -s $mirror/openwrt/patch/kernel-6.18/net/601-netfilter-export-udp_get_timeouts-function.patch > target/linux/generic/hack-6.18/601-netfilter-export-udp_get_timeouts-function.patch
+curl -s $mirror/openwrt/patch/kernel-6.18/net/952-net-conntrack-events-support-multiple-registrant.patch > target/linux/generic/hack-6.18/952-net-conntrack-events-support-multiple-registrant.patch
+curl -s $mirror/openwrt/patch/kernel-6.18/net/953-net-patch-linux-kernel-to-support-shortcut-fe.patch > target/linux/generic/hack-6.18/953-net-patch-linux-kernel-to-support-shortcut-fe.patch

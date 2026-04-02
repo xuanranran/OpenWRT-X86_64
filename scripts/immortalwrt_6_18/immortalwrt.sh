@@ -49,5 +49,19 @@ echo "CONFIG_KERNEL_LRNG=y" >> .config
 echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
 echo "# CONFIG_PACKAGE_urngd is not set" >> .config
 
+# Kernel - Hyper-V
+# Keep the Hyper-V boot path built-in for Gen 2 VMs, otherwise the root
+# disk on storvsc/VMBus may not appear before OpenWrt starts waiting for
+# the PARTUUID root device.
+echo -e "\n# Kernel - Hyper-V" >> .config
+echo "CONFIG_KERNEL_HYPERV=y" >> .config
+echo "CONFIG_KERNEL_HYPERVISOR_GUEST=y" >> .config
+echo "CONFIG_KERNEL_HYPERV_NET=y" >> .config
+echo "CONFIG_KERNEL_HYPERV_STORAGE=y" >> .config
+echo "CONFIG_KERNEL_HYPERV_UTILS=y" >> .config
+echo "CONFIG_KERNEL_PCI_HYPERV=y" >> .config
+echo "CONFIG_KERNEL_PCI_MMCONFIG=y" >> .config
+echo "CONFIG_KERNEL_SCSI_FC_ATTRS=y" >> .config
+
 # test 6.18
 sed -i 's/6.12/6.18/g' target/linux/x86/Makefile
