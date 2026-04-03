@@ -1,25 +1,38 @@
 #!/bin/bash
 # Set to local prepare
 
-# apk-tools
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/apk-tools/9999-hack-for-linux-pre-releases.patch > package/system/apk/patches/9999-hack-for-linux-pre-releases.patch
+mirror="https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master"
+github="github.com"
+gitea="git.cooluc.com"
 
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/generic-24.10/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
-echo "# CONFIG_KMSAN is not set" >> target/linux/x86/config-6.12
+# lto jobserver
+sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
+
+curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
+
+# add source mirror
+sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
+
+# attr no-mold
+sed -i '/PKG_BUILD_PARALLEL/aPKG_BUILD_FLAGS:=no-mold' customfeeds/packages/utils/attr/Makefile
 
 # x86 - disable mitigations
 sed -i 's/noinitrd/noinitrd mitigations=off/g' target/linux/x86/image/grub-efi.cfg
 
+# GCC Optimization level -O3
+curl -s $mirror/openwrt/patch/target-modify_for_aarch64_x86_64.patch | patch -p1
+
+# libubox
+sed -i '/TARGET_CFLAGS/ s/$/ -O2/' package/libs/libubox/Makefile
+
 # fstools
-pushd package/system/fstools
-patch -p1 < $GITHUB_WORKSPACE/data/fstools/fstools-add-xfs-ntfs3-extroot-support-and-fix-packaging.patch
-sed -i 's/+libjson-c/+libjson-c +fstools/' Makefile
-popd
+rm -rf package/system/fstools
+git clone https://$github/sbwml/package_system_fstools -b openwrt-25.12 package/system/fstools
 
 # util-linux
 mkdir -p package/utils/util-linux/patches
-curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/heads/openwrt-24.10/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch > package/utils/util-linux/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch
+curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/heads/openwrt-25.12/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch > package/utils/util-linux/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch
 
 # openssl urandom
 sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
@@ -29,16 +42,19 @@ sed -i "s/ no-lto//g" package/libs/openssl/Makefile
 sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
 
 # nghttp3
-# rm -rf customfeeds/packages/libs/nghttp3
-# git clone https://github.com/sbwml/package_libs_nghttp3 customfeeds/packages/libs/nghttp3
+rm -rf customfeeds/packages/libs/nghttp3
+git clone https://$github/sbwml/package_libs_nghttp3 customfeeds/packages/libs/nghttp3
 
 # ngtcp2
-# rm -rf customfeeds/packages/libs/ngtcp2
-# git clone https://github.com/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
+rm -rf customfeeds/packages/libs/ngtcp2
+git clone https://$github/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
 
 # curl - fix passwall `time_pretransfer` check
 rm -rf customfeeds/packages/net/curl
-git clone https://github.com/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
+git clone https://$github/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
+
+# procps-ng - top
+sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
 
 # TTYD
 sed -i 's/services/system/g' customfeeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
@@ -53,9 +69,7 @@ sed -i 's/PKG_RELEASE:=1/PKG_RELEASE:=2/g' customfeeds/packages/net/miniupnpd/Ma
 
 # nginx - latest version
 rm -rf customfeeds/packages/net/nginx
-git clone https://github.com/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-25.12
-# sed -i 's/1.28.0/1.29.0/g' customfeeds/packages/net/nginx/Makefile
-# sed -i 's/c6b5c6b086c0df9d3ca3ff5e084c1d0ef909e6038279c71c1c3e985f576ff76a/109754dfe8e5169a7a0cf0db6718e7da2db495753308f933f161e525a579a664/g' customfeeds/packages/net/nginx/Makefile
+git clone https://$github/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-25.12
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
 
 # nginx - ubus
@@ -63,13 +77,12 @@ sed -i 's/ubus_parallel_req 2/ubus_parallel_req 6/g' customfeeds/packages/net/ng
 sed -i '/ubus_parallel_req/a\        ubus_script_timeout 300;' customfeeds/packages/net/nginx/files-luci-support/60_nginx-luci-support
 
 # nginx - config
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/nginx/uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
+curl -s $mirror/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
+curl -s $mirror/openwrt/nginx/uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
 
-# opkg
-mkdir -p package/system/opkg/patches
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/opkg/900-opkg-download-disable-hsts.patch > package/system/opkg/patches/900-opkg-download-disable-hsts.patch
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/opkg/901-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch > package/system/opkg/patches/901-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch
+# apk
+mkdir -p package/system/apk/patches
+curl -s $mirror/openwrt/patch/apk/9000-io_url_wget-disbale-hsts.patch > package/system/apk/patches/9000-io_url_wget-disbale-hsts.patch
 
 # uwsgi - fix timeout
 sed -i '$a cgi-timeout = 600' customfeeds/packages/net/uwsgi/files-luci-support/luci-*.ini
@@ -88,17 +101,25 @@ sed -i 's#20) \* 1000#60) \* 1000#g' customfeeds/luci/modules/luci-base/htdocs/l
 
 # luci-mod extra
 pushd customfeeds/luci
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0001-luci-mod-system-add-modal-overlay-dialog-to-reboot.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0002-luci-mod-status-displays-actual-process-memory-usage.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0003-luci-mod-status-storage-index-applicable-only-to-val.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0004-luci-mod-status-firewall-disable-legacy-firewall-rul.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0005-luci-mod-system-add-refresh-interval-setting.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0006-luci-mod-system-mounts-add-docker-directory-mount-po.patch | patch -p1
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/luci/0007-luci-mod-system-add-ucitrack-luci-mod-system-zram.js.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0001-luci-mod-system-add-modal-overlay-dialog-to-reboot.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0002-luci-mod-status-displays-actual-process-memory-usage.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0003-luci-mod-status-storage-index-applicable-only-to-val.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0004-luci-mod-status-firewall-disable-legacy-firewall-rul.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0005-luci-mod-system-add-refresh-interval-setting.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0006-luci-mod-system-mounts-add-docker-directory-mount-po.patch | patch -p1
+curl -s $mirror/openwrt/patch/luci/0007-luci-mod-system-add-ucitrack-luci-mod-system-zram.js.patch | patch -p1
 popd
 
 # Luci diagnostics.js
 sed -i "s/immortalwrt.org/www.baidu.com/g" customfeeds/luci/modules/luci-mod-network/htdocs/luci-static/resources/view/network/diagnostics.js
+
+# luci-compat - remove extra line breaks from description
+sed -i '/<br \/>/d' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/full_valuefooter.htm
+
+# luci-app-package-manager
+pushd customfeeds/luci
+    curl -s $mirror/openwrt/patch/luci/applications/luci-app-package-manager/0001-luci-app-package-manager-support-installing-uploaded.patch | patch -p1
+popd
 
 # profile
 sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
@@ -107,6 +128,10 @@ sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
 
 # luci-compat - remove extra line breaks from description
 sed -i '/<br \/>/d' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/full_valuefooter.htm
+
+# luci-theme-bootstrap
+sed -i 's/font-size: 13px/font-size: 14px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css
+sed -i 's/9.75px/10.75px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css
 
 # BBRv3 - linux-6.12
 pushd target/linux/generic/backport-6.12
@@ -172,7 +197,3 @@ curl -Os https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/head
 curl -Os https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/linux-rt/012-0007-drm-i915-guc-Consider-also-RCU-depth-in-busy-loop.patch
 curl -Os https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/kernel-6.12/linux-rt/012-0008-Revert-drm-i915-Depend-on-PREEMPT_RT.patch
 popd
-
-# luci-theme-bootstrap
-sed -i 's/font-size: 13px/font-size: 14px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css
-sed -i 's/9.75px/10.75px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css

@@ -1,6 +1,10 @@
 #!/bin/bash
 # Set to local prepare
 
+mirror="https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master"
+github="github.com"
+gitea="git.cooluc.com"
+
 # autocore
 rm -rf package/emortal/autocore
 git clone https://github.com/xuanranran/autocore-arm -b openwrt-25.12 package/emortal/autocore
@@ -37,13 +41,6 @@ sed -i 's/0666/0644/g;s/0744/0755/g;s/0777/0755/g' customfeeds/luci/applications
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/samba.config
 sed -i 's/0666/0644/g;s/0777/0755/g' customfeeds/packages/net/samba4/files/smb.conf.template
 
-# luci-app-sqm
-# rm -rf customfeeds/luci/applications/luci-app-sqm
-# git clone https://git.cooluc.com/sbwml/luci-app-sqm customfeeds/luci/applications/luci-app-sqm
-
-# procps-ng - top
-sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
-
 # xdp-tools
 rm -rf package/network/utils/xdp-tools
 git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools package/network/utils/xdp-tools
@@ -51,17 +48,15 @@ git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools pac
 # clang
 # xtables-addons module
 rm -rf customfeeds/packages/net/xtables-addons
-git clone https://github.com/sbwml/kmod_packages_net_xtables-addons customfeeds/packages/net/xtables-addons
+git clone https://$github/sbwml/kmod_packages_net_xtables-addons customfeeds/packages/net/xtables-addons -b openwrt-25.12
 # netatop
 sed -i 's/$(MAKE)/$(KERNEL_MAKE)/g' customfeeds/packages/admin/netatop/Makefile
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/master/openwrt/patch/packages-patches/clang/netatop/900-fix-build-with-clang.patch > customfeeds/packages/admin/netatop/patches/900-fix-build-with-clang.patch
+curl -s $mirror/openwrt/patch/packages-patches/clang/netatop/900-fix-build-with-clang.patch > customfeeds/packages/admin/netatop/patches/900-fix-build-with-clang.patch
 # dmx_usb_module
 rm -rf customfeeds/packages/libs/dmx_usb_module
-git clone https://github.com/xuanranran/feeds_packages_libs_dmx_usb_module customfeeds/packages/libs/dmx_usb_module
+git clone https://git.cooluc.com/sbwml/feeds_packages_libs_dmx_usb_module customfeeds/packages/libs/dmx_usb_module
 # macremapper
-curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/6.6/openwrt/patch/packages-patches/clang/macremapper/100-macremapper-fix-clang-build.patch | patch -p1
+# curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/6.6/openwrt/patch/packages-patches/clang/macremapper/100-macremapper-fix-clang-build.patch | patch -p1
 # coova-chilli module
 rm -rf customfeeds/packages/net/coova-chilli
-git clone https://github.com/sbwml/kmod_packages_net_coova-chilli customfeeds/packages/net/coova-chilli
-
-# 替换杂项
+git clone https://$github/sbwml/kmod_packages_net_coova-chilli customfeeds/packages/net/coova-chilli

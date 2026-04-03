@@ -43,6 +43,8 @@ jobs:
         [ -f /etc/issue.net ] && cat /etc/issue.net
         [ -f /etc/issue ] && cat /etc/issue
         ulimit -a
+        echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+        echo "LC_ALL=en_US.UTF-8" >> $GITHUB_ENV
         
     - name: Clone Source Code
       run: |
@@ -84,9 +86,6 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/zsh_master/preset-terminal-tools.sh
-        # echo "::group::Run the 6.12 upgrade patch"
-        # ../scripts/patch/up6_12_patch.sh
-        # echo "::endgroup::"
         echo "::group::View 'make defconfig' output"
         make defconfig
         echo "::endgroup::"
