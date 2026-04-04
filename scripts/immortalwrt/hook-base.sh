@@ -195,8 +195,11 @@ sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]
 sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
 sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
 
-# luci-compat - remove extra line breaks from description
-sed -i '/<br \/>/d' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/full_valuefooter.htm
+# rootfs files
+mkdir -p files/etc/sysctl.d
+curl -so files/etc/sysctl.d/10-default.conf $mirror/openwrt/files/etc/sysctl.d/10-default.conf
+curl -so files/etc/sysctl.d/15-vm-swappiness.conf $mirror/openwrt/files/etc/sysctl.d/15-vm-swappiness.conf
+curl -so files/etc/sysctl.d/16-udp-buffer-size.conf $mirror/openwrt/files/etc/sysctl.d/16-udp-buffer-size.conf
 
 # luci-theme-bootstrap
 sed -i 's/font-size: 13px/font-size: 14px/g' customfeeds/luci/themes/luci-theme-bootstrap/htdocs/luci-static/bootstrap/cascade.css

@@ -114,5 +114,3 @@ rm -rf package/network/utils/nftables/patches
 
 # del packages
 rm -rf customfeeds/packages/net/onionshare-cli
-# rm -rf customfeeds/packages/net/fail2ban
-# rm -rf customfeeds/packages/utils/setools
