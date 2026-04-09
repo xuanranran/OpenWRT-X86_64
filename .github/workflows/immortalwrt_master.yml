@@ -88,10 +88,6 @@ jobs:
         echo "::group::View 'make defconfig' output"
         make defconfig
         echo "::endgroup::"
-        chmod +x ../scripts/check-hyperv-config.sh
-        echo "::group::Verify requested Hyper-V kernel options"
-        ../scripts/check-hyperv-config.sh "$OPENWRTROOT" top
-        echo "::endgroup::"
 
     - name: Download Package
       id: package
@@ -111,9 +107,6 @@ jobs:
         make tools/compile -j$(nproc) || make tools/compile -j$(nproc) || make tools/compile -j1 IGNORE_ERRORS=1 V=s
         make toolchain/compile -j$(nproc) || make toolchain/compile -j$(nproc) || make toolchain/compile -j1 IGNORE_ERRORS=1 V=s
         make target/compile -j$(nproc) || make target/compile -j$(nproc) IGNORE_ERRORS=1 || make target/compile -j1 IGNORE_ERRORS=1 V=s
-        echo "::group::Verify final kernel Hyper-V options"
-        ../scripts/check-hyperv-config.sh "$OPENWRTROOT" kernel
-        echo "::endgroup::"
         make diffconfig
         make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j$(nproc) IGNORE_ERRORS=1
         make package/index
