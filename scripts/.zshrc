@@ -70,6 +70,10 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git command-not-found extract z docker zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 
+ZSH_COMPDUMP="${HOME}/.zcompdump"
+ZSH_DISABLE_COMPFIX=true
+rm -f "${HOME}"/.zcompdump "${HOME}"/.zcompdump-*(N) 2>/dev/null
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -98,8 +102,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# 修复 OpenWrt 下的权限和路径问题
-autoload -Uz compinit
-compinit -u -C -d $HOME/.zcompdump
-
-cat /etc/banner
+# cat /etc/banner
