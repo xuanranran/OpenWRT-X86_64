@@ -186,9 +186,7 @@ sed -i "s/immortalwrt.org/www.baidu.com/g" customfeeds/luci/modules/luci-mod-net
 sed -i '/<br \/>/d' customfeeds/luci/modules/luci-compat/luasrc/view/cbi/full_valuefooter.htm
 
 # luci-app-package-manager
-pushd customfeeds/luci
-    curl -s $mirror/openwrt/patch/luci/applications/luci-app-package-manager/0001-luci-app-package-manager-support-installing-uploaded.patch | patch -p1
-popd
+patch -p1 -d customfeeds/luci < ../data/luci/0001-luci-app-package-manager-support-installing-uploaded.patch
 
 # profile
 sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]\\W\\[\\033[00m\\]\\[\\e[32;1m\\]]\\[\\e[0m\\]\\\$#g' package/base-files/files/etc/profile
