@@ -87,7 +87,7 @@ curl -s $mirror/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullcone
 git clone https://$github/sbwml/packages_new_nat6 package/utils/nat6 -b openwrt-25.12
 
 # natflow
-git clone https://$github/sbwml/package_new_natflow package/utils/natflow
+git clone https://$github/xuanranran/package_new_natflow package/utils/natflow
 
 # luci-app-firewall
 curl -s https://raw.githubusercontent.com/openwrt/luci/refs/heads/master/applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js > customfeeds/luci/applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js
