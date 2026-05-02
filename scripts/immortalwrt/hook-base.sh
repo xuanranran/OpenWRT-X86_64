@@ -193,6 +193,9 @@ sed -i 's#\\u@\\h:\\w\\\$#\\[\\e[32;1m\\][\\u@\\h\\[\\e[0m\\] \\[\\033[01;34m\\]
 sed -ri 's/(export PATH=")[^"]*/\1%PATH%:\/opt\/bin:\/opt\/sbin:\/opt\/usr\/bin:\/opt\/usr\/sbin/' package/base-files/files/etc/profile
 sed -i '/PS1/a\export TERM=xterm-color' package/base-files/files/etc/profile
 
+# busybox
+sed -i '/profile\.d/d' package/utils/busybox/Makefile
+
 # rootfs files
 mkdir -p files/etc/sysctl.d
 curl -so files/etc/sysctl.d/10-default.conf $mirror/openwrt/files/etc/sysctl.d/10-default.conf
