@@ -68,18 +68,35 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found extract z docker zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(command-not-found extract z zsh-autosuggestions zsh-syntax-highlighting)
 
-ZSH_COMPDUMP="${HOME}/.zcompdump"
+ZSH_COMPDUMP="/tmp/.zcompdump-${USER:-root}"
 ZSH_DISABLE_COMPFIX=true
-if [[ -w /tmp ]]; then
-  _zcompdump_clean_marker="/tmp/.zcompdump-cleaned-${USER:-root}"
-  if [[ ! -e "${_zcompdump_clean_marker}" ]]; then
-    rm -f "${HOME}"/.zcompdump "${HOME}"/.zcompdump-*(N) 2>/dev/null
-    : >| "${_zcompdump_clean_marker}" 2>/dev/null
+rm -f "${HOME}"/.zcompdump "${HOME}"/.zcompdump-*(N) 2>/dev/null
+
+fpath=("${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src" $fpath)
+autoload -Uz compinit
+_zcompdump_ready="${ZSH_COMPDUMP}.ready"
+_zcompdump_lock="${ZSH_COMPDUMP}.lock"
+if [[ ! -s "${ZSH_COMPDUMP}" || ! -e "${_zcompdump_ready}" ]]; then
+  if mkdir "${_zcompdump_lock}" 2>/dev/null; then
+    rm -f "${ZSH_COMPDUMP}" "${_zcompdump_ready}" 2>/dev/null
+    compinit -C -d "${ZSH_COMPDUMP}"
+    [[ -s "${ZSH_COMPDUMP}" ]] && : >| "${_zcompdump_ready}"
+    rmdir "${_zcompdump_lock}" 2>/dev/null
+  else
+    _zcompdump_wait=0
+    while [[ -d "${_zcompdump_lock}" && ! -e "${_zcompdump_ready}" && ${_zcompdump_wait} -lt 10 ]]; do
+      sleep 1
+      _zcompdump_wait=$((_zcompdump_wait + 1))
+    done
+    unset _zcompdump_wait
+    compinit -C -d "${ZSH_COMPDUMP}"
   fi
-  unset _zcompdump_clean_marker
+else
+  compinit -C -d "${ZSH_COMPDUMP}"
 fi
+unset _zcompdump_ready _zcompdump_lock
 
 source $ZSH/oh-my-zsh.sh
 
