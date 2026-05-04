@@ -11,7 +11,8 @@ on:
 env:
   USER_NAME: xuanranran
   REPO_BRANCH: master
-  CONFIG_FILE: configs/immortalwrt/immortalwrt.config
+  BUILD_CONFIG: configs/immortalwrt/build.config
+  PKG_CONFIG: configs/immortalwrt/packages.config
   DIY_SH: scripts/immortalwrt/immortalwrt.sh
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -79,7 +80,7 @@ jobs:
     - name: Load Custom Configuration
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
+        cat $BUILD_CONFIG $PKG_CONFIG > $OPENWRTROOT/.config
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64

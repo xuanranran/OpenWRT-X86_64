@@ -46,6 +46,3 @@ cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/
 # UPX - copy binary list for rootfs compression (patch 0002)
 cp -f $GITHUB_WORKSPACE/data/upx_list.txt ./upx_list.txt
 
-# DPDK
-echo 'CONFIG_PACKAGE_dpdk-tools=y' >> .config
-echo 'CONFIG_PACKAGE_numactl=y' >> .config
