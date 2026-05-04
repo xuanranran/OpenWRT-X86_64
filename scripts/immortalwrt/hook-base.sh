@@ -8,8 +8,18 @@ gitea="git.cooluc.com"
 # lto jobserver
 sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
 
+# generic-25.12 patches (0010 skipped - PREEMPT_RT already in immortalwrt)
+curl -s $mirror/openwrt/patch/generic-25.12/0001-tools-add-upx-tools.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0002-rootfs-add-upx-compression-support.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0003-rootfs-add-r-w-permissions-for-UCI-configuration-fil.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0004-rootfs-Add-support-for-local-kmod-installation-sourc.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
 curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0007-include-kernel-add-miss-config-for-linux-6.11.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0008-meson-add-platform-variable-to-cross-compilation-fil.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0009-tools-squashfs4-enable-lz4-zstd-compression-support.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0011-config-include-image-add-support-for-squashfs-zstd-c.patch | patch -p1
+curl -s $mirror/openwrt/patch/generic-25.12/0013-include-netfilter-update-kernel-config-options-for-l.patch | patch -p1
 
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json

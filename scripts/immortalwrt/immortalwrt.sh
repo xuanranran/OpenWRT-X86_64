@@ -49,6 +49,10 @@ echo "CONFIG_KERNEL_LRNG=y" >> .config
 echo "# CONFIG_PACKAGE_urandom-seed is not set" >> .config
 echo "# CONFIG_PACKAGE_urngd is not set" >> .config
 
+# SquashFS - zstd compression (requires 0009/0011 patches)
+echo -e "\n# SquashFS zstd compression" >> .config
+echo "CONFIG_TARGET_ROOTFS_SQUASHFS_ZSTD=y" >> .config
+
 # DPDK
 echo 'CONFIG_PACKAGE_dpdk-tools=y' >> .config
 echo 'CONFIG_PACKAGE_numactl=y' >> .config
