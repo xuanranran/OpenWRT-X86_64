@@ -55,6 +55,23 @@ curl -s $mirror/openwrt/patch/dpdk/dpdk/patches/010-dpdk_arm_build_platform_fix.
 curl -s $mirror/openwrt/patch/dpdk/dpdk/patches/201-r8125-add-r8125-ethernet-poll-mode-driver.patch > package/emortal/dpdk/patches/201-r8125-add-r8125-ethernet-poll-mode-driver.patch
 curl -s $mirror/openwrt/patch/dpdk/numactl/Makefile > package/emortal/numactl/Makefile
 
+# IF USE GLIBC
+if [ "$ENABLE_GLIBC" = "true" ]; then
+    # musl-libc
+    git clone https://$gitea/sbwml/package_libs_musl-libc package/libs/musl-libc
+    # glibc-common
+    curl -s $mirror/openwrt/patch/glibc/glibc-common.patch | patch -p1
+    # glibc-common - locale data
+    mkdir -p package/libs/toolchain/glibc-locale
+    curl -Lso package/libs/toolchain/glibc-locale/locale-archive https://github.com/sbwml/r4s_build_script/releases/download/locale/locale-archive
+    [ "$?" -ne 0 ] && echo "Locale file download failed..."
+    # GNU LANG
+    mkdir -p package/base-files/files/etc/profile.d
+    echo 'export LANG="en_US.UTF-8" I18NPATH="/usr/share/i18n"' > package/base-files/files/etc/profile.d/sys_locale.sh
+    # build - drop `--disable-profile`
+    sed -i "/disable-profile/d" toolchain/glibc/common.mk
+fi
+
 # fstools
 rm -rf package/system/fstools
 git clone https://$github/sbwml/package_system_fstools -b openwrt-25.12 package/system/fstools

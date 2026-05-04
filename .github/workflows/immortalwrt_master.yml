@@ -3,6 +3,11 @@ name: immortalwrt_master
 on:
   repository_dispatch:
   workflow_dispatch:
+    inputs:
+      ENABLE_GLIBC:
+        description: 'Enable glibc (instead of musl)'
+        type: boolean
+        default: false
   # schedule:
   #   - cron: 11 23 * * * 
   # watch:
@@ -68,7 +73,7 @@ jobs:
         echo "::group::Executing package hook scripts"
         find ../scripts -type f -name "*.sh" -exec chmod +x {} +
         ../scripts/immortalwrt/hook-package.sh
-        ../scripts/immortalwrt/hook-base.sh
+        ENABLE_GLIBC=${{ inputs.ENABLE_GLIBC }} ../scripts/immortalwrt/hook-base.sh
         echo "::endgroup::"
         ../scripts/immortalwrt/hook-feeds.sh
 
@@ -81,6 +86,7 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         cat $BUILD_CONFIG $PKG_CONFIG > $OPENWRTROOT/.config
+        [ "${{ inputs.ENABLE_GLIBC }}" = "true" ] && cat configs/immortalwrt/glibc.config >> $OPENWRTROOT/.config
         cd $OPENWRTROOT
         ../$DIY_SH
         ../scripts/preset-clash-core.sh amd64
