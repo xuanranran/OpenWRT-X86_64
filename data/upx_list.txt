@@ -1,0 +1,4 @@
+/usr/bin/xray
+/usr/bin/sing-box
+/usr/bin/mihomo
+/usr/sbin/haproxy
