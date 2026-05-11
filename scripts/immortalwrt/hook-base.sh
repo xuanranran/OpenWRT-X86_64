@@ -298,10 +298,6 @@ pushd package/kernel/mt76/src/firmware/mt7927
     curl -Os $mirror/openwrt/patch/mt76/src/firmware/mt7927/WIFI_RAM_CODE_MT6639_2_1.bin
 popd
 
-# mac80211 - 6.18
-rm -rf package/kernel/mac80211
-git clone https://$github/sbwml/package_kernel_mac80211 package/kernel/mac80211 -b v6.18
-
 # kernel patch
 # btf: silence btf module warning messages
 curl -s $mirror/openwrt/patch/kernel-6.18/btf/990-btf-silence-btf-module-warning-messages.patch > target/linux/generic/hack-6.18/990-btf-silence-btf-module-warning-messages.patch
