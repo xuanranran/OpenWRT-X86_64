@@ -1,0 +1,6 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,4 +2,4 @@
+ project(quectel-CM)
+-add_definitions(-Wall -Wextra -Werror -O1)
++add_definitions(-Wall -Wextra -Werror -O1 -Wno-unused-but-set-variable)

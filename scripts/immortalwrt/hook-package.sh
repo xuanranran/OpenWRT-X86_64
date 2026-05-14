@@ -113,6 +113,9 @@ mkdir -p customfeeds/packages/libs/libwebsockets/patches
 curl -s $mirror/openwrt/patch/packages-patches_gcc16/libwebsockets/900-fix-build-for-gcc-16.patch > customfeeds/packages/libs/libwebsockets/patches/900-fix-build-for-gcc-16.patch
 # bash
 sed -i "/PKG_INSTALL:=/i\PKG_BUILD_FLAGS:=no-lto" customfeeds/packages/utils/bash/Makefile
+# quectel-cm
+mkdir -p customfeeds/packages/net/quectel-cm/patches
+cp -f $GITHUB_WORKSPACE/data/patches/quectel-cm/030-gcc16.patch customfeeds/packages/net/quectel-cm/patches/030-gcc16.patch
 
 sed -i '/^CONFIG_FAILOVER=y$/a CONFIG_SHORTCUT_FE=y' target/linux/x86/64/config-6.18
 
