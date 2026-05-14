@@ -103,7 +103,7 @@ sed -i 's|^PKG_SOURCE_URL:=.*|PKG_SOURCE_URL:=@SF/$(PKG_NAME)/$(PKG_NAME)/$(PKG_
 # xl2tpd
 sed -i '/ifneq (0,0)/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/xl2tpd/Makefile
 # netdata
-sed -i '/TARGET_CFLAGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/admin/netdata/Makefile
+cp -f $GITHUB_WORKSPACE/data/patches/netdata/Makefile customfeeds/packages/admin/netdata/Makefile
 
 # fix gcc-16.1.0
 # elfutils lto
