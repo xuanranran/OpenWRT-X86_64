@@ -104,12 +104,15 @@ sed -i 's|^PKG_SOURCE_URL:=.*|PKG_SOURCE_URL:=@SF/$(PKG_NAME)/$(PKG_NAME)/$(PKG_
 sed -i '/ifneq (0,0)/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/xl2tpd/Makefile
 # netdata
 sed -i '/TARGET_CFLAGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/admin/netdata/Makefile
-# uwsgi
-sed -i '/MAKE_VARS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/uwsgi/Makefile
-# libpam
-sed -i '/MESON_ARGS/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/libs/libpam/Makefile
-# coova-chilli - fix gcc 15 c23
-sed -i '/TARGET_CFLAGS/s/$/ -std=gnu17/' customfeeds/packages/net/coova-chilli/Makefile
+
+# fix gcc-16.1.0
+# elfutils lto
+curl -s $mirror/openwrt/patch/packages-patches_gcc16/elfutils/900-fix-gcc16-null-dereference-with-lto.patch > package/libs/elfutils/patches/900-fix-gcc16-null-dereference-with-lto.patch
+# libwebsockets
+mkdir -p customfeeds/packages/libs/libwebsockets/patches
+curl -s $mirror/openwrt/patch/packages-patches_gcc16/libwebsockets/900-fix-build-for-gcc-16.patch > customfeeds/packages/libs/libwebsockets/patches/900-fix-build-for-gcc-16.patch
+# bash
+sed -i "/PKG_INSTALL:=/i\PKG_BUILD_FLAGS:=no-lto" customfeeds/packages/utils/bash/Makefile
 
 sed -i '/^CONFIG_FAILOVER=y$/a CONFIG_SHORTCUT_FE=y' target/linux/x86/64/config-6.18
 
