@@ -233,6 +233,22 @@ pushd target/linux/generic/backport-6.18
     curl -Os $mirror/openwrt/patch/kernel-6.18/bbr3/010-bbr3-0018-tcp-export-TCPI_OPT_ECN_LOW-in-tcp_info-tcpi_options.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/bbr3/010-bbr3-0019-x86-cfi-bpf-Add-tso_segs-and-skb_marked_lost-to-bpf_.patch
     curl -Os $mirror/openwrt/patch/kernel-6.18/bbr3/010-bbr3-0020-net-tcp_bbr-v3-silence-Wconstant-logical-operand.patch
+    # fix 010-bbr3-0016 for linux 6.18.33: snd_ssthresh assignments use WRITE_ONCE()
+    python3 - <<'PYEOF'
+f = "010-bbr3-0016-net-tcp_bbr-v3-update-TCP-bbr-congestion-control-mod.patch"
+with open(f) as fp:
+    c = fp.read()
+c = c.replace(
+    "-\t\ttcp_sk(sk)->snd_ssthresh =\n-\t\t\t\tbbr_inflight(sk, bbr_max_bw(sk), BBR_UNIT);",
+    "-\t\tWRITE_ONCE(tcp_sk(sk)->snd_ssthresh,\n-\t\t\t   bbr_inflight(sk, bbr_max_bw(sk), BBR_UNIT));"
+)
+c = c.replace(
+    " \ttp->snd_ssthresh = TCP_INFINITE_SSTHRESH;",
+    " \tWRITE_ONCE(tp->snd_ssthresh, TCP_INFINITE_SSTHRESH);"
+)
+with open(f, "w") as fp:
+    fp.write(c)
+PYEOF
 popd
 
 # LRNG - 6.18
