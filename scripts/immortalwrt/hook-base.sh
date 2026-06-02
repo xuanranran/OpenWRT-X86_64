@@ -150,6 +150,9 @@ sed -i '/ubus_parallel_req/a\        ubus_script_timeout 300;' customfeeds/packa
 curl -s $mirror/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
 curl -s $mirror/openwrt/nginx/uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
 
+# nginx-util
+sed -i '/\/etc\/nginx\/uci.conf.template/d' feeds/packages/net/nginx-util/Makefile
+
 # apk
 mkdir -p package/system/apk/patches
 curl -s $mirror/openwrt/patch/apk/9000-io_url_wget-disbale-hsts.patch > package/system/apk/patches/9000-io_url_wget-disbale-hsts.patch
