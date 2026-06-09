@@ -121,6 +121,3 @@ sed -i '/^CONFIG_FAILOVER=y$/a CONFIG_SHORTCUT_FE=y' target/linux/x86/64/config-
 rm -rf package/libs/libnftnl/patches
 # nftables
 rm -rf package/network/utils/nftables/patches
-
-# del packages
-rm -rf customfeeds/packages/net/onionshare-cli
