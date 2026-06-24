@@ -106,9 +106,6 @@ sed -i '/ifneq (0,0)/i TARGET_CFLAGS += -std=gnu17\n' customfeeds/packages/net/x
 # fix gcc-16.1.0
 # elfutils lto
 curl -s $mirror/openwrt/patch/packages-patches_gcc16/elfutils/900-fix-gcc16-null-dereference-with-lto.patch > package/libs/elfutils/patches/900-fix-gcc16-null-dereference-with-lto.patch
-# libwebsockets
-mkdir -p customfeeds/packages/libs/libwebsockets/patches
-curl -s $mirror/openwrt/patch/packages-patches_gcc16/libwebsockets/900-fix-build-for-gcc-16.patch > customfeeds/packages/libs/libwebsockets/patches/900-fix-build-for-gcc-16.patch
 # bash
 sed -i "/PKG_INSTALL:=/i\PKG_BUILD_FLAGS:=no-lto" customfeeds/packages/utils/bash/Makefile
 # quectel-cm
