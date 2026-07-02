@@ -131,6 +131,7 @@ jobs:
       id: generate
       run: |
         cd $OPENWRTROOT
+        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         mkdir -p files/etc/uci-defaults/
         cp ../scripts/immortalwrt/snapshots-init-settings.sh files/etc/uci-defaults/99-init-settings
         mkdir -p files/etc/apk/repositories.d 
