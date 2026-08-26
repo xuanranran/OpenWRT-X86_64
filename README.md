@@ -4,13 +4,13 @@
 
 **方式一：直接运行（在线）**
 ```bash
-bash <(curl -sL https://upop.miaoco.me/update)
+bash <(curl -sL https://raw.githubusercontent.com/xuanranran/scripts/refs/heads/main/update_openwrt.sh)
 ```
 
 **方式二：使用本地脚本（推荐）**
 ```bash
 # 下载并运行升级脚本
-wget https://upop.miaoco.me/update && chmod +x update && sh update
+wget https://raw.githubusercontent.com/xuanranran/scripts/refs/heads/main/update_openwrt.sh && chmod +x update_openwrt.sh && sh update_openwrt.sh
 ```
 
 # 界面展示
