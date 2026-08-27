@@ -3,6 +3,12 @@ name: immortalwrt_master
 on:
   repository_dispatch:
   workflow_dispatch:
+    inputs:
+      compile_mwan3:
+        description: 'Add mwan3'
+        required: true
+        default: false
+        type: boolean
   # schedule:
   #   - cron: 11 23 * * * 
   # watch:
@@ -79,6 +85,7 @@ jobs:
     - name: Load Custom Configuration
       env:
         CNSPEEDTEST_TOKEN: ${{ secrets.CNSPEEDTEST_TOKEN }}
+        COMPILE_MWAN3: ${{ inputs.compile_mwan3 }}
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
@@ -87,6 +94,10 @@ jobs:
         ../scripts/preset-clash-core.sh amd64
         ../scripts/preset-nikki-core.sh amd64
         ../scripts/preset-terminal-tools.sh
+        if [ "$COMPILE_MWAN3" = "true" ]; then
+          echo 'CONFIG_PACKAGE_luci-app-mwan3=y' >> .config
+        fi
+        echo "Compile luci-app-mwan3: $COMPILE_MWAN3"
         echo "::group::View 'make defconfig' output"
         make defconfig
         echo "::endgroup::"
