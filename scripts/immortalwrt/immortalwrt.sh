@@ -31,6 +31,13 @@ sed -i "s/ImmortalWrt/OpenWrt/g" package/base-files/files/bin/config_generate
 # 修改开源站地址 (按内容删除国内镜像, 避免行号漂移破坏 JSON)
 sed -i '\#mirror.iscas.ac.cn/kernel.org#d; \#mirrors.ustc.edu.cn/kernel.org#d; \#mirror.nju.edu.cn/kernel.org#d; \#mirrors.ustc.edu.cn/gnome#d; \#mirror.nju.edu.cn/gnome#d' scripts/projectsmirrors.json
 
+# Prefer the MIT kernel mirror for the New York runner
+sed -i '/"@KERNEL": \[/,/]/ {
+  s#"https://cdn.kernel.org/pub"#"https://kernel-mirror-placeholder"#
+  s#"https://mirrors.mit.edu/kernel"#"https://cdn.kernel.org/pub"#
+  s#"https://kernel-mirror-placeholder"#"https://mirrors.mit.edu/kernel"#
+}' scripts/projectsmirrors.json
+
 # Prefer the official Samba source; keep other mirrors as fallbacks
 samba_makefile="customfeeds/packages/net/samba4/Makefile"
 if [ -f "$samba_makefile" ]; then
