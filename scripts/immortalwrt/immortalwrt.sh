@@ -31,6 +31,12 @@ sed -i "s/ImmortalWrt/OpenWrt/g" package/base-files/files/bin/config_generate
 # 修改开源站地址 (按内容删除国内镜像, 避免行号漂移破坏 JSON)
 sed -i '\#mirror.iscas.ac.cn/kernel.org#d; \#mirrors.ustc.edu.cn/kernel.org#d; \#mirror.nju.edu.cn/kernel.org#d; \#mirrors.ustc.edu.cn/gnome#d; \#mirror.nju.edu.cn/gnome#d' scripts/projectsmirrors.json
 
+# Prefer the official Samba source; keep other mirrors as fallbacks
+samba_makefile="customfeeds/packages/net/samba4/Makefile"
+if [ -f "$samba_makefile" ]; then
+  sed -i '\#https://download.samba.org/pub/samba/stable/#d; \#https://www.nic.funet.fi/index/samba/pub/samba/stable/#s/[[:space:]]*\\$//; /^PKG_SOURCE_URL:= \\/a\        https://download.samba.org/pub/samba/stable/ \\' "$samba_makefile"
+fi
+
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 sed -i 's/services/vpn/g' customfeeds/luci/applications/luci-app-frpc/root/usr/share/luci/menu.d/luci-app-frpc.json
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-3cat/root/usr/share/luci/menu.d/luci-app-3cat.json
