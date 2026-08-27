@@ -77,6 +77,8 @@ jobs:
         ./scripts/feeds install -a
 
     - name: Load Custom Configuration
+      env:
+        CNSPEEDTEST_TOKEN: ${{ secrets.CNSPEEDTEST_TOKEN }}
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRTROOT/.config
