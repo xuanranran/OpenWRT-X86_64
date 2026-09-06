@@ -281,7 +281,7 @@ popd
 
 # mt76
 rm -rf package/kernel/mt76
-git clone https://github.com/xuanranran/package_kernel_mt76.git package/kernel/mt76 || exit 1
+git clone https://github.com/xuanranran/package_kernel_mt76 package/kernel/mt76
 
 # kernel patch
 # btf: silence btf module warning messages
