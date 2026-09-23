@@ -9,7 +9,7 @@ gitea="git.cooluc.com"
 sed -i 's/-flto=auto/-flto=jobserver/g' include/package.mk
 
 curl -s $mirror/openwrt/patch/generic-25.12/0005-kernel-Add-support-for-llvm-clang-compiler.patch | patch -p1
-curl -s $mirror/openwrt/patch/generic-25.12/0006-build-kernel-add-out-of-tree-kernel-config.patch | patch -p1
+patch --batch --forward -p1 < ../data/patches/kernel/0006-build-kernel-add-out-of-tree-kernel-config.patch
 
 # add source mirror
 sed -i '/"@OPENWRT": \[/a\\t\t"https://source.cooluc.com",' scripts/projectsmirrors.json
