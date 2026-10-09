@@ -31,6 +31,8 @@ rm -rf customfeeds/packages/utils/{docker,dockerd,containerd,runc}
 git clone https://github.com/sbwml/packages_utils_docker customfeeds/packages/utils/docker
 git clone https://github.com/sbwml/packages_utils_dockerd customfeeds/packages/utils/dockerd
 git clone https://github.com/sbwml/packages_utils_containerd customfeeds/packages/utils/containerd
+# Keep the urfave CLI resources required by go:embed in the Go build directory.
+sed -i '/^MAKE_PATH:=/i GO_PKG_INSTALL_EXTRA += vendor/github.com/urfave/cli/v3/autocomplete/ vendor/github.com/urfave/cli-docs/v3/.*[.]gotmpl' customfeeds/packages/utils/containerd/Makefile
 git clone https://github.com/sbwml/packages_utils_runc customfeeds/packages/utils/runc
 
 # samba4 - bump version
