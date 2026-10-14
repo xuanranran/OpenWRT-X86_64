@@ -78,8 +78,8 @@ cp -f "$GITHUB_WORKSPACE/data/patches/libnftnl/0003-libnftnl-fullcone-adapt-sett
 sed -i '/^PKG_BUILD_FLAGS[[:space:]]*:/aPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
 # nftables
 mkdir -p package/network/utils/nftables/patches
-curl -s $mirror/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
-curl -s $mirror/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/nftables/0001-nftables-add-fullcone-expression-support.patch" package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/nftables/0002-nftables-add-brcm-fullconenat-support.patch" package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
 
 # FullCone module
 # rm -rf package/network/utils/fullconenat-nft
