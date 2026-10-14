@@ -124,10 +124,10 @@ rm -rf package/network/utils/nftables/patches
 # 修改开源站地址 (按内容删除国内镜像, 避免行号漂移破坏 JSON)
 sed -i '\#mirror.iscas.ac.cn/kernel.org#d; \#mirrors.ustc.edu.cn/kernel.org#d; \#mirror.nju.edu.cn/kernel.org#d; \#mirrors.ustc.edu.cn/gnome#d; \#mirror.nju.edu.cn/gnome#d' scripts/projectsmirrors.json
 
-# Prefer the kernel.org edge mirror; keep the CDN and other mirrors as fallbacks
+# Prefer the official kernel.org CDN; keep the edge mirror and other fallbacks
 sed -i '/"@KERNEL": \[/,/]/ {
   \#"https://mirrors.edge.kernel.org/pub"#d
-  s#"https://cdn.kernel.org/pub"#"https://mirrors.edge.kernel.org/pub",\n\t\t"https://cdn.kernel.org/pub"#
+  s#"https://cdn.kernel.org/pub"#"https://cdn.kernel.org/pub",\n\t\t"https://mirrors.edge.kernel.org/pub"#
 }' scripts/projectsmirrors.json
 
 # Prefer the official Samba source; keep other mirrors as fallbacks
