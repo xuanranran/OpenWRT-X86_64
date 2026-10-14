@@ -59,6 +59,8 @@ jobs:
 
     - name: Update Feeds
       id: update
+      env:
+        CNSPEEDTEST_TOKEN: ${{ secrets.CNSPEEDTEST_TOKEN }}
       run: |
         cd openwrt
         echo "OPENWRTROOT=$PWD" >> $GITHUB_ENV
@@ -84,7 +86,6 @@ jobs:
 
     - name: Load Custom Configuration
       env:
-        CNSPEEDTEST_TOKEN: ${{ secrets.CNSPEEDTEST_TOKEN }}
         COMPILE_MWAN3: ${{ inputs.compile_mwan3 }}
       run: |
         [ -e files ] && mv files $OPENWRTROOT/files

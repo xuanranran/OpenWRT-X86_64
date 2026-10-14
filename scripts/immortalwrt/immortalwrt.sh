@@ -1,6 +1,6 @@
 #!/bin/bash
 # Clone community packages to package/community
-mkdir package/community
+mkdir -p package/community
 pushd package/community
 
 # Add openwrt-packages
@@ -28,21 +28,6 @@ sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 sed -i 's/192.168.1.1/192.168.11.1/g' package/base-files/files/bin/config_generate
 sed -i "s/ImmortalWrt/OpenWrt/g" package/base-files/files/bin/config_generate
 
-# 修改开源站地址 (按内容删除国内镜像, 避免行号漂移破坏 JSON)
-sed -i '\#mirror.iscas.ac.cn/kernel.org#d; \#mirrors.ustc.edu.cn/kernel.org#d; \#mirror.nju.edu.cn/kernel.org#d; \#mirrors.ustc.edu.cn/gnome#d; \#mirror.nju.edu.cn/gnome#d' scripts/projectsmirrors.json
-
-# Prefer the kernel.org edge mirror; keep the CDN and other mirrors as fallbacks
-sed -i '/"@KERNEL": \[/,/]/ {
-  \#"https://mirrors.edge.kernel.org/pub"#d
-  s#"https://cdn.kernel.org/pub"#"https://mirrors.edge.kernel.org/pub",\n\t\t"https://cdn.kernel.org/pub"#
-}' scripts/projectsmirrors.json
-
-# Prefer the official Samba source; keep other mirrors as fallbacks
-samba_makefile="customfeeds/packages/net/samba4/Makefile"
-if [ -f "$samba_makefile" ]; then
-  sed -i '\#https://download.samba.org/pub/samba/stable/#d; \#https://www.nic.funet.fi/index/samba/pub/samba/stable/#s/[[:space:]]*\\$//; /^PKG_SOURCE_URL:= \\/a\        https://download.samba.org/pub/samba/stable/ \\' "$samba_makefile"
-fi
-
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-upnp/root/usr/share/luci/menu.d/luci-app-upnp.json
 sed -i 's/services/vpn/g' customfeeds/luci/applications/luci-app-frpc/root/usr/share/luci/menu.d/luci-app-frpc.json
 sed -i 's/services/network/g' customfeeds/luci/applications/luci-app-3cat/root/usr/share/luci/menu.d/luci-app-3cat.json
@@ -53,18 +38,3 @@ rm -rf target/linux/x86/base-files/etc/board.d/02_network
 rm -rf package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/banner package/base-files/files/etc/banner
 cp -f $GITHUB_WORKSPACE/data/02_network target/linux/x86/base-files/etc/board.d/02_network
-
-# Add private cnspeedtest packages
-rm -rf package/community/openwrt-cnspeedtest
-if [ -z "$CNSPEEDTEST_TOKEN" ]; then
-  echo "CNSPEEDTEST_TOKEN is not configured; skipping private cnspeedtest packages"
-else
-  CNSPEEDTEST_AUTH="$(printf 'x-access-token:%s' "$CNSPEEDTEST_TOKEN" | base64 | tr -d '\n')"
-  GIT_CONFIG_COUNT=1 \
-  GIT_CONFIG_KEY_0=http.https://github.com/.extraheader \
-  GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $CNSPEEDTEST_AUTH" \
-  git clone --depth=1 --branch master \
-    https://github.com/xuanranran/openwrt-cnspeedtest.git \
-    package/community/openwrt-cnspeedtest
-  unset CNSPEEDTEST_AUTH
-fi
