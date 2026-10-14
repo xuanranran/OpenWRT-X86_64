@@ -73,6 +73,7 @@ sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/c
 mkdir -p package/libs/libnftnl/patches
 curl -s $mirror/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
 curl -s $mirror/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/libnftnl/0003-libnftnl-fullcone-adapt-setter-api.patch" package/libs/libnftnl/patches/0003-libnftnl-fullcone-adapt-setter-api.patch
 # fix build on rhel9
 sed -i '/^PKG_BUILD_FLAGS[[:space:]]*:/aPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
 # nftables
