@@ -1,0 +1,27 @@
+From 70aff01d2fbd8a81b9d275ad48216f7a6bc91e57 Mon Sep 17 00:00:00 2001
+From: sbwml <984419930@qq.com>
+Date: Sat, 28 Jan 2023 20:31:55 +0800
+Subject: [PATCH 3/4] block: add xfsck support
+
+
+Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
+---
+--- a/block.c
++++ b/block.c
+@@ -775,6 +775,7 @@
+ 	const char *e2fsck = "/usr/sbin/e2fsck";
+ 	const char *f2fsck = "/usr/sbin/fsck.f2fs";
+ 	const char *fatfsck = "/usr/sbin/fsck.fat";
++	const char *xfsck = "/usr/sbin/xfs_repair";
+ 	const char *btrfsck = "/usr/bin/btrfsck";
+ 	const char *ntfsck = "/usr/bin/ntfsfix";
+ 	const char *ckfs;
+@@ -787,6 +788,8 @@
+ 		ckfs = fatfsck;
+ 	} else if (!strncmp(pr->type, "f2fs", 4)) {
+ 		ckfs = f2fsck;
++	} else if (!strncmp(pr->type, "xfs", 3)) {
++		ckfs = xfsck;
+ 	} else if (!strncmp(pr->type, "ext", 3)) {
+ 		ckfs = e2fsck;
+ 	} else if (!strncmp(pr->type, "btrfs", 5)) {

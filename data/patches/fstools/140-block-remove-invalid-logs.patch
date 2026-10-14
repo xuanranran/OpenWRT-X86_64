@@ -1,0 +1,29 @@
+From c47d588d7fdbeaf1d035b797703991c9f7026c7a Mon Sep 17 00:00:00 2001
+From: sbwml <admin@cooluc.com>
+Date: Fri, 18 Oct 2024 21:33:47 +0800
+Subject: [PATCH] block: remove invalid logs
+
+Signed-off-by: sbwml <admin@cooluc.com>
+
+Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
+---
+--- a/block.c
++++ b/block.c
+@@ -435,7 +435,7 @@
+ 
+ 	if (uci_load(ctx, file, &pkg)) {
+ 		uci_get_errorstr(ctx, &err, file);
+-		ULOG_ERR("unable to load configuration (%s)\n", err);
++		//ULOG_ERR("unable to load configuration (%s)\n", err);
+ 
+ 		free(err);
+ 		return NULL;
+@@ -469,7 +469,7 @@
+ 	}
+ 
+ 	if (!pkg) {
+-		ULOG_ERR("no usable configuration\n");
++		//ULOG_ERR("no usable configuration\n");
+ 		return -1;
+ 	}
+ 

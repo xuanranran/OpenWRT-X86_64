@@ -46,8 +46,9 @@ curl -s $mirror/openwrt/patch/dpdk/dpdk/patches/201-r8125-add-r8125-ethernet-pol
 curl -s $mirror/openwrt/patch/dpdk/numactl/Makefile > package/emortal/numactl/Makefile
 
 # fstools
-rm -rf package/system/fstools
-git clone https://$github/sbwml/package_system_fstools -b openwrt-25.12 package/system/fstools
+# Keep the ImmortalWrt source version and extroot patch; add sbwml filesystem changes.
+mkdir -p package/system/fstools/patches
+cp -f "$GITHUB_WORKSPACE"/data/patches/fstools/*.patch package/system/fstools/patches/
 # util-linux
 mkdir -p package/utils/util-linux/patches
 curl -s https://raw.githubusercontent.com/sbwml/package_utils_util-linux/refs/heads/openwrt-25.12/patches/0001-ntfs-use-ntfs3-for-read-write-filesystem.patch > package/utils/util-linux/patches/0002-ntfs-use-ntfs3-for-read-write-filesystem.patch

@@ -1,0 +1,76 @@
+From 52d6ec22f7b6678a0d7e7ec18e9c72892cd21681 Mon Sep 17 00:00:00 2001
+From: sbwml <admin@cooluc.com>
+Date: Sat, 5 Oct 2024 20:26:55 +0800
+Subject: [PATCH 4/4] fstools: use ntfs3 instead of ntfs
+
+Signed-off-by: sbwml <admin@cooluc.com>
+
+Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
+---
+--- a/block.c
++++ b/block.c
+@@ -794,7 +794,7 @@
+ 		ckfs = e2fsck;
+ 	} else if (!strncmp(pr->type, "btrfs", 5)) {
+ 		ckfs = btrfsck;
+-	} else if (!strncmp(pr->type, "ntfs", 4)) {
++	} else if (!strncmp(pr->type, "ntfs3", 4)) {
+ 		ckfs = ntfsck;
+ 	} else {
+ 		ULOG_ERR("check_filesystem: %s is not supported\n", pr->type);
+@@ -814,7 +814,7 @@
+ 		} else if(!strncmp(pr->type, "btrfs", 5)) {
+ 			execl(ckfs, ckfs, "--repair", pr->dev, NULL);
+ 			exit(EXIT_FAILURE);
+-		} else if(!strncmp(pr->type, "ntfs", 4)) {
++		} else if(!strncmp(pr->type, "ntfs3", 4)) {
+ 			execl(ckfs, ckfs, "-b", pr->dev, NULL);
+ 			exit(EXIT_FAILURE);
+ 		} else {
+@@ -959,8 +959,12 @@
+ 	int err = -EINVAL;
+ 	size_t count;
+ 	int i;
+-
+-	if (!strcmp(fstype, "ntfs")) {
++	char _data[128] = {0};
++	if (strstr(fstype, "fat") || strstr(fstype, "ntfs3")) {
++		snprintf(_data, sizeof(_data), "%s", "iocharset=utf8,uid=65534,gid=65534");
++	}
++
++	if (!strcmp(fstype, "ntfs3")) {
+ 		filesystems = ntfs_fs;
+ 		count = ARRAY_SIZE(ntfs_fs);
+ 	} else {
+@@ -972,7 +976,7 @@
+ 		const char *fs = filesystems[i];
+ 
+ 		err = mount(source, target, fs, m ? m->flags : 0,
+-			    (m && m->options) ? m->options : "");
++			    (m && m->options) ? m->options : _data);
+ 		if (!err || errno != ENODEV)
+ 			break;
+ 	}
+@@ -1628,9 +1632,9 @@
+ 		if (strncmp(pr->type, "ext", 3) &&
+ 		    strncmp(pr->type, "f2fs", 4) &&
+ 		    strncmp(pr->type, "btrfs", 5) &&
+-		    strncmp(pr->type, "ntfs", 4) &&
++		    strncmp(pr->type, "ntfs3", 4) &&
+ 		    strncmp(pr->type, "ubifs", 5)) {
+-			ULOG_ERR("extroot: unsupported filesystem %s, try ext4, f2fs, btrfs, ntfs or ubifs\n", pr->type);
++			ULOG_ERR("extroot: unsupported filesystem %s, try ext4, f2fs, btrfs, ntfs3 or ubifs\n", pr->type);
+ 			return -1;
+ 		}
+ 
+--- a/libblkid-tiny/ntfs.c
++++ b/libblkid-tiny/ntfs.c
+@@ -214,7 +214,7 @@
+ 
+ const struct blkid_idinfo ntfs_idinfo =
+ {
+-	.name		= "ntfs",
++	.name		= "ntfs3",
+ 	.usage		= BLKID_USAGE_FILESYSTEM,
+ 	.probefunc	= probe_ntfs,
+ 	.magics		=
