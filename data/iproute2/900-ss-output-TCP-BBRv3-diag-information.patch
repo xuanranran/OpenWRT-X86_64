@@ -1,5 +1,6 @@
 From ca7f11ebc4d4a99ccfd44be8555d505b26996c12 Mon Sep 17 00:00:00 2001
-From: Arjun Roy <arjunroy@google.com>
+From: Lovin Yarn <juanshengyuan@gmail.com>
+Original-author: Arjun Roy <arjunroy@google.com>
 Date: Mon, 25 Jul 2022 12:49:35 -0400
 Subject: [PATCH 2/2] ss: output TCP BBRv3 diag information
 
@@ -16,14 +17,13 @@ check the version of the data.
 Signed-off-by: Arjun Roy <arjunroy@google.com>
 Signed-off-by: Neal Cardwell <ncardwell@google.com>
 Signed-off-by: David Morley <morleyd@google.com>
----
- include/uapi/linux/inet_diag.h | 23 ++++++++++++
- misc/ss.c                      | 66 +++++++++++++++++++++++++++++++++-
- 2 files changed, 88 insertions(+), 1 deletion(-)
 
+Refreshed for ImmortalWrt iproute2 6.18.0 after its existing patch series.
+Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
+---
 --- a/include/uapi/linux/inet_diag.h
 +++ b/include/uapi/linux/inet_diag.h
-@@ -229,6 +229,29 @@ struct tcp_bbr_info {
+@@ -229,6 +229,29 @@
  	__u32	bbr_min_rtt;		/* min-filtered RTT in uSec */
  	__u32	bbr_pacing_gain;	/* pacing gain shifted left 8 bits */
  	__u32	bbr_cwnd_gain;		/* cwnd gain shifted left 8 bits */
@@ -55,7 +55,7 @@ Signed-off-by: David Morley <morleyd@google.com>
  union tcp_cc_info {
 --- a/misc/ss.c
 +++ b/misc/ss.c
-@@ -895,6 +895,7 @@ struct tcpstat {
+@@ -895,6 +895,7 @@
  	bool		    app_limited;
  	struct dctcpstat    *dctcp;
  	struct tcp_bbr_info *bbr_info;
@@ -63,7 +63,7 @@ Signed-off-by: David Morley <morleyd@google.com>
  };
  
  /* SCTP assocs share the same inode number with their parent endpoint. So if we
-@@ -2597,6 +2598,29 @@ static void sctp_stats_print(struct sctp
+@@ -2597,6 +2598,29 @@
  		out(" fraginl:%d", s->sctpi_s_frag_interleave);
  }
  
@@ -93,7 +93,7 @@ Signed-off-by: David Morley <morleyd@google.com>
  static void tcp_stats_print(struct tcpstat *s)
  {
  	char b1[64];
-@@ -2672,7 +2696,14 @@ static void tcp_stats_print(struct tcpst
+@@ -2672,7 +2696,14 @@
  	}
  
  	if (s->bbr_info) {
@@ -109,7 +109,7 @@ Signed-off-by: David Morley <morleyd@google.com>
  
  		bw = s->bbr_info->bbr_bw_hi;
  		bw <<= 32;
-@@ -2687,6 +2718,38 @@ static void tcp_stats_print(struct tcpst
+@@ -2687,6 +2718,38 @@
  		if (s->bbr_info->bbr_cwnd_gain)
  			out(",cwnd_gain:%g",
  			    (double)s->bbr_info->bbr_cwnd_gain / 256.0);
@@ -148,7 +148,7 @@ Signed-off-by: David Morley <morleyd@google.com>
  		out(")");
  	}
  
-@@ -3174,6 +3237,7 @@ static void tcp_show_info(const struct n
+@@ -3174,6 +3237,7 @@
  			s.bbr_info = calloc(1, sizeof(*s.bbr_info));
  			if (s.bbr_info && bbr_info)
  				memcpy(s.bbr_info, bbr_info, len);
