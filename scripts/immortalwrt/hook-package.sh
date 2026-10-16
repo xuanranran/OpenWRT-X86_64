@@ -73,9 +73,6 @@ git clone https://$github/sbwml/kmod_packages_net_coova-chilli customfeeds/packa
 mkdir -p package/kernel/nat46/patches
 curl -s $mirror/openwrt/patch/packages-patches/nat46/102-fix-build-with-kernel-6.18.patch > package/kernel/nat46/patches/102-fix-build-with-kernel-6.18.patch
 
-# openvswitch
-sed -i '/ovs_kmod_openvswitch_depends/a\\t\ \ +kmod-sched-act-sample \\' customfeeds/packages/net/openvswitch/Makefile
-
 # rtpengine
 curl -s $mirror/openwrt/patch/packages-patches/rtpengine/901-fix-build-for-linux-6.18.patch > customfeeds/telephony/net/rtpengine/patches/901-fix-build-for-linux-6.18.patch
 
