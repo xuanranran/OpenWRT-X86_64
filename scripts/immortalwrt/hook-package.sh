@@ -116,10 +116,7 @@ cp -f $GITHUB_WORKSPACE/data/patches/quectel-cm/030-gcc16.patch customfeeds/pack
 
 sed -i '/^CONFIG_FAILOVER=y$/a CONFIG_SHORTCUT_FE=y' target/linux/x86/64/config-6.18
 
-# libnftnl
-rm -rf package/libs/libnftnl/patches
-# nftables
-rm -rf package/network/utils/nftables/patches
+# Preserve ImmortalWrt fullcone patches; hook-base.sh adds BCM support.
 
 # 修改开源站地址 (按内容删除国内镜像, 避免行号漂移破坏 JSON)
 sed -i '\#mirror.iscas.ac.cn/kernel.org#d; \#mirrors.ustc.edu.cn/kernel.org#d; \#mirror.nju.edu.cn/kernel.org#d; \#mirrors.ustc.edu.cn/gnome#d; \#mirror.nju.edu.cn/gnome#d' scripts/projectsmirrors.json

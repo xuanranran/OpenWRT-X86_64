@@ -72,15 +72,13 @@ curl -s $mirror/openwrt/patch/firewall4/100-openwrt-firewall4-add-custom-nft-com
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/config/firewall4/Makefile
 # libnftnl
 mkdir -p package/libs/libnftnl/patches
-curl -s $mirror/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
-curl -s $mirror/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
-cp -f "$GITHUB_WORKSPACE/data/patches/libnftnl/0003-libnftnl-fullcone-adapt-setter-api.patch" package/libs/libnftnl/patches/0003-libnftnl-fullcone-adapt-setter-api.patch
-# fix build on rhel9
-sed -i '/^PKG_BUILD_FLAGS[[:space:]]*:/aPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
+# Remove the previous replacements when rerunning preparation on an existing tree.
+rm -f package/libs/libnftnl/patches/{0001-libnftnl-add-fullcone-expression-support,0002-libnftnl-add-brcm-fullcone-support,0003-libnftnl-fullcone-adapt-setter-api}.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/libnftnl/002-libnftnl-add-brcm-fullcone-support.patch" package/libs/libnftnl/patches/
 # nftables
 mkdir -p package/network/utils/nftables/patches
-cp -f "$GITHUB_WORKSPACE/data/patches/nftables/0001-nftables-add-fullcone-expression-support.patch" package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
-cp -f "$GITHUB_WORKSPACE/data/patches/nftables/0002-nftables-add-brcm-fullconenat-support.patch" package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
+rm -f package/network/utils/nftables/patches/{0001-nftables-add-fullcone-expression-support,0002-nftables-add-brcm-fullconenat-support}.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/nftables/003-nftables-add-brcm-fullconenat-support.patch" package/network/utils/nftables/patches/
 
 # FullCone module
 # rm -rf package/network/utils/fullconenat-nft

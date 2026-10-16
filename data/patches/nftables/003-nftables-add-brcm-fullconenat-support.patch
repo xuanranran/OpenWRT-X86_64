@@ -1,11 +1,15 @@
 From ae87b5c969b8020a229054493467b272a3f2a79d Mon Sep 17 00:00:00 2001
-From: sbwml <admin@cooluc.com>
+From: Lovin Yarn <juanshengyuan@gmail.com>
 Date: Sat, 26 Oct 2024 06:06:30 +0800
 Subject: [PATCH 2/2] nftables: add brcm fullconenat support
 
 Rebased onto nftables 1.1.7, including explicit scanner start conditions.
 
+Original-author: sbwml <admin@cooluc.com>
 Signed-off-by: sbwml <admin@cooluc.com>
+Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
+
+Apply after the fullcone patch shipped by ImmortalWrt.
 ---
 --- a/include/linux/netfilter/nf_tables.h
 +++ b/include/linux/netfilter/nf_tables.h
