@@ -132,4 +132,15 @@ fi
 
 # Authenticate both private source and its version-pinned native Release.
 # Preload dl so later make download/compile needs no token or public repository.
-python3 "$(dirname "${BASH_SOURCE[0]}")/preset-cnspeedtest.py" x86_64 || exit 1
+# Optional for forks: missing credentials or failed preparation must not fail firmware builds.
+if ! python3 "$(dirname "${BASH_SOURCE[0]}")/preset-cnspeedtest.py" x86_64; then
+  # Exclude any old checkout from package scanning: keeping it here could make
+  # make download fail later on an unavailable private Release. Preserve it outside package/.
+  if [ -e package/community/openwrt-cnspeedtest ] || [ -L package/community/openwrt-cnspeedtest ]; then
+    cnspeedtest_skip_dir="$(mktemp -d .cnspeedtest-skipped.XXXXXX)" || exit 1
+    mv -- package/community/openwrt-cnspeedtest "$cnspeedtest_skip_dir/" || exit 1
+    echo "Previous cnspeedtest checkout preserved in $cnspeedtest_skip_dir/"
+    unset cnspeedtest_skip_dir
+  fi
+  echo "::warning::Skipping optional cnspeedtest packages: source/core preparation failed or CNSPEEDTEST_TOKEN is unavailable. Continuing firmware build."
+fi
