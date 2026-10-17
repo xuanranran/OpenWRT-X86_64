@@ -130,18 +130,6 @@ if [ -f "$samba_makefile" ]; then
   sed -i '\#https://download.samba.org/pub/samba/stable/#d; \#https://www.nic.funet.fi/index/samba/pub/samba/stable/#s/[[:space:]]*\\$//; /^PKG_SOURCE_URL:= \\/a\        https://download.samba.org/pub/samba/stable/ \\' "$samba_makefile"
 fi
 
-# Add private cnspeedtest packages
-mkdir -p package/community
-rm -rf package/community/openwrt-cnspeedtest
-if [ -z "$CNSPEEDTEST_TOKEN" ]; then
-  echo "CNSPEEDTEST_TOKEN is not configured; skipping private cnspeedtest packages"
-else
-  CNSPEEDTEST_AUTH="$(printf 'x-access-token:%s' "$CNSPEEDTEST_TOKEN" | base64 | tr -d '\n')"
-  GIT_CONFIG_COUNT=1 \
-  GIT_CONFIG_KEY_0=http.https://github.com/.extraheader \
-  GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $CNSPEEDTEST_AUTH" \
-  git clone --depth=1 --branch master \
-    https://github.com/xuanranran/openwrt-cnspeedtest.git \
-    package/community/openwrt-cnspeedtest
-  unset CNSPEEDTEST_AUTH
-fi
+# Authenticate both private source and its version-pinned native Release.
+# Preload dl so later make download/compile needs no token or public repository.
+python3 "$(dirname "${BASH_SOURCE[0]}")/preset-cnspeedtest.py" x86_64 || exit 1
