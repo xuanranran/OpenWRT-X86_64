@@ -5,11 +5,12 @@ Subject: [PATCH 4/4] fstools: use ntfs3 instead of ntfs
 
 Signed-off-by: sbwml <admin@cooluc.com>
 
-Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
+Rebased onto fstools 907cf449 after the ImmortalWrt extroot and XFS patches.
+Preserve filesystem validation and mount-helper handling from upstream.
 ---
 --- a/block.c
 +++ b/block.c
-@@ -794,7 +794,7 @@
+@@ -930,7 +930,7 @@
  		ckfs = e2fsck;
  	} else if (!strncmp(pr->type, "btrfs", 5)) {
  		ckfs = btrfsck;
@@ -18,7 +19,7 @@ Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
  		ckfs = ntfsck;
  	} else {
  		ULOG_ERR("check_filesystem: %s is not supported\n", pr->type);
-@@ -814,7 +814,7 @@
+@@ -950,7 +950,7 @@
  		} else if(!strncmp(pr->type, "btrfs", 5)) {
  			execl(ckfs, ckfs, "--repair", pr->dev, NULL);
  			exit(EXIT_FAILURE);
@@ -27,31 +28,36 @@ Rebased onto fstools 2aa16407 after the ImmortalWrt extroot patch.
  			execl(ckfs, ckfs, "-b", pr->dev, NULL);
  			exit(EXIT_FAILURE);
  		} else {
-@@ -959,8 +959,12 @@
+@@ -1189,6 +1189,7 @@
+ 	char cmd[sizeof("/sbin/mount.") + NAME_MAX];
+ 	const char * const *filesystems;
+ 	char *mount_opts = NULL;
++	const char *default_options = "";
  	int err = -EINVAL;
- 	size_t count;
- 	int i;
--
+ 	int mount_errno;
+ 	bool attempted;
+@@ -1201,7 +1202,10 @@
+ 		return -1;
+ 	}
+ 
 -	if (!strcmp(fstype, "ntfs")) {
-+	char _data[128] = {0};
-+	if (strstr(fstype, "fat") || strstr(fstype, "ntfs3")) {
-+		snprintf(_data, sizeof(_data), "%s", "iocharset=utf8,uid=65534,gid=65534");
-+	}
++	if (strstr(fstype, "fat") || strstr(fstype, "ntfs3"))
++		default_options = "iocharset=utf8,uid=65534,gid=65534";
 +
 +	if (!strcmp(fstype, "ntfs3")) {
  		filesystems = ntfs_fs;
  		count = ARRAY_SIZE(ntfs_fs);
  	} else {
-@@ -972,7 +976,7 @@
- 		const char *fs = filesystems[i];
+@@ -1211,7 +1215,7 @@
  
- 		err = mount(source, target, fs, m ? m->flags : 0,
+ 	for (i = 0; i < count; i++) {
+ 		err = mount(source, target, filesystems[i], m ? m->flags : 0,
 -			    (m && m->options) ? m->options : "");
-+			    (m && m->options) ? m->options : _data);
++			    (m && m->options) ? m->options : default_options);
  		if (!err || errno != ENODEV)
  			break;
  	}
-@@ -1628,9 +1632,9 @@
+@@ -2033,9 +2037,9 @@
  		if (strncmp(pr->type, "ext", 3) &&
  		    strncmp(pr->type, "f2fs", 4) &&
  		    strncmp(pr->type, "btrfs", 5) &&
