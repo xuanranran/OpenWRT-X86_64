@@ -61,9 +61,9 @@ rm -rf package/network/config/firewall4/patches
 # firewall4
 mkdir -p package/network/config/firewall4/patches
 # fullcone
-curl -s $mirror/openwrt/patch/firewall4/firewall4_patches/999-01-firewall4-add-fullcone-support.patch > package/network/config/firewall4/patches/999-01-firewall4-add-fullcone-support.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/firewall4/999-01-firewall4-add-fullcone-support.patch" package/network/config/firewall4/patches/999-01-firewall4-add-fullcone-support.patch
 # bcm fullcone
-curl -s $mirror/openwrt/patch/firewall4/firewall4_patches/999-02-firewall4-add-bcm-fullconenat-support.patch > package/network/config/firewall4/patches/999-02-firewall4-add-bcm-fullconenat-support.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/firewall4/999-02-firewall4-add-bcm-fullconenat-support.patch" package/network/config/firewall4/patches/999-02-firewall4-add-bcm-fullconenat-support.patch
 # fix flow offload
 curl -s $mirror/openwrt/patch/firewall4/firewall4_patches/001-fix-fw4-flow-offload.patch > package/network/config/firewall4/patches/001-fix-fw4-flow-offload.patch
 # add custom nft command support
