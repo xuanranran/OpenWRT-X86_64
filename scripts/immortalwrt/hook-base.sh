@@ -111,17 +111,7 @@ sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/uran
 sed -i "s/ no-lto//g" package/libs/openssl/Makefile
 sed -i "/TARGET_CFLAGS +=/ s/\$/ -ffat-lto-objects/" package/libs/openssl/Makefile
 
-# nghttp3
-rm -rf customfeeds/packages/libs/nghttp3
-git clone https://$github/sbwml/package_libs_nghttp3 customfeeds/packages/libs/nghttp3
-
-# ngtcp2
-rm -rf customfeeds/packages/libs/ngtcp2
-git clone https://$github/sbwml/package_libs_ngtcp2 customfeeds/packages/libs/ngtcp2
-
-# curl - fix passwall `time_pretransfer` check
-rm -rf customfeeds/packages/net/curl
-git clone https://$github/sbwml/feeds_packages_net_curl customfeeds/packages/net/curl
+# curl/nghttp3/ngtcp2: keep feed versions; HTTP/3 is enabled in the build config.
 
 # procps-ng - top
 sed -i 's/enable-skill/enable-skill --disable-modern-top/g' customfeeds/packages/utils/procps-ng/Makefile
@@ -131,26 +121,16 @@ sed -i '3 a\\t\t"order": 50,' customfeeds/luci/applications/luci-app-ttyd/root/u
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' customfeeds/packages/utils/ttyd/files/ttyd.init
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/utils/ttyd/files/ttyd.init
 
-# UPnP
-rm -rf customfeeds/packages/net/miniupnpd
-git clone https://$gitea/sbwml/miniupnpd customfeeds/packages/net/miniupnpd -b v2.3.9
-sed -i 's/PKG_RELEASE:=1/PKG_RELEASE:=3/g' customfeeds/packages/net/miniupnpd/Makefile
+# UPnP: keep the current daemon and add sbwml configuration handling.
+patch --batch --forward -p1 -d customfeeds/packages < "$GITHUB_WORKSPACE/data/patches/packages/003-miniupnpd-sbwml-settings.patch"
 
-# nginx - latest version
-rm -rf customfeeds/packages/net/nginx
-git clone https://$github/sbwml/feeds_packages_net_nginx customfeeds/packages/net/nginx -b openwrt-25.12
+# nginx: keep current sources and add compression modules and LuCI tuning.
+patch --batch --forward -p1 -d customfeeds/packages < "$GITHUB_WORKSPACE/data/patches/packages/002-nginx-sbwml-features.patch"
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
 
 # nginx - ubus
 sed -i 's/ubus_parallel_req 2/ubus_parallel_req 6/g' customfeeds/packages/net/nginx/files-luci-support/60_nginx-luci-support
 sed -i '/ubus_parallel_req/a\        ubus_script_timeout 300;' customfeeds/packages/net/nginx/files-luci-support/60_nginx-luci-support
-
-# nginx - config
-curl -s $mirror/openwrt/nginx/luci.locations > customfeeds/packages/net/nginx/files-luci-support/luci.locations
-curl -s $mirror/openwrt/nginx/uci.conf.template > customfeeds/packages/net/nginx-util/files/uci.conf.template
-
-# nginx-util
-sed -i '/\/etc\/nginx\/uci.conf.template/d' customfeeds/packages/net/nginx-util/Makefile
 
 # apk
 mkdir -p package/system/apk/patches

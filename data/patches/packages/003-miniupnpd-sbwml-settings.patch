@@ -1,0 +1,50 @@
+From: Lovin Yarn <juanshengyuan@gmail.com>
+Subject: [PATCH] miniupnpd: retain cleanup settings and presentation URL handling
+
+Port sbwml features while retaining the current feed package version.
+Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
+
+--- a/net/miniupnpd/files/miniupnpd.init
++++ b/net/miniupnpd/files/miniupnpd.init
+@@ -62,6 +62,7 @@
+ 	local upload download log_output port config_file serial_number model_number
+ 	local use_stun stun_host stun_port uuid notify_interval presentation_url
+ 	local upnp_lease_file upnp_lease_file6 ipv6_disable ext_allow_private_ipv4
++	local clean_ruleset_threshold clean_ruleset_interval
+ 
+ 	local enabled
+ 	config_get_bool enabled config enabled 1
+@@ -87,6 +88,8 @@
+ 	config_get presentation_url config presentation_url
+ 	config_get upnp_lease_file config upnp_lease_file
+ 	config_get upnp_lease_file6 config upnp_lease_file6
++	config_get clean_ruleset_threshold config clean_ruleset_threshold
++	config_get clean_ruleset_interval config clean_ruleset_interval
+ 	config_get ipv6_disable config ipv6_disable 0
+ 	config_get ext_allow_private_ipv4 config ext_allow_private_ipv4 0
+ 
+@@ -157,6 +160,8 @@
+ 		[ -n "$upnp_lease_file6" ] && touch "$upnp_lease_file6" && echo "lease_file6=$upnp_lease_file6"
+ 		[ -n "$presentation_url" ] && echo "presentation_url=$presentation_url"
+ 		[ -n "$notify_interval" ] && echo "notify_interval=$notify_interval"
++		[ -n "$clean_ruleset_threshold" ] && echo "clean_ruleset_threshold=$clean_ruleset_threshold"
++		[ -n "$clean_ruleset_interval" ] && echo "clean_ruleset_interval=$clean_ruleset_interval"
+ 		[ -n "$serial_number" ] && echo "serial=$serial_number"
+ 		[ -n "$model_number" ] && echo "model_number=$model_number"
+ 		[ -n "$port" ] && echo "port=$port"
+@@ -216,6 +221,15 @@
+ }
+ 
+ start_service() {
++	local full_addr ip_addr
++	if [ -z "$(uci -q get upnpd.config.presentation_url)" ]; then
++		full_addr=$(uci -q get network.lan.ipaddr)
++		ip_addr="${full_addr%%/*}"
++		if [ -n "$ip_addr" ]; then
++			uci set upnpd.config.presentation_url="http://$ip_addr/"
++			uci commit upnpd
++		fi
++	fi
+ 	config_load "upnpd"
+ 	config_foreach upnpd "upnpd"
+ }
