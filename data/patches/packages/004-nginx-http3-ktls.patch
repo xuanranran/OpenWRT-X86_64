@@ -1,0 +1,89 @@
+From: Lovin Yarn <juanshengyuan@gmail.com>
+Subject: [PATCH] nginx: enable HTTP/3 and kTLS on the LAN TLS server
+
+Migrate the existing UCI server before the LuCI setup starts nginx, including
+installations that retain an older configuration template.
+
+Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
+
+--- a/net/nginx/Makefile
++++ b/net/nginx/Makefile
+@@ -223,6 +223,7 @@
+ 	$(INSTALL_DIR) $(1)/etc/nginx/conf.d
+ 	$(INSTALL_CONF) ./files-luci-support/luci.locations $(1)/etc/nginx/conf.d/
+ 	$(INSTALL_DIR) $(1)/etc/uci-defaults
++	$(INSTALL_BIN) ./files-luci-support/59_nginx-http3-ktls $(1)/etc/uci-defaults/59_nginx-http3-ktls
+ 	$(INSTALL_BIN) ./files-luci-support/60_nginx-luci-support $(1)/etc/uci-defaults/60_nginx-luci-support
+ endef
+ 
+--- /dev/null
++++ b/net/nginx/files-luci-support/59_nginx-http3-ktls
+@@ -0,0 +1,68 @@
++#!/bin/sh
++
++# Configure the existing LAN TLS server before 60_nginx-luci-support starts it.
++[ -z "$IPKG_INSTROOT" ] || exit 1
++nginx -V 2>&1 | grep -q -- '--with-http_v3_module' || exit 0
++
++. /lib/functions.sh
++config_load nginx
++config_get_bool enabled global uci_enable 1
++[ "$enabled" = 1 ] || exit 0
++config_get lan_type _lan TYPE
++[ "$lan_type" = server ] || exit 0
++
++quic_addresses=''
++found_tls=0
++write_failed=0
++
++remember_quic_listener() {
++	case " $1 " in
++		*" quic "*) quic_addresses="$quic_addresses ${1%% *}" ;;
++	esac
++}
++
++add_http3_listener() {
++	local listener="$1" address port
++	case " $listener " in
++		*" quic "*) return ;;
++		*" ssl "*) ;;
++		*) return ;;
++	esac
++
++	address="${listener%% *}"
++	port="${address##*:}"
++	case "$port" in
++		''|*[!0-9]*) return ;;
++	esac
++	found_tls=1
++
++	# Preserve an existing QUIC socket, including its custom socket options.
++	case " $quic_addresses " in
++		*" $address "*) ;;
++		*)
++			uci -q add_list "nginx._lan.listen=$address quic reuseport" || write_failed=1
++			quic_addresses="$quic_addresses $address"
++			;;
++	esac
++}
++
++config_list_foreach _lan listen remember_quic_listener
++config_list_foreach _lan listen add_http3_listener
++[ "$write_failed" = 0 ] || exit 1
++[ "$found_tls" = 1 ] || exit 0
++
++config_get headers _lan add_header
++case "$headers" in
++	*Alt-Svc*|*alt-svc*) ;;
++	*) uci -q add_list "nginx._lan.add_header=Alt-Svc 'h3=\":\$server_port\"; ma=86400' always" || exit 1 ;;
++esac
++
++config_get ssl_commands _lan ssl_conf_command
++case "$ssl_commands" in
++	*KTLS*) ;;
++	*) uci -q add_list 'nginx._lan.ssl_conf_command=Options KTLS' || exit 1 ;;
++esac
++
++uci -q set nginx._lan.http3=on || exit 1
++uci -q commit nginx || exit 1
++exit 0

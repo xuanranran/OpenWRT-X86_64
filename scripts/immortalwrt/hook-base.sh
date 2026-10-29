@@ -105,7 +105,7 @@ pushd customfeeds/luci
 popd
 
 # openssl urandom
-sed -i "/-openwrt/iOPENSSL_OPTIONS += enable-ktls '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
+sed -i "/-openwrt/iOPENSSL_OPTIONS += '-DDEVRANDOM=\"\\\\\"/dev/urandom\\\\\"\"\'\n" package/libs/openssl/Makefile
 
 # openssl - lto
 sed -i "s/ no-lto//g" package/libs/openssl/Makefile
@@ -126,6 +126,7 @@ patch --batch --forward -p1 -d customfeeds/packages < "$GITHUB_WORKSPACE/data/pa
 
 # nginx: keep current sources and add compression modules and LuCI tuning.
 patch --batch --forward -p1 -d customfeeds/packages < "$GITHUB_WORKSPACE/data/patches/packages/002-nginx-sbwml-features.patch"
+patch --batch --forward -p1 -d customfeeds/packages < "$GITHUB_WORKSPACE/data/patches/packages/004-nginx-http3-ktls.patch"
 sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g;s/procd_set_param stderr 1/procd_set_param stderr 0/g' customfeeds/packages/net/nginx/files/nginx.init
 
 # nginx - ubus
