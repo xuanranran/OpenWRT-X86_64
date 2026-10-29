@@ -24,6 +24,10 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 
+# node - verified official ImmortalWrt prebuilt packages
+rm -rf customfeeds/packages/lang/node/node
+git clone https://$github/xuanranran/feeds_packages_lang_node customfeeds/packages/lang/node/node
+
 # Docker
 rm -rf customfeeds/luci/applications/luci-app-dockerman
 git clone https://github.com/sbwml/luci-app-dockerman -b openwrt-25.12 customfeeds/luci/applications/luci-app-dockerman
