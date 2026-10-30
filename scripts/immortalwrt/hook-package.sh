@@ -24,9 +24,12 @@ rm -rf customfeeds/packages/net/{*alist,chinadns-ng,dns2socks,dns2tcp,lucky,sing
 rm -rf customfeeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang customfeeds/packages/lang/golang
 
-# node - verified official ImmortalWrt prebuilt packages
+# node - prebuilt Node 24 (nxhack), falling back to Node 22 (ImmortalWrt)
 rm -rf customfeeds/packages/lang/node/node
-git clone https://$github/xuanranran/feeds_packages_lang_node customfeeds/packages/lang/node/node
+node_mirror="https://raw.githubusercontent.com/xuanranran/feeds_packages_lang_node_node/refs/heads/main"
+mkdir -p customfeeds/packages/lang/node/node/scripts
+curl -fsSL "$node_mirror/Makefile" > customfeeds/packages/lang/node/node/Makefile
+curl -fsSL "$node_mirror/scripts/resolve.py" > customfeeds/packages/lang/node/node/scripts/resolve.py
 
 # Docker
 rm -rf customfeeds/luci/applications/luci-app-dockerman
