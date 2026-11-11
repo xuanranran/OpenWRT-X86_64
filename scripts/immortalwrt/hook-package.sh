@@ -68,8 +68,11 @@ git clone --depth 1 https://github.com/sbwml/package_network_utils_xdp-tools pac
 sed -i 's/$(MAKE)/$(KERNEL_MAKE)/g' customfeeds/packages/admin/netatop/Makefile
 curl -s $mirror/openwrt/patch/packages-patches/clang/netatop/900-fix-build-with-clang.patch > customfeeds/packages/admin/netatop/patches/900-fix-build-with-clang.patch
 # dmx_usb_module
-rm -rf customfeeds/packages/libs/dmx_usb_module
-git clone https://git.cooluc.com/sbwml/feeds_packages_libs_dmx_usb_module customfeeds/packages/libs/dmx_usb_module
+if ! bash "$GITHUB_WORKSPACE/scripts/clone-cooluc.sh" \
+    "https://$gitea/sbwml/feeds_packages_libs_dmx_usb_module" \
+    "https://$github/gitbruc/feeds_packages_libs_dmx_usb_module" customfeeds/packages/libs/dmx_usb_module; then
+    exit 1
+fi
 # macremapper
 # curl -s https://raw.githubusercontent.com/xuanranran/r4s_build_script/refs/heads/6.6/openwrt/patch/packages-patches/clang/macremapper/100-macremapper-fix-clang-build.patch | patch -p1
 # coova-chilli module
