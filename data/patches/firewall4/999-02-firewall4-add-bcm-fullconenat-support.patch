@@ -1,11 +1,11 @@
-Rebased onto firewall4 bac1d656. Preserve upstream helper-chain availability checks.
+Rebased onto firewall4 3722eadc. Preserve upstream helper-chain availability checks.
 Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
 
 --- a/root/etc/config/firewall
 +++ b/root/etc/config/firewall
-@@ -6,6 +6,9 @@
- # Uncomment this line to disable ipv6 rules
- #	option disable_ipv6	1
+@@ -4,6 +4,9 @@
+ 	option output		ACCEPT
+ 	option forward		REJECT
  	option fullcone		0
 +# 0 - use nft_fullcone originated from Chion82
 +# 1 - use bcm fullconenat from broadcom ASUS Merlin
@@ -15,7 +15,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  	option name		lan
 --- a/root/usr/share/firewall4/templates/ruleset.uc
 +++ b/root/usr/share/firewall4/templates/ruleset.uc
-@@ -330,11 +330,13 @@
+@@ -333,11 +333,13 @@
  {%   for (let redirect in fw4.redirects(`dstnat_${zone.name}`)): %}
  		{%+ include("redirect.uc", { fw4, zone, redirect }) %}
  {%   endfor %}
@@ -32,7 +32,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  {%   endif %}
  {%   fw4.includes('chain-append', `dstnat_${zone.name}`) %}
  	}
-@@ -360,11 +362,18 @@
+@@ -363,11 +365,18 @@
  {%     endfor %}
  {%    endfor %}
  {%   endif %}
@@ -63,7 +63,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
 +}} IPv4 BCM fullcone NAT {{ direction }} traffic, IPv4 ONLY"
 --- a/root/usr/share/ucode/fw4.uc
 +++ b/root/usr/share/ucode/fw4.uc
-@@ -510,6 +510,20 @@
+@@ -563,6 +563,20 @@
  	return ok;
  }
  
@@ -84,7 +84,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  
  return {
  	read_kernel_version: function() {
-@@ -2015,6 +2029,7 @@
+@@ -2171,6 +2185,7 @@
  		}
  
  		let defs = this.parse_options(data, {
@@ -92,7 +92,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  			fullcone: [ "bool", "0" ],
  			input: [ "policy", "drop" ],
  			output: [ "policy", "drop" ],
-@@ -2050,9 +2065,20 @@
+@@ -2206,9 +2221,20 @@
  
  		delete defs.syn_flood;
  
@@ -116,7 +116,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  		}
  
  		this.state.defaults = defs;
-@@ -2136,6 +2162,10 @@
+@@ -2292,6 +2318,10 @@
  		if (this.state.defaults && !this.state.defaults.fullcone) {
  			this.warn_section(data, "fullcone in defaults not enabled, ignore zone fullcone settings");
  			zone.fullcone4 = false;
@@ -127,7 +127,7 @@ Signed-off-by: Lovin Yarn <juanshengyuan@gmail.com>
  			zone.fullcone6 = false;
  		}
  		if (zone.fullcone4) {
-@@ -2321,6 +2351,9 @@
+@@ -2482,6 +2512,9 @@
  
  		if (zone.masq || zone.masq6)
  			zone.dflags.snat = true;

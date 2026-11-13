@@ -68,8 +68,7 @@ mkdir -p package/network/config/firewall4/patches
 cp -f "$GITHUB_WORKSPACE/data/patches/firewall4/999-01-firewall4-add-fullcone-support.patch" package/network/config/firewall4/patches/999-01-firewall4-add-fullcone-support.patch
 # bcm fullcone
 cp -f "$GITHUB_WORKSPACE/data/patches/firewall4/999-02-firewall4-add-bcm-fullconenat-support.patch" package/network/config/firewall4/patches/999-02-firewall4-add-bcm-fullconenat-support.patch
-# fix flow offload
-curl -s $mirror/openwrt/patch/firewall4/firewall4_patches/001-fix-fw4-flow-offload.patch > package/network/config/firewall4/patches/001-fix-fw4-flow-offload.patch
+# firewall4 now collects lower and layer 3 devices for flow offloading upstream.
 # add custom nft command support
 curl -s $mirror/openwrt/patch/firewall4/100-openwrt-firewall4-add-custom-nft-command-support.patch | patch -p1
 # fw4 - github mirror
