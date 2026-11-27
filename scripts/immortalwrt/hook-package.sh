@@ -13,6 +13,11 @@ git clone https://github.com/xuanranran/autocore-arm -b openwrt-25.12 package/em
 rm -rf package/emortal/default-settings
 git clone https://github.com/xuanranran/default-settings -b openwrt-25.12 package/emortal/default-settings
 
+# Device Access
+if [ ! -f customfeeds/lovepackages/luci-app-device-access/Makefile ]; then
+    git clone --depth=1 https://github.com/xuanranran/luci-app-device-access customfeeds/lovepackages/luci-app-device-access || exit 1
+fi
+
 # custom packages
 rm -rf customfeeds/luci/applications/{luci-app-filebrowser,luci-app-argon-config}
 rm -rf customfeeds/luci/themes/luci-theme-argon
